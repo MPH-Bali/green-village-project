@@ -5,10 +5,6 @@ Powering MPH recycling and composting facilities in Bali
 
 ---
 
-## Data Model
-
-![Proposed Data Model](https://imgur.com/8G40S01.png)
-
 ## Stack Proposal
 
 ### Core
@@ -43,6 +39,12 @@ Powering MPH recycling and composting facilities in Bali
 
 ### Code decorators? (Great with mobx)
 - [Can i use?](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#can-i-use-decorators)
+
+---
+
+## Data Model Propsal
+
+![Proposed Data Model](https://imgur.com/8G40S01.png)
 
 ---
 

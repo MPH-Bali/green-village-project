@@ -5,6 +5,10 @@ Powering MPH recycling and composting facilities in Bali
 
 ---
 
+## Data Model
+
+![Proposed Data Model](https://imgur.com/8G40S01.png)
+
 ## Stack Proposal
 
 ### Core

@@ -5,6 +5,68 @@ Powering MPH recycling and composting facilities in Bali
 
 ---
 
+### Tentative Stack
+
+- [Carbon Design Systems](http://www.carbondesignsystem.com/)
+-- [GitHub](https://github.com/carbon-design-system/)
+-- [Design](https://github.com/carbon-design-system/carbon-design-kit)
+
+# Front End
+
+- #### Vue
+
+-- VueX
+-- Vueifiy
+-- Vue-cli
+
+# Back End
+
+- #### AWS
+
+-- EC2
+-- S3
+
+- #### Firebase
+
+-- Authentication
+--- SMS
+--- Email
+--- Facebook
+
+-- Client Hosting
+
+-- Storage Buckets
+
+-- DataStore
+
+- #### Docker?
+-- Probably not
+
+-- Analytics
+
+-- Notifications
+
+-- Predictions
+
+-- AdMob
+
+-- Dynamic Links
+
+-- Stability
+--- Crashlytics
+--- Performance
+--- Test Lab
+
+-- Develop
+
+---
+
+### TODO
+
+- Setup Google Firebase hosting
+
+---
+
 ## Stack Proposal
 
 ### Core

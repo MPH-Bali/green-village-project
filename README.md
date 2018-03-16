@@ -14,19 +14,19 @@ Powering MPH recycling and composting facilities in Bali
 # Front End
 
 - #### [Vue](https://vuejs.org/)
--- State management: [Vuex](https://vuex.vuejs.org/en/)
+	State management: [Vuex](https://vuex.vuejs.org/en/)
 
--- UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
+	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
 
--- Routing: [Vue-router](https://router.vuejs.org/en/)
+	Routing: [Vue-router](https://router.vuejs.org/en/)
 
--- Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
+	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
 
--- Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
+	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
 
--- Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
+	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
 
--- Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
+	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
 
 # Back End
 

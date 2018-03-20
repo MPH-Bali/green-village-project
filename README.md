@@ -1,73 +1,111 @@
 # [green-village-project](http://mph-bali.org/en/pererenan-project/)
-Powering MPH recycling and composting facilities in Bali!
+
+Powering MPH recycling and composting facilities in Bali.
+
+Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.com/)
+## Links
 
 [Persona Real Time Board](https://realtimeboard.com/app/board/o9J_k0Yt1AU=/)
 
+[Wireframes - Facility Manager](https://www.figma.com/file/BciMKKjYcuDKnhUdayNdBwtA/Backend-Facility-Manager-Wires)
+
+[Wireframes - backend super admin](https://www.figma.com/file/biyuSfQcDz7vw0Pgj9fVyY1T/Backend-Admin-Wires)
+
+[Wireframes - public facing web](https://www.figma.com/file/VxhqIW4QCTTX3Q95ocSAis3l/Community-Public-Pages-Wires)
+
+[Zepplin desings](https://app.zeplin.io/project/5a976d7c3ccf224b6dbd223b) Make sure you are registered and added to the project to view those. If you need adding to the project contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa)
+
 ---
+## How to contribute
+
+### Git workflow
+
+#### Internal team
+
+- **master branch** - no one commits to master, master contains the currently deployed code
+- **tags** - do not forget to tag each version that is deployed from master
+- **develop branch** - code in development
+- **new feature** = new branch
+- **pull requests** - once done with a feature, submit a pull request, add reviewers
+- **tests** - make sure to write a test for the piece of functionality you created
+
+
+#### External contributions
+
+- fork the repository
+- create a branch out of *develop*
+- make your changes and create a Pull Request to the main repository to *develop*.
+
+If you would like to become a part of our team and be added to the repository, please contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa).
+
+---
+
+
+## Functionality
+
+#### Auth
+
+1. Registration
+
+	System users (community manager and facility manager) register using their mobile phone and an OTP sent to them via SMS.
+
+2. Application to register
+
+	Customers apply to be added to the system, however they do not become system users.
+
+3. Authentication
+
+	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
+
+	Users login through OTP. Users will only need to login if they change the device they are using.
+
+#### Facility (community and facility managers)
+
+1. Add delivery
+
+2. Weigh material
+
+3. Workers hours
+
+4. Add Stock
+
+5. Create sale
+
+6. Add Expense
+
+#### Super admin
+
+---
+
+## Front End
+
+### Tests
+
+[Jest](https://facebook.github.io/jest/)
 
 ### Tentative Stack
 
 - [Carbon Design Systems](http://www.carbondesignsystem.com/)
--- [GitHub](https://github.com/carbon-design-system/)
--- [Design](https://github.com/carbon-design-system/carbon-design-kit)
 
-# Front End
+- [GitHub](https://github.com/carbon-design-system/)
 
-- #### Vue
+- [Design](https://github.com/carbon-design-system/carbon-design-kit)
 
--- VueX
--- Vueifiy
--- Vue-cli
+- #### [Vue](https://vuejs.org/)
+	State management: [Vuex](https://vuex.vuejs.org/en/)
 
-# Back End
+	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
 
-- #### AWS
+	Routing: [Vue-router](https://router.vuejs.org/en/)
 
--- EC2
--- S3
+	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
 
-- #### Firebase
+	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
 
--- Authentication
---- SMS
---- Email
---- Facebook
+	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
 
--- Client Hosting
+	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
 
--- Storage Buckets
-
--- DataStore
-
-- #### Docker?
--- Probably not
-
--- Analytics
-
--- Notifications
-
--- Predictions
-
--- AdMob
-
--- Dynamic Links
-
--- Stability
---- Crashlytics
---- Performance
---- Test Lab
-
--- Develop
-
----
-
-### TODO
-
-- Setup Google Firebase hosting
-
----
-
-## Stack Proposal
 
 ### Core
 - [react](https://github.com/facebook/react)
@@ -104,12 +142,167 @@ Powering MPH recycling and composting facilities in Bali!
 
 ---
 
-## Data Model Propsal
+## Back End
 
-![Proposed Data Model](https://imgur.com/8G40S01.png)
+### Tests
+
+[Jest](https://facebook.github.io/jest/)
+
+### Firebase
+
+#### Authentication
+
+- OTP using SMS
+- Email
+
+-- Client Hosting
+
+-- Storage Buckets
+
+-- DataStore
+
+-- Analytics
+
+-- Notifications
+
+-- Predictions
+
+-- AdMob
+
+-- Dynamic Links
+
+-- Stability
+--- Crashlytics
+--- Performance
+--- Test Lab
+
 
 ---
 
-## TODO
-- Write back end spec
-  - I propse we use [node](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/) and keep our stack all javascript
+## Data Model - Firebase
+
+```javascript
+// Since settings is an object, it can be stored in the realtime database
+var settings = {
+  name: 'Facility 1',
+  village: 'Canggu',
+  importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc'),
+  houseTypes: [ //needed?
+    { name: 'Villa', collectionFee: 20000 },
+    { name: 'Local House', collectionFee: 1000 },
+    { name: 'Business', collectionFee: 2500 }
+  ],
+  materials: [
+    { name: 'Material 1', pricePerKilo: 2000 },
+    { name: 'Material 2', pricePerKilo: 3000 }
+    //...
+  ],
+  trucks: [
+    { name: 'Truck 1', plate: 'ABC123', model: 'Toyota Trucki' },
+    { name: 'Truck 2', plate: 'DEF456', model: 'Toyota Trucki' }
+  ],
+  banjars: [
+    {
+      name: 'Banjar Name',
+      pickupTimes: {
+        mon: '6am-2pm',
+        tue: '6am-2pm'
+        //...
+      }
+    }
+  ]
+}
+
+// The rest is collections and can be stored in firestore
+var personCollection = [
+  {
+    login: firebaseUserId, // Only for people with a login
+    name: 'Test User',
+    phone: '+62 123 123 123',
+    address: 'Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361',
+    email: 'some@address.com',
+    geolaction: {
+      latitude: '8.39111',
+      longitude: '115.07361'
+    },
+    type: 'employee | client | community manager | facility manager | super admin | village guy',
+    house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
+  }
+]
+
+var deliveryCollection = [
+  {
+    timestamp: '2018-03-15T09:55:48.942Z',
+    organic: 12.5,
+    anorganic: 12.5,
+    truck: getTruck('Tu4SFfDhBUgAwGsvfopc'),
+    driver: getPeron('Tu4SFfDhBUgAwGsvfopc'),
+    banjar: getBanjar('Tu4SFfDhBUgAwGsvfopc')
+  }
+]
+
+var workedHoursCollection = [
+  {
+    employee: getPeron('Tu4SFfDhBUgAwGsvfopc'),
+    in: '2018-03-15T09:55:48.942Z',
+    out: null
+  }
+]
+
+var stockCollection = [
+  {
+    timestamp: '2018-03-15T09:55:48.942Z',
+    material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+    amount: 200
+  }
+]
+var expenseCollection = [
+  {
+    description: 'Limited Furby Collection',
+    amount: 20000000,
+    person: getPerson('Tu4SFfDhBUgAwGsvfopc')
+  }
+]
+
+var saleCollection = [
+  {
+    buyer: getPerson('Tu4SFfDhBUgAwGsvfopc'),
+    materials: [
+      {
+        material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+        kilo: 200,
+        pricePerKilo: 20000
+      }
+    ]
+  }
+
+]
+```
+---
+
+### User roles
+
+#### Community manager
+
+- Community manager works in the village and talks with customers, households, businesses, villas and public facilities. He educates the village and discusses the rule and role of separation, he collects fees, he is on the ground and the ears and eyes of the facility manager.
+
+#### Facility manager
+
+- The facility manager works at the facility. He manages the workers, the separation and weighing of delivered waste/materials, the sorting and weighing of plastics, paper and metal. He makes compost, he tracks worker hours
+
+#### Super admin
+
+- access to internal statistics, adding new facilities, changing default prices
+
+#### Other
+
+There are more people in the system but they are not system users (have no login in the system) -
+
+- workers of the facility - people who sort materials, truck drivers
+- clients - people who buy compost, plastic, etc
+- Customers
+	- household - locals
+	- villas - bules :)
+	- businesses - restaurants, hotels
+	- public facilities - schools
+---

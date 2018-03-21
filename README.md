@@ -5,6 +5,8 @@ Powering MPH recycling and composting facilities in Bali.
 Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.com/)
 ## Links
 
+[Designs Trello Boars](https://trello.com/b/gbAYV7TV/mph-design)
+
 [Persona Real Time Board](https://realtimeboard.com/app/board/o9J_k0Yt1AU=/)
 
 [Wireframes - Facility Manager](https://www.figma.com/file/BciMKKjYcuDKnhUdayNdBwtA/Backend-Facility-Manager-Wires)
@@ -79,29 +81,6 @@ each user will have a corresponding user in Firebase
 
 - [Authorization](https://firebase.google.com/docs/database/security/#section-authorization)
 - [Data validation](https://firebase.google.com/docs/database/security/#section-validation)
-
-
-
--- Client Hosting
-
--- Storage Buckets
-
--- DataStore
-
--- Analytics
-
--- Notifications
-
--- Predictions
-
--- AdMob
-
--- Dynamic Links
-
--- Stability
---- Crashlytics
---- Performance
---- Test Lab
 
 ---
 

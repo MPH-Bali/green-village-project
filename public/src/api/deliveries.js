@@ -1,6 +1,6 @@
 import { db } from '@/firebase'
 
-const fetchDailyDeliveries = async ({ date }) => {
+const fetchDailyList = async ({ date }) => {
   try {
     const response = await db.collection('delivery')
       .where('timestamp', '>=', new Date(date))
@@ -14,7 +14,7 @@ const fetchDailyDeliveries = async ({ date }) => {
   }
 }
 
-const fetchDeliveryItem = async ({ id }) => {
+const fetchItem = async ({ id }) => {
   try {
     const doc = await db.collection('delivery').doc(id).get()
     return {
@@ -29,7 +29,7 @@ const fetchDeliveryItem = async ({ id }) => {
   }
 }
 
-const deleteDeliveryItem = async ({ id }) => {
+const deleteItem = async ({ id }) => {
   try {
     const result = db.collection('delivery').doc(id).delete()
     return {
@@ -44,7 +44,7 @@ const deleteDeliveryItem = async ({ id }) => {
   }
 }
 
-const saveDeliveryItem = async ({ form }) => {
+const saveItem = async ({ form }) => {
   if (form.id) {
     try {
       const result = await db.collection('delivery')
@@ -65,8 +65,8 @@ const saveDeliveryItem = async ({ form }) => {
 }
 
 export default {
-  fetchDailyDeliveries,
-  fetchDeliveryItem,
-  deleteDeliveryItem,
-  saveDeliveryItem
+  fetchDailyList,
+  fetchItem,
+  deleteItem,
+  saveItem
 }

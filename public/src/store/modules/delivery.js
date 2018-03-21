@@ -4,24 +4,24 @@ import * as types from '../mutations.js'
 
 const actions = {
   fetchDailyList: async ({ commit }, { date }) => {
-    const result = await API.Deliveries.fetchDailyDeliveries({ date })
+    const result = await API.Deliveries.fetchDailyList({ date })
     if (result.success) {
       commit(types.FETCH_DAILY_DELIVERIES, { list: result.data })
     }
     return result
   },
   fetchItem: async ({ commit }, { id }) => {
-    const result = API.Deliveries.fetchDeliveryItem({ id })
+    const result = API.Deliveries.fetchItem({ id })
     return result
     // todo: proper mutations
   },
   deleteItem ({ commit }, { id }) {
-    const result = API.Deliveries.deleteDeliveryItem({ id })
+    const result = API.Deliveries.deleteItem({ id })
     return result
     // todo: proper mutations
   },
   saveItem ({ commit }, { form }) {
-    const result = API.Deliveries.saveDeliveryItem({ form })
+    const result = API.Deliveries.saveItem({ form })
     return result
     // todo: proper mutations
   }

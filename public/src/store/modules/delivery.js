@@ -28,8 +28,7 @@ const actions = {
 }
 
 const getters = {
-  getDailyList: state => state.dailyList,
-  areDeliveriesFetching: state => state.dailyListFetching
+  getDailyList: state => state.dailyList
 }
 
 const mutations = {
@@ -39,8 +38,7 @@ const mutations = {
 }
 
 const initialState = {
-  dailyList: [],
-  dailyListFetching: false
+  dailyList: []
 }
 
 export default {

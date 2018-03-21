@@ -48,12 +48,6 @@ If you would like to become a part of our team and be added to the repository, p
 
 ### Tentative Stack
 
-- [Carbon Design Systems](http://www.carbondesignsystem.com/)
-
-- [GitHub](https://github.com/carbon-design-system/)
-
-- [Design](https://github.com/carbon-design-system/carbon-design-kit)
-
 - #### [Vue](https://vuejs.org/)
 	State management: [Vuex](https://vuex.vuejs.org/en/)
 
@@ -69,30 +63,14 @@ If you would like to become a part of our team and be added to the repository, p
 
 	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
 
-
-### Core
-- [react](https://github.com/facebook/react)
-- [react-router](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-router)
-- [mobx](https://github.com/mobxjs/mobx)
-- [mobx-react](https://github.com/mobxjs/mobx-react)
-- [styled-components](https://github.com/styled-components/styled-components)
-
 ### Code Formatting
 - [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically)
 
-### Internationalization
-- [react-i18next](https://github.com/i18next/react-i18next)
-
 ### Analytics
 - [Google Analytics](https://analytics.google.com/analytics/web/)
-- [react-ga](https://github.com/react-ga/react-ga)
-
-### Creation
-- [create-react-app](https://zeit.co/docs/examples/create-react-app)
 
 ### Hosting/Deployment
 - [Google Cloud](cloud.google.com)
-- [now](https://zeit.co/docs/examples/create-react-app)
 
 ### Environment variable managment
 - [dotenv](https://github.com/motdotla/dotenv)
@@ -102,6 +80,11 @@ If you would like to become a part of our team and be added to the repository, p
 
 ### Code decorators? (Great with mobx)
 - [Can i use?](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#can-i-use-decorators)
+
+### Style guides
+- [ES6](https://github.com/standard/eslint-config-standard)
+- [Vue](https://vuejs.org/v2/style-guide/)
+
 
 ---
 

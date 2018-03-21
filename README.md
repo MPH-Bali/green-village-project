@@ -25,7 +25,7 @@ Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.co
 - **master branch** - no one commits to master, master contains the currently deployed code
 - **tags** - do not forget to tag each version that is deployed from master
 - **develop branch** - code in development
-- **new feature** = new branch
+- **new feature** = new branch, add an issues number in the name of the branch
 - **pull requests** - once done with a feature, submit a pull request, add reviewers
 - **tests** - make sure to write a test for the piece of functionality you created
 
@@ -147,10 +147,9 @@ each user will have a corresponding user in Firebase
 --- Performance
 --- Test Lab
 
-
 ---
 
-## Data Model - Firebase
+## Firebase - example data
 
 ```javascript
 // Since settings is an object, it can be stored in the realtime database
@@ -395,8 +394,14 @@ There are more people in the system but they are not system users (have no login
 
 #### Community public page
 
-1. Submission of a feedback form
+1. Submission of a feedback/contact us form
 
+---
+
+## Cloud Functions
+
+- sending emails ?
+- upload files to storage
 
 ---
 

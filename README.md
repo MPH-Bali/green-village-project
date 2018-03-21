@@ -150,7 +150,7 @@ each user will have a corresponding user in Firebase
 
 ---
 
-## Data Model - Firebase
+## Firebase - example data
 
 ```javascript
 // Since settings is an object, it can be stored in the realtime database
@@ -259,7 +259,7 @@ var saleCollection = [
 
 #### Facility manager
 
-- The facility manager works at the facility. He manages the workers, the separation and weighing of delivered waste/materials, the sorting and weighing of plastics, paper and metal. He makes compost, he tracks worker hours
+- The facility manager works at the facility. He manages the workers, the separation and weighing of delivered waste/materials, the sorting and weighing of plastics, paper and metal, makes compost and tracks worker hours.
 
 #### Super admin
 
@@ -267,7 +267,7 @@ var saleCollection = [
 
 #### Other
 
-There are more people in the system but they are not system users (have no login in the system) -
+There are more people in the system but they are not system users (have no login in the system)
 
 - workers of the facility - people who sort materials, truck drivers
 - clients - people who buy compost, plastic, etc
@@ -395,7 +395,7 @@ There are more people in the system but they are not system users (have no login
 
 #### Community public page
 
-1. Submission of a feedback form
+1. Submission of a feedback/contact us form
 
 
 ---

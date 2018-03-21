@@ -111,12 +111,20 @@ If you would like to become a part of our team and be added to the repository, p
 
 [Jest](https://facebook.github.io/jest/)
 
-### Firebase
+### Firebase Authentication
 
-#### Authentication
+each user will have a corresponding user in Firebase
 
-- OTP using SMS
-- Email
+- OTP using SMS, 	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
+
+### Security rules
+
+[Cloud Firestore Security rules structure](https://firebase.google.com/docs/firestore/security/rules-structure) allow you to control access to documents and collections in your database.
+
+- [Authorization](https://firebase.google.com/docs/database/security/#section-authorization)
+- [Data validation](https://firebase.google.com/docs/database/security/#section-validation)
+
+
 
 -- Client Hosting
 
@@ -269,12 +277,12 @@ There are more people in the system but they are not system users (have no login
 	- businesses - restaurants, hotels
 	- public facilities - schools
 
-	---
+---
 
-## Prefilled data
+## Predefined lists of values
 
 - banjar list
--
+- material type
 
 ---
 
@@ -293,6 +301,8 @@ There are more people in the system but they are not system users (have no login
 3. Authentication
 
 	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
+
+	**Phone numbers that end users provide for authentication will be sent and stored by Google to improve our spam and abuse prevention across Google services, including but not limited to Firebase. Developers should ensure they have appropriate end-user consent prior to using the Firebase Authentication phone number sign-in service.**
 
 	Users login through OTP. Users will only need to login if they change the device they are using.
 
@@ -380,7 +390,12 @@ There are more people in the system but they are not system users (have no login
 11. Add/edit daily note
 	- note text
 
-#### Super admin
+12. User actions log
+
+
+#### Community public page
+
+1. Submission of a feedback form
 
 
 ---
@@ -388,3 +403,4 @@ There are more people in the system but they are not system users (have no login
 ## Definitions
 
 - Delivery - delivery of the collected trash around the village
+- Buyer - anyone who wants to buy the facility products - compost, plastic, etc.

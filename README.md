@@ -40,69 +40,21 @@ If you would like to become a part of our team and be added to the repository, p
 
 ---
 
-## Front End
+## Front End with [Vue.js ❤](https://vuejs.org/)
 
-### Tests
+### Dependencies
+- [Vue.js](https://vuejs.org/) - Frontend Framework
+- [Vueifiy](https://vuetifyjs.com/en/) - UI Components Framework
+- [Vuex](https://vuex.vuejs.org/en/) - State Management
+- [Vue-router](https://router.vuejs.org/en/) - Routing
+- [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
+- [Vue-chartjs](https://github.com/apertureless/vue-chartjs) Charts and Graphs
 
-[Jest](https://facebook.github.io/jest/)
-
-### Tentative Stack
-
-- [Carbon Design Systems](http://www.carbondesignsystem.com/)
-
-- [GitHub](https://github.com/carbon-design-system/)
-
-- [Design](https://github.com/carbon-design-system/carbon-design-kit)
-
-- #### [Vue](https://vuejs.org/)
-	State management: [Vuex](https://vuex.vuejs.org/en/)
-
-	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
-
-	Routing: [Vue-router](https://router.vuejs.org/en/)
-
-	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
-
-	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
-
-	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
-
-	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
-
-
-### Core
-- [react](https://github.com/facebook/react)
-- [react-router](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-router)
-- [mobx](https://github.com/mobxjs/mobx)
-- [mobx-react](https://github.com/mobxjs/mobx-react)
-- [styled-components](https://github.com/styled-components/styled-components)
-
-### Code Formatting
-- [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically)
-
-### Internationalization
-- [react-i18next](https://github.com/i18next/react-i18next)
-
-### Analytics
-- [Google Analytics](https://analytics.google.com/analytics/web/)
-- [react-ga](https://github.com/react-ga/react-ga)
-
-### Creation
-- [create-react-app](https://zeit.co/docs/examples/create-react-app)
-
-### Hosting/Deployment
-- [Google Cloud](cloud.google.com)
-- [now](https://zeit.co/docs/examples/create-react-app)
-
-### Environment variable managment
-- [dotenv](https://github.com/motdotla/dotenv)
-
-### Continuous Integration
-- [Travis CI](https://docs.travis-ci.com)
-
-### Code decorators? (Great with mobx)
-- [Can i use?](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#can-i-use-decorators)
-
+### DEV Dependencies
+- [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md) - Initial build setup ([template](https://github.com/vuetifyjs/webpack))
+- [Firebase-Tools](https://github.com/firebase/firebase-tools) - Deployment
+- [Jest](https://facebook.github.io/jest/) - Testing
+- [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) - Code Formatting
 ---
 
 ## Back End

@@ -40,43 +40,6 @@ If you would like to become a part of our team and be added to the repository, p
 
 ---
 
-
-## Functionality
-
-#### Auth
-
-1. Registration
-
-	System users (community manager and facility manager) register using their mobile phone and an OTP sent to them via SMS.
-
-2. Application to register
-
-	Customers apply to be added to the system, however they do not become system users.
-
-3. Authentication
-
-	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
-
-	Users login through OTP. Users will only need to login if they change the device they are using.
-
-#### Facility (community and facility managers)
-
-1. Add delivery
-
-2. Weigh material
-
-3. Workers hours
-
-4. Add Stock
-
-5. Create sale
-
-6. Add Expense
-
-#### Super admin
-
----
-
 ## Front End
 
 ### Tests
@@ -305,4 +268,123 @@ There are more people in the system but they are not system users (have no login
 	- villas - bules :)
 	- businesses - restaurants, hotels
 	- public facilities - schools
+
+	---
+
+## Prefilled data
+
+- banjar list
+-
+
 ---
+
+## Functionality
+
+#### Auth
+
+1. Registration
+
+	System users (community manager and facility manager) register using their mobile phone and an OTP sent to them via SMS.
+
+2. Application to register
+
+	Customers apply to be added to the system, however they do not become system users.
+
+3. Authentication
+
+	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
+
+	Users login through OTP. Users will only need to login if they change the device they are using.
+
+#### Facility (community and facility managers)
+
+1. Add/edit delivery
+	- driver (non system user, person)
+	- banjar name(predefined list of values in db)
+	- #villas
+	- #households
+	- #businesses
+	- #public facilities
+	- comment
+
+2. Add/edit material
+
+	- worker (non system user, person)
+	- inorganic material kg
+	- organic material kg
+	- banjar name (predefined list of values in db)
+
+3. Add/edit stock
+
+	- weight kg
+	- type of material (predefined list of values in db)
+	- comment
+
+4. Add/edit worker hours
+
+	- name
+	- type
+	- note
+	- morning in/out hours
+	- afternoon in/out hours
+
+5. Add/edit a new buyer
+
+	- name
+	- email
+	- company
+	- sms/call
+	- whatsapp
+	- address
+	- notes
+6. Add/edit a sale
+
+	- buyer name (chosen from existing customers in the database)
+	- records with:
+		- material name
+		- kg
+		- price per kg
+		- total price
+		- final price (can be negotiated to be different than adviced price)
+
+7. Add/edit an expense
+	- type (predefined list of values in db, e.g. fuel, maintenance)
+	- cost
+	- notes
+
+8. Add/edit a customer - automatically prefilled from a customer application
+
+	- name
+	- type (household, villa, business)
+	- email
+	- company
+	- sms/call
+	- whatsapp
+	- address
+	- notes
+
+9. Approve customer application (community manager)
+
+	add "approved" flag to the customer detail
+
+10. Collect the fee from a customer (community manager)
+
+	1. Add a fee collection record
+		- date time
+		- monthly fee
+		- total paid ?
+		- paid until
+
+	2. Send a confirmation email to the customer
+
+11. Add/edit daily note
+	- note text
+
+#### Super admin
+
+
+---
+
+## Definitions
+
+- Delivery - delivery of the collected trash around the village

@@ -1,5 +1,10 @@
 <template>
-  <v-data-table :loading="loading" :headers="headers" :items="deliveries" hide-actions class="elevation-1">
+  <v-data-table 
+    :loading="loading" 
+    :headers="headers" 
+    :items="deliveries" 
+    hide-actions class="elevation-1"
+  >
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ parseInt(props.item.organic) + parseInt(props.item.anorganic) }}</td>
@@ -19,26 +24,9 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    deliveries () {
-      return this.$store.state.delivery.dailyList
-    },
-    logDate () {
-      const date = this.$moment(this.$route.params.date)
-      const today = this.$moment().startOf('day')
-      return today > date ? date : today
-    }
-  },
-  created () {
-    this.loading = true
+import { mapGetters, mapActions } from 'vuex'
 
-    // query part
-    this.$store
-      .dispatch('delivery/fetchDailyList', this.logDate)
-      .catch(err => console.log(err)) // make toast
-      .then(() => { this.loading = false })
-  },
+export default {
   data () {
     return {
       loading: false,
@@ -53,6 +41,30 @@ export default {
         { text: 'Comments', align: 'left', sortable: false, value: 'comments' },
         { text: 'Actions', align: 'center', sortable: false, value: null }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters({
+      deliveries: 'delivery/getDailyList'
+    }),
+    logDate () {
+      const date = this.$moment(this.$route.params.date)
+      const today = this.$moment().startOf('day')
+      return today > date ? date : today
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchDeliveries: 'delivery/fetchDailyList'
+    })
+  },
+  async created () {
+    this.loading = true
+    const result = await this.fetchDeliveries({ date: this.logDate })
+    this.loading = false
+    if (!result.success) {
+      console.log(result.error)
+      // make toast
     }
   }
 }

@@ -1,67 +1,46 @@
-// import * as types from '../mutation.js'
-import { db } from '../firebase'
+import Vue from 'vue'
+import API from '@/api/'
+import * as types from '../mutations.js'
 
 const actions = {
-  fetchDailyList ({ commit }, logDate) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery')
-        .where('timestamp', '>=', new Date(logDate))
-        .where('timestamp', '<=', new Date(logDate.endOf('day')))
-        .get()
-        .then(snapShot => {
-          let data = []
-          snapShot.forEach(doc => data.push({ id: doc.id, ...doc.data() }))
-          commit('setDailyList', data)
-          resolve(data)
-        })
-        .catch(err => reject(err))
-    })
+  fetchDailyList: async ({ commit }, { date }) => {
+    const result = await API.Deliveries.fetchDailyDeliveries({ date })
+    if (result.success) {
+      commit(types.FETCH_DAILY_DELIVERIES, { list: result.data })
+    }
+    return result
   },
-  fetchItem ({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery').doc(id).get()
-        .then(doc => resolve({ id: doc.id, ...doc.data() }))
-        .catch(err => reject(err))
-    })
+  fetchItem: async ({ commit }, { id }) => {
+    const result = API.Deliveries.fetchDeliveryItem({ id })
+    return result
+    // todo: proper mutations
   },
-  deleteItem ({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery').doc(id).delete()
-        .then(data => resolve(data)) // ToDo: Remove from local array
-        .catch(err => reject(err))
-    })
+  deleteItem ({ commit }, { id }) {
+    const result = API.Deliveries.deleteDeliveryItem({ id })
+    return result
+    // todo: proper mutations
   },
-  save ({ commit }, form) {
-    return new Promise((resolve, reject) => {
-      if (form.id) {
-        db.collection('delivery')
-          .doc(form.id)
-          .set({ ...form })
-          .then(data => resolve(data)) // ToDo: Update local array
-          .catch(err => reject(err))
-      } else {
-        db.collection('delivery')
-          .add(form)
-          .then(data => resolve(data)) // ToDo: Push to local array
-          .catch(err => reject(err))
-      }
-    })
+  saveItem ({ commit }, { form }) {
+    const result = API.Deliveries.saveDeliveryItem({ form })
+    return result
+    // todo: proper mutations
   }
 }
 
 const getters = {
-
+  getDailyList: state => state.dailyList,
+  areDeliveriesFetching: state => state.dailyListFetching
 }
 
 const mutations = {
-  setDailyList (state, dailyList) {
-    state.dailyList = []
-    dailyList.forEach(item => state.dailyList.push(item))
+  [types.FETCH_DAILY_DELIVERIES]: (state, { list }) => {
+    Vue.set(state, 'dailyList', list.slice())
   }
 }
 
 const initialState = {
-  dailyList: []
+  dailyList: [],
+  dailyListFetching: false
 }
 
 export default {

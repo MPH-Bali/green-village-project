@@ -53,9 +53,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  created () {
-    const id = this.$route.params.id
+  props: {
+    id: {
+      type: String,
+      required: false
+    }
+  },
+  data () {
+    return {
+      formData: null
+    }
+  },
+  async created () {
+    const id = this.id
 
     if (!id) {
       this.formData = {
@@ -68,31 +81,42 @@ export default {
         timestamp: new Date()
       }
     } else {
-      this.$store.dispatch('delivery/fetchItem', id)
-        .then(data => { this.formData = data })
-        .catch(err => console.log(err))
+      const response = await this.fetchItem({ id })
+      if (response.success) {
+        this.formData = response.data
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     }
   },
   methods: {
+    ...mapActions({
+      fetchItem: 'delivery/fetchItem',
+      saveItem: 'delivery/saveItem',
+      deleteItem: 'delivery/deleteItem'
+    }),
     cancel () {
       this.formData = null
       this.showForm = false
     },
-    save () {
-      this.$store
-        .dispatch('delivery/save', this.formData)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
+    async save () {
+      const response = await this.saveItem({ form: this.formData })
+      if (response.success) {
+        this.$router.go({ name: 'Home' })
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     },
-    remove () {
-      this.$store.dispatch('delivery/deleteItem', this.formData.id)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
-    }
-  },
-  data () {
-    return {
-      formData: null
+    async remove () {
+      const response = await this.deleteItem({ id: this.formData.id })
+      if (response.success) {
+        this.$router.go({ name: 'Home' })
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     }
   }
 }

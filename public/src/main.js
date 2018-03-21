@@ -7,8 +7,6 @@ import store from './store'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-import './components'
-
 Vue.prototype.$moment = moment
 
 Vue.use(Vuetify, {

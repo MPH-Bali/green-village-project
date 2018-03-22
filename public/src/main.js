@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import i18n from 'vue-i18n'
-import chartjs from 'vue-chartjs'
 import moment from 'vue-moment'
 import { sync } from 'vuex-router-sync'
 import Vuetify from 'vuetify'
@@ -11,9 +10,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './components'
+import './elements'
 
 Vue.use(i18n)
-Vue.use(chartjs)
 Vue.use(moment)
 Vue.use(Vuetify, {
   theme: {

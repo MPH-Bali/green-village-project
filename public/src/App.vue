@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  name: 'App',
-  created () {
-    console.log(this.$route.path)
-  }
+  name: 'App'
 }
 </script>

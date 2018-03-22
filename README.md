@@ -41,6 +41,7 @@ If you would like to become a part of our team and be added to the repository, p
 ---
 
 ## Front End with [Vue.js ❤](https://vuejs.org/)
+The frontend can be found in the *public* directory and was initialised using [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)  and the [vuetify/webpack](https://github.com/vuetifyjs/webpack) template.
 
 ### Dependencies
 - [Vue.js](https://vuejs.org/) - Frontend Framework
@@ -48,13 +49,16 @@ If you would like to become a part of our team and be added to the repository, p
 - [Vuex](https://vuex.vuejs.org/en/) - State Management
 - [Vue-router](https://router.vuejs.org/en/) - Routing
 - [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
-- [Vue-chartjs](https://github.com/apertureless/vue-chartjs) Charts and Graphs
+- [Vue-chartjs](https://github.com/apertureless/vue-chartjs) - Charts and Graphs
+- [Vue-moment](https://github.com/brockpetrie/vue-moment) - Helper library for Dates
+- [Firebasse SDK](https://github.com/firebase/firebase-js-sdk) - Firebase connector
 
 ### DEV Dependencies
-- [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md) - Initial build setup ([template](https://github.com/vuetifyjs/webpack))
 - [Firebase-Tools](https://github.com/firebase/firebase-tools) - Deployment
-- [Jest](https://facebook.github.io/jest/) - Testing
 - [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) - Code Formatting
+- [ESLint](https://github.com/eslint/eslint) - Linting using [standard conf](https://github.com/standard/eslint-config-standard)
+- [Jest](https://facebook.github.io/jest/) - Testing
+
 ---
 
 ## Back End

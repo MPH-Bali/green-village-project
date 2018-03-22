@@ -1,10 +1,10 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row wrap>
-      <v-flex hidden-sm-and-up xs12>
+      <v-flex xs12>
         <v-card color="primary">
           <v-card-text>
-            <h1 class="display-1 white--text">WELCOME</h1>
+            <h1 class="display-1 white--text"><p>{{ $t("home.welcome") }}</p></h1>
             <h2 class="subheading white--text">Pererenan Facility</h2>
           </v-card-text>
         </v-card>

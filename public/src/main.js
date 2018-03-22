@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import i18n from 'vue-i18n'
 import moment from 'vue-moment'
 import { sync } from 'vuex-router-sync'
 import Vuetify from 'vuetify'
@@ -9,10 +8,10 @@ import './App.css'
 import App from './App'
 import router from './router'
 import store from './store'
+import i18n from './i18n'
 import './components'
 import './elements'
 
-Vue.use(i18n)
 Vue.use(moment)
 Vue.use(Vuetify, {
   theme: {
@@ -28,6 +27,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   store,
   router,
   components: { App },

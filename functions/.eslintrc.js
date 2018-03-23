@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"parserOptions": {
 		// Required for certain syntax usages
 		"ecmaVersion": 6
@@ -120,4 +120,4 @@
 		// Warn against nested then() or catch() statements
 		"promise/no-nesting": 1
 	}
-}
+};

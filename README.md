@@ -39,47 +39,24 @@ Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.co
 If you would like to become a part of our team and be added to the repository, please contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa).
 
 ---
+## Front End with [Vue.js ❤](https://vuejs.org/)
+The frontend can be found in the *public* directory and was initialised using [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)  and the [vuetify/webpack](https://github.com/vuetifyjs/webpack) template.
 
-## Front End
+### Dependencies
+- [Vue.js](https://vuejs.org/) - Frontend Framework
+- [Vueifiy](https://vuetifyjs.com/en/) - UI Components Framework
+- [Vuex](https://vuex.vuejs.org/en/) - State Management
+- [Vue-router](https://router.vuejs.org/en/) - Routing
+- [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
+- [Vue-chartjs](https://github.com/apertureless/vue-chartjs) - Charts and Graphs
+- [Vue-moment](https://github.com/brockpetrie/vue-moment) - Helper library for Dates
+- [Firebasse SDK](https://github.com/firebase/firebase-js-sdk) - Firebase connector
 
-### Tests
-
-[Jest](https://facebook.github.io/jest/)
-
-### Tentative Stack
-
-- #### [Vue](https://vuejs.org/)
-	State management: [Vuex](https://vuex.vuejs.org/en/)
-
-	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
-
-	Routing: [Vue-router](https://router.vuejs.org/en/)
-
-	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
-
-	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
-
-	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
-
-	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
-
-### Code Formatting
-- [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically)
-
-### Analytics
-- [Google Analytics](https://analytics.google.com/analytics/web/)
-
-### Hosting/Deployment
-- [Google Cloud](cloud.google.com)
-
-### Environment variable managment
-- [dotenv](https://github.com/motdotla/dotenv)
-
-### Continuous Integration
-- [Travis CI](https://docs.travis-ci.com)
-
-### Code decorators? (Great with mobx)
-- [Can i use?](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#can-i-use-decorators)
+### DEV Dependencies
+- [Firebase-Tools](https://github.com/firebase/firebase-tools) - Deployment
+- [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) - Code Formatting
+- [ESLint](https://github.com/eslint/eslint) - Linting using [standard conf](https://github.com/standard/eslint-config-standard)
+- [Jest](https://facebook.github.io/jest/) - Testing
 
 ### Style guides
 - [ES6](https://github.com/standard/eslint-config-standard)

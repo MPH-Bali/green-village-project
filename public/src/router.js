@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Manager from '@/components/Manager'
+import Manager from '@/components/Manager/Index'
 import DailyLog from '@/components/Manager/DailyLog'
 import DeliveryForm from '@/components/Manager/DeliveryForm'
 
-import Public from '@/components/Public'
+import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
 

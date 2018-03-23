@@ -350,8 +350,8 @@ There are more people in the system but they are not system users (have no login
 
 ## Cloud Functions
 
-- sending emails ?
-- upload files to storage
+- sending emails - Welcome email, EOD notification
+- daily gathering of data for graphs
 
 ---
 

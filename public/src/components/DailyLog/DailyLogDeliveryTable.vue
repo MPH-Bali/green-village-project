@@ -15,7 +15,7 @@
       <td>{{ props.item.banjar }}</td>
       <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">
-        <v-btn icon @click="$router.push('/delivery-form/' + props.item.id)">
+        <v-btn icon @click="$router.push({ name: 'Delivery Form', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
         </v-btn>
       </td>

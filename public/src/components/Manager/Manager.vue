@@ -21,9 +21,14 @@
       </v-slide-y-transition>
     </v-content>
     <v-bottom-nav app :value="$route.path" color="grey darken-4">
-      <v-btn flat color="primary" :value="section.route"
-        v-for="section in sections" :key="section.name"
-        @click.stop="$router.push(section.route)">
+      <v-btn 
+        flat 
+        color="primary" 
+       :value="section.route"
+        v-for="section in sections" 
+       :key="section.name"
+       @click.stop="$router.push(section.route)"
+       >
         <span class="mt-1">{{ section.name }}</span>
         <v-icon icon="blue" class="mt-1" size="20px">{{ section.icon }}</v-icon>
       </v-btn>
@@ -33,11 +38,12 @@
 
 <script>
 export default {
+  name: 'Manager',
   data () {
     return {
       sections: [
         { name: 'Daily Log', icon: 'fa-calendar-alt', route: '/manager' },
-        { name: 'Add Delivery', icon: 'fa-truck', route: '/manager/delivery' },
+        { name: 'Add Delivery', icon: 'fa-truck', route: '/manager/delivery-form' },
         { name: 'Weight Material', icon: 'fa-weight', route: '/manager/material' },
         { name: 'Worker Hours', icon: 'fa-clock', route: '/manager/hours' },
         { name: 'Add Stock', icon: 'fa-cubes', route: '/manager/stock' },
@@ -46,7 +52,6 @@ export default {
         { name: 'Settings', icon: 'fa-cog', route: '/manager/settings' }
       ]
     }
-  },
-  name: 'App'
+  }
 }
 </script>

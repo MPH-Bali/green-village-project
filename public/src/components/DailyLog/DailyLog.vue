@@ -1,37 +1,37 @@
 <template>
   <v-layout row>
-    <v-flex xs12 md10 offset-md1>
+    <v-flex xs12 md10 offset-md1 lg8 offset-lg2>
       <v-layout row wrap pt-4>
         <v-flex text-xs-center>
           <p class="title">
-            <v-btn icon class="mr-3" @click="$router.push('/daily-log/' + previousDay)">
+            <v-btn icon class="mr-3" @click="$router.push('/manager/daily-log/' + previousDay)">
               <v-icon>chevron_left</v-icon>
             </v-btn>
             <v-icon color="primary">event</v-icon>
             <span>{{ $moment(logDate).format('ddd, DD MMM YYYY') }}</span>
-            <v-btn icon class="ml-3" @click="$router.push('/daily-log/' + nextDay)">
+            <v-btn icon class="ml-3" @click="$router.push('/manager/daily-log/' + nextDay)">
               <v-icon>chevron_right</v-icon>
             </v-btn>
           </p>
         </v-flex>
       </v-layout>
 
-      <Header action="/delivery-form" title="Delivery" />
+      <Header action="/manager/delivery-form" title="Delivery" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/delivery-form" title="Material Kg" />
+      <Header class="mt-4" action="/manager/delivery-form" title="Material Kg" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/delivery-form" title="Stock Kg" />
+      <Header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/delivery-form" title="Sales IDR" />
+      <Header class="mt-4" action="/manager/delivery-form" title="Sales IDR" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/delivery-form" title="Expenses IDR" />
+      <Header class="mt-4" action="/manager/delivery-form" title="Expenses IDR" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/delivery-form" title="Workers Hours" />
+      <Header class="mt-4" action="/manager/delivery-form" title="Workers Hours" />
       <DeliveryTable/>
     </v-flex>
   </v-layout>

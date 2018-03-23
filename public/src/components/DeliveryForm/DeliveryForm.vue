@@ -3,11 +3,11 @@
     <v-flex xs12 md8 offset-md2>
       <v-container fluid grid-list-lg v-if="formData">
         <v-layout row wrap>
-          <v-flex xs12>
-            <h1 class="py-4 title">Delivery Waste Data</h1>
-          </v-flex>
-          <v-flex xs12>
-            <v-text-field solo flat label="Date & Time" v-model="formData.timestamp" prepend-icon="event" readonly />
+          <v-flex xs12 text-xs-center pt-4>
+            <p class="title">
+              <v-icon color="primary">event</v-icon>
+              <span>{{ $moment(formData.timestamp).format('ddd, DD MMM YYYY') }}</span>
+            </p>
           </v-flex>
           <v-flex xs6>
             <v-text-field solo flat label="Organic" suffix="kg" type="number" v-model="formData.organic" />
@@ -103,7 +103,7 @@ export default {
     async save () {
       const response = await this.saveItem({ form: this.formData })
       if (response.success) {
-        this.$router.go({ name: 'Home' })
+        this.$router.push({ name: 'Daily Log' })
       } else {
         console.log(response.error)
         // show toast
@@ -112,7 +112,7 @@ export default {
     async remove () {
       const response = await this.deleteItem({ id: this.formData.id })
       if (response.success) {
-        this.$router.go({ name: 'Home' })
+        this.$router.push({ name: 'Daily Log' })
       } else {
         console.log(response.error)
         // show toast

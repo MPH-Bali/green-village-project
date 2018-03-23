@@ -1,10 +1,10 @@
 // ToDo: Do this dynamically in vue-loader (if possible)
 import Vue from 'vue'
 
-import DailyLog from './DailyLog'
-import DailyLogHeader from './DailyLogHeader'
-import DeliveryForm from './DeliveryForm'
-import DeliveryTable from './DeliveryTable'
+import DailyLog from './Manager/DailyLog'
+import DailyLogHeader from './Manager/DailyLogHeader'
+import DeliveryForm from './Manager/DeliveryForm'
+import DeliveryTable from './Manager/DeliveryTable'
 
 Vue.component('daily-log', DailyLog)
 Vue.component('daily-log-header', DailyLogHeader)

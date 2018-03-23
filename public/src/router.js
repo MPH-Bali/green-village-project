@@ -5,7 +5,7 @@ import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/DailyLog/DailyLog'
 import DeliveryForm from '@/components/DeliveryForm/DeliveryForm'
 
-import Public from '@/components/Public'
+import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
 

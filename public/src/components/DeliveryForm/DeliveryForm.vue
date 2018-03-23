@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -75,14 +75,9 @@ export default {
     return {
       formData: null,
       deletePending: false,
-      savePending: false
-    }
-  },
-  async created () {
-    const id = this.id
-
-    if (!id) {
-      this.formData = {
+      savePending: false,
+      fetchingDelivery: false,
+      defaultFormData: {
         anorganic: 20,
         organic: 20,
         households: 20,
@@ -91,15 +86,20 @@ export default {
         driver: 'Putu',
         timestamp: new Date()
       }
-    } else {
-      const response = await this.fetchItem({ id })
-      if (response.success) {
-        this.formData = response.data
-      } else {
-        console.log(response.error)
-        // show toast
-      }
     }
+  },
+  created () {
+    const id = this.id
+    if (id) {
+      this.fetchDelivery(id)
+    } else {
+      this.formData = this.defaultFormData
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getDeliveryById: 'delivery/getDeliveryById'
+    })
   },
   methods: {
     ...mapActions({
@@ -110,6 +110,15 @@ export default {
     cancel () {
       this.formData = null
       this.showForm = false
+    },
+    async fetchDelivery (id) {
+      const response = await this.fetchItem({ id })
+      if (response.success) {
+        this.formData = this.getDeliveryById(id)
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     },
     async save () {
       this.savePending = true

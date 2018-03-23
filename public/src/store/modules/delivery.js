@@ -5,6 +5,7 @@ const FETCH_DAILY_DELIVERIES = 'FETCH_DAILY_DELIVERIES'
 const DELETE_DELIVERY_ITEM = 'DELETE_DELIVERY_ITEM'
 const UPDATE_DELIVERY_ITEM = 'UPDATE_DELIVERY_ITEM'
 const CREATE_DELIVERY_ITEM = 'CREATE_DELIVERY_ITEM'
+const FETCH_DELIVERY_ITEM = 'FETCH_DELIVERY_ITEM'
 
 const actions = {
   fetchDailyList: async ({ commit }, { date }) => {
@@ -16,8 +17,10 @@ const actions = {
   },
   fetchItem: async ({ commit }, { id }) => {
     const result = await API.Deliveries.fetchItem({ id })
+    if (result.success) {
+      commit(FETCH_DELIVERY_ITEM, { id, data: result.data })
+    }
     return result
-    // todo: proper mutations
   },
   deleteItem: async ({ commit, getters }, { id }) => {
     const result = await API.Deliveries.deleteItem({ id })
@@ -49,7 +52,12 @@ const actions = {
 }
 
 const getters = {
-  getDailyList: state => state.dailyList
+  getDailyList: state => state.dailyList,
+  getDeliveryById: state => {
+    return id => {
+      return state.dailyList[id]
+    }
+  }
 }
 
 const mutations = {
@@ -63,6 +71,9 @@ const mutations = {
     Vue.set(state.dailyList, id, data)
   },
   [CREATE_DELIVERY_ITEM]: (state, { id, data }) => {
+    Vue.set(state.dailyList, id, data)
+  },
+  [FETCH_DELIVERY_ITEM]: (state, { id, data }) => {
     Vue.set(state.dailyList, id, data)
   }
 }

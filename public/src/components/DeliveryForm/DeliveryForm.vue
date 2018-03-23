@@ -41,10 +41,19 @@
             <v-btn color="error" flat outline @click.stop="$router.go(-1)">Cancel</v-btn>
           </v-flex>
           <v-flex xs4 text-xs-center>
-            <v-btn v-if="this.formData.id" color="error" depressed @click.stop="remove">Delete</v-btn>
+            <v-btn v-if="this.formData.id" 
+                   color="error" 
+                   depressed 
+                  @click.stop="remove" 
+                  :loading="deletePending">Delete
+            </v-btn>
           </v-flex>
           <v-flex xs4 text-xs-right>
-            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save Delivery</v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   depressed color="primary" 
+                  @click.stop="save" 
+                  :loading="savePending">Save Delivery
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -64,7 +73,9 @@ export default {
   },
   data () {
     return {
-      formData: null
+      formData: null,
+      deletePending: false,
+      savePending: false
     }
   },
   async created () {
@@ -101,7 +112,9 @@ export default {
       this.showForm = false
     },
     async save () {
+      this.savePending = true
       const response = await this.saveItem({ form: this.formData })
+      this.savePending = false
       if (response.success) {
         this.$router.push({ name: 'Daily Log' })
       } else {
@@ -110,7 +123,9 @@ export default {
       }
     },
     async remove () {
+      this.deletePending = true
       const response = await this.deleteItem({ id: this.formData.id })
+      this.deletePending = false
       if (response.success) {
         this.$router.push({ name: 'Daily Log' })
       } else {

@@ -1,4 +1,5 @@
 import { db } from '@/firebase'
+import { arrayToObjectById } from '@/utils'
 
 const fetchDailyList = async ({ date }) => {
   try {
@@ -8,7 +9,7 @@ const fetchDailyList = async ({ date }) => {
       .get()
     const data = []
     response.forEach(doc => data.push({ id: doc.id, ...doc.data() }))
-    return { success: true, data }
+    return { success: true, data: arrayToObjectById(data) }
   } catch (error) {
     return { success: false, error }
   }
@@ -31,7 +32,7 @@ const fetchItem = async ({ id }) => {
 
 const deleteItem = async ({ id }) => {
   try {
-    const result = db.collection('delivery').doc(id).delete()
+    const result = await db.collection('delivery').doc(id).delete()
     return {
       success: true,
       data: result
@@ -44,23 +45,23 @@ const deleteItem = async ({ id }) => {
   }
 }
 
-const saveItem = async ({ form }) => {
-  if (form.id) {
-    try {
-      const result = await db.collection('delivery')
-                             .doc(form.id)
-                             .set({ ...form })
-      return { success: true, data: result }
-    } catch (error) {
-      return { success: false, error }
-    }
-  } else {
-    try {
-      const result = db.collection('delivery').add(form)
-      return { success: true, data: result }
-    } catch (error) {
-      return { success: false, error }
-    }
+const createItem = async ({ form }) => {
+  try {
+    const result = await db.collection('delivery').add(form)
+    return { success: true, data: result }
+  } catch (error) {
+    return { success: false, error }
+  }
+}
+
+const updateItem = async ({ form }) => {
+  try {
+    const result = await db.collection('delivery')
+                           .doc(form.id)
+                           .set({ ...form })
+    return { success: true, data: result }
+  } catch (error) {
+    return { success: false, error }
   }
 }
 
@@ -68,5 +69,6 @@ export default {
   fetchDailyList,
   fetchItem,
   deleteItem,
-  saveItem
+  createItem,
+  updateItem
 }

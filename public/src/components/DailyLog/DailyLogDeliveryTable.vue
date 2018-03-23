@@ -2,7 +2,7 @@
   <v-data-table 
     :loading="loading" 
     :headers="headers" 
-    :items="deliveries" 
+    :items="deliveriesAsArray" 
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">
@@ -47,6 +47,9 @@ export default {
     ...mapGetters({
       deliveries: 'delivery/getDailyList'
     }),
+    deliveriesAsArray () {
+      return Object.keys(this.deliveries).map(id => this.deliveries[id])
+    },
     logDate () {
       const date = this.$moment(this.$route.params.date)
       const today = this.$moment().startOf('day')

@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// import DailyLog from '@/components/DailyLog/DailyLog'
-// import DeliveryForm from '@/components/DeliveryForm/DeliveryForm'
-
 import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/DailyLog/DailyLog'
 import DeliveryForm from '@/components/DeliveryForm/DeliveryForm'

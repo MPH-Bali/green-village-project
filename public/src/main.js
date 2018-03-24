@@ -10,6 +10,9 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 import './elements'
+import firestore from './firestore'
+
+Vue.prototype.$firestore = firestore
 
 Vue.use(moment)
 Vue.use(Vuetify, {

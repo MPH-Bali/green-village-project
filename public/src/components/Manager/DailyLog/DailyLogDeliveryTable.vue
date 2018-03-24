@@ -1,8 +1,8 @@
 <template>
-  <v-data-table 
-    :loading="loading" 
-    :headers="headers" 
-    :items="deliveriesAsArray" 
+  <v-data-table
+    :loading="loading"
+    :headers="headers"
+    :items="$firestore.delivery"
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">

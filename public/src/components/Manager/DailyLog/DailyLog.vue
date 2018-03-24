@@ -19,6 +19,8 @@
       <log-header action="/manager/delivery-form" title="Delivery" />
       <delivery-table/>
 
+      <log-header class="mt-4" action="/manager/material" title="Material Kg" />
+      <MaterialTable/>
     </v-flex>
   </v-layout>
 </template>
@@ -26,6 +28,7 @@
 <script>
 import LogHeader from './DailyLogHeader'
 import DeliveryTable from '@/components/Manager/Delivery/Table'
+import MaterialTable from './DailyLogMaterialTable'
 
 export default {
   props: {
@@ -36,7 +39,8 @@ export default {
   },
   components: {
     LogHeader,
-    DeliveryTable
+    DeliveryTable,
+    MaterialTable
   },
   data () {
     return {

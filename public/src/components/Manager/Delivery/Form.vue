@@ -12,9 +12,7 @@
           <v-flex xs6>
             <p class="body-2 mb-1">Driver</p>
             <v-select
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               label="Pick a driver name"
               :items="$firestore.collections.person.filter(p => p.type && p.type.employee)"
               item-value="id"
@@ -25,9 +23,7 @@
           <v-flex xs6>
             <p class="body-2 mb-1">Banjar</p>
             <v-select
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               label="Select one ore more Banjars"
               :items="$firestore.collections.banjar"
               item-value="id"
@@ -38,9 +34,7 @@
           <v-flex xs6>
             <p class="body-2 mb-1">Oragnic</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               suffix="kg"
               type="number" min="0"
               v-model="form.organic" />
@@ -48,9 +42,7 @@
           <v-flex xs6>
             <p class="body-2 mb-1">Anoragnic</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               suffix="kg"
               type="number" min="0"
               v-model="form.anorganic" />
@@ -58,45 +50,36 @@
           <v-flex xs3>
             <p class="body-2 mb-1">#villas</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               type="number" min="0"
               v-model="form.villas" />
           </v-flex>
           <v-flex xs3>
             <p class="body-2 mb-1">#households</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               type="number" min="0"
               v-model="form.households" />
           </v-flex>
           <v-flex xs3>
             <p class="body-2 mb-1">#businesses</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               type="number" min="0"
               v-model="form.businesses" />
           </v-flex>
           <v-flex xs3>
             <p class="body-2 mb-1">#facilities</p>
             <v-text-field
-              required
-              solo flat
-              class="accent"
+              solo flat class="accent"
               type="number" min="0"
               v-model="form.facilities" />
           </v-flex>
           <v-flex xs12>
             <p class="body-2 mb-1">Comments</p>
             <v-text-field
-              required
-              solo flat auto-grow multi-line
-              class="accent"
+              solo flat class="accent"
+              auto-grow multi-line
               v-model="form.comments"/>
           </v-flex>
           <v-flex xs6>
@@ -104,9 +87,10 @@
           </v-flex>
           <v-flex xs6 text-xs-right>
             <v-btn @click.stop="save"
-              required
+              :disabled="!valid"
               style="text-transform: capitalize"
-              depressed color="primary"
+              depressed
+              color="primary"
               :loading="savePending">
               Save Delivery
             </v-btn>
@@ -128,6 +112,11 @@ export default {
       this.fetchingDelivery = true
       this.form = await this.$firestore.get('delivery', this.id)
       this.fetchingDelivery = false
+    }
+  },
+  computed: {
+    valid () {
+      return this.form.banjar && this.form.driver
     }
   },
   data () {

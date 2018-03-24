@@ -102,10 +102,6 @@ const settings = {
     { name: 'Material 2', pricePerKilo: 3000 }
     //...
   ],
-  trucks: [
-    { name: 'Truck 1', plate: 'ABC123', model: 'Toyota Trucki' },
-    { name: 'Truck 2', plate: 'DEF456', model: 'Toyota Trucki' }
-  ],
   banjars: [
     {
       name: 'Banjar Name',
@@ -131,8 +127,10 @@ const personCollection = [
       longitude: '115.07361'
     },
     type: {
-      employee:false,
-      client:false,
+      employee: false,
+      client: false
+    },
+    role: {
       communityManager:false,
       facilityManager:false,
       superAdmin: true

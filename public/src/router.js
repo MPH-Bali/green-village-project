@@ -7,7 +7,7 @@ import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
-import Login from '@/components/Public/Login'
+import Login from '@/components/Public/Login/Login'
 import SignUp from '@/components/Public/SignUp'
 
 import { auth } from '@/firebase'

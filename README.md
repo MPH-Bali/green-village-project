@@ -47,7 +47,6 @@ The frontend can be found in the *public* directory and was initialised using [V
 ### Dependencies
 - [Vue.js](https://vuejs.org/) - Frontend Framework
 - [Vueifiy](https://vuetifyjs.com/en/) - UI Components Framework
-- [Vuex](https://vuex.vuejs.org/en/) - State Management
 - [Vue-router](https://router.vuejs.org/en/) - Routing
 - [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
 - [Vue-chartjs](https://github.com/apertureless/vue-chartjs) - Charts and Graphs

@@ -34,25 +34,21 @@
 
       <v-layout row wrap text-xs-center>
         <v-flex xs12 style="background: linear-gradient(#fafafa 50%, #424242 50%)">
-          <v-btn class="mx-3" icon color="accent">
+          <v-btn target="_blank" href="https://www.facebook.com/MerahPutihHijau/" class="mx-3" icon color="accent">
             <v-icon color="primary">fab fa-facebook</v-icon>
           </v-btn>
-          <v-btn class="mx-3" icon color="accent">
-            <v-icon color="primary">fab fa-twitter</v-icon>
-          </v-btn>
-          <v-btn class="mx-3" icon color="accent">
-            <v-icon color="primary">fab fa-google-plus</v-icon>
+          <v-btn target="_blank" href="https://www.instagram.com/mph.bali/" class="mx-3" icon color="accent">
+            <v-icon color="primary">fab fa-instagram</v-icon>
           </v-btn>
           <v-btn class="mx-3" icon color="accent">
             <v-icon color="primary">fab fa-whatsapp</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs12 class="grey darken-3 white--text">
-          <a href="contact-us" class="body-1 my-3">Contact Us</a>
+          <router-link to="contact-us">Contact Us</router-link>
           <p class="body-1 my-3">Send Feedback</p>
           <p class="body-1 my-3">Contribute</p>
           <p class="body-1 my-3">FAQ</p>
-          <p class="body-1 my-3">Credits</p>
         </v-flex>
       </v-layout>
 

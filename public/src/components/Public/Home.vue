@@ -4,8 +4,8 @@
       <v-flex xs12>
         <v-card color="primary">
           <v-card-text>
-            <h1 class="display-1 white--text"><p>{{ $t("home.welcome") }}</p></h1>
-            <h2 class="subheading white--text">Pererenan Facility</h2>
+            <h2 class="subheading white--text">{{ $t("home.welcome") }}</h2>
+            <h1 class="display-1 white--text">Pererenan Facility</h1>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -19,7 +19,6 @@
             <h1 class="headline mt-2">MEMBERS</h1>
             <p>We’re already a lot, but we want all 805 Pererenan households to join us!</p>
             <v-progress-linear value="75" height="20" color="primary" />
-            <v-btn color="primary" flat>Share</v-btn>
             <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
           </v-card-text>
         </v-card>
@@ -185,3 +184,12 @@ export default {
   }
 }
 </script>
+
+
+<!-- function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+} -->

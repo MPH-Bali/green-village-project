@@ -12,7 +12,7 @@
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="Worker" class='material-select banjar' />
+            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="" class='material-select banjar' />
           </th>
           <th style="width: 10%;">
             <v-text-field
@@ -27,7 +27,7 @@
                 name="input-1"></v-text-field>
           </th>
           <th style="width: 30%">
-            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="Banjar" class='material-select banjar'  />
+            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="" class='material-select banjar'  />
           </th>
           <th style="width: 20%">
             <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
@@ -35,7 +35,7 @@
         </tr>
       </template>
       <template slot='items' slot-scope='props'>
-        <td><span class='worker-id'>{{ props.item.id }}.</span> {{ props.item.worker }}</td>
+        <td><span class='worker-id'>0{{ props.item.id }}.</span> {{ props.item.worker }}</td>
         <td>{{ props.item.inorganic }}</td>
         <td>{{ props.item.organic }}</td>
         <td>{{ props.item.banjar }}</td>

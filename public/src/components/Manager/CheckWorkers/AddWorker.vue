@@ -125,19 +125,16 @@
     </v-flex>
 
     <v-flex xs4>
-      <v-card dark color="primary">
-        <v-card-text class="px-0"></v-card-text>
-      </v-card>
+      <div class="left">
+        <v-btn color="error">Error</v-btn>
+      </div>
     </v-flex>
-    <v-flex xs4>
-      <v-card dark color="primary">
-        <v-card-text class="px-0"></v-card-text>
-      </v-card>
+    <v-flex xs4 class="center">
+      <span class="title">Total Hours</span>
+      <p class="total-hours">8 Hours</p>
     </v-flex>
-    <v-flex xs4>
-      <v-card dark color="primary">
-        <v-card-text class="px-0"></v-card-text>
-      </v-card>
+    <v-flex xs4 class="right">
+      <v-btn color="success">Success</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -161,6 +158,28 @@ export default {
 </script>
 
 <style scoped>
+.total-hours {
+  font-size: 28px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #152935;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
 .subheading {
   margin-bottom: 0px!important;
 }

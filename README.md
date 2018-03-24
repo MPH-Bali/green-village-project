@@ -235,6 +235,22 @@ const banjarCollection = [
 ];
 
 const materialCollection = [
+   {
+	worker: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Worker name'
+	},
+	banjar: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Banjar name'
+	},
+	organic: 10,
+	inorganic: 10,
+	timestamp: 2018-03-15T09:55:48.942Z'
+   }
+]
+
+const materialTypeCollection = [
   {
     name: 'Material 1',
     pricePerKilo: 2000

@@ -6,7 +6,8 @@ import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerInfo from '@/components/Manager/Buyer/BuyerInfo'
 import BuyerEdit from '@/components/Manager/Buyer/BuyerEdit'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
-import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
+import DeliveryForm from '@/components/Manager/Delivery/Form'
+import AddMaterial from '@/components/Manager/AddMaterial'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -38,6 +39,7 @@ export default new Router({
         { path: 'buyers', name: 'buyers', component: Buyers },
         { path: 'buyer/info/:id?', name: 'buyer-info', component: BuyerInfo, props: true },
         { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
+        { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: '*', redirect: '/manager' }
       ]
     },

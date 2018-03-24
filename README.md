@@ -90,6 +90,21 @@ each user will have a corresponding user in Firebase
 
 - OTP using SMS, 	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
 
+- #### [Vue](https://vuejs.org/)
+	State management: [Vuex](https://vuex.vuejs.org/en/)
+
+	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
+
+	Routing: [Vue-router](https://router.vuejs.org/en/)
+
+	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
+
+	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
+
+	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
+
+	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
+
 ### Security rules
 
 [Cloud Firestore Security rules structure](https://firebase.google.com/docs/firestore/security/rules-structure) allow you to control access to documents and collections in your database.

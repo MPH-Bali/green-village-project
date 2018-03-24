@@ -146,14 +146,35 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">PICKUP SCHEDULE</h1>
+            <h1 class="headline mt-2">Banner Materials</h1>
             <p>Pickups for Pererenan are scheduled as follow:</p>
+            <v-container fluid grid-list-xl>
+              <v-layout row>
+                 <v-flex xs4 sm4 md4 style="align-self: center;">
+                  <v-avatar slot="activator">
+                    <img src="http://mph-bali.org/wp-content/uploads/2016/08/logo.png" alt="">
+                  </v-avatar>
+                </v-flex>
+                <v-flex xs8>
+                  <p>Download information and PDF to understand what we're doing</p>
+                </v-flex>
+            </v-layout>
+          </v-container>
+          </v-card-text>
+        </v-card>
+      </v-flex>
 
-            <h1 class="title">Banajar 1:</h1>
-            <h1 class="mb-3 headline primary--text">Mon & Fri 9 AM</h1>
-
-            <h1 class="title">Banajar 2:</h1>
-            <h1 class="mb-3 headline primary--text">Tue & Thu 9 AM</h1>
+      <v-flex xs12>
+        <v-card>
+          <v-card-text>
+            <v-avatar color="grey lighten-2" size="80px">
+              <v-icon size="50px">assignment_turned_in</v-icon>
+            </v-avatar>
+            <h1 class="headline mt-2">Newsletter Signup</h1>
+            <p>Sign up and stay up to date with it</p>
+            <v-form v-model="valid" ref="form" lazy-validation>
+              <v-text-field label="Email" flat v-model="form.email" :rules="emailRules" required />
+            </v-form>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -166,6 +187,7 @@
 export default {
   data () {
     return {
+      form: {},
       dailyStockData: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [
@@ -257,7 +279,12 @@ export default {
           xAxes: [{ stacked: true }],
           yAxes: [{ stacked: true }]
         }
-      }
+      },
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ]
     }
   }
 }

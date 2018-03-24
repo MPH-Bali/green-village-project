@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
-import DailyLog from '@/components/DailyLog/DailyLog'
-import DeliveryForm from '@/components/DeliveryForm/DeliveryForm'
 import CustomerDetailView from '@/components/Manager/CustomerDetailView'
+import DailyLog from '@/components/Manager/DailyLog/DailyLog'
+import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'

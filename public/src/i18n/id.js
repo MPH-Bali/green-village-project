@@ -2,6 +2,9 @@ export default {
   home: {
     welcome: 'selamat datang'
   },
+  common: {
+    number: 'no.'
+  },
   // 01.0
   login: {
     headerTitle: '',
@@ -46,4 +49,22 @@ export default {
     createSale: '',
     addExpense: '',
   },
+  // 02.0b
+  dailyLog: {
+    deliveries: '',
+    material: '',
+    stock: '',
+    sales: '',
+    expenses: '',
+    workers: '',
+    currency: '',
+    weightUnit: '',
+    addButton: '',
+  },
+  deliveries: {},
+  material: {},
+  stock: {},
+  sales: {},
+  expenses: {},
+  workers: {},
 }

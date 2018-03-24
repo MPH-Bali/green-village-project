@@ -62,7 +62,6 @@ export default {
     fullName: 'full name',
     paidUntil: 'paid until',
     totalPaid: 'total paid',
-    approve: 'approve',
     collectFee: 'collectFee',
     sortByName: 'sort by name',
     aToZ: 'a-z',

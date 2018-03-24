@@ -89,7 +89,6 @@ export default {
       return this.$firestore.collections.banjar
     },
     materials () {
-      console.log('Inside', this.$firestore.dailyCollections.material)
       return this.$firestore.dailyCollections.material
     }
   },
@@ -136,7 +135,6 @@ export default {
     },
     editMaterial (material) {
       this.formdata = {...material}
-      console.log('EDIT', material)
     }
   },
   data () {

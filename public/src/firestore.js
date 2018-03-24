@@ -73,7 +73,6 @@ export default new Vue({
 
         this.dailySubscriptions.push(unsubscribe)
       })
-      console.log('Col -> ', this.dailyCollections)
     },
     add (collection, data) {
       return db.collection(collection).add(data)

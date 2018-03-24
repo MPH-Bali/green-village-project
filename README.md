@@ -91,34 +91,16 @@ each user will have a corresponding user in Firebase
 ## Firebase - example data
 
 ```javascript
-// Since settings is an object, it can be stored in the realtime database
+/* eslint-disable */
+
+// All collections and are stored in the firestore
 const settings = {
   name: 'Facility 1',
-  village: 'Canggu',
-  importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc'),
-  houseTypes: [ //needed?
-    { name: 'Villa', collectionFee: 20000 },
-    { name: 'Local House', collectionFee: 1000 },
-    { name: 'Business', collectionFee: 2500 }
-  ],
-  materials: [
-    { name: 'Material 1', pricePerKilo: 2000 },
-    { name: 'Material 2', pricePerKilo: 3000 }
-    //...
-  ],
-  banjars: [
-    {
-      name: 'Banjar Name',
-      pickupTimes: {
-        mon: '6am-2pm',
-        tue: '6am-2pm'
-        //...
-      }
-    }
-  ]
+  village: 'Pererenan',
+  importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc')
+  // + other information about the facility that we might need
 }
 
-// The rest is collections and can be stored in firestore
 const personCollection = [
   {
     login: firebaseUserId, // Only for people with a login
@@ -149,7 +131,6 @@ const deliveryCollection = [
     timestamp: '2018-03-15T09:55:48.942Z',
     organic: 12.5,
     anorganic: 12.5,
-    truck: getTruck('Tu4SFfDhBUgAwGsvfopc'),
     driver: getPeron('Tu4SFfDhBUgAwGsvfopc'),
     banjar: getBanjar('Tu4SFfDhBUgAwGsvfopc')
   }
@@ -191,13 +172,44 @@ const saleCollection = [
   }
 ]
 
-const feesCollection = [
+const feeCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     monthly_fee: 50,
     total_paid: 200,
     paid_until: '2018-07-15T09:55:48.942Z'
   }
+]
+
+const banjarCollection = [
+  {
+    name: 'Banjar Name',
+    pickupTimes: [
+      {
+        day: 'Monday',
+        time: '6am-2pm'
+      },
+      {
+        day: 'Tuesday',
+        time: '6am-2pm'
+      }
+    ]
+  }
+];
+
+const materialCollection = [
+  {
+    name: 'Material 1',
+    pricePerKilo: 2000
+  }
+]
+
+// villa, household, business
+const houseTypesCollection = [
+    {
+      name: 'Villa',
+      collectionFee: 20000
+    }
 ]
 ```
 ---

@@ -33,7 +33,6 @@ auth.onAuthStateChanged(user => {
     new Vue({
       el: '#app',
       i18n,
-      store,
       router,
       components: { App },
       template: '<App/>'

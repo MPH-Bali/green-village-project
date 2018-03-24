@@ -1,5 +1,5 @@
 // All collections and are stored in the firestore
-const settings = {
+const settingsCollection = {
   name: 'Facility 1',
   village: 'Pererenan',
   importantVillageGuy: {

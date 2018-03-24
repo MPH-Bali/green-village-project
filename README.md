@@ -92,7 +92,7 @@ each user will have a corresponding user in Firebase
 
 ```javascript
 // All collections and are stored in the firestore
-const settings = {
+const settingsCollection = {
   name: 'Facility 1',
   village: 'Pererenan',
   importantVillageGuy: {

@@ -31,7 +31,7 @@
       <Header class="mt-4" action="/manager/delivery-form" title="Expenses IDR" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/manager/delivery-form" title="Workers Hours" />
+      <Header class="mt-4" action="/manager/workercheck" title="Workers Hours" />
       <DeliveryTable/>
     </v-flex>
   </v-layout>

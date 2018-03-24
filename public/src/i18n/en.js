@@ -6,7 +6,8 @@ export default {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
-    addMaterial: 'Add material'
+    addMaterial: 'Add material',
+    workerCheck: 'Check workers'
   },
   // example string
   home: {

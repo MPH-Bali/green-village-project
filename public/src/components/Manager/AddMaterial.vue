@@ -15,12 +15,12 @@
               item-text="name" 
               item-value="id"
               return-object
-              label="" class='material-select banjar' />
+              label="" class='grey-select banjar' />
           </th>
           <th style="width: 12.5%;">
             <v-text-field
               v-model="formdata.inorganic"
-              class='material-select red' 
+              class='grey-select red' 
               type="number"
               solo flat 
               name="input-1"></v-text-field>
@@ -29,7 +29,7 @@
             <v-text-field
               v-model="formdata.organic"
               type="number" 
-              class='material-select green' 
+              class='grey-select green' 
               solo flat 
               name="input-1"></v-text-field>
           </th>
@@ -38,7 +38,7 @@
               v-model="formdata.banjar"
               item-text="name" label="" 
               item-value="id" return-object
-              class='material-select banjar'  />
+              class='grey-select banjar'  />
           </th>
           <th style="width: 15%">
             <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
@@ -179,11 +179,11 @@ export default {
   padding: 0 10px!important;
 }
 
-.material-select {
+.grey-select {
   background-color: rgba(66, 133, 61, 0.1)!important;
 }
 
-.material-select div {
+.grey-select div {
   padding: 3px 3px!important;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap class='add-worker'>
-    <v-flex xs6 >
+    <v-flex xs12 sm6>
       <p class='subheading'>Worker name</p>
       <v-select solo flat :items="workers" 
               v-model="formdata.worker"
@@ -18,20 +18,10 @@
           <p class='subheading'>In</p>
           <v-layout row wrap>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="m_in_last" />
             </v-flex>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="m_in_last" />
             </v-flex>
             <div class="separator"><span>:</span></div>
           </v-layout>
@@ -40,20 +30,10 @@
           <p class='subheading'>Out</p>
           <v-layout row wrap>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="m_out_first" />
             </v-flex>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="m_out_last" />
             </v-flex>
             <div class="separator"><span>:</span></div>
           </v-layout>
@@ -61,11 +41,10 @@
       </v-layout>
     </v-flex>
 
-    <v-flex xs6 x>
+    <v-flex xs12 sm6>
       <p class='subheading'>Notes</p>
       <v-text-field
               v-model="formdata.notes"
-              type="number" 
               class='grey-select' 
               solo flat 
               name="input-1"></v-text-field>
@@ -79,20 +58,10 @@
           <p class='subheading'>In</p>
           <v-layout row wrap>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="a_in_first" />
             </v-flex>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="a_in_last" />
             </v-flex>
             <div class="separator"><span>:</span></div>
           </v-layout>
@@ -101,32 +70,20 @@
           <p class='subheading'>Out</p>
           <v-layout row wrap>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="a_out_first" />
             </v-flex>
             <v-flex xs6 >
-              <v-text-field
-                type="number" 
-                class='grey-select' 
-                solo flat 
-                name="input-1">
-              </v-text-field>
+              <TimeField @done="receiveTime" part="a_out_last" />
             </v-flex>
             <div class="separator"><span>:</span></div>
           </v-layout>
         </v-flex>
       </v-layout>
-
-
     </v-flex>
 
     <v-flex xs4>
       <div class="left">
-        <v-btn color="error">Error</v-btn>
+        <v-btn color="error">Cancel</v-btn>
       </div>
     </v-flex>
     <v-flex xs4 class="center">
@@ -134,15 +91,24 @@
       <p class="total-hours">8 Hours</p>
     </v-flex>
     <v-flex xs4 class="right">
-      <v-btn color="success">Success</v-btn>
+      <v-btn color="success" @click="save">Save</v-btn>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+
+import TimeField from './TimeField'
+
 export default {
+  components: {
+    TimeField
+  },
   data () {
     return {
+      modal2: false,
+      returntime: null,
+      time: null,
       formdata: {
         worker: null,
         notes: ''
@@ -152,6 +118,14 @@ export default {
   computed: {
     workers () {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
+    }
+  },
+  methods: {
+    save () {
+      console.log(this.returntime)
+    },
+    receiveTime ({time, part}) {
+      console.log('Time changed', time, part)
     }
   }
 }
@@ -186,6 +160,7 @@ export default {
 
 .add-worker {
   background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 .grey-select {
   background-color: rgba(66, 133, 61, 0.1)!important;

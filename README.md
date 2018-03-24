@@ -133,9 +133,9 @@ const personCollection = [
     type: {
       employee:false,
       client:false,
-      community_manager:false,
-      facility_manager:false,
-      super_admin: true
+      communityManager:false,
+      facilityManager:false,
+      superAdmin: true
     },
     house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
 

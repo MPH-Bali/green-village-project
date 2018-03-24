@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   props: {
     id: {
@@ -96,51 +94,19 @@ export default {
       this.formData = this.defaultFormData
     }
   },
-  computed: {
-    ...mapGetters({
-      getDeliveryById: 'delivery/getDeliveryById'
-    })
-  },
   methods: {
-    ...mapActions({
-      fetchItem: 'delivery/fetchItem',
-      saveItem: 'delivery/saveItem',
-      deleteItem: 'delivery/deleteItem'
-    }),
     cancel () {
       this.formData = null
       this.showForm = false
     },
     async fetchDelivery (id) {
-      const response = await this.fetchItem({ id })
-      if (response.success) {
-        this.formData = this.getDeliveryById(id)
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+      
     },
     async save () {
-      this.savePending = true
-      const response = await this.saveItem({ form: this.formData })
-      this.savePending = false
-      if (response.success) {
-        this.$router.push({ name: 'Daily Log' })
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+       
     },
     async remove () {
-      this.deletePending = true
-      const response = await this.deleteItem({ id: this.formData.id })
-      this.deletePending = false
-      if (response.success) {
-        this.$router.push({ name: 'Daily Log' })
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+      
     }
   }
 }

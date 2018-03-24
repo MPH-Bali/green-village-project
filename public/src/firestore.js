@@ -3,6 +3,10 @@ import moment from 'vue-moment'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
+firebase.initializeApp({
+  projectId: 'mph-bali',
+  databaseURL: 'https://mph-bali.firebaseio.com'
+})
 // firebase.initializeApp({
 //   projectId: 'mph-bali',
 //   databaseURL: 'https://mph-bali.firebaseio.com'

@@ -1,4 +1,5 @@
 <template>
+    <v-container>
    <v-flex xs12>
         <v-card>
           <v-card-text>
@@ -16,6 +17,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
+    </v-container>
 </template>
 
 <script>

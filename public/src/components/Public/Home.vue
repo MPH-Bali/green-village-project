@@ -18,14 +18,14 @@
             </v-avatar>
             <h1 class="headline mt-2">MEMBERS</h1>
             <p>We’re already a lot, but we want all 805 Pererenan households to join us!</p>
-            <v-progress-linear value="75" height="20" color="primary" />
+            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalarChartOptions" />
             <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
 
       <v-flex xs12>
-        <v-card>
+        <v-card color="grey lighten-2">
           <v-card-text>
             <h1 class="headline mt-2">Recycling Efficiency</h1>
             <doughnut-chart :height="300" :chart-data="recyclingData" :options="ChartOptions" />
@@ -82,7 +82,7 @@
       </v-flex>
 
       <v-flex xs12>
-        <v-card>
+        <v-card color="grey lighten-2">
           <v-card-text>
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
@@ -141,7 +141,7 @@
       </v-flex>
 
       <v-flex xs12>
-        <v-card>
+        <v-card color="grey lighten-2">
           <v-card-text>
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
@@ -175,6 +175,7 @@
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field label="Email" flat v-model="form.email" :rules="emailRules" required />
             </v-form>
+            <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>Join Us</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -203,6 +204,24 @@ export default {
             backgroundColor: '#42853d',
             borderColor: '#42853d',
             data: [10, 38, 55, 50, 82, 90, 130]
+          }
+        ]
+      },
+      customerData: {
+        labels: ['businesses', 'villa', 'households'],
+        datasets: [
+          {
+            label: 'businesses',
+            backgroundColor: '#4a90e2',
+            data: [65]
+          }, {
+            label: 'villa',
+            backgroundColor: '#cc8a8c',
+            data: [17]
+          }, {
+            label: 'households',
+            backgroundColor: '#d1dfd0',
+            data: [35]
           }
         ]
       },

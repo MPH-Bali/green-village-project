@@ -9,7 +9,7 @@
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ props.item.worker.name }}</td>
       <td class="text-xs-center">{{ props.item.inorganic }}</td>
-      <td class="text-xs-center">{{ props.item.anorganic }}</td>
+      <td class="text-xs-center">{{ props.item.organic }}</td>
       <td class="text-xs-center">
         <template v-if="props.item.banjar">
           {{ props.item.banjar.name }}

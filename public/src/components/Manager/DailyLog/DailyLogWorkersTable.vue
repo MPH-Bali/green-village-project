@@ -2,7 +2,7 @@
   <v-data-table
     :loading="$firestore.collectionsPending.workertimes"
     :headers="headers"
-    :items="workertimes"
+    :items="this.$firestore.dailyCollections.workertimes"
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">
@@ -28,12 +28,6 @@ export default {
         { text: 'In', align: 'center', sortable: true, value: 'afternoon_in' },
         { text: 'Out', align: 'center', sortable: true, value: 'afternoon_out' }
       ]
-    }
-  },
-  computed: {
-    workertimes () {
-      console.log(this.$firestore.dailyCollections.workertimes)
-      return this.$firestore.dailyCollections.workertimes
     }
   }
 }

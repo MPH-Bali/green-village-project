@@ -59,7 +59,7 @@
                    v-if="!this.formData.id"
                    depressed color="primary" 
                   @click.stop="add" 
-                  :loading="savePending">Create Delivery
+                  :loading="addPending">Create Delivery
             </v-btn>
           </v-flex>
         </v-layout>

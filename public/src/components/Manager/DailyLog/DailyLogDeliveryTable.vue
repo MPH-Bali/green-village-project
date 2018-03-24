@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    :loading="loading"
+    :loading="$firestore.collectionsPending.delivery"
     :headers="headers"
     :items="$firestore.delivery"
     hide-actions class="elevation-1"

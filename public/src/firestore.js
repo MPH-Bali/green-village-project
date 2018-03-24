@@ -20,10 +20,13 @@ export default new Vue({
       persons: [],
       dailySubscriptions: [],
       delivery: [],
-      // ToDo: Add all collections
       start: null,
       end: null,
-      collections: ['delivery']
+      // ToDo: Add all collections
+      collections: ['delivery'],
+      collectionsPending: {
+        delivery: false
+      }
     }
   },
   methods: {
@@ -47,6 +50,7 @@ export default new Vue({
       this.dailySubscriptions = []
 
       this.collections.forEach(collection => {
+        this.collectionsPending[collection] = true
         const unsubscribe = db.collection(collection)
           .where('timestamp', '>=', new Date(this.start))
           .where('timestamp', '<=', new Date(this.end))
@@ -55,6 +59,7 @@ export default new Vue({
             snapshot.forEach(doc => {
               this[collection].push({ id: doc.id, ...doc.data() })
             })
+            this.collectionsPending[collection] = false
           })
 
         this.dailySubscriptions.push(unsubscribe)

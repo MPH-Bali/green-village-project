@@ -20,7 +20,7 @@
         <router-view />
       </v-slide-y-transition>
     </v-content>
-    <v-bottom-nav app :value="$route.path" color="grey darken-4">
+    <v-bottom-nav app :value="$route.path" v-if="$route.path !== '/manager/login'" color="grey darken-4">
       <v-btn
         flat
         color="primary"

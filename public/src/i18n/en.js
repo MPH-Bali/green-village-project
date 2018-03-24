@@ -3,6 +3,7 @@ export default {
    * @desc these keys MUST coorlate with the @/router Router.routes.children.name value
    */
   routeNames: {
+    login: 'Login',
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form'

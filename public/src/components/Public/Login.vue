@@ -1,65 +1,97 @@
 <template>
-  <v-layout row>
   <v-container grid-list-lg>
-
-    <template v-if="!confirmationResult">
-
-      <v-layout row wrap>
-        <v-flex xs12 md8 offset-md2 text-xs-center>
-          <v-card>
-            <v-card-text>
-              <p class="title">To login, please enter your phone number</p>
-              <v-flex text-xs-left>
-                <label>Phone Number</label>
-                <v-form>
-                  <v-text-field solo flat label="Type Your Phone Number" type="tel" v-model="formData.phoneNumber" :disabled="loading" />
-                </v-form>
+    <v-layout column text-xs-center>
+      <v-card v-if="!confirmationResult" class="py-5 my-5">
+        <v-card-text class="py-5 my-5">
+          <p class="title" style="text-transform: uppercase;">To login, please enter your phone number</p>
+          <v-flex md4 offset-md4>
+            <v-form>
+              <v-flex ml-0 mt-3 pl-0 text-xs-left>
+                <label class="loginLabel">Phone Number</label>
               </v-flex>
-              <v-btn id="confirmButton" color="primary" depressed style="text-transform: capitalize" @click.stop="confirm" :disabled="loading">
-                <template v-if="loading">
-                  <v-progress-circular indeterminate color="primary" />
-                </template>
-                <template v-else>
-                  Continue
-                </template>
-              </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-flex>
-      </v-layout>
-
-    </template>
-    <template v-else>
-
-      <v-layout row wrap>
-        <v-flex xs12 md8 offset-md2 text-xs-center>
-          <v-card>
-            <v-card-text>
-              <p class="title">Please enter the code we sent you via sms</p>
-              <v-flex text-xs-left>
-                <label>Code</label>
-                <v-form>
-                  <v-text-field solo flat label="Type Your Code" type="number" v-model="formData.confirmationCode" :disabled="loading" />
-                </v-form>
+              <v-text-field
+                class="loginField"
+                name="phoneNumber" 
+                ref="phoneNumber" 
+                solo 
+                flat 
+                label="Type Your Phone Number" 
+                type="tel" 
+                v-model="formData.phoneNumber" 
+                :disabled="loading" 
+                @input="errorMessages = []" 
+                :error="hasErrors" />
+              <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+              <v-flex px-0 mt-3>
+               <v-btn id="confirmButton" color="primary" depressed style="text-transform: capitalize" @click.stop="confirm" :loading="loading" block>Continue</v-btn>
               </v-flex>
-              <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="login" :disabled="loading">
-                <template v-if="loading">
-                  <v-progress-circular indeterminate color="primary" />
-                </template>
-                <template v-else>
-                  Login
-                </template>              
-              </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-flex>
-      </v-layout>
+            </v-form>
+          </v-flex>
+        </v-card-text>
+      </v-card>
 
-    </template>
+      <v-card v-else class="py-5 my-5">
+        <v-card-text class="py-5 my-5">
+          <p class="title" style="text-transform: uppercase;">Please enter the code we sent you via sms</p>
+          <v-flex md4 offset-md4>
+            <v-form>
+              <v-flex ml-0 mt-3 pl-0 text-xs-left>
+                <label class="loginLabel">Code</label>
+              </v-flex>
+                <v-text-field 
+                  class="loginField"
+                  name="confirmationCode" 
+                  ref="confirmationCode" 
+                  solo 
+                  flat 
+                  label="Type Your Code" 
+                  type="number" 
+                  v-model="formData.confirmationCode" 
+                  :disabled="loading" 
+                  @input="errorMessages = []" 
+                  :error="hasErrors" />                
+              <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+              <v-flex px-0 mt-3>
+               <v-btn id="confirmButton" color="primary" depressed style="text-transform: capitalize" @click.stop="login" :loading="loading" block>Login</v-btn>
+              </v-flex>
+            </v-form>
+          </v-flex>
+        </v-card-text>
+      </v-card>      
+    </v-layout>
+
+    <!--
+    <v-layout v-else>
+      <v-flex xs12 md8 offset-md2 text-xs-center>
+        <v-card>
+          <v-card-text>
+            <p class="title">Please enter the code we sent you via sms</p>
+            <v-flex text-xs-left>
+              <v-form>
+                <label for="confirmationCode">Code</label>
+                <v-text-field 
+                  name="confirmationCode" 
+                  ref="confirmationCode" 
+                  solo 
+                  flat 
+                  label="Type Your Code" 
+                  type="number" 
+                  v-model="formData.confirmationCode" 
+                  :disabled="loading" 
+                  @input="errorMessages = []" 
+                  :error="hasErrors" />
+                <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+              </v-form>
+            </v-flex>
+            <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="login" :disabled="loading">Login</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout> -->
+
+    <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="logout">Logout</v-btn>
 
   </v-container>
-    <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="logout">Logout</v-btn>
-  </v-layout>
 </template>
 
 <script>
@@ -68,13 +100,11 @@ import router from '@/router'
 
 export default {
   mounted () {
-    var vm = this
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('confirmButton', {
-      'size': 'invisible',
-      'callback': function (response) {
-        vm.loading = false
-      }
+      size: 'invisible'
     })
+
+    this.$refs.phoneNumber.focus()
   },
   data () {
     return {
@@ -83,44 +113,44 @@ export default {
         confirmationCode: null
       },
       loading: false,
+      errorMessages: [],
       confirmationResult: null
+    }
+  },
+  computed: {
+    hasErrors () {
+      return this.errorMessages.length > 0
     }
   },
   methods: {
     async confirm () {
-      var vm = this
-      this.loading = true
-      var phoneNumber = this.formData.phoneNumber
-      var appVerifier = window.recaptchaVerifier
-      firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-        .then(function (confirmationResult) {
-          // SMS sent. Prompt user to type the code from the message, then sign the
-          // user in with confirmationResult.confirm(code).
-          vm.confirmationResult = confirmationResult
-        }).catch(function (error) {
-          // Error; SMS not sent
-          // ...
-          // Or, if you haven't stored the widget ID:
-          console.log(error)
-          window.recaptchaVerifier.render().then(function (widgetId) {
-            window.grecaptcha.reset(widgetId)
-          })
-        })
+      try {
+        this.loading = true
+        let confirmationResult = await firebase.auth().signInWithPhoneNumber(this.formData.phoneNumber, window.recaptchaVerifier)
+        // SMS sent. Prompt user to type the code from the message.
+        this.confirmationResult = confirmationResult
+        this.loading = false
+      } catch (error) {
+        // Error SMS not sent
+        this.errorMessages.push(error.message)
+        this.loading = false
+      }
     },
     async login () {
-      var vm = this
-      this.loading = true
-      var code = this.formData.confirmationCode
-      this.confirmationResult.confirm(code).then(function (result) {
+      try {
+        this.loading = true
+        // Sign the user in.
+        let result = await this.confirmationResult.confirm(this.formData.confirmationCode)
         // User signed in successfully.
-        var user = result.user
+        let user = result.user
         // TODO create a new person in the database linking them to a uid
         console.log(user.uid)
-        router.push(vm.$route.query.redirect || '/manager')
-      }).catch(function (error) {
-        // User couldn't sign in (bad verification code?)
-        console.log(error)
-      })
+        this.loading = false
+        router.push(this.$route.query.redirect || '/manager')
+      } catch (error) {
+        this.loading = false
+        this.errorMessages.push(error.message)
+      }
     },
     async logout () {
       try {
@@ -132,3 +162,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .container.grid-list-lg {
+    height: calc(100% - 54px);
+  }
+
+  .layout.column {
+    height: 100%;
+    justify-content: center;
+  }
+
+  .loginLabel {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .loginField {
+    background-color:  rgba(66, 133, 61, 0.1) !important;
+  }
+</style>

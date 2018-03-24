@@ -1,15 +1,8 @@
 import Vue from 'vue'
 import moment from 'vue-moment'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-firebase.initializeApp({
-  projectId: 'mph-bali',
-  databaseURL: 'https://mph-bali.firebaseio.com'
-})
+import { db } from '@/firebase'
 
 Vue.use(moment)
-const db = firebase.firestore()
 
 export default new Vue({
   data () {

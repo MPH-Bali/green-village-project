@@ -7,19 +7,19 @@
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Customer Name</h3>
               <p class="subheading">
-                Jaya Supraya
+                {{person.name}}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Type</h3>
               <p class="subheading">
-                Household
+                {{ person.household }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Company</h3>
               <p class="subheading">
-                /
+                {{ person.company }}
               </p>
             </v-flex>
           </v-layout>
@@ -27,19 +27,19 @@
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">SMS/Call</h3>
               <p class="subheading">
-                Jaya Supraya
+                {{ person.phone }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Whatsapp</h3>
               <p class="subheading">
-                Jaya Supraya
+                {{ person.whatsapp }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Email</h3>
               <p class="subheading">
-                Jaya Supraya
+                {{ person.email }}
               </p>
             </v-flex>
           </v-layout>
@@ -47,7 +47,7 @@
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Address</h3>
               <p class="subheading">
-                Js. Kuta Selatan 5 Bali
+                {{ person.address }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
@@ -81,10 +81,10 @@
         <v-card>
           <v-data-table
             :headers="headers"
-            :items="items"
+            :items="$firestore.fees"
             hide-actions>
             <template slot="items" slot-scope="props">
-              <td class="text-xs-center">{{props.item.timestamp}}</td>
+              <td class="text-xs-center">{{ $moment(props.item.timestamp).format('DD/MM/YYYY') }}</td>
               <td class="text-xs-center">{{ props.item.monthlyFee }}</td>
               <td class="text-xs-center">{{ props.item.totalPaid }}</td>
               <td class="text-xs-center">{{ props.item.paidUntil }}</td>
@@ -99,8 +99,16 @@
 <script>
 export default {
   name: 'CustomerDetailView',
+  created () {
+    this.$firestore.get('person', this.$route.params.id)
+      .then((data) => {
+        this.person = data
+      })
+    this.$firestore.syncFees(this.$route.params.id)
+  },
   data () {
     return {
+      person: {},
       headers: [
         { text: 'Date Time', value: 'timestamp', align: 'center' },
         { text: 'Monthly Fee', value: 'monthlyFee', align: 'center' },
@@ -109,10 +117,11 @@ export default {
       ],
       items: [
         {
-          timestamp: '2018-03-15T09:55:48.942Z',
+          personId: 'XXcgSBLHHkGb2KrOTJ0y',
+          timestamp: new Date(),
           monthlyFee: 50,
           totalPaid: 200,
-          paidUntil: '2018-07-15T09:55:48.942Z'
+          paidUntil: '2018-07-24T09:55:48.942Z'
         }
       ]
     }

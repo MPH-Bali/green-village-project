@@ -19,6 +19,7 @@ export default new Vue({
       delivery: [],
       start: null,
       end: null,
+      fees: [],
       // ToDo: Add all collections
       collections: ['delivery'],
       collectionsPending: {
@@ -41,6 +42,16 @@ export default new Vue({
           this.persons.push({ id: doc.id, ...doc.data() })
         })
       })
+    },
+    syncFees (personId) {
+      db.collection('fee')
+        .where('personId', '==', personId)
+        .onSnapshot(snapshot => {
+          this.fees = []
+          snapshot.forEach(doc => {
+            this.fees.push({ id: doc.id, ...doc.data() })
+          })
+        })
     },
     syncDailyData () {
       this.dailySubscriptions.forEach(unsubscribe => unsubscribe())

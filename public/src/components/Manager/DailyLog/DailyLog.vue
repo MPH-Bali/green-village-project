@@ -16,30 +16,21 @@
         </v-flex>
       </v-layout>
 
-      <Header action="/manager/delivery-form" title="Delivery" />
-      <DeliveryTable/>
+      <log-header action="/manager/delivery-form" title="Delivery" />
+      <delivery-table/>
 
-      <Header class="mt-4" action="/manager/material" title="Material Kg" />
+      <log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <MaterialTable/>
 
-      <Header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />
-      <DeliveryTable/>
-
-      <Header class="mt-4" action="/manager/delivery-form" title="Sales IDR" />
-      <DeliveryTable/>
-
-      <Header class="mt-4" action="/manager/delivery-form" title="Expenses IDR" />
-      <DeliveryTable/>
-
-      <Header class="mt-4" action="/manager/workercheck" title="Workers Hours" />
+      <log-header class="mt-4" action="/manager/workercheck" title="Workers Hours" />
       <WorkerTimes/>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import Header from './DailyLogHeader'
-import DeliveryTable from './DailyLogDeliveryTable'
+import LogHeader from './DailyLogHeader'
+import DeliveryTable from '@/components/Manager/Delivery/Table'
 import MaterialTable from './DailyLogMaterialTable'
 import WorkerTimes from './DailyLogWorkersTable'
 
@@ -51,7 +42,10 @@ export default {
     }
   },
   components: {
-    Header, DeliveryTable, MaterialTable, WorkerTimes
+    LogHeader,
+    DeliveryTable,
+    MaterialTable,
+    WorkerTimes
   },
   data () {
     return {

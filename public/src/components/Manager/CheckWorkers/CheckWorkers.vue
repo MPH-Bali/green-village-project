@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavigationHeader from '../Ui/NavigationHeader'
+import NavigationHeader from '@/elements/NavigationHeader'
 import AddWorker from './AddWorker'
 export default {
   components: {

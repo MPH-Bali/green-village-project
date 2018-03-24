@@ -3,7 +3,7 @@
     <navigation-header />
     <v-data-table :items='materials' :headers='headers' hide-actions>
       <template slot='headers' slot-scope="props">
-        <tr class='material-header'> 
+        <tr class='material-header'>
           <th v-for='header in props.headers' :key="header.text">
           {{ header.text }}
           </th>
@@ -22,7 +22,7 @@
               v-model="formData.inorganic"
               class='grey-select red' 
               type="number"
-              solo flat 
+              solo flat
               name="input-1"></v-text-field>
           </th>
           <th style="width: 12.5%;">
@@ -68,8 +68,7 @@
 </template>
 
 <script>
-import NavigationHeader from './Ui/NavigationHeader'
-
+import NavigationHeader from '@/elements/NavigationHeader'
 const defaultForm = {
   inorganic: '',
   organic: '',
@@ -164,7 +163,9 @@ export default {
 
 .material-header {
   border-bottom: none!important;
+  background-color: white;
 }
+
 
 .material-header th {
   text-align: left;
@@ -177,6 +178,7 @@ export default {
 
 .material-actions th {
   padding: 0 10px!important;
+  background-color: white;
 }
 
 .grey-select {

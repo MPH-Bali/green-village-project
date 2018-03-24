@@ -2,7 +2,14 @@
   <v-layout row>
     <v-flex xs12 md8 offset-md2>
       <v-container fluid grid-list-lg>
-        <v-layout row wrap>
+        <v-flex xs12 text-xs-center>
+          <v-progress-circular 
+            indeterminate 
+            :size="50" 
+            v-show="getPending"
+            color="primary"/>          
+        </v-flex>
+        <v-layout row wrap v-if="!getPending">
           <v-flex xs6>
             <v-text-field label="Name" v-model="formData.name" />
           </v-flex>
@@ -30,8 +37,7 @@
             <v-btn color="error" 
                    outline
                    depressed 
-                  @click.stop="$router.push({ name: 'Buyers' })" 
-                  :loading="deletePending">Cancel
+                  @click.stop="$router.push({ name: 'buyers' })">Cancel
             </v-btn>
             <v-btn v-if="this.formData.id" 
                    color="error" 
@@ -61,10 +67,14 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, email, phone } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
   props: {
     id: {
-      type: 'String',
+      type: String,
       reqired: false
     }
   },
@@ -76,6 +86,9 @@ export default {
       addPending: false,
       formData: {}
     }
+  },
+  validations: {
+
   },
   created () {
     if (this.id) this.fetchBuyer(this.id)
@@ -93,13 +106,19 @@ export default {
       this.formData.numberOfSales = 0
       await this.$firestore.add('person', this.formData)
       this.addPending = false
-      this.$router.push({ name: 'Buyers' })
+      this.$router.push({ name: 'buyers' })
     },
     async save () {
-
+      this.savePending = true
+      await this.$firestore.update('person', this.formData)
+      this.savePending = false
+      this.$router.push({ name: 'buyers' })
     },
     async remove () {
-
+      this.deletePending = true
+      await this.$firestore.remove('person', this.formData.id)
+      this.deletePending = false
+      this.$router.push({ name: 'buyers' })
     }
   }
 }

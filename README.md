@@ -102,34 +102,17 @@ each user will have a corresponding user in Firebase
 ## Firebase - example data
 
 ```javascript
-// Since settings is an object, it can be stored in the realtime database
-const settings = {
+// All collections and are stored in the firestore
+const settingsCollection = {
   name: 'Facility 1',
-  village: 'Canggu',
-  importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc'),
-  houseTypes: [ //needed?
-    { name: 'Villa', collectionFee: 20000 },
-    { name: 'Local House', collectionFee: 1000 },
-    { name: 'Business', collectionFee: 2500 }
-  ],
-  materials: [
-    { name: 'Material 1', pricePerKilo: 2000 },
-    { name: 'Material 2', pricePerKilo: 3000 }
-    //...
-  ],
-  banjars: [
-    {
-      name: 'Banjar Name',
-      pickupTimes: {
-        mon: '6am-2pm',
-        tue: '6am-2pm'
-        //...
-      }
-    }
-  ]
+  village: 'Pererenan',
+  importantVillageGuy: {
+    id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+    name: 'Michael'
+  }
+  // + other information about the facility that we might need
 }
 
-// The rest is collections and can be stored in firestore
 const personCollection = [
   {
     login: firebaseUserId, // Only for people with a login
@@ -147,12 +130,14 @@ const personCollection = [
       buyer: false
     },
     role: {
-      communityManager:false,
-      facilityManager:false,
+      communityManager: false,
+      facilityManager: false,
       superAdmin: true
     },
-    house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
-
+    houseType: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'villa'
+    }
   }
 ]
 
@@ -161,15 +146,23 @@ const deliveryCollection = [
     timestamp: '2018-03-15T09:55:48.942Z',
     organic: 12.5,
     anorganic: 12.5,
-    truck: getTruck('Tu4SFfDhBUgAwGsvfopc'),
-    driver: getPeron('Tu4SFfDhBUgAwGsvfopc'),
-    banjar: getBanjar('Tu4SFfDhBUgAwGsvfopc')
+    driver: {
+      id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+      name: 'Michael'
+    },
+    banjar: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    }
   }
 ]
 
 const workedHoursCollection = [
   {
-    employee: getPeron('Tu4SFfDhBUgAwGsvfopc'),
+    employee: {
+      id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+      name: 'Michael'
+    },
     in: '2018-03-15T09:55:48.942Z',
     out: null
   }
@@ -178,7 +171,10 @@ const workedHoursCollection = [
 const stockCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
-    material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+    material: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'plastic'
+    },
     amount: 200
   }
 ]
@@ -186,16 +182,25 @@ const expenseCollection = [
   {
     description: 'Limited Furby Collection',
     amount: 20000000,
-    person: getPerson('Tu4SFfDhBUgAwGsvfopc')
+    person: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    }
   }
 ]
 
 const saleCollection = [
   {
-    buyer: getPerson('Tu4SFfDhBUgAwGsvfopc'),
+    buyer: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    },
     materials: [
       {
-        material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+        material: {
+          id: 'Tu4SFfDhBUgAwGsvfopc',
+          name: 'plastic'
+        },
         kilo: 200,
         pricePerKilo: 20000
       }
@@ -203,12 +208,43 @@ const saleCollection = [
   }
 ]
 
-const feesCollection = [
+const feeCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     monthly_fee: 50,
     total_paid: 200,
     paid_until: '2018-07-15T09:55:48.942Z'
+  }
+]
+
+const banjarCollection = [
+  {
+    name: 'Banjar Name',
+    pickupTimes: [
+      {
+        day: 'Monday',
+        time: '6am-2pm'
+      },
+      {
+        day: 'Tuesday',
+        time: '6am-2pm'
+      }
+    ]
+  }
+];
+
+const materialCollection = [
+  {
+    name: 'Material 1',
+    pricePerKilo: 2000
+  }
+]
+
+// villa, household, business
+const houseTypesCollection = [
+  {
+    name: 'Villa',
+    collectionFee: 20000
   }
 ]
 ```

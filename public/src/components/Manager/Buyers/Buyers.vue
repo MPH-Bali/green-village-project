@@ -1,15 +1,15 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row mb-3>
-      <v-flex text-xs-right>
-        <v-btn depressed color="primary" @click.stop="$router.push({ name: 'Buyer' })">
+      <v-flex text-xs-right
+        <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyer' })">
           <v-icon>add_circle</v-icon>
           <span style="text-transform: capitalize" class="ml-2">Add</span>
         </v-btn>
       </v-flex>
     </v-layout>
     <v-data-table
-      :loading="false"
+      :loading="$firestore.collectionsPending.person"
       :headers="headers"
       :items="buyersList"
       hide-actions class="elevation-1"
@@ -20,7 +20,7 @@
         <td class="text-xs-center">{{ props.item.numberOfSales }}</td>
         <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
         <td class="text-xs-center">
-          <v-btn icon @click="$router.push({ name: 'Buyer', params: { id: props.item.id }})">
+          <v-btn icon @click="$router.push({ name: 'buyer', params: { id: props.item.id }})">
             <v-icon size="17px" color="primary">fa-edit</v-icon>
           </v-btn>
         </td>
@@ -44,8 +44,13 @@ export default {
     }
   },
   computed: {
+    sales() {
+      return this.$firestore.collections.sales
+    },
     buyersList () {
-      return this.$firestore.persons.filter(person => person.type && person.type.buyer)
+      return this.$firestore.collections.person.filter(person => {
+        return person.type && person.type.buyer
+      })
     }
   }
 }

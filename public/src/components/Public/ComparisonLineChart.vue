@@ -1,5 +1,4 @@
 
-
 <script>
   import VueCharts from 'vue-chartjs'
   import { Line } from 'vue-chartjs'

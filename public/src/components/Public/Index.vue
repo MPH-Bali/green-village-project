@@ -7,12 +7,16 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-title>Pererenan</v-toolbar-title>
-      <v-spacer />
+<!--       <v-toolbar-title>Pererenan</v-toolbar-title>
+ -->      <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat>
+        <v-btn flat>Pickup Schedule</v-btn>
+        <v-btn flat>Sign Up</v-btn>
+        <v-btn flat><img src="assets/images/bahasa-flag(1).svg"
+     class="Bahasa-Flag"></v-btn>
+        <!-- <v-btn flat>
           <v-icon size="30px">menu</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-toolbar-items>
     </v-toolbar>
     <v-content>

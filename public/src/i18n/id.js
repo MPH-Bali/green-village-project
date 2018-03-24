@@ -111,6 +111,7 @@ export default {
     addStock: 'tambah stok atau kompos',
     createSale: 'buat penjualan',
     addExpense: 'tambah biaya',
+    settings: 'pengaturan',
   },
   // 02.0b
   dailyLog: {

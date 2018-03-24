@@ -46,14 +46,14 @@ export default {
   data () {
     return {
       sections: [
-        { name: 'Daily Log', icon: 'fa-calendar-alt', route: '/manager' },
-        { name: 'Add Delivery', icon: 'fa-truck', route: '/manager/delivery-form' },
-        { name: 'Weight Material', icon: 'fa-weight', route: '/manager/material' },
-        { name: 'Worker Hours', icon: 'fa-clock', route: '/manager/hours' },
-        { name: 'Add Stock', icon: 'fa-cubes', route: '/manager/stock' },
-        { name: 'Create Sale', icon: 'fa-credit-card', route: '/manager/sale' },
-        { name: 'Add Expense', icon: 'fa-money-bill-alt', route: '/manager/expense' },
-        { name: 'Settings', icon: 'fa-cog', route: '/manager/settings' }
+        { name: this.$i18n.t('bottomMenu.dailyLog'), icon: 'fa-calendar-alt', route: '/manager' },
+        { name: this.$i18n.t('bottomMenu.addDelivery'), icon: 'fa-truck', route: '/manager/delivery' },
+        { name: this.$i18n.t('bottomMenu.weighMaterials'), icon: 'fa-weight', route: '/manager/material' },
+        { name: this.$i18n.t('bottomMenu.workerHours'), icon: 'fa-clock', route: '/manager/hours' },
+        { name: this.$i18n.t('bottomMenu.addStock'), icon: 'fa-cubes', route: '/manager/stock' },
+        { name: this.$i18n.t('bottomMenu.createSale'), icon: 'fa-credit-card', route: '/manager/sale' },
+        { name: this.$i18n.t('bottomMenu.addExpense'), icon: 'fa-money-bill-alt', route: '/manager/expense' },
+        { name: this.$i18n.t('bottomMenu.settings'), icon: 'fa-cog', route: '/manager/settings' }
       ]
     }
   }

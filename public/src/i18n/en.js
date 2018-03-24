@@ -111,6 +111,7 @@ export default {
     addStock: 'add stock',
     createSale: 'create sale',
     addExpense: 'add expense',
+    settings: 'settings',
   },
   // 02.0b
   dailyLog: {

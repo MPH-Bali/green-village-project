@@ -47,7 +47,6 @@ The frontend can be found in the *public* directory and was initialised using [V
 ### Dependencies
 - [Vue.js](https://vuejs.org/) - Frontend Framework
 - [Vueifiy](https://vuetifyjs.com/en/) - UI Components Framework
-- [Vuex](https://vuex.vuejs.org/en/) - State Management
 - [Vue-router](https://router.vuejs.org/en/) - Routing
 - [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
 - [Vue-chartjs](https://github.com/apertureless/vue-chartjs) - Charts and Graphs
@@ -64,6 +63,18 @@ The frontend can be found in the *public* directory and was initialised using [V
 - [ES6](https://github.com/standard/eslint-config-standard)
 - [Vue](https://vuejs.org/v2/style-guide/)
 
+### Facility Manager - Architecture ###
+The store is implemented using a single Vue instance that is made globably available through **$firestore**.
+
+We're using firestore realtime data. Therefore all collections will be synced all the time and can be accessed from any component like this: **$firestore.COLLECTION_NAME**.
+
+The following CRUD actions are available:
+- **$firestore.get(COLLCTION_NAME, ID)** returns promise with the requested item
+- **$firestore.remove(COLLCTION_NAME, ID)** deletes requested item, returns promise for success/error
+- **$firestore.update(COLLCTION_NAME, DATA)** updates parts of object (needs to have DATA.ID)
+- **$firestore.add(COLLCTION_NAME, DATA)** adds a record and returns promise with created object/error
+
+The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
 ---
 

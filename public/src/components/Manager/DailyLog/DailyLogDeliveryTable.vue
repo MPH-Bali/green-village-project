@@ -1,8 +1,8 @@
 <template>
-  <v-data-table 
-    :loading="loading" 
-    :headers="headers" 
-    :items="deliveriesAsArray" 
+  <v-data-table
+    :loading="$firestore.collectionsPending.delivery"
+    :headers="headers"
+    :items="$firestore.delivery"
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -41,33 +40,6 @@ export default {
         { text: 'Comments', align: 'left', sortable: false, value: 'comments' },
         { text: 'Actions', align: 'center', sortable: false, value: null }
       ]
-    }
-  },
-  computed: {
-    ...mapGetters({
-      deliveries: 'delivery/getDailyList'
-    }),
-    deliveriesAsArray () {
-      return Object.keys(this.deliveries).map(id => this.deliveries[id])
-    },
-    logDate () {
-      const date = this.$moment(this.$route.params.date)
-      const today = this.$moment().startOf('day')
-      return today > date ? date : today
-    }
-  },
-  methods: {
-    ...mapActions({
-      fetchDeliveries: 'delivery/fetchDailyList'
-    })
-  },
-  async created () {
-    this.loading = true
-    const result = await this.fetchDeliveries({ date: this.logDate })
-    this.loading = false
-    if (!result.success) {
-      console.log(result.error)
-      // make toast
     }
   }
 }

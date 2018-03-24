@@ -46,49 +46,54 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        timestamp: new Date(),
-        items: [
-          {
-            id: 1,
-            worker: 'Made',
-            inorganic: '20kg',
-            organic: '10kg',
-            banjar: 'banjar 1'
-          },
-          {
-            id: 2,
-            worker: 'Made',
-            inorganic: '20kg',
-            organic: '10kg',
-            banjar: 'banjar 1'
-          },
-          {
-            id: 3,
-            worker: 'Made',
-            inorganic: '20kg',
-            organic: '10kg',
-            banjar: 'banjar 1'
-          },
-          {
-            id: 4,
-            worker: 'Made',
-            inorganic: '20kg',
-            organic: '10kg',
-            banjar: 'banjar 1'
-          }
-        ],
-        headers: [
-          { text: 'Worker', value: 'worker', align: 'left' },
-          { text: 'Inorganic', value: 'inorganic', align: 'left' },
-          { text: 'Organic', value: 'organic', align: 'left' },
-          { text: 'Banjar', value: 'banjar', align: 'left' }
-        ]
-      }
+import NavigationHeader from './Ui/NavigationHeader'
+
+export default {
+  components: {
+    NavigationHeader
+  },
+  data () {
+    return {
+      timestamp: new Date(),
+      items: [
+        {
+          id: 1,
+          worker: 'Made',
+          inorganic: '20kg',
+          organic: '10kg',
+          banjar: 'banjar 1'
+        },
+        {
+          id: 2,
+          worker: 'Made',
+          inorganic: '20kg',
+          organic: '10kg',
+          banjar: 'banjar 1'
+        },
+        {
+          id: 3,
+          worker: 'Made',
+          inorganic: '20kg',
+          organic: '10kg',
+          banjar: 'banjar 1'
+        },
+        {
+          id: 4,
+          worker: 'Made',
+          inorganic: '20kg',
+          organic: '10kg',
+          banjar: 'banjar 1'
+        }
+      ],
+      headers: [
+        { text: 'Worker', value: 'worker', align: 'left' },
+        { text: 'Inorganic', value: 'inorganic', align: 'left' },
+        { text: 'Organic', value: 'organic', align: 'left' },
+        { text: 'Banjar', value: 'banjar', align: 'left' }
+      ]
     }
   }
+}
 </script>
 
 <style scoped>

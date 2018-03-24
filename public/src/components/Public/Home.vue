@@ -45,6 +45,15 @@
       <v-flex xs12>
         <v-card>
           <v-card-text>
+            <h1 class="headline mt-2">Recycling Efficiency</h1>
+            <line-chart :height="300" :chart-data="recyclingEfficiency" />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-card>
+          <v-card-text>
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">multiline_chart</v-icon>
             </v-avatar>
@@ -172,6 +181,17 @@ export default {
             backgroundColor: '#d1dfd0',
             data: [35, 20, 20, 20, 35]
           }
+        ]
+      },
+     recyclingEfficiency: {
+      type: 'doughnut',
+      labels: ['Compost', 'Material', 'Landfill'],
+      datasets: [
+          {
+            label: 'Oragnic',
+            backgroundColor: '#4a90e2',
+            data: [65, 45, 60, 65, 52]
+          },
         ]
       },
       barChartOptions: {

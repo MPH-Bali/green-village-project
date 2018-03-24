@@ -20,7 +20,7 @@
 
             <p class="caption">Our Community Manager will come to your place to collect the fee and finalise your subscription</p>
             <v-btn color="primary" flat>Problem?</v-btn>
-            <v-btn color="primary" depressed>Join Us</v-btn>
+            <v-btn v-on:click="addClient"color="primary" depressed>Join Us</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -33,6 +33,11 @@ export default {
   data () {
     return {
       form: {}
+    }
+  },
+  methods: {
+    addClient: function(){
+      alert('Hello ' + this.form.name + '!')
     }
   }
 }

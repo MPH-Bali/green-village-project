@@ -29,10 +29,13 @@ export default new Router({
     {
       path: '/manager',
       component: Manager,
+      /**
+       *  @desc the children.name value MUST coorlelate with the key in our i18n routeNames
+       */
       children: [
-        { path: '', name: 'Daily Log', component: DailyLog },
-        { path: 'daily-log/:date?', name: 'Daily Log History', component: DailyLog, props: true },
-        { path: 'delivery-form/:id?', name: 'Delivery Form', component: DeliveryForm, props: true },
+        { path: '', name: 'dailyLog', component: DailyLog },
+        { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
+        { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

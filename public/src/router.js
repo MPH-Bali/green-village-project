@@ -9,6 +9,7 @@ import Public from '@/components/Public'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
 import SignedUp from '@/components/Public/SignedUp'
+import ContactUs from '@/components/Public/ContactUs'
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ export default new Router({
         { path: '', name: 'Home', component: Home },
         { path: 'sign-up', name: 'SignUp', component: SignUp },
         { path: 'signed-up', name: 'SignedUp', component: SignedUp },
+        { path: 'contact-us', name: 'ContactUs', component: ContactUs },
       ]
     },
     {

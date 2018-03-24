@@ -2,21 +2,22 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
+        <v-btn flat color="primary" @click="$router.push('/')">
           <v-icon>fa-recycle</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-<!--       <v-toolbar-title>Pererenan</v-toolbar-title>
- -->      <v-spacer />
       <v-toolbar-items class="mr-0">
         <v-btn flat>Pickup Schedule</v-btn>
-        <v-btn flat>Sign Up</v-btn>
-        <v-btn flat><img src="assets/images/bahasa-flag(1).svg"
-     class="Bahasa-Flag"></v-btn>
-        <!-- <v-btn flat>
-          <v-icon size="30px">menu</v-icon>
-        </v-btn> -->
+        <v-btn flat @click="$router.push('/sign-up')" >Sign Up</v-btn>
+        <v-menu offset-y>
+          <v-btn color="primary" dark slot="activator">Language</v-btn>
+            <v-list>
+              <v-list-tile v-for="item in items" :key="item.title" @click="">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+    </v-menu>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -47,7 +48,7 @@
           </v-btn>
         </v-flex>
         <v-flex xs12 class="grey darken-3 white--text">
-          <p class="body-1 my-3">Contact Us</p>
+          <a href="contact-us" class="body-1 my-3">Contact Us</a>
           <p class="body-1 my-3">Send Feedback</p>
           <p class="body-1 my-3">Contribute</p>
           <p class="body-1 my-3">FAQ</p>
@@ -58,3 +59,14 @@
     </v-content>
   </v-app>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      items: [
+        { title: 'Bahasa' },
+        { title: 'English' }
+      ]
+    })
+  }
+</script>

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
-import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
+import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 
 import Public from '@/components/Public/Index'

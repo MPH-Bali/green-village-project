@@ -3,16 +3,16 @@
     <navigation-header />
     <v-data-table :items='materials' :headers='headers' hide-actions>
       <template slot='headers' slot-scope="props">
-        <tr class='material-header'> 
+        <tr class='material-header'>
           <th v-for='header in props.headers' :key="header.text">
           {{ header.text }}
           </th>
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="workers" 
+            <v-select solo flat :items="workers"
               v-model="formdata.worker"
-              item-text="name" 
+              item-text="name"
               item-value="id"
               return-object
               label="" class='material-select banjar' />
@@ -20,23 +20,23 @@
           <th style="width: 12.5%;">
             <v-text-field
               v-model="formdata.inorganic"
-              class='material-select red' 
+              class='material-select red'
               type="number"
-              solo flat 
+              solo flat
               name="input-1"></v-text-field>
           </th>
           <th style="width: 12.5%;">
             <v-text-field
               v-model="formdata.organic"
-              type="number" 
-              class='material-select green' 
-              solo flat 
+              type="number"
+              class='material-select green'
+              solo flat
               name="input-1"></v-text-field>
           </th>
           <th style="width: 30%">
-            <v-select solo flat :items="banjars" 
+            <v-select solo flat :items="banjars"
               v-model="formdata.banjar"
-              item-text="name" label="" 
+              item-text="name" label=""
               item-value="id" return-object
               class='material-select banjar'  />
           </th>
@@ -68,8 +68,6 @@
 </template>
 
 <script>
-import NavigationHeader from './Ui/NavigationHeader'
-
 const defaultForm = {
   inorganic: '',
   organic: '',
@@ -78,9 +76,6 @@ const defaultForm = {
 }
 
 export default {
-  components: {
-    NavigationHeader
-  },
   computed: {
     workers () {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)

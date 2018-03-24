@@ -3,19 +3,18 @@
     :loading="$firestore.collectionsPending.delivery"
     :headers="headers"
     :items="$firestore.dailyCollections.delivery"
-    hide-actions class="elevation-1"
-  >
+    hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ parseInt(props.item.organic) + parseInt(props.item.anorganic) }}</td>
       <td class="text-xs-center">{{ props.item.organic }}</td>
       <td class="text-xs-center">{{ props.item.anorganic }}</td>
       <td class="text-xs-center">{{ props.item.households }}</td>
-      <td>{{ props.item.driver }}</td>
-      <td>{{ props.item.banjar }}</td>
+      <td>{{ props.item.driver && props.item.driver.name }}</td>
+      <td>{{ props.item.banjar && props.item.banjar.name }}</td>
       <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">
-        <v-btn icon @click="$router.push({ name: 'Delivery Form', params: { id: props.item.id }})">
+        <v-btn icon @click="$router.push({ name: 'deliveryForm', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
         </v-btn>
       </td>
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -44,9 +42,3 @@ export default {
   }
 }
 </script>
-
-<style >
-  .elevation-1 thead {
-    background: #e5ece9;
-  }
-</style>

@@ -13,6 +13,8 @@
             <v-select solo flat :items="workers" 
               v-model="formdata.worker"
               item-text="name" 
+              item-value="id"
+              return-object
               label="" class='material-select banjar' />
           </th>
           <th style="width: 12.5%;">
@@ -35,6 +37,7 @@
             <v-select solo flat :items="banjars" 
               v-model="formdata.banjar"
               item-text="name" label="" 
+              item-value="id" return-object
               class='material-select banjar'  />
           </th>
           <th style="width: 15%">
@@ -58,7 +61,7 @@
             {{ props.item.banjar.name }}
           </template>
         </td>
-        <td class="align-right"><v-icon small>fas fa-pencil-alt</v-icon></td>
+        <td class="align-right" @click="editMaterial(props.item)"><v-icon small>fas fa-pencil-alt</v-icon></td>
       </template>
     </v-data-table>
   </v-container>
@@ -92,22 +95,30 @@ export default {
   },
   methods: {
     save () {
-      console.log(this.formdata)
       if (!this.formdata.worker) {
         this.error = 'You have to select a worker to save'
       } else {
         this.setWeights()
-        const payload = {
-          worker: this.formdata.worker,
-          organic: parseInt(this.formdata.organic),
-          inorganic: parseInt(this.formdata.inorganic),
-          banjar: this.formdata.banjar,
-          timestamp: new Date()
+        if (this.formdata.id) {
+          this.updateMaterial()
+        } else {
+          this.newMaterial()
         }
-        this.$firestore.add('material', payload).then(() => {
-          this.clearForm()
-        })
+        this.clearForm()
       }
+    },
+    newMaterial () {
+      const payload = {
+        worker: this.formdata.worker,
+        organic: parseInt(this.formdata.organic),
+        inorganic: parseInt(this.formdata.inorganic),
+        banjar: this.formdata.banjar,
+        timestamp: new Date()
+      }
+      this.$firestore.add('material', payload)
+    },
+    updateMaterial () {
+      this.$firestore.update('material', this.formdata)
     },
     hideError () {
       this.error = ''
@@ -122,6 +133,10 @@ export default {
     },
     clearForm () {
       this.formdata = defaultForm
+    },
+    editMaterial (material) {
+      this.formdata = {...material}
+      console.log('EDIT', material)
     }
   },
   data () {

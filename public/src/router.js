@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/DailyLog/DailyLog'
 import DeliveryForm from '@/components/DeliveryForm/DeliveryForm'
+import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -29,6 +30,7 @@ export default new Router({
         { path: '', name: 'Daily Log', component: DailyLog },
         { path: 'daily-log/:date?', name: 'Daily Log History', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'Delivery Form', component: DeliveryForm, props: true },
+        { path: 'customers/:id?', name: 'Customer Detail', component: CustomerDetailView, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

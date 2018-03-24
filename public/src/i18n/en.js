@@ -37,4 +37,13 @@ export default {
     contactAdmin: 'contact admin',
     logout: 'logout',
   },
+  // fixed menu located at the bottom of the screen
+  bottomMenu: {
+    addDelivery: 'add delivery',
+    weighMaterials: 'weighMaterials',
+    workersHours: 'workers hours',
+    addStock: 'add stock',
+    createSale: 'create sale',
+    addExpense: 'add expense',
+  },
 }

@@ -41,13 +41,6 @@ export default {
         { text: 'Actions', align: 'center', sortable: false, value: null }
       ]
     }
-  },
-  computed: {
-    logDate () {
-      const date = this.$moment(this.$route.params.date)
-      const today = this.$moment().startOf('day')
-      return today > date ? date : today
-    }
   }
 }
 </script>

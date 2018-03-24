@@ -2,7 +2,7 @@
   <v-data-table
     :loading="$firestore.collectionsPending.delivery"
     :headers="headers"
-    :items="$firestore.delivery"
+    :items="$firestore.dailyCollections.delivery"
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">

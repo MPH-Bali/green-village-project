@@ -16,32 +16,48 @@
         </v-flex>
       </v-layout>
 
-      <daily-log-header action="/manager/delivery-form" title="Delivery" />
-      <delivery-table/>
+      <Header action="/manager/delivery-form" title="Delivery" />
+      <DeliveryTable/>
 
       <daily-log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <delivery-table/>
 
-      <daily-log-header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />
-      <delivery-table/>
+      <Header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />
+      <DeliveryTable/>
 
-      <daily-log-header class="mt-4" action="/manager/delivery-form" title="Sales IDR" />
-      <delivery-table/>
+      <Header class="mt-4" action="/manager/delivery-form" title="Sales IDR" />
+      <DeliveryTable/>
 
-      <daily-log-header class="mt-4" action="/manager/delivery-form" title="Expenses IDR" />
-      <delivery-table/>
+      <Header class="mt-4" action="/manager/delivery-form" title="Expenses IDR" />
+      <DeliveryTable/>
 
-      <daily-log-header class="mt-4" action="/manager/delivery-form" title="Workers Hours" />
-      <delivery-table/>
+      <Header class="mt-4" action="/manager/delivery-form" title="Workers Hours" />
+      <DeliveryTable/>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Header from './DailyLogHeader'
+import DeliveryTable from './DailyLogDeliveryTable'
+
 export default {
+  props: {
+    date: {
+      type: String,
+      required: false
+    }
+  },
+  components: {
+    Header, DeliveryTable
+  },
+  data () {
+    return {
+    }
+  },
   computed: {
     logDate () {
-      const date = this.$moment(this.$route.params.date)
+      const date = this.$moment(this.date)
       const today = this.$moment().startOf('day')
       return today > date ? date : today
     },

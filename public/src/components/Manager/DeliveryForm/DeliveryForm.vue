@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs12 md6 offset-md3>
+    <v-flex xs12 md8 offset-md2>
       <v-container fluid grid-list-lg v-if="formData">
         <v-layout row wrap>
           <v-flex xs12 text-xs-center pt-4>
@@ -41,10 +41,26 @@
             <v-btn color="error" flat outline @click.stop="$router.go(-1)">Cancel</v-btn>
           </v-flex>
           <v-flex xs4 text-xs-center>
-            <v-btn v-if="this.formData.id" color="error" depressed @click.stop="remove">Delete</v-btn>
+            <v-btn v-if="this.formData.id" 
+                   color="error" 
+                   depressed 
+                  @click.stop="remove" 
+                  :loading="deletePending">Delete
+            </v-btn>
           </v-flex>
           <v-flex xs4 text-xs-right>
-            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save Delivery</v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   v-if="this.formData.id"
+                   depressed color="primary" 
+                  @click.stop="save" 
+                  :loading="savePending">Save Delivery
+            </v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   v-if="!this.formData.id"
+                   depressed color="primary" 
+                  @click.stop="add" 
+                  :loading="addPending">Create Delivery
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -54,23 +70,36 @@
 
 <script>
 export default {
-  created () {
-    const id = this.$route.params.id
-
-    if (!id) {
-      this.formData = {
+  props: {
+    id: {
+      type: String,
+      required: false
+    }
+  },
+  data () {
+    return {
+      formData: null,
+      deletePending: false,
+      savePending: false,
+      addPending: false,
+      fetchingDelivery: false,
+      defaultFormData: {
         anorganic: 20,
         organic: 20,
         households: 20,
         banjar: 'There',
         comments: 'Foo',
         driver: 'Putu',
-        timestamp: new Date() // keep this
+        timestamp: new Date()
       }
+    }
+  },
+  created () {
+    const id = this.id
+    if (id) {
+      this.fetchDelivery(id)
     } else {
-      this.$store.dispatch('delivery/fetchItem', id)
-        .then(data => { this.formData = data })
-        .catch(err => console.log(err))
+      this.formData = this.defaultFormData
     }
   },
   methods: {
@@ -78,21 +107,27 @@ export default {
       this.formData = null
       this.showForm = false
     },
-    save () {
-      this.$store
-        .dispatch('delivery/save', this.formData)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
+    async fetchDelivery (id) {
+      const result = await this.$firestore.get('delivery', id)
+      this.formData = result
     },
-    remove () {
-      this.$store.dispatch('delivery/deleteItem', this.formData.id)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
-    }
-  },
-  data () {
-    return {
-      formData: null
+    async save () {
+      this.savePending = true
+      await this.$firestore.update('delivery', this.formData)
+      this.savePending = false
+      this.$router.push({ name: 'Daily Log' })
+    },
+    async remove () {
+      this.deletePending = true
+      await this.$firestore.remove('delivery', this.formData.id)
+      this.deletePending = false
+      this.$router.push({ name: 'Daily Log' })
+    },
+    async add () {
+      this.addPending = true
+      await this.$firestore.add('delivery', this.formData)
+      this.addPending = false
+      this.$router.push({ name: 'Daily Log' })
     }
   }
 }

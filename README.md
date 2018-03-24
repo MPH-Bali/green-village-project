@@ -5,6 +5,8 @@ Powering MPH recycling and composting facilities in Bali.
 Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.com/)
 ## Links
 
+[Designs Trello Boars](https://trello.com/b/gbAYV7TV/mph-design)
+
 [Persona Real Time Board](https://realtimeboard.com/app/board/o9J_k0Yt1AU=/)
 
 [Wireframes - Facility Manager](https://www.figma.com/file/BciMKKjYcuDKnhUdayNdBwtA/Backend-Facility-Manager-Wires)
@@ -39,14 +41,12 @@ Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.co
 If you would like to become a part of our team and be added to the repository, please contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa).
 
 ---
-
 ## Front End with [Vue.js ❤](https://vuejs.org/)
 The frontend can be found in the *public* directory and was initialised using [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)  and the [vuetify/webpack](https://github.com/vuetifyjs/webpack) template.
 
 ### Dependencies
 - [Vue.js](https://vuejs.org/) - Frontend Framework
 - [Vueifiy](https://vuetifyjs.com/en/) - UI Components Framework
-- [Vuex](https://vuex.vuejs.org/en/) - State Management
 - [Vue-router](https://router.vuejs.org/en/) - Routing
 - [Vue-i18n](https://kazupon.github.io/vue-i18n/en/) - Internalization
 - [Vue-chartjs](https://github.com/apertureless/vue-chartjs) - Charts and Graphs
@@ -58,6 +58,23 @@ The frontend can be found in the *public* directory and was initialised using [V
 - [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) - Code Formatting
 - [ESLint](https://github.com/eslint/eslint) - Linting using [standard conf](https://github.com/standard/eslint-config-standard)
 - [Jest](https://facebook.github.io/jest/) - Testing
+
+### Style guides
+- [ES6](https://github.com/standard/eslint-config-standard)
+- [Vue](https://vuejs.org/v2/style-guide/)
+
+### Facility Manager - Architecture ###
+The store is implemented using a single Vue instance that is made globably available through **$firestore**.
+
+We're using firestore realtime data. Therefore all collections will be synced all the time and can be accessed from any component like this: **$firestore.COLLECTION_NAME**.
+
+The following CRUD actions are available:
+- **$firestore.get(COLLCTION_NAME, ID)** returns promise with the requested item
+- **$firestore.remove(COLLCTION_NAME, ID)** deletes requested item, returns promise for success/error
+- **$firestore.update(COLLCTION_NAME, DATA)** updates parts of object (needs to have DATA.ID)
+- **$firestore.add(COLLCTION_NAME, DATA)** adds a record and returns promise with created object/error
+
+The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
 ---
 
@@ -80,37 +97,13 @@ each user will have a corresponding user in Firebase
 - [Authorization](https://firebase.google.com/docs/database/security/#section-authorization)
 - [Data validation](https://firebase.google.com/docs/database/security/#section-validation)
 
-
-
--- Client Hosting
-
--- Storage Buckets
-
--- DataStore
-
--- Analytics
-
--- Notifications
-
--- Predictions
-
--- AdMob
-
--- Dynamic Links
-
--- Stability
---- Crashlytics
---- Performance
---- Test Lab
-
-
 ---
 
 ## Firebase - example data
 
 ```javascript
 // Since settings is an object, it can be stored in the realtime database
-var settings = {
+const settings = {
   name: 'Facility 1',
   village: 'Canggu',
   importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc'),
@@ -123,10 +116,6 @@ var settings = {
     { name: 'Material 1', pricePerKilo: 2000 },
     { name: 'Material 2', pricePerKilo: 3000 }
     //...
-  ],
-  trucks: [
-    { name: 'Truck 1', plate: 'ABC123', model: 'Toyota Trucki' },
-    { name: 'Truck 2', plate: 'DEF456', model: 'Toyota Trucki' }
   ],
   banjars: [
     {
@@ -141,23 +130,32 @@ var settings = {
 }
 
 // The rest is collections and can be stored in firestore
-var personCollection = [
+const personCollection = [
   {
     login: firebaseUserId, // Only for people with a login
     name: 'Test User',
     phone: '+62 123 123 123',
     address: 'Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361',
     email: 'some@address.com',
-    geolaction: {
+    geolocation: {
       latitude: '8.39111',
       longitude: '115.07361'
     },
-    type: 'employee | client | community manager | facility manager | super admin | village guy',
+    type: {
+      employee: false,
+      client: false
+    },
+    role: {
+      communityManager:false,
+      facilityManager:false,
+      superAdmin: true
+    },
     house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
+
   }
 ]
 
-var deliveryCollection = [
+const deliveryCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     organic: 12.5,
@@ -168,7 +166,7 @@ var deliveryCollection = [
   }
 ]
 
-var workedHoursCollection = [
+const workedHoursCollection = [
   {
     employee: getPeron('Tu4SFfDhBUgAwGsvfopc'),
     in: '2018-03-15T09:55:48.942Z',
@@ -176,14 +174,14 @@ var workedHoursCollection = [
   }
 ]
 
-var stockCollection = [
+const stockCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
     amount: 200
   }
 ]
-var expenseCollection = [
+const expenseCollection = [
   {
     description: 'Limited Furby Collection',
     amount: 20000000,
@@ -191,7 +189,7 @@ var expenseCollection = [
   }
 ]
 
-var saleCollection = [
+const saleCollection = [
   {
     buyer: getPerson('Tu4SFfDhBUgAwGsvfopc'),
     materials: [
@@ -202,7 +200,15 @@ var saleCollection = [
       }
     ]
   }
+]
 
+const feesCollection = [
+  {
+    timestamp: '2018-03-15T09:55:48.942Z',
+    monthly_fee: 50,
+    total_paid: 200,
+    paid_until: '2018-07-15T09:55:48.942Z'
+  }
 ]
 ```
 ---
@@ -215,7 +221,7 @@ var saleCollection = [
 
 #### Facility manager
 
-- The facility manager works at the facility. He manages the workers, the separation and weighing of delivered waste/materials, the sorting and weighing of plastics, paper and metal, makes compost and tracks worker hours.
+- The facility manager works at the facility. He manages the workers, the separation and weighing of delivered waste/materials, the sorting and weighing of plastics, paper and metal. He makes compost, he tracks worker hours
 
 #### Super admin
 
@@ -223,7 +229,7 @@ var saleCollection = [
 
 #### Other
 
-There are more people in the system but they are not system users (have no login in the system)
+There are more people in the system but they are not system users (have no login in the system) -
 
 - workers of the facility - people who sort materials, truck drivers
 - clients - people who buy compost, plastic, etc
@@ -357,8 +363,8 @@ There are more people in the system but they are not system users (have no login
 
 ## Cloud Functions
 
-- sending emails ?
-- upload files to storage
+- sending emails - Welcome email, EOD notification
+- daily gathering of data for graphs
 
 ---
 

@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 // Since settings is an object, it can be stored in the realtime database
-var settings = {
+const settings = {
   name: 'Facility 1',
   village: 'Canggu',
   importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc'),
@@ -14,10 +14,6 @@ var settings = {
     { name: 'Material 1', pricePerKilo: 2000 },
     { name: 'Material 2', pricePerKilo: 3000 }
     //...
-  ],
-  trucks: [
-    { name: 'Truck 1', plate: 'ABC123', model: 'Toyota Trucki' },
-    { name: 'Truck 2', plate: 'DEF456', model: 'Toyota Trucki' }
   ],
   banjars: [
     {
@@ -32,23 +28,32 @@ var settings = {
 }
 
 // The rest is collections and can be stored in firestore
-var personCollection = [
+const personCollection = [
   {
     login: firebaseUserId, // Only for people with a login
     name: 'Test User',
     phone: '+62 123 123 123',
     address: 'Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361',
     email: 'some@address.com',
-    geolaction: {
+    geolocation: {
       latitude: '8.39111',
       longitude: '115.07361'
     },
-    type: 'employee | client | community manager | facility manager | super admin | village guy',
+    type: {
+      employee: false,
+      client: false
+    },
+    role: {
+      communityManager:false,
+      facilityManager:false,
+      superAdmin: true
+    },
     house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
+
   }
 ]
 
-var deliveryCollection = [
+const deliveryCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     organic: 12.5,
@@ -59,7 +64,7 @@ var deliveryCollection = [
   }
 ]
 
-var workedHoursCollection = [
+const workedHoursCollection = [
   {
     employee: getPeron('Tu4SFfDhBUgAwGsvfopc'),
     in: '2018-03-15T09:55:48.942Z',
@@ -67,14 +72,14 @@ var workedHoursCollection = [
   }
 ]
 
-var stockCollection = [
+const stockCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
     material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
     amount: 200
   }
 ]
-var expenseCollection = [
+const expenseCollection = [
   {
     description: 'Limited Furby Collection',
     amount: 20000000,
@@ -82,7 +87,7 @@ var expenseCollection = [
   }
 ]
 
-var saleCollection = [
+const saleCollection = [
   {
     buyer: getPerson('Tu4SFfDhBUgAwGsvfopc'),
     materials: [
@@ -93,5 +98,13 @@ var saleCollection = [
       }
     ]
   }
+]
 
+const feesCollection = [
+  {
+    timestamp: '2018-03-15T09:55:48.942Z',
+    monthly_fee: 50,
+    total_paid: 200,
+    paid_until: '2018-07-15T09:55:48.942Z'
+  }
 ]

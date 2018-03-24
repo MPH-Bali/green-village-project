@@ -1,7 +1,12 @@
 <template>
-  <v-data-table :loading="loading" :headers="headers" :items="deliveries" hide-actions class="elevation-1">
+  <v-data-table
+    :loading="$firestore.collectionsPending.delivery"
+    :headers="headers"
+    :items="$firestore.delivery"
+    hide-actions class="elevation-1"
+  >
     <template slot="items" slot-scope="props">
-      <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mmA') }}</td>
+      <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ parseInt(props.item.organic) + parseInt(props.item.anorganic) }}</td>
       <td class="text-xs-center">{{ props.item.organic }}</td>
       <td class="text-xs-center">{{ props.item.anorganic }}</td>
@@ -10,7 +15,7 @@
       <td>{{ props.item.banjar }}</td>
       <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">
-        <v-btn icon @click="$router.push('/manager/delivery-form/' + props.item.id)">
+        <v-btn icon @click="$router.push({ name: 'Delivery Form', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
         </v-btn>
       </td>
@@ -19,26 +24,8 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    deliveries () {
-      return this.$store.state.delivery.dailyList
-    },
-    logDate () {
-      const date = this.$moment(this.$route.params.date)
-      const today = this.$moment().startOf('day')
-      return today > date ? date : today
-    }
-  },
-  created () {
-    this.loading = true
 
-    // query part
-    this.$store
-      .dispatch('delivery/fetchDailyList', this.logDate)
-      .catch(err => console.log(err)) // make toast
-      .then(() => { this.loading = false })
-  },
+export default {
   data () {
     return {
       loading: false,

@@ -36,7 +36,7 @@ export default new Router({
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: 'buyers', name: 'buyers', component: Buyers },
-        { path: 'buyer/:id?', name: 'buyer-info', component: BuyerInfo, props: true },
+        { path: 'buyer/info/:id?', name: 'buyer-info', component: BuyerInfo, props: true },
         { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: '*', redirect: '/manager' }
       ]

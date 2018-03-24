@@ -1,82 +1,84 @@
 <template>
-  <v-layout row>
+  <v-layout row >
     <v-flex xs12 md8 offset-md2>
-      <v-container fluid grid-list-lg>
-        <v-flex xs12 text-xs-center>
-          <v-progress-circular 
-            indeterminate 
-            :size="50" 
-            v-show="getPending"
-            color="primary"/>          
+      <v-card class="mt-4">
+        <v-flex xs12>
+          <v-container fluid grid-list-lg class="buyers-container">
+            <v-flex xs12 text-xs-center>
+              <v-progress-circular 
+                indeterminate 
+                :size="50" 
+                v-show="getPending"
+                color="primary"/>          
+            </v-flex>
+            <v-layout row wrap v-if="!getPending">
+              <v-flex xs6>
+                <p class="body-2 mb-1">Name</p>
+                <v-text-field v-model="formData.name" 
+                              :error-messages="nameErrors"
+                              flat
+                              @input="$v.formData.name.$touch()"
+                              @blur="$v.formData.name.$touch()"/>
+              </v-flex>
+              <v-flex xs6>
+                <p class="body-2 mb-1">Company</p>
+                <v-text-field flat 
+                              v-model="formData.company"/>
+              </v-flex>
+              
+              <v-flex xs6>
+                <p class="body-2 mb-1">E-mail</p>
+                <v-text-field v-model="formData.email" 
+                              :error-messages="emailErrors"
+                              flat 
+                              @input="$v.formData.email.$touch()"
+                              @blur="$v.formData.email.$touch()"/>
+              </v-flex>
+              <v-flex xs6>
+              </v-flex>
+
+              <v-flex xs6>
+                <p class="body-2 mb-1">Phone</p>
+                <v-text-field v-model="formData.phone"
+                              :error-messages="phoneErrors"
+                              flat 
+                              @input="$v.formData.phone.$touch()"
+                              @blur="$v.formData.phone.$touch()"/>
+              </v-flex>
+              <v-flex xs6>
+                <p class="body-2 mb-1">Whatsapp</p>
+                <v-text-field flat 
+                              v-model="formData.whatsapp" />
+              </v-flex>
+
+              <v-flex xs12>
+                <p class="body-2 mb-1">Notes</p>
+                <v-text-field name="input-1"
+                              v-model="formData.notes"
+                              flat 
+                              multi-line>
+                </v-text-field>            
+              </v-flex>
+
+              <v-flex xs6 text-xs-left>
+                <v-btn color="error" 
+                       outline
+                       depressed 
+                      @click.stop="$router.push({ name: 'buyers' })">Cancel
+                </v-btn>
+              </v-flex>
+              <v-flex xs6 text-xs-right>
+                <v-btn style="text-transform: capitalize" 
+                       depressed color="primary" 
+                      @click.stop="save" 
+                      :loading="savePending">{{ this.id ? 'Save' : 'Add' }}
+                </v-btn>
+              </v-flex>
+
+            </v-layout>
+          </v-container>
         </v-flex>
-        <v-layout row wrap v-if="!getPending">
-          <v-flex xs6>
-            <p class="body-2 mb-1">Name</p>
-            <v-text-field box
-                          
-                          v-model="formData.name" 
-                          :error-messages="nameErrors"
-                          @input="$v.formData.name.$touch()"
-                          @blur="$v.formData.name.$touch()"/>
-          </v-flex>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Company</p>
-            <v-text-field box
-                          v-model="formData.company"/>
-          </v-flex>
-          
-
-          <v-flex xs6>
-            <p class="body-2 mb-1">E-mail</p>
-            <v-text-field box
-                          v-model="formData.email" 
-                          :error-messages="emailErrors"
-                          @input="$v.formData.email.$touch()"
-                          @blur="$v.formData.email.$touch()"/>
-          </v-flex>
-          <v-flex xs6>
-          </v-flex>
-
-          <v-flex xs6>
-            <p class="body-2 mb-1">Phone</p>
-            <v-text-field box
-                          v-model="formData.phone"
-                          :error-messages="phoneErrors"
-                          @input="$v.formData.phone.$touch()"
-                          @blur="$v.formData.phone.$touch()"/>
-          </v-flex>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Whatsapp</p>
-            <v-text-field box v-model="formData.whatsapp" />
-          </v-flex>
-
-          <v-flex xs12>
-            <v-text-field
-                  box
-                  name="input-1"
-                  label="Notes"
-                  v-model="formData.notes"
-                  multi-line>
-            </v-text-field>            
-          </v-flex>
-
-          <v-flex xs6 text-xs-left>
-            <v-btn color="error" 
-                   outline
-                   depressed 
-                  @click.stop="$router.push({ name: 'buyers' })">Cancel
-            </v-btn>
-          </v-flex>
-          <v-flex xs6 text-xs-right>
-            <v-btn style="text-transform: capitalize" 
-                   depressed color="primary" 
-                  @click.stop="save" 
-                  :loading="savePending">{{ this.id ? 'Save' : 'Add' }}
-            </v-btn>
-          </v-flex>
-
-        </v-layout>
-      </v-container>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -153,3 +155,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>

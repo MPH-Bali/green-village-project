@@ -1,6 +1,7 @@
 <template>
   <v-container fluid grid-list-lg >
     <navigation-header />
+    {{ banjars }}
     <v-data-table :items='items' :headers='headers' hide-actions>
       <template slot='headers' slot-scope="props">
         <tr class='material-header'> 
@@ -12,7 +13,7 @@
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="" class='material-select banjar' />
+            <v-select solo flat :items="workers" item-text="name" item-value="id" label="" class='material-select banjar' />
           </th>
           <th style="width: 10%;">
             <v-text-field
@@ -51,6 +52,15 @@ import NavigationHeader from './Ui/NavigationHeader'
 export default {
   components: {
     NavigationHeader
+  },
+  computed: {
+    workers () {
+      return this.$firestore.persons.filter((person) => person.type.employee)
+    },
+    banjars () {
+      console.log('BANJAR', this.$firestore.banjar)
+      return this.$firestore.banjar
+    }
   },
   data () {
     return {

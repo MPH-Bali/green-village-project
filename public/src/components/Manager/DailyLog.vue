@@ -19,7 +19,7 @@
       <daily-log-header action="/manager/delivery-form" title="Delivery" />
       <delivery-table/>
 
-      <daily-log-header class="mt-4" action="/manager/delivery-form" title="Material Kg" />
+      <daily-log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <delivery-table/>
 
       <daily-log-header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />

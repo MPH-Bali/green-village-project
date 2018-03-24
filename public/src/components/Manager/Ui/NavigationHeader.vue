@@ -4,7 +4,9 @@
       <v-flex xs12 text-xs-center pt-4>
       <p class='left'>
         <slot name="left">
+          <p @click="goback">
           <v-icon small color="blue darken-2">fas fa-arrow-left</v-icon> Back
+          </p>
         </slot>
       </p>
       </v-flex>
@@ -29,6 +31,11 @@
     data () {
       return {
         timestamp: new Date()
+      }
+    },
+    methods: {
+      goback () {
+        this.$router.go(-1)
       }
     }
   }

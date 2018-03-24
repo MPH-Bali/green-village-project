@@ -19,7 +19,8 @@ export default new Vue({
       end: null,
       // ToDo: Add all collections
       dailyCollections: {
-        delivery: []
+        delivery: [],
+        material: []
       },
       collections: {
         banjar: [],
@@ -72,6 +73,7 @@ export default new Vue({
 
         this.dailySubscriptions.push(unsubscribe)
       })
+      console.log('Col -> ', this.dailyCollections)
     },
     add (collection, data) {
       return db.collection(collection).add(data)

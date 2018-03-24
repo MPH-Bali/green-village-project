@@ -1,45 +1,63 @@
 <template>
   <v-container fluid grid-list-lg >
     <navigation-header />
-    {{ banjars }}
-    <v-data-table :items='items' :headers='headers' hide-actions>
+    <v-data-table :items='materials' :headers='headers' hide-actions>
       <template slot='headers' slot-scope="props">
         <tr class='material-header'> 
-          <th v-for='header in props.headers'
-          :key="header.text"
-          >
+          <th v-for='header in props.headers' :key="header.text">
           {{ header.text }}
           </th>
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="workers" item-text="name" item-value="id" label="" class='material-select banjar' />
+            <v-select solo flat :items="workers" 
+              v-model="formdata.worker"
+              item-text="name" 
+              label="" class='material-select banjar' />
           </th>
-          <th style="width: 10%;">
+          <th style="width: 12.5%;">
             <v-text-field
-              class='material-select' 
+              v-model="formdata.inorganic"
+              class='material-select red' 
+              type="number"
               solo flat 
               name="input-1"></v-text-field>
           </th>
-          <th style="width: 10%;">
+          <th style="width: 12.5%;">
             <v-text-field
-                class='material-select' 
-                solo flat 
-                name="input-1"></v-text-field>
+              v-model="formdata.organic"
+              type="number" 
+              class='material-select green' 
+              solo flat 
+              name="input-1"></v-text-field>
           </th>
           <th style="width: 30%">
-            <v-select solo flat :items="['Putu', 'Kutu', 'Tutu']" label="" class='material-select banjar'  />
+            <v-select solo flat :items="banjars" 
+              v-model="formdata.banjar"
+              item-text="name" label="" 
+              class='material-select banjar'  />
           </th>
-          <th style="width: 20%">
+          <th style="width: 15%">
             <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
           </th>
         </tr>
+        <tr>
+        <th colspan="5" v-show="error" @click="hideError">
+          <v-alert type="error" :value="true">
+            {{ error }}
+          </v-alert>
+        </th>
+        </tr>
       </template>
       <template slot='items' slot-scope='props'>
-        <td><span class='worker-id'>0{{ props.item.id }}.</span> {{ props.item.worker }}</td>
+        <td>{{ props.item.worker.name }}</td>
         <td>{{ props.item.inorganic }}</td>
         <td>{{ props.item.organic }}</td>
-        <td>{{ props.item.banjar }}</td>
+        <td>
+          <template v-if="props.item.banjar">
+            {{ props.item.banjar.name }}
+          </template>
+        </td>
         <td class="align-right"><v-icon small>fas fa-pencil-alt</v-icon></td>
       </template>
     </v-data-table>
@@ -49,52 +67,67 @@
 <script>
 import NavigationHeader from './Ui/NavigationHeader'
 
+const defaultForm = {
+  inorganic: '',
+  organic: '',
+  worker: null,
+  banjar: null
+}
+
 export default {
   components: {
     NavigationHeader
   },
   computed: {
     workers () {
-      return this.$firestore.persons.filter((person) => person.type.employee)
+      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
     },
     banjars () {
-      console.log('BANJAR', this.$firestore.banjar)
-      return this.$firestore.banjar
+      return this.$firestore.collections.banjar
+    },
+    materials () {
+      console.log('Inside', this.$firestore.dailyCollections.material)
+      return this.$firestore.dailyCollections.material
+    }
+  },
+  methods: {
+    save () {
+      console.log(this.formdata)
+      if (!this.formdata.worker) {
+        this.error = 'You have to select a worker to save'
+      } else {
+        this.setWeights()
+        const payload = {
+          worker: this.formdata.worker,
+          organic: parseInt(this.formdata.organic),
+          inorganic: parseInt(this.formdata.inorganic),
+          banjar: this.formdata.banjar,
+          timestamp: new Date()
+        }
+        this.$firestore.add('material', payload).then(() => {
+          this.clearForm()
+        })
+      }
+    },
+    hideError () {
+      this.error = ''
+    },
+    setWeights () {
+      if (this.formdata.organic === '') {
+        this.formdata.organic = 0
+      }
+      if (this.formdata.inorganic === '') {
+        this.formdata.inorganic = 0
+      }
+    },
+    clearForm () {
+      this.formdata = defaultForm
     }
   },
   data () {
     return {
-      timestamp: new Date(),
-      items: [
-        {
-          id: 1,
-          worker: 'Made',
-          inorganic: '20kg',
-          organic: '10kg',
-          banjar: 'banjar 1'
-        },
-        {
-          id: 2,
-          worker: 'Made',
-          inorganic: '20kg',
-          organic: '10kg',
-          banjar: 'banjar 1'
-        },
-        {
-          id: 3,
-          worker: 'Made',
-          inorganic: '20kg',
-          organic: '10kg',
-          banjar: 'banjar 1'
-        },
-        {
-          id: 4,
-          worker: 'Made',
-          inorganic: '20kg',
-          organic: '10kg',
-          banjar: 'banjar 1'
-        }
-      ],
+      formdata: defaultForm,
+      error: '',
       headers: [
         { text: 'Worker', value: 'worker', align: 'left' },
         { text: 'Inorganic', value: 'inorganic', align: 'left' },
@@ -107,6 +140,15 @@ export default {
 </script>
 
 <style scoped>
+
+.red {
+  border: 1px solid #d0021b!important;
+}
+
+.green {
+  border: 1px solid #7ed321!important;
+}
+
 .material-header {
   border-bottom: none!important;
 }
@@ -126,6 +168,10 @@ export default {
 
 .material-select {
   background-color: rgba(66, 133, 61, 0.1)!important;
+}
+
+.material-select div {
+  padding: 3px 3px!important;
 }
 
 .worker-id {

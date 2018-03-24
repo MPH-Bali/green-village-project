@@ -33,7 +33,7 @@ export default new Router({
         { path: '', name: 'dailyLog', component: DailyLog },
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
-        { path: 'material', name: 'ADD MATERIAL', component: AddMaterial },
+        { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: '*', redirect: '/manager' }
       ]
     },

@@ -16,27 +16,11 @@
       <v-layout row wrap>
         <v-flex xs6 >
           <p class='subheading'>In</p>
-          <v-layout row wrap>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="m_in_last" />
-            </v-flex>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="m_in_last" />
-            </v-flex>
-            <div class="separator"><span>:</span></div>
-          </v-layout>
+          <TimeField @done="receiveTime" part="out_first" />
         </v-flex>
         <v-flex xs6 >
           <p class='subheading'>Out</p>
-          <v-layout row wrap>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="m_out_first" />
-            </v-flex>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="m_out_last" />
-            </v-flex>
-            <div class="separator"><span>:</span></div>
-          </v-layout>
+          <TimeField @done="receiveTime" part="out_last" />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -56,27 +40,11 @@
       <v-layout row wrap>
         <v-flex xs6 >
           <p class='subheading'>In</p>
-          <v-layout row wrap>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="a_in_first" />
-            </v-flex>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="a_in_last" />
-            </v-flex>
-            <div class="separator"><span>:</span></div>
-          </v-layout>
+          <TimeField @done="receiveTime" part="in_first" />
         </v-flex>
         <v-flex xs6 >
           <p class='subheading'>Out</p>
-          <v-layout row wrap>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="a_out_first" />
-            </v-flex>
-            <v-flex xs6 >
-              <TimeField @done="receiveTime" part="a_out_last" />
-            </v-flex>
-            <div class="separator"><span>:</span></div>
-          </v-layout>
+          <TimeField @done="receiveTime" part="in_last" />
         </v-flex>
       </v-layout>
     </v-flex>

@@ -8,6 +8,7 @@ import DeliveryForm from '@/components/Manager/DeliveryForm'
 import Public from '@/components/Public'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
+import SignedUp from '@/components/Public/SignedUp'
 
 Vue.use(Router)
 
@@ -19,7 +20,8 @@ export default new Router({
       component: Public,
       children: [
         { path: '', name: 'Home', component: Home },
-        { path: 'sign-up', name: 'SignUp', component: SignUp }
+        { path: 'sign-up', name: 'SignUp', component: SignUp },
+        { path: 'signed-up', name: 'SignedUp', component: SignedUp },
       ]
     },
     {

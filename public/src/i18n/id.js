@@ -54,7 +54,6 @@ export default {
     fullName: 'nama lengkap',
     paidUntil: 'dibayar sampai',
     totalPaid: 'total pembayaran',
-    approve: 'setujui',
     collectFee: 'pungut biaya',
     sortByName: 'atur berdasarkan nama',
     aToZ: 'a-z',

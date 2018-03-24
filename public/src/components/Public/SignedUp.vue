@@ -7,7 +7,7 @@
             <v-icon size="50px">thumb_up</v-icon>
             <p>Our Community Manager will get in touch with you in the next hours and come visit you to welcome you and start your subscription.</p>
             <p>Problem?</p>
-            <a v-link="'/contact-us'" class="body-1 my-3">Contact Us</a>
+            <router-link to="contact-us">Contact Us</router-link>
           </v-card-text>
         </v-card>
       </v-flex>

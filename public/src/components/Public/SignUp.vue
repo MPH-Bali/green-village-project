@@ -17,7 +17,7 @@
               <v-select flat :items="['Houshold', 'Villa', 'Business']" label="Item" v-model="form.type" :rules="[v => !!v || 'Item is required']"required />
             </v-form>
             <p class="caption">Our Community Manager will come to your place to collect the fee and finalise your subscription</p>
-            <v-btn color="primary" flat>Problem?</v-btn>
+            <v-btn v-on:click="$router.push('/contact-us')" flat>Problem?</v-btn>
             <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>Join Us</v-btn>
           </v-card-text>
         </v-card>

@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/')">
+        <v-btn flat color="primary" @click="$router.push('/manager')">
           <v-icon>fa-recycle</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -13,7 +13,7 @@
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Language</v-btn>
             <v-list>
-              <v-list-tile v-for="item in items" :key="item.title" @click="">
+              <v-list-tile v-for="item in items" :key="item.title">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -57,12 +57,9 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Bahasa' },
-        { title: 'English' }
-      ]
-    })
-  }
+export default {
+  data: () => ({
+    items: [{ title: "Bahasa" }, { title: "English" }]
+  })
+};
 </script>

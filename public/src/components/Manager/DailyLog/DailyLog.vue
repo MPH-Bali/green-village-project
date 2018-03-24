@@ -19,8 +19,8 @@
       <Header action="/manager/delivery-form" title="Delivery" />
       <DeliveryTable/>
 
-      <Header class="mt-4" action="/manager/delivery-form" title="Material Kg" />
-      <DeliveryTable/>
+      <Header class="mt-4" action="/manager/material" title="Material Kg" />
+      <MaterialTable/>
 
       <Header class="mt-4" action="/manager/delivery-form" title="Stock Kg" />
       <DeliveryTable/>
@@ -40,6 +40,7 @@
 <script>
 import Header from './DailyLogHeader'
 import DeliveryTable from './DailyLogDeliveryTable'
+import MaterialTable from './DailyLogMaterialTable'
 
 export default {
   props: {
@@ -49,7 +50,7 @@ export default {
     }
   },
   components: {
-    Header, DeliveryTable
+    Header, DeliveryTable, MaterialTable
   },
   data () {
     return {

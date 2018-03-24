@@ -45,8 +45,8 @@ export default {
 }
 </script>
 
-<style>
-  thead {
+<style >
+  .elevation-1 thead {
     background: #e5ece9;
   }
 </style>

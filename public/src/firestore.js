@@ -19,7 +19,8 @@ export default new Vue({
       end: null,
       // ToDo: Add all collections
       dailyCollections: {
-        delivery: []
+        delivery: [],
+        material: []
       },
       collections: {
         banjar: [],

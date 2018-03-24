@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/')">
+        <v-btn flat color="primary" @click="$router.push('/manager')">
           <v-icon>fa-recycle</v-icon>
         </v-btn>
       </v-toolbar-items>

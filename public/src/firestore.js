@@ -14,15 +14,21 @@ const db = firebase.firestore()
 export default new Vue({
   data () {
     return {
-      persons: [],
       dailySubscriptions: [],
-      delivery: [],
       start: null,
       end: null,
       // ToDo: Add all collections
-      collections: ['delivery'],
+      dailyCollections: {
+        delivery: []
+      },
+      collections: {
+        banjar: [],
+        person: []
+      },
       collectionsPending: {
-        delivery: false
+        delivery: false,
+        banjar: false,
+        person: false
       }
     }
   },
@@ -34,11 +40,16 @@ export default new Vue({
       this.end = this.$moment(this.start).endOf('day')
       this.syncDailyData()
     },
-    syncPersons () {
-      db.collection('person').onSnapshot(snapshot => {
-        this.persons = []
-        snapshot.forEach(doc => {
-          this.persons.push({ id: doc.id, ...doc.data() })
+    syncData () {
+      Object.keys(this.collections).forEach((collection) => {
+        this.collectionsPending[collection] = true
+        this.collections[collection] = []
+
+        db.collection(collection).onSnapshot(snapshot => {
+          this.collections[collection] = []
+          snapshot.forEach(doc => {
+            this.collections[collection].push({ id: doc.id, ...doc.data() })
+          })
         })
       })
     },
@@ -46,15 +57,15 @@ export default new Vue({
       this.dailySubscriptions.forEach(unsubscribe => unsubscribe())
       this.dailySubscriptions = []
 
-      this.collections.forEach(collection => {
+      Object.keys(this.dailyCollections).forEach((collection) => {
         this.collectionsPending[collection] = true
         const unsubscribe = db.collection(collection)
           .where('timestamp', '>=', new Date(this.start))
           .where('timestamp', '<=', new Date(this.end))
           .onSnapshot(snapshot => {
-            this[collection] = []
+            this.dailyCollections[collection] = []
             snapshot.forEach(doc => {
-              this[collection].push({ id: doc.id, ...doc.data() })
+              this.dailyCollections[collection].push({ id: doc.id, ...doc.data() })
             })
             this.collectionsPending[collection] = false
           })

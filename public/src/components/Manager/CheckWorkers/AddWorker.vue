@@ -3,7 +3,7 @@
     <v-flex xs12 sm6>
       <p class='subheading'>Worker name</p>
       <v-select solo flat :items="workers" 
-              v-model="formdata.worker"
+              v-model="formData.worker"
               item-text="name" 
               item-value="id"
               return-object
@@ -28,7 +28,7 @@
     <v-flex xs12 sm6>
       <p class='subheading'>Notes</p>
       <v-text-field
-              v-model="formdata.notes"
+              v-model="formData.notes"
               class='grey-select' 
               solo flat 
               name="input-1"></v-text-field>
@@ -76,7 +76,21 @@ export default {
     return {
       modal2: false,
       returntime: null,
-      time: {
+      formData: {
+        worker: null,
+        notes: '',
+        times: {
+          morning: {
+            start: null,
+            end: null
+          },
+          afternoon: {
+            start: null,
+            end: null
+          }
+        }
+      },
+      pickedTime: {
         morning: {
           start: null,
           end: null
@@ -85,10 +99,6 @@ export default {
           start: null,
           end: null
         }
-      },
-      formdata: {
-        worker: null,
-        notes: ''
       }
     }
   },
@@ -98,30 +108,43 @@ export default {
     },
     getTotalTime () {
       let total = 0
-      if (this.time.morning.start && this.time.morning.end) {
-        const start = this.$moment('2000-04-20T' + this.time.morning.start)
-        const end = this.$moment('2000-04-20T' + this.time.morning.end)
+      if (this.pickedTime.morning.start && this.pickedTime.morning.end) {
+        const now = this.$moment().format('YYYY-MM-DD')
+
+        const start = this.$moment(now + 'T' + this.pickedTime.morning.start)
+        const end = this.$moment(now + 'T' + this.pickedTime.morning.end)
+
+        this.formData.times.morning.start = start.toDate()
+        this.formData.times.morning.end = end.toDate()
+
         const duration = this.$moment.duration(end.diff(start))
         total += duration.asHours()
       }
-      if (this.time.afternoon.start && this.time.afternoon.end) {
-        const start = this.$moment('2000-04-20T' + this.time.afternoon.start)
-        const end = this.$moment('2000-04-20T' + this.time.afternoon.end)
+      if (this.pickedTime.afternoon.start && this.pickedTime.afternoon.end) {
+        const now = this.$moment().format('YYYY-MM-DD')
+
+        const start = this.$moment(now + 'T' + this.pickedTime.afternoon.start)
+        const end = this.$moment(now + 'T' + this.pickedTime.afternoon.end)
+
+        this.formData.times.afternoon.start = start.toDate()
+        this.formData.times.afternoon.end = end.toDate()
+
         const duration = this.$moment.duration(end.diff(start))
         total += duration.asHours()
       }
-      console.log('Total', total)
       return Math.round(total)
     }
   },
   methods: {
     save () {
-      console.log(this.returntime)
+      this.formData.timestamp = new Date()
+      this.$firestore.add('workertimes', this.formData).then(() => {
+        this.$router.go(-1)
+      })
     },
     receiveTime ({time, interval}) {
       const { daytime, part } = interval
-      this.time[daytime][part] = time
-      console.log('Time changed', this.time)
+      this.pickedTime[daytime][part] = time
     },
     setPart (daytime, part) {
       return { daytime, part }

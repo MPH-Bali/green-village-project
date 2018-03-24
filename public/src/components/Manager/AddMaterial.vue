@@ -11,7 +11,7 @@
         <tr class='material-actions'>
           <th style="width: 30%;">
             <v-select solo flat :items="workers" 
-              v-model="formdata.worker"
+              v-model="formData.worker"
               item-text="name" 
               item-value="id"
               return-object
@@ -19,7 +19,7 @@
           </th>
           <th style="width: 12.5%;">
             <v-text-field
-              v-model="formdata.inorganic"
+              v-model="formData.inorganic"
               class='grey-select red' 
               type="number"
               solo flat 
@@ -27,7 +27,7 @@
           </th>
           <th style="width: 12.5%;">
             <v-text-field
-              v-model="formdata.organic"
+              v-model="formData.organic"
               type="number" 
               class='grey-select green' 
               solo flat 
@@ -35,7 +35,7 @@
           </th>
           <th style="width: 30%">
             <v-select solo flat :items="banjars" 
-              v-model="formdata.banjar"
+              v-model="formData.banjar"
               item-text="name" label="" 
               item-value="id" return-object
               class='grey-select banjar'  />
@@ -94,11 +94,11 @@ export default {
   },
   methods: {
     save () {
-      if (!this.formdata.worker) {
+      if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
       } else {
         this.setWeights()
-        if (this.formdata.id) {
+        if (this.formData.id) {
           this.updateMaterial()
         } else {
           this.newMaterial()
@@ -108,38 +108,38 @@ export default {
     },
     newMaterial () {
       const payload = {
-        worker: this.formdata.worker,
-        organic: parseInt(this.formdata.organic),
-        inorganic: parseInt(this.formdata.inorganic),
-        banjar: this.formdata.banjar,
+        worker: this.formData.worker,
+        organic: parseInt(this.formData.organic),
+        inorganic: parseInt(this.formData.inorganic),
+        banjar: this.formData.banjar,
         timestamp: new Date()
       }
       this.$firestore.add('material', payload)
     },
     updateMaterial () {
-      this.$firestore.update('material', this.formdata)
+      this.$firestore.update('material', this.formData)
     },
     hideError () {
       this.error = ''
     },
     setWeights () {
-      if (this.formdata.organic === '') {
-        this.formdata.organic = 0
+      if (this.formData.organic === '') {
+        this.formData.organic = 0
       }
-      if (this.formdata.inorganic === '') {
-        this.formdata.inorganic = 0
+      if (this.formData.inorganic === '') {
+        this.formData.inorganic = 0
       }
     },
     clearForm () {
-      this.formdata = defaultForm
+      this.formData = defaultForm
     },
     editMaterial (material) {
-      this.formdata = {...material}
+      this.formData = {...material}
     }
   },
   data () {
     return {
-      formdata: defaultForm,
+      formData: defaultForm,
       error: '',
       headers: [
         { text: 'Worker', value: 'worker', align: 'left' },

@@ -32,7 +32,7 @@
       <DeliveryTable/>
 
       <Header class="mt-4" action="/manager/workercheck" title="Workers Hours" />
-      <DeliveryTable/>
+      <WorkerTimes/>
     </v-flex>
   </v-layout>
 </template>
@@ -41,6 +41,7 @@
 import Header from './DailyLogHeader'
 import DeliveryTable from './DailyLogDeliveryTable'
 import MaterialTable from './DailyLogMaterialTable'
+import WorkerTimes from './DailyLogWorkersTable'
 
 export default {
   props: {
@@ -50,7 +51,7 @@ export default {
     }
   },
   components: {
-    Header, DeliveryTable, MaterialTable
+    Header, DeliveryTable, MaterialTable, WorkerTimes
   },
   data () {
     return {

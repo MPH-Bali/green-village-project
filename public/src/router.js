@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
 import Buyers from '@/components/Manager/Buyers/Buyers'
-import Buyer from '@/components/Manager/Buyer/Buyer'
+import BuyerInfo from '@/components/Manager/Buyer/BuyerInfo'
+import BuyerEdit from '@/components/Manager/Buyer/BuyerEdit'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
 
@@ -35,7 +36,8 @@ export default new Router({
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: 'buyers', name: 'buyers', component: Buyers },
-        { path: 'buyer/:id', name: 'buyer', component: Buyer, props: true },
+        { path: 'buyer/:id?', name: 'buyer-info', component: BuyerInfo, props: true },
+        { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

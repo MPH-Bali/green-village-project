@@ -7,7 +7,8 @@ export default {
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
     buyers: 'Buyers',
-    buyer: 'Buyer'
+    'buyer-edit': 'Add/Edit Buyer',
+    'buyer-info': 'Buyer Info'
   },
   // example string
   home: {

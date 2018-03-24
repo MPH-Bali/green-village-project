@@ -83,6 +83,9 @@ export default new Vue({
     update (collection, data) {
       return db.collection(collection).doc(data.id).set({ ...data })
     },
+    save (collection, data) {
+      return data.id ? this.update(collection, data) : this.add(collection, data)
+    },
     async get (collection, id) {
       const result = await db.collection(collection).doc(id).get()
       return {

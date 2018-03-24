@@ -5,11 +5,11 @@ export default {
   routeNames: {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
-    deliveryForm: 'Delivery Form',
+    deliveryForm: 'Delivery Form'
   },
   // example string
   home: {
-    welcome: 'welcome',
+    welcome: 'welcome'
   },
   // the most common terms shared throughout components in the app
   common: {
@@ -73,7 +73,7 @@ export default {
     approve: 'approve',
     sendEmail: 'send email',
     monthly: 'monthly',
-    fee: 'fee',
+    fee: 'fee'
   },
   // 01.0
   login: {
@@ -81,7 +81,7 @@ export default {
     instructions: 'to login, please enter phone number',
     inputPlaceholder: 'type your phone number',
     label: 'phone number',
-    button: 'continue',
+    button: 'continue'
   },
   // 01.1
   loginEnterCode: {
@@ -90,7 +90,7 @@ export default {
     codeInputLabel: 'code',
     codeInputPlaceholder: '012345',
     resendCodeLink: 'resend code',
-    button: 'login',
+    button: 'login'
   },
   // 02.0
   main: {
@@ -99,7 +99,7 @@ export default {
     codeInputLabel: '',
     codeInputPlaceholder: '',
     resendCodeLink: '',
-    button: '',
+    button: ''
   },
   // 02.0a Menu
   menu: {
@@ -108,7 +108,7 @@ export default {
     customerList: 'customer list',
     buyerList: 'buyer list',
     contactAdmin: 'contact admin',
-    logout: 'logout',
+    logout: 'logout'
   },
   // fixed menu located at the bottom of the screen
   bottomMenu: {
@@ -118,7 +118,7 @@ export default {
     addStock: 'add stock',
     createSale: 'create sale',
     addExpense: 'add expense',
-    settings: 'settings',
+    settings: 'settings'
   },
   // 02.0b
   dailyLog: {
@@ -129,7 +129,7 @@ export default {
     expenses: 'expenses',
     workers: 'workers hours',
     currency: 'idr',
-    weightUnit: 'kg',
+    weightUnit: 'kg'
   },
   // deliveries section of the daily log
   deliveries: {
@@ -139,12 +139,12 @@ export default {
     facilities: 'facilities',
     time: 'time',
     details: 'details',
-    edit: 'edit',
+    edit: 'edit'
   },
   // material section of the daily log
   material: {
     worker: 'worker',
     angorganic: 'angorganic',
-    organic: 'organic',
-  },
+    organic: 'organic'
+  }
 }

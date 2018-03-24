@@ -1,10 +1,11 @@
-/* eslint-disable */
-
 // All collections and are stored in the firestore
 const settings = {
   name: 'Facility 1',
   village: 'Pererenan',
-  importantVillageGuy: getPerson('Tu4SFfDhBUgAwGsvfopc')
+  importantVillageGuy: {
+    id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+    name: 'Michael'
+  }
   // + other information about the facility that we might need
 }
 
@@ -28,8 +29,7 @@ const personCollection = [
       facilityManager:false,
       superAdmin: true
     },
-    house: getHouseType('Tu4SFfDhBUgAwGsvfopc') // only for clients
-
+    houseType: 'Tu4SFfDhBUgAwGsvfopc' // house type id
   }
 ]
 
@@ -38,14 +38,23 @@ const deliveryCollection = [
     timestamp: '2018-03-15T09:55:48.942Z',
     organic: 12.5,
     anorganic: 12.5,
-    driver: getPeron('Tu4SFfDhBUgAwGsvfopc'),
-    banjar: getBanjar('Tu4SFfDhBUgAwGsvfopc')
+    driver: {
+      id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+      name: 'Michael'
+    },
+    banjar: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    }
   }
 ]
 
 const workedHoursCollection = [
   {
-    employee: getPeron('Tu4SFfDhBUgAwGsvfopc'),
+    employee: {
+      id: 'Tu4SFfDhBUgAwGsvfopc', // person id
+      name: 'Michael'
+    },
     in: '2018-03-15T09:55:48.942Z',
     out: null
   }
@@ -54,7 +63,10 @@ const workedHoursCollection = [
 const stockCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
-    material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+    material: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'plastic'
+    },
     amount: 200
   }
 ]
@@ -62,16 +74,25 @@ const expenseCollection = [
   {
     description: 'Limited Furby Collection',
     amount: 20000000,
-    person: getPerson('Tu4SFfDhBUgAwGsvfopc')
+    person: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    }
   }
 ]
 
 const saleCollection = [
   {
-    buyer: getPerson('Tu4SFfDhBUgAwGsvfopc'),
+    buyer: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'Michael'
+    },
     materials: [
       {
-        material: getMaterial('Tu4SFfDhBUgAwGsvfopc'),
+        material: {
+          id: 'Tu4SFfDhBUgAwGsvfopc',
+          name: 'plastic'
+        },
         kilo: 200,
         pricePerKilo: 20000
       }

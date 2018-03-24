@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout row wrap class='add-worker'>
     <v-flex xs6 >
       <p class='subheading'>Worker name</p>
       <v-select solo flat :items="workers" 
@@ -69,7 +69,7 @@
               class='grey-select' 
               solo flat 
               name="input-1"></v-text-field>
-              
+
       <div class='devider-container'>
         <div class='devider subheadingfont'><span>Afternoon</span></div>
       </div>
@@ -161,6 +161,13 @@ export default {
 </script>
 
 <style scoped>
+.subheading {
+  margin-bottom: 0px!important;
+}
+
+.add-worker {
+  background-color: white;
+}
 .grey-select {
   background-color: rgba(66, 133, 61, 0.1)!important;
 }

@@ -8,7 +8,7 @@
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat>Pickup Schedule</v-btn>
+        <v-btn flat @click="$router.push('/pickup-schedule')">Pickup Schedule</v-btn>
         <v-btn flat @click="$router.push('/sign-up')" >Sign Up</v-btn>
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Language</v-btn>

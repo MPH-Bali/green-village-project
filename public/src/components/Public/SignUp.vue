@@ -92,7 +92,8 @@ export default {
   methods: {
     submit () {
         if (this.$refs.form.validate()) {
-          alert('Test Thank You' + this.form.name + '!')
+            this.$router.push('/signed-up')
+          // this.$store.commit {}
           }
         },
       },

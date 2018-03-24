@@ -16,11 +16,11 @@
       <v-layout row wrap>
         <v-flex xs6 >
           <p class='subheading'>In</p>
-          <TimeField @done="receiveTime" part="out_first" />
+          <TimeField @done="receiveTime" :part="setPart('morning','start')"  />
         </v-flex>
         <v-flex xs6 >
           <p class='subheading'>Out</p>
-          <TimeField @done="receiveTime" part="out_last" />
+          <TimeField @done="receiveTime" :part="setPart('morning','end')"  />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -40,11 +40,11 @@
       <v-layout row wrap>
         <v-flex xs6 >
           <p class='subheading'>In</p>
-          <TimeField @done="receiveTime" part="in_first" />
+          <TimeField @done="receiveTime" :part="setPart('afternoon','start')" />
         </v-flex>
         <v-flex xs6 >
           <p class='subheading'>Out</p>
-          <TimeField @done="receiveTime" part="in_last" />
+          <TimeField @done="receiveTime" :part="setPart('afternoon','end')" />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -56,7 +56,7 @@
     </v-flex>
     <v-flex xs4 class="center">
       <span class="title">Total Hours</span>
-      <p class="total-hours">8 Hours</p>
+      <p class="total-hours">{{getTotalTime}} Hours</p>
     </v-flex>
     <v-flex xs4 class="right">
       <v-btn color="success" @click="save">Save</v-btn>
@@ -76,7 +76,16 @@ export default {
     return {
       modal2: false,
       returntime: null,
-      time: null,
+      time: {
+        morning: {
+          start: null,
+          end: null
+        },
+        afternoon: {
+          start: null,
+          end: null
+        }
+      },
       formdata: {
         worker: null,
         notes: ''
@@ -86,14 +95,36 @@ export default {
   computed: {
     workers () {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
+    },
+    getTotalTime () {
+      let total = 0
+      if (this.time.morning.start && this.time.morning.end) {
+        const start = this.$moment('2000-04-20T' + this.time.morning.start)
+        const end = this.$moment('2000-04-20T' + this.time.morning.end)
+        const duration = this.$moment.duration(end.diff(start))
+        total += duration.asHours()
+      }
+      if (this.time.afternoon.start && this.time.afternoon.end) {
+        const start = this.$moment('2000-04-20T' + this.time.afternoon.start)
+        const end = this.$moment('2000-04-20T' + this.time.afternoon.end)
+        const duration = this.$moment.duration(end.diff(start))
+        total += duration.asHours()
+      }
+      console.log('Total', total)
+      return Math.round(total)
     }
   },
   methods: {
     save () {
       console.log(this.returntime)
     },
-    receiveTime ({time, part}) {
-      console.log('Time changed', time, part)
+    receiveTime ({time, interval}) {
+      const { daytime, part } = interval
+      this.time[daytime][part] = time
+      console.log('Time changed', this.time)
+    },
+    setPart (daytime, part) {
+      return { daytime, part }
     }
   }
 }

@@ -33,9 +33,9 @@ export default {
   },
   methods: {
     setTime (time) {
-      const part = this.part
+      const interval = this.part
       this.$refs.dialog.save(time)
-      this.$emit('done', { time, part })
+      this.$emit('done', { time, interval })
     }
   }
 }

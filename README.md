@@ -234,37 +234,18 @@ const banjarCollection = [
 
 const materialCollection = [
    {
-      timestamp: 2018-03-15T09:55:48.942Z',
-      data: [
-      	{
-	   worker: {
-	     id: 'Tu4SFfDhBUgAwGsvfopc',
-	     name: 'Worker name'
-	   },
-	   banjar: {
-	     id: 'Tu4SFfDhBUgAwGsvfopc',
-	     name: 'Banjar name'
-	   },
-	   organic: 10,
-	   inorganic: 10
+	worker: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Worker name'
 	},
-	{
-	   worker: {
-	     id: 'Tu4SFfDhBUgAwGsvfopc',
-	     name: 'Worker name'
-	   },
-	   banjar: {
-	     id: 'Tu4SFfDhBUgAwGsvfopc',
-	     name: 'Banjar name'
-	   },
-	   organic: 100,
-	   inorganic: 50
-	}      
-      ]
-      
-   
-
-
+	banjar: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Banjar name'
+	},
+	organic: 10,
+	inorganic: 10,
+	timestamp: 2018-03-15T09:55:48.942Z'
+   }
 ]
 
 const materialTypeCollection = [

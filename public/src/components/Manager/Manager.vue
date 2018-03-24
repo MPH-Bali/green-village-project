@@ -41,7 +41,7 @@ export default {
   name: 'Manager',
   created () {
     this.$firestore.changeDate()
-    this.$firestore.syncPersons()
+    this.$firestore.syncData()
   },
   data () {
     return {

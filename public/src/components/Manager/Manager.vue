@@ -21,11 +21,11 @@
       </v-slide-y-transition>
     </v-content>
     <v-bottom-nav app :value="$route.path" color="grey darken-4">
-      <v-btn 
-        flat 
-        color="primary" 
+      <v-btn
+        flat
+        color="primary"
        :value="section.route"
-        v-for="section in sections" 
+        v-for="section in sections"
        :key="section.name"
        @click.stop="$router.push(section.route)"
        >
@@ -39,6 +39,10 @@
 <script>
 export default {
   name: 'Manager',
+  created () {
+    this.$firestore.changeDate()
+    this.$firestore.syncPersons()
+  },
   data () {
     return {
       sections: [

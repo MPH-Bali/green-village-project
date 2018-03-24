@@ -50,9 +50,16 @@
           </v-flex>
           <v-flex xs4 text-xs-right>
             <v-btn style="text-transform: capitalize" 
+                   v-if="this.formData.id"
                    depressed color="primary" 
                   @click.stop="save" 
                   :loading="savePending">Save Delivery
+            </v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   v-if="!this.formData.id"
+                   depressed color="primary" 
+                  @click.stop="add" 
+                  :loading="addPending">Create Delivery
             </v-btn>
           </v-flex>
         </v-layout>
@@ -62,8 +69,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   props: {
     id: {
@@ -76,6 +81,7 @@ export default {
       formData: null,
       deletePending: false,
       savePending: false,
+      addPending: false,
       fetchingDelivery: false,
       defaultFormData: {
         anorganic: 20,
@@ -96,51 +102,32 @@ export default {
       this.formData = this.defaultFormData
     }
   },
-  computed: {
-    ...mapGetters({
-      getDeliveryById: 'delivery/getDeliveryById'
-    })
-  },
   methods: {
-    ...mapActions({
-      fetchItem: 'delivery/fetchItem',
-      saveItem: 'delivery/saveItem',
-      deleteItem: 'delivery/deleteItem'
-    }),
     cancel () {
       this.formData = null
       this.showForm = false
     },
     async fetchDelivery (id) {
-      const response = await this.fetchItem({ id })
-      if (response.success) {
-        this.formData = this.getDeliveryById(id)
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+      const result = await this.$firestore.get('delivery', id)
+      this.formData = result
     },
     async save () {
       this.savePending = true
-      const response = await this.saveItem({ form: this.formData })
+      await this.$firestore.update('delivery', this.formData)
       this.savePending = false
-      if (response.success) {
-        this.$router.push({ name: 'Daily Log' })
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+      this.$router.push({ name: 'Daily Log' })
     },
     async remove () {
       this.deletePending = true
-      const response = await this.deleteItem({ id: this.formData.id })
+      await this.$firestore.remove('delivery', this.formData.id)
       this.deletePending = false
-      if (response.success) {
-        this.$router.push({ name: 'Daily Log' })
-      } else {
-        console.log(response.error)
-        // show toast
-      }
+      this.$router.push({ name: 'Daily Log' })
+    },
+    async add () {
+      this.addPending = true
+      await this.$firestore.add('delivery', this.formData)
+      this.addPending = false
+      this.$router.push({ name: 'Daily Log' })
     }
   }
 }

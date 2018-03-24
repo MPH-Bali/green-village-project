@@ -25,7 +25,9 @@ export default new Router({
     {
       path: '/manager',
       component: Manager,
-      // please set the `name` to the appropriate key inside our i18n config
+      /**
+       *  @desc the children.name value MUST coorlelate with the key in our i18n routeNames
+       */
       children: [
         { path: '', name: 'dailyLog', component: DailyLog },
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },

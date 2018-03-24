@@ -10,17 +10,32 @@
             <h1 class="headline mt-2">JOIN MPH PERERENAN</h1>
             <p class="body-1">Fill in your details to join the MPH program and get your rubbish collected.</p>
 
-            <v-form>
-              <v-text-field label="Write your Full Name" flat v-model="form.name" />
-              <v-text-field label="Email" flat v-model="form.email" />
+            <v-form v-model="valid" ref="form" lazy-validation>
+              <v-text-field for="name" label="Write your Full Name" flat
+              v-model="form.name"
+              :rules="nameRules"
+              :counter="10"
+              required />
+
+              <v-text-field label="Email" flat
+              v-model="form.email"
+              :rules="emailRules"
+              required />
+
               <v-text-field label="SMS & Call Phone" flat v-model="form.sms" />
               <v-text-field label="Whatsapp" flat v-model="form.whatsapp" />
-              <v-select flat :items="['Houshold', 'Villa', 'Business']" label="Houshold, Villa or Business" v-model="form.type" />
+              <v-select flat
+              :items="['Houshold', 'Villa', 'Business']"
+              label="Item" v-model="form.type"
+              :rules="[v => !!v || 'Item is required']"
+              required
+              />
+
             </v-form>
 
             <p class="caption">Our Community Manager will come to your place to collect the fee and finalise your subscription</p>
             <v-btn color="primary" flat>Problem?</v-btn>
-            <v-btn v-on:click="addClient"color="primary" depressed>Join Us</v-btn>
+            <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>Join Us</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -29,16 +44,45 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
-      form: {}
+      form: {},
+      errors:[],
+      valid: true,
+      name: '',
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
+      select: null,
     }
   },
   methods: {
     addClient: function(){
-      alert('Hello ' + this.form.name + '!')
-    }
+      alert('Test Thank You' + this.form.name + '!')
+    },
+    submit () {
+        if (this.$refs.form.validate()) {
+          // Native form submission is not yet supported
+          axios.post('/api/submit', {
+            name: this.name,
+            email: this.email,
+          })
+        }
+      },
   }
 }
 </script>
+
+<!--
+Store new client
+Provide errors if fields aren't valid
+Render SignedUp onClick -->

@@ -13,7 +13,7 @@
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Language</v-btn>
             <v-list>
-              <v-list-tile v-for="item in items" :key="item.title" @click="">
+              <v-list-tile v-for="item in items" :key="item.title">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -61,12 +61,9 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Bahasa' },
-        { title: 'English' }
-      ]
-    })
-  }
+export default {
+  data: () => ({
+    items: [{ title: "Bahasa" }, { title: "English" }]
+  })
+};
 </script>

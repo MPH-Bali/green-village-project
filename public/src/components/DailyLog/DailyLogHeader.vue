@@ -14,6 +14,19 @@
 
 <script>
 export default {
-  props: ['title', 'action']
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    action: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+    }
+  }
 }
 </script>

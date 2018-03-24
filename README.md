@@ -41,7 +41,6 @@ Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.co
 If you would like to become a part of our team and be added to the repository, please contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa).
 
 ---
-
 ## Front End with [Vue.js ❤](https://vuejs.org/)
 The frontend can be found in the *public* directory and was initialised using [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)  and the [vuetify/webpack](https://github.com/vuetifyjs/webpack) template.
 
@@ -60,6 +59,11 @@ The frontend can be found in the *public* directory and was initialised using [V
 - [Prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) - Code Formatting
 - [ESLint](https://github.com/eslint/eslint) - Linting using [standard conf](https://github.com/standard/eslint-config-standard)
 - [Jest](https://facebook.github.io/jest/) - Testing
+
+### Style guides
+- [ES6](https://github.com/standard/eslint-config-standard)
+- [Vue](https://vuejs.org/v2/style-guide/)
+
 
 ---
 

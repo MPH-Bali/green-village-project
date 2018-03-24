@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs12 md6 offset-md3>
+    <v-flex xs12 md8 offset-md2>
       <v-container fluid grid-list-lg v-if="formData">
         <v-layout row wrap>
           <v-flex xs12 text-xs-center pt-4>
@@ -41,10 +41,19 @@
             <v-btn color="error" flat outline @click.stop="$router.go(-1)">Cancel</v-btn>
           </v-flex>
           <v-flex xs4 text-xs-center>
-            <v-btn v-if="this.formData.id" color="error" depressed @click.stop="remove">Delete</v-btn>
+            <v-btn v-if="this.formData.id" 
+                   color="error" 
+                   depressed 
+                  @click.stop="remove" 
+                  :loading="deletePending">Delete
+            </v-btn>
           </v-flex>
           <v-flex xs4 text-xs-right>
-            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save Delivery</v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   depressed color="primary" 
+                  @click.stop="save" 
+                  :loading="savePending">Save Delivery
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -53,46 +62,85 @@
 </template>
 
 <script>
-export default {
-  created () {
-    const id = this.$route.params.id
+import { mapGetters, mapActions } from 'vuex'
 
-    if (!id) {
-      this.formData = {
+export default {
+  props: {
+    id: {
+      type: String,
+      required: false
+    }
+  },
+  data () {
+    return {
+      formData: null,
+      deletePending: false,
+      savePending: false,
+      fetchingDelivery: false,
+      defaultFormData: {
         anorganic: 20,
         organic: 20,
         households: 20,
         banjar: 'There',
         comments: 'Foo',
         driver: 'Putu',
-        timestamp: new Date() // keep this
+        timestamp: new Date()
       }
-    } else {
-      this.$store.dispatch('delivery/fetchItem', id)
-        .then(data => { this.formData = data })
-        .catch(err => console.log(err))
     }
   },
+  created () {
+    const id = this.id
+    if (id) {
+      this.fetchDelivery(id)
+    } else {
+      this.formData = this.defaultFormData
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getDeliveryById: 'delivery/getDeliveryById'
+    })
+  },
   methods: {
+    ...mapActions({
+      fetchItem: 'delivery/fetchItem',
+      saveItem: 'delivery/saveItem',
+      deleteItem: 'delivery/deleteItem'
+    }),
     cancel () {
       this.formData = null
       this.showForm = false
     },
-    save () {
-      this.$store
-        .dispatch('delivery/save', this.formData)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
+    async fetchDelivery (id) {
+      const response = await this.fetchItem({ id })
+      if (response.success) {
+        this.formData = this.getDeliveryById(id)
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     },
-    remove () {
-      this.$store.dispatch('delivery/deleteItem', this.formData.id)
-        .then(this.$router.go(-1))
-        .catch(err => console.log(err))
-    }
-  },
-  data () {
-    return {
-      formData: null
+    async save () {
+      this.savePending = true
+      const response = await this.saveItem({ form: this.formData })
+      this.savePending = false
+      if (response.success) {
+        this.$router.push({ name: 'Daily Log' })
+      } else {
+        console.log(response.error)
+        // show toast
+      }
+    },
+    async remove () {
+      this.deletePending = true
+      const response = await this.deleteItem({ id: this.formData.id })
+      this.deletePending = false
+      if (response.success) {
+        this.$router.push({ name: 'Daily Log' })
+      } else {
+        console.log(response.error)
+        // show toast
+      }
     }
   }
 }

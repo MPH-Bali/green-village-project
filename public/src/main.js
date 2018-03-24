@@ -9,7 +9,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import i18n from './i18n'
-import './components'
 import './elements'
 
 Vue.use(moment)

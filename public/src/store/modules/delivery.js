@@ -1,67 +1,85 @@
-// import * as types from '../mutation.js'
-import { db } from '../firebase'
+import Vue from 'vue'
+import API from '@/api/'
+
+const FETCH_DAILY_DELIVERIES = 'FETCH_DAILY_DELIVERIES'
+const DELETE_DELIVERY_ITEM = 'DELETE_DELIVERY_ITEM'
+const UPDATE_DELIVERY_ITEM = 'UPDATE_DELIVERY_ITEM'
+const CREATE_DELIVERY_ITEM = 'CREATE_DELIVERY_ITEM'
+const FETCH_DELIVERY_ITEM = 'FETCH_DELIVERY_ITEM'
 
 const actions = {
-  fetchDailyList ({ commit }, logDate) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery')
-        .where('timestamp', '>=', new Date(logDate))
-        .where('timestamp', '<=', new Date(logDate.endOf('day')))
-        .get()
-        .then(snapShot => {
-          let data = []
-          snapShot.forEach(doc => data.push({ id: doc.id, ...doc.data() }))
-          commit('setDailyList', data)
-          resolve(data)
-        })
-        .catch(err => reject(err))
-    })
+  fetchDailyList: async ({ commit }, { date }) => {
+    const result = await API.Deliveries.fetchDailyList({ date })
+    if (result.success) {
+      commit(FETCH_DAILY_DELIVERIES, { data: result.data })
+    }
+    return result
   },
-  fetchItem ({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery').doc(id).get()
-        .then(doc => resolve({ id: doc.id, ...doc.data() }))
-        .catch(err => reject(err))
-    })
+  fetchItem: async ({ commit }, { id }) => {
+    const result = await API.Deliveries.fetchItem({ id })
+    if (result.success) {
+      commit(FETCH_DELIVERY_ITEM, { id, data: result.data })
+    }
+    return result
   },
-  deleteItem ({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      db.collection('delivery').doc(id).delete()
-        .then(data => resolve(data)) // ToDo: Remove from local array
-        .catch(err => reject(err))
-    })
+  deleteItem: async ({ commit, getters }, { id }) => {
+    const result = await API.Deliveries.deleteItem({ id })
+    if (result.success) {
+      commit(DELETE_DELIVERY_ITEM, { id })
+    }
+    return result
   },
-  save ({ commit }, form) {
-    return new Promise((resolve, reject) => {
-      if (form.id) {
-        db.collection('delivery')
-          .doc(form.id)
-          .set({ ...form })
-          .then(data => resolve(data)) // ToDo: Update local array
-          .catch(err => reject(err))
-      } else {
-        db.collection('delivery')
-          .add(form)
-          .then(data => resolve(data)) // ToDo: Push to local array
-          .catch(err => reject(err))
-      }
-    })
+  createItem: async ({ commit }, { form }) => {
+    const result = await API.Deliveries.createItem({ form })
+    if (result.success) {
+      commit(CREATE_DELIVERY_ITEM, { id: result.data.id, data: form })
+    }
+    return result
+  },
+  updateItem: async ({ commit }, { form }) => {
+    const result = await API.Deliveries.updateItem({ form })
+    if (result.success) {
+      commit(UPDATE_DELIVERY_ITEM, { id: form.id, data: form })
+    }
+    return result
+  },
+  saveItem: async (store, { form }) => {
+    if (form.id) {
+      return actions.updateItem(store, { form })
+    }
+    return actions.createItem(store, { form })
   }
 }
 
 const getters = {
-
+  getDailyList: state => state.dailyList,
+  getDeliveryById: state => {
+    return id => {
+      return state.dailyList[id]
+    }
+  }
 }
 
 const mutations = {
-  setDailyList (state, dailyList) {
-    state.dailyList = []
-    dailyList.forEach(item => state.dailyList.push(item))
+  [FETCH_DAILY_DELIVERIES]: (state, { data }) => {
+    Vue.set(state, 'dailyList', data)
+  },
+  [DELETE_DELIVERY_ITEM]: (state, { id }) => {
+    Vue.delete(state.dailyList, id)
+  },
+  [UPDATE_DELIVERY_ITEM]: (state, { id, data }) => {
+    Vue.set(state.dailyList, id, data)
+  },
+  [CREATE_DELIVERY_ITEM]: (state, { id, data }) => {
+    Vue.set(state.dailyList, id, data)
+  },
+  [FETCH_DELIVERY_ITEM]: (state, { id, data }) => {
+    Vue.set(state.dailyList, id, data)
   }
 }
 
 const initialState = {
-  dailyList: []
+  dailyList: {}
 }
 
 export default {

@@ -118,11 +118,14 @@ const personCollection = [
       client: false
     },
     role: {
-      communityManager:false,
-      facilityManager:false,
+      communityManager: false,
+      facilityManager: false,
       superAdmin: true
     },
-    houseType: 'Tu4SFfDhBUgAwGsvfopc' // house type id
+    houseType: {
+      id: 'Tu4SFfDhBUgAwGsvfopc',
+      name: 'villa'
+    }
   }
 ]
 
@@ -227,10 +230,10 @@ const materialCollection = [
 
 // villa, household, business
 const houseTypesCollection = [
-    {
-      name: 'Villa',
-      collectionFee: 20000
-    }
+  {
+    name: 'Villa',
+    collectionFee: 20000
+  }
 ]
 ```
 ---

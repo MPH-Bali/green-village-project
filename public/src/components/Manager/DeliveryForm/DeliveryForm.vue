@@ -50,9 +50,16 @@
           </v-flex>
           <v-flex xs4 text-xs-right>
             <v-btn style="text-transform: capitalize" 
+                   v-if="this.formData.id"
                    depressed color="primary" 
                   @click.stop="save" 
                   :loading="savePending">Save Delivery
+            </v-btn>
+            <v-btn style="text-transform: capitalize" 
+                   v-if="!this.formData.id"
+                   depressed color="primary" 
+                  @click.stop="add" 
+                  :loading="savePending">Create Delivery
             </v-btn>
           </v-flex>
         </v-layout>
@@ -74,6 +81,7 @@ export default {
       formData: null,
       deletePending: false,
       savePending: false,
+      addPending: false,
       fetchingDelivery: false,
       defaultFormData: {
         anorganic: 20,
@@ -100,13 +108,26 @@ export default {
       this.showForm = false
     },
     async fetchDelivery (id) {
-      
+      const result = await this.$firestore.get('delivery', id)
+      this.formData = result
     },
     async save () {
-       
+      this.savePending = true
+      await this.$firestore.update('delivery', this.formData)
+      this.savePending = false
+      this.$router.push({ name: 'Daily Log' })
     },
     async remove () {
-      
+      this.deletePending = true
+      await this.$firestore.remove('delivery', this.formData.id)
+      this.deletePending = false
+      this.$router.push({ name: 'Daily Log' })
+    },
+    async add () {
+      this.addPending = true
+      await this.$firestore.add('delivery', this.formData)
+      this.addPending = false
+      this.$router.push({ name: 'Daily Log' })
     }
   }
 }

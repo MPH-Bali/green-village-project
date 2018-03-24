@@ -93,18 +93,8 @@ export default {
     submit () {
         if (this.$refs.form.validate()) {
             this.$router.push('/signed-up')
-          // this.$store.commit {}
           }
         },
       },
   }
 </script>
-
-<!--
-Store new client
-Provide errors if fields aren't valid
-Render SignedUp onClick -->
-
-<!-- addClient: function(){
-      alert('Test Thank You' + this.form.name + '!')
-    }, -->

@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- '7'
+before_script:
+- npm install -g firebase-tools
+- cd $TRAVIS_BUILD_DIR/public && npm install
+script:
+- cd $TRAVIS_BUILD_DIR/public && npm run test
+- cd $TRAVIS_BUILD_DIR/public && npm run lint
+- cd $TRAVIS_BUILD_DIR/public && npm run build
+skip_cleanup: true
+after_success:
+  - test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN --non-interactive
+cache:
+  directories:
+    - public/node_modules

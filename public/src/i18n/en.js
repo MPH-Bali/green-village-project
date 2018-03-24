@@ -106,7 +106,7 @@ export default {
   // fixed menu located at the bottom of the screen
   bottomMenu: {
     addDelivery: 'add delivery',
-    weighMaterials: 'weighMaterials',
+    weighMaterials: 'weigh material',
     workersHours: 'workers hours',
     addStock: 'add stock',
     createSale: 'create sale',

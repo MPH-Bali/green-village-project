@@ -2,6 +2,7 @@ import Vue from 'vue'
 import moment from 'vue-moment'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import { auth } from '@/firebase'
 import './App.css'
 
 import App from './App'
@@ -23,11 +24,19 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  i18n,
-  router,
-  components: { App },
-  template: '<App/>'
+let app
+// Wait for the firebase state to initialise before we render the component,
+// so we know if we need to redirect the user to the login page.
+auth.onAuthStateChanged(user => {
+  if (!app) {
+    /* eslint-disable no-new */
+    new Vue({
+      el: '#app',
+      i18n,
+      store,
+      router,
+      components: { App },
+      template: '<App/>'
+    })
+  }
 })

@@ -7,10 +7,7 @@ firebase.initializeApp({
   projectId: 'mph-bali',
   databaseURL: 'https://mph-bali.firebaseio.com'
 })
-// firebase.initializeApp({
-//   projectId: 'mph-bali',
-//   databaseURL: 'https://mph-bali.firebaseio.com'
-// })
+
 Vue.use(moment)
 const db = firebase.firestore()
 

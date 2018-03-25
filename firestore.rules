@@ -97,6 +97,14 @@ service cloud.firestore {
 	      	&& validTimestamp()
     	}
 
+    	match /materialType/{materialTypeId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['name', 'pricePerKilo'])
+	      	&& data().name is string
+	      	&& data().pricePerKilo is int;
+    	}
   	}
   }
 }

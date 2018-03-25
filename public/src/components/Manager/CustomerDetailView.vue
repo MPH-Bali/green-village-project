@@ -63,9 +63,20 @@
           <v-layout column wrap align-end>
             <v-flex xs12>
               <v-card-actions>
-                  <v-btn color="error" large>Decline</v-btn>
-                  <v-btn color="info" large>Approve</v-btn>
-                  <v-btn color="success" large>Send Email</v-btn>
+                  <template v-if="!decided">
+                    <v-btn
+                      @click="decline"
+                      color="error"
+                      large>Decline</v-btn>
+                    <v-btn
+                      @click="approve"
+                      color="info"
+                      large>Approve</v-btn>
+                  </template>
+                  <v-btn
+                    v-if="person.email"
+                    v-bind:href="mailto"
+                    color="success" large>Send Email</v-btn>
               </v-card-actions>
             </v-flex>
           </v-layout>
@@ -88,7 +99,7 @@
                     lazy
                     full-width
                     width="290px"
-                    :return-value.sync="date">
+                    :return-value.sync="form.timestamp">
                     <v-text-field
                       slot="activator"
                       v-model="form.timestamp"
@@ -99,7 +110,7 @@
                     <v-date-picker v-model="form.timestamp">
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="timestampModal = false">Cancel</v-btn>
-                      <v-btn flat color="primary" @click="$refs.timestampModal.save(timestamp)">OK</v-btn>
+                      <v-btn flat color="primary" @click="$refs.timestampModal.save(form.timestamp)">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
                 </v-flex>
@@ -125,7 +136,7 @@
                     lazy
                     full-width
                     width="290px"
-                    :return-value.sync="date">
+                    :return-value.sync="form.paidUntil">
                     <v-text-field
                       slot="activator"
                       v-model="form.paidUntil"
@@ -136,7 +147,7 @@
                     <v-date-picker v-model="form.paidUntil">
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="paidUntilModal = false">Cancel</v-btn>
-                      <v-btn flat color="primary" @click="$refs.paidUntilDialog.save(paidUntil)">OK</v-btn>
+                      <v-btn flat color="primary" @click="$refs.paidUntilDialog.save(form.paidUntil)">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
                 </v-flex>
@@ -144,7 +155,7 @@
             </v-flex>
             <v-flex sm3 row align-center>
               <v-btn
-                :disabled="submitting"
+                :disabled="submitting || !valid"
                 :loading="submitting"
                 @click="addFee"
                 large block color="success">Collect Fee</v-btn>
@@ -183,10 +194,20 @@ export default {
     this.$firestore.syncFees(this.$route.params.id)
   },
   methods: {
+    approve (e) {
+      this.person.approved = true
+
+      this.$firestore.update('person', this.person)
+    },
+    decline (e) {
+      this.person.declined = true
+      this.$firestore.update('person', this.person)
+    },
     addFee (e) {
       e.preventDefault()
 
       this.submitting = true
+
       this.$firestore.add('fee', {
         ...this.form,
         personId: this.$route.params.id
@@ -197,6 +218,17 @@ export default {
     }
   },
   computed: {
+    mailto () {
+      return `mailto:${this.person.email}`
+    },
+    valid () {
+      const { timestamp, monthlyFee, paidUntil, totalPaid } = this.form
+      return timestamp && monthlyFee && paidUntil && totalPaid
+    },
+    decided () {
+      const { approved, declined } = this.person
+      return approved || declined
+    },
     houseType: function () {
       return this.person.houseType ? this.person.houseType.name : 'n/a'
     },

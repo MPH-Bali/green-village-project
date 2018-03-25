@@ -1,203 +1,205 @@
 {
-	"settings": [
-		{
-			"name": "Facility 1",
-			"village": "Pererenan"
+  "settings": [
+    {
+      "name": "Facility 1",
+      "village": "Pererenan"
     }
   ],
-	"person": [
-		{
-			"login": null,
-			"name": "Putu",
-			"phone": "+62 123 123 123",
-			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
-			"email": "some@address.com",
-			"geolocation": {
-				"latitude": "8.39111",
-				"longitude": "115.07361"
-			},
-			"type": {
-				"employee": true,
-				"client": false,
-				"buyer": false
-			},
-			"role": {
-				"communityManager": false,
-				"facilityManager": false,
-				"superAdmin": false
-			},
-			"houseType": null
+  "person": [
+    {
+      "login": null,
+      "name": "Putu",
+      "phone": "+62 123 123 123",
+      "address":
+        "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+      "email": "some@address.com",
+      "geolocation": {
+        "latitude": "8.39111",
+        "longitude": "115.07361"
+      },
+      "type": {
+        "employee": true,
+        "client": false,
+        "buyer": false
+      },
+      "role": {
+        "communityManager": false,
+        "facilityManager": false,
+        "superAdmin": false
+      },
+      "houseType": null
     },
-		{
-			"login": "firebaseUserId",
-			"name": "Wayan",
-			"phone": "+62 123 123 123",
-			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
-			"email": "some@address.com",
-			"geolocation": {
-				"latitude": "8.39111",
-				"longitude": "115.07361"
-			},
-			"type": {
-				"employee": false,
-				"client": false,
-				"buyer": false
-			},
-			"role": {
-				"communityManager": true,
-				"facilityManager": false,
-				"superAdmin": false
-			},
-			"houseType": null
+    {
+      "login": "firebaseUserId",
+      "name": "Wayan",
+      "phone": "+62 123 123 123",
+      "address":
+        "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+      "email": "some@address.com",
+      "geolocation": {
+        "latitude": "8.39111",
+        "longitude": "115.07361"
+      },
+      "type": {
+        "employee": false,
+        "client": false,
+        "buyer": false
+      },
+      "role": {
+        "communityManager": true,
+        "facilityManager": false,
+        "superAdmin": false
+      },
+      "houseType": null
     },
-		{
-			"login": null,
-			"name": "Ketut",
-			"phone": "+62 123 123 123",
-			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
-			"email": "some@address.com",
-			"geolocation": {
-				"latitude": "8.39111",
-				"longitude": "115.07361"
-			},
-			"type": {
-				"employee": false,
-				"client": false,
-				"buyer": true
-			},
-			"role": {
-				"communityManager": false,
-				"facilityManager": false,
-				"superAdmin": false
-			},
-			"houseType": null
+    {
+      "login": null,
+      "name": "Ketut",
+      "phone": "+62 123 123 123",
+      "address":
+        "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+      "email": "some@address.com",
+      "geolocation": {
+        "latitude": "8.39111",
+        "longitude": "115.07361"
+      },
+      "type": {
+        "employee": false,
+        "client": false,
+        "buyer": true
+      },
+      "role": {
+        "communityManager": false,
+        "facilityManager": false,
+        "superAdmin": false
+      },
+      "houseType": null
     }
   ],
-	"delivery": [
-		{
-			"timestamp": "2018-03-15T09:55:48.942Z",
-			"organic": 12.5,
-			"anorganic": 12.5,
-			"driver": {
-				"id": "person1",
-				"name": "Putu"
-			},
-			"banjar": {
-				"id": "banjar1",
-				"name": "Banjar Pererenan"
-			}
+  "delivery": [
+    {
+      "timestamp": "2018-03-15T09:55:48.942Z",
+      "organic": 12.5,
+      "anorganic": 12.5,
+      "driver": {
+        "id": "person1",
+        "name": "Putu"
+      },
+      "banjar": {
+        "id": "banjar1",
+        "name": "Banjar Pererenan"
+      }
     }
   ],
-	"workHours": [
-		{
-			"employee": {
-				"id": "person1",
-				"name": "Putu"
-			},
-			"in": "2018-03-15T09:55:48.942Z",
-			"out": null
+  "workHours": [
+    {
+      "employee": {
+        "id": "person1",
+        "name": "Putu"
+      },
+      "in": "2018-03-15T09:55:48.942Z",
+      "out": null
     }
   ],
-	"stock": [
-		{
-			"timestamp": "2018-03-15T09:55:48.942Z",
-			"material": {
-				"id": "materialType1",
-				"name": "plastic"
-			},
-			"amount": 200
+  "stock": [
+    {
+      "timestamp": "2018-03-15T09:55:48.942Z",
+      "material": {
+        "id": "materialType1",
+        "name": "plastic"
+      },
+      "amount": 200
     }
   ],
-	"expenses": [
-		{
-			"description": "Limited Furby Collection",
-			"amount": 20000000,
-			"person": {
-				"id": "person2",
-				"name": "Wayan"
-			}
+  "expenses": [
+    {
+      "description": "Limited Furby Collection",
+      "amount": 20000000,
+      "person": {
+        "id": "person2",
+        "name": "Wayan"
+      }
     }
   ],
-	"sales": [
-		{
-			"buyer": {
-				"id": "person3",
-				"name": "Ketut"
-			},
-			"materials": [
-				{
-					"material": {
-						"id": "materialType1",
-						"name": "plastic"
-					},
-					"kilo": 200,
-					"pricePerKilo": 20000
+  "sales": [
+    {
+      "buyer": {
+        "id": "person3",
+        "name": "Ketut"
+      },
+      "materials": [
+        {
+          "material": {
+            "id": "materialType1",
+            "name": "plastic"
+          },
+          "kilo": 200,
+          "pricePerKilo": 20000
         }
       ]
     }
   ],
-	"fees": [
-
-		{
-			"timestamp": "2018-03-15T09:55:48.942Z",
-			"monthly_fee": 50,
-			"total_paid": 200,
-			"paid_until": "2018-07-15T09:55:48.942Z"
+  "fees": [
+    {
+      "timestamp": "2018-03-15T09:55:48.942Z",
+      "monthly_fee": 50,
+      "total_paid": 200,
+      "paid_until": "2018-07-15T09:55:48.942Z"
     }
   ],
-	"materialType": [
-		{
-			"name": "Plastic",
-			"pricePerKilo": 2000
+  "materialType": [
+    {
+      "name": "Plastic",
+      "pricePerKilo": 2000
     }
   ],
-	"houseType": [
-		{
-			"name": "Villa",
-			"collectionFee": 20000
+  "houseType": [
+    {
+      "name": "Villa",
+      "collectionFee": 20000
     }
   ],
-	"banjar": [
-		{
-			"name": "Banjar Pererenan",
-			"pickupTimes": [
-				{
-					"day": "Monday",
-					"time": "6am-2pm"
+  "banjar": [
+    {
+      "name": "Banjar Pererenan",
+      "pickupTimes": [
+        {
+          "day": "Monday",
+          "time": "6am-2pm"
         },
-				{
-					"day": "Tuesday",
-					"time": "6am-2pm"
+        {
+          "day": "Tuesday",
+          "time": "6am-2pm"
         }
       ]
     },
-		{
-			"name": "Banjar pantai Berawa",
-			"pickupTimes": [
-				{
-					"day": "Monday",
-					"time": "6am-2pm"
+    {
+      "name": "Banjar pantai Berawa",
+      "pickupTimes": [
+        {
+          "day": "Monday",
+          "time": "6am-2pm"
         },
-				{
-					"day": "Tuesday",
-					"time": "6am-2pm"
+        {
+          "day": "Tuesday",
+          "time": "6am-2pm"
         }
       ]
     }
   ],
-	"material": [
-	 {
-			"worker": {
-			   "id": "person1",
-			   "name": "Putu"
-			},
-			"banjar": {
-			   "id": "banjar1",
-			   "name": "Banjar Pererenan"
-			},
-			"organic": 10,
-			"inorganic": 10,
-			"timestamp": "2018-03-15T09:55:48.942Z"
-   		}
-	]
+  "material": [
+    {
+      "worker": {
+        "id": "person1",
+        "name": "Putu"
+      },
+      "banjar": {
+        "id": "banjar1",
+        "name": "Banjar Pererenan"
+      },
+      "organic": 10,
+      "inorganic": 10,
+      "timestamp": "2018-03-15T09:55:48.942Z"
+    }
+  ]
 }

@@ -15,6 +15,10 @@ service cloud.firestore {
         return request.resource.data;
       }
 
+			function validTimestamp() {
+				return data().timestamp is timestamp;
+			}
+
     	match /delivery/{deliveryId} {
     		allow read: if true;
 
@@ -23,7 +27,7 @@ service cloud.firestore {
   				//driver exists and his role is employee
   				&& getDoc(data().driver.id, 'person').type.employee == true
   				//timestamp
-  				&& (data().timestamp) is timestamp
+  				&& validTimestamp()
   				//banjar exists
   				&& docExists(data().banjar.id, 'banjar')
       }
@@ -60,7 +64,7 @@ service cloud.firestore {
 	      allow create, update:
 	      	if data().keys().hasAll(['timestamp', 'material', 'amount'])
 	      	&& data().amount is int
-	      	&& data().timestamp is timestamp
+	      	&& validTimestamp()
     	}
 
     	match /fee/{feeId} {
@@ -70,7 +74,7 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['monthly_fee', 'total_paid', 'paid_until', 'timestamp'])
 	      	&& data().monthly_fee is int
 	      	&& data().total_paid is int
-	      	&& data().timestamp is timestamp
+	      	&& validTimestamp()
 	      	&& data().paid_until is timestamp
     	}
 
@@ -82,6 +86,16 @@ service cloud.firestore {
 	      	&& data().name is string
     	}
 
+    	match /material/{materialId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['worker', 'banjar', 'timestamp'])
+	      	&& data().keys().hasAny(['organic', 'inorganic'])
+	      	&& getDoc(data().worker.id, 'person').type.employee == true
+	      	&& docExists(data().banjar.id, 'banjar')
+	      	&& validTimestamp()
+    	}
 
   	}
   }

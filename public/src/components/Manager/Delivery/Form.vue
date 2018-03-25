@@ -125,7 +125,11 @@ export default {
         businesses: parseInt(this.form.businesses || 0),
         facilities: parseInt(this.form.facilities || 0)
       })
-      this.$emit('message', 'Delivery saved', 'success')
+      this.$emit('message', {
+        text: 'Delivery saved',
+        type: 'success',
+        ding: true
+      })
       this.$router.go(-1)
     }
   }

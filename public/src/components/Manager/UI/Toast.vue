@@ -3,8 +3,8 @@
     <v-snackbar :bottom="true"
                 v-model="show"
                 :timeout="2000"
-                :color="type">
-     {{ message }}
+                :color="message.type">
+     {{ message.text }}
    </v-snackbar>
   </div>
 </template>
@@ -15,11 +15,8 @@ import ding from '@/../static/ding.mp3'
 export default {
   props: {
     message: {
-      type: String
-    },
-    type: {
-      type: String,
-      default: ''
+      type: Object,
+      required: true
     }
   },
   data () {
@@ -29,12 +26,13 @@ export default {
     }
   },
   watch: {
-    message (newVal) {
-      if (!newVal) return
-      this.message = newVal
+    message (newMessage) {
+      if (!newMessage.text) return
       this.show = true
-      if (this.type === 'success') this.playDing()
-      window.navigator.vibrate(1000)
+      if (newMessage.type === 'success' && newMessage.ding) {
+        this.playDing()
+        window.navigator.vibrate(1000)
+      }
     }
   },
   methods: {

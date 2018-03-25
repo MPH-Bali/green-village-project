@@ -20,7 +20,7 @@
         <router-view @message="newMessage"/>
       </v-slide-y-transition>
     </v-content>
-    <Toast :message="toastText" :type="toastType"/>
+    <Toast :message="toastMessage"/>
   </v-app>
 </template>
 
@@ -36,8 +36,7 @@ export default {
   },
   data () {
     return {
-      toastText: '',
-      toastType: '',
+      toastMessage: {},
       sections: [
         {
           name: this.$i18n.t('bottomMenu.dailyLog'),
@@ -83,12 +82,10 @@ export default {
     }
   },
   methods: {
-    newMessage (message, type) {
-      this.toastText = message
-      this.toastType = type
+    newMessage (message) {
+      this.toastMessage = message
       setTimeout(() => {
-        this.toastText = ''
-        this.toastType = ''
+        this.toastMessage = {}
       }, 3000)
     }
   }

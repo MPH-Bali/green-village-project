@@ -8,6 +8,7 @@ export default {
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
     addMaterial: 'Add material',
+    workerHours: 'Check workers',
     customerDetail: 'Customer Detail',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',

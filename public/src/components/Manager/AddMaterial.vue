@@ -10,35 +10,35 @@
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="workers"
-              v-model="formdata.worker"
-              item-text="name"
+            <v-select solo flat :items="workers" 
+              v-model="formData.worker"
+              item-text="name" 
               item-value="id"
               return-object
-              label="" class='material-select banjar' />
+              label="" class='grey-select banjar' />
           </th>
           <th style="width: 12.5%;">
             <v-text-field
-              v-model="formdata.inorganic"
-              class='material-select red'
+              v-model="formData.inorganic"
+              class='grey-select red' 
               type="number"
               solo flat
               name="input-1"></v-text-field>
           </th>
           <th style="width: 12.5%;">
             <v-text-field
-              v-model="formdata.organic"
-              type="number"
-              class='material-select green'
-              solo flat
+              v-model="formData.organic"
+              type="number" 
+              class='grey-select green' 
+              solo flat 
               name="input-1"></v-text-field>
           </th>
           <th style="width: 30%">
-            <v-select solo flat :items="banjars"
-              v-model="formdata.banjar"
-              item-text="name" label=""
+            <v-select solo flat :items="banjars" 
+              v-model="formData.banjar"
+              item-text="name" label="" 
               item-value="id" return-object
-              class='material-select banjar'  />
+              class='grey-select banjar'  />
           </th>
           <th style="width: 15%">
             <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
@@ -68,20 +68,33 @@
 </template>
 
 <script>
+import NavigationHeader from '@/elements/NavigationHeader'
 const defaultForm = {
   inorganic: '',
   organic: '',
   worker: null,
-  banjar: null
+  banjar: {
+    id: 0,
+    name: 'No banjar'
+  }
 }
 
 export default {
+  components: {
+    NavigationHeader
+  },
   computed: {
     workers () {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
     },
     banjars () {
-      return this.$firestore.collections.banjar
+      const banjars = this.$firestore.collections.banjar
+      const noBanjar = {
+        id: 0,
+        name: 'No banjar'
+      }
+      banjars.unshift(noBanjar)
+      return banjars
     },
     materials () {
       return this.$firestore.dailyCollections.material
@@ -89,11 +102,17 @@ export default {
   },
   methods: {
     save () {
-      if (!this.formdata.worker) {
+      if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
       } else {
         this.setWeights()
-        if (this.formdata.id) {
+
+        // This is because we need to have 'No banjar field'
+        if (this.formData.banjar && this.formData.banjar.id === 0) {
+          this.formData.banjar = null
+        }
+
+        if (this.formData.id) {
           this.updateMaterial()
         } else {
           this.newMaterial()
@@ -103,38 +122,38 @@ export default {
     },
     newMaterial () {
       const payload = {
-        worker: this.formdata.worker,
-        organic: parseInt(this.formdata.organic),
-        inorganic: parseInt(this.formdata.inorganic),
-        banjar: this.formdata.banjar,
+        worker: this.formData.worker,
+        organic: parseInt(this.formData.organic),
+        inorganic: parseInt(this.formData.inorganic),
+        banjar: this.formData.banjar,
         timestamp: new Date()
       }
       this.$firestore.add('material', payload)
     },
     updateMaterial () {
-      this.$firestore.update('material', this.formdata)
+      this.$firestore.update('material', this.formData)
     },
     hideError () {
       this.error = ''
     },
     setWeights () {
-      if (this.formdata.organic === '') {
-        this.formdata.organic = 0
+      if (this.formData.organic === '') {
+        this.formData.organic = 0
       }
-      if (this.formdata.inorganic === '') {
-        this.formdata.inorganic = 0
+      if (this.formData.inorganic === '') {
+        this.formData.inorganic = 0
       }
     },
     clearForm () {
-      this.formdata = defaultForm
+      this.formData = defaultForm
     },
     editMaterial (material) {
-      this.formdata = {...material}
+      this.formData = {...material}
     }
   },
   data () {
     return {
-      formdata: defaultForm,
+      formData: defaultForm,
       error: '',
       headers: [
         { text: 'Worker', value: 'worker', align: 'left' },
@@ -159,7 +178,9 @@ export default {
 
 .material-header {
   border-bottom: none!important;
+  background-color: white;
 }
+
 
 .material-header th {
   text-align: left;
@@ -172,13 +193,14 @@ export default {
 
 .material-actions th {
   padding: 0 10px!important;
+  background-color: white;
 }
 
-.material-select {
+.grey-select {
   background-color: rgba(66, 133, 61, 0.1)!important;
 }
 
-.material-select div {
+.grey-select div {
   padding: 3px 3px!important;
 }
 

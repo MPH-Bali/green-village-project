@@ -26,7 +26,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view />
+              <router-view v-if="$firestore.charts"/>
             </v-slide-y-transition>
           </v-layout>
         </v-flex>
@@ -61,6 +61,9 @@ export default {
   data: () => ({
     items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
   }),
+  created () {
+    this.$firestore.syncCharts()
+  },
   methods: {
     lang (val) {
       this.$root.$options.i18n.locale = val

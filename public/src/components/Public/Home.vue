@@ -335,7 +335,7 @@ export default {
         ]
       },
       pickupsData: {
-        totalPickups: 40,
+        totalPickups: this.$firestore.charts.totalPickups,
         totalWeight: 40
       },
       barChartOptions: {

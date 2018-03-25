@@ -1,8 +1,8 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.expenses"
+    :loading="$firestore.collectionsPending.expense"
     :headers="headers"
-    :items="$firestore.dailyCollections.expenses"
+    :items="$firestore.dailyCollections.expense"
     hide-actions class="elevation-1"
   >
     <template slot="items" slot-scope="props">

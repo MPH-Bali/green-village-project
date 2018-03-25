@@ -25,7 +25,7 @@
       <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />
       <WorkerTimes/>
 
-      <log-header class="mt-4" action="/manager/expenses" title="Add Expense" />
+      <log-header class="mt-4" action="/manager/expense" title="Add Expense" />
       <ExpensesTable/>
     </v-flex>
   </v-layout>

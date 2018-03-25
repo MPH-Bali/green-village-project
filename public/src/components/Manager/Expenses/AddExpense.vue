@@ -90,7 +90,10 @@ export default {
         return
       }
 
-      this.$firestore.save('expenses', this.formData).then(() => {
+      this.formData.cost = parseInt(this.formData.cost)
+      this.formData.timestamp = new Date()
+
+      this.$firestore.save('expense', this.formData).then(() => {
         this.$emit('message', 'Expense saved', 'success')
         this.$router.go(-1)
       })

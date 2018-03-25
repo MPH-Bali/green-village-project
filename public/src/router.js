@@ -53,7 +53,7 @@ export default new Router({
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
-        { path: 'expenses/:id?', name: 'addExpense', component: AddExpense, props: true },
+        { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

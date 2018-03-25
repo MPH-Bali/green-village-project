@@ -157,7 +157,7 @@ const deliveryCollection = [
   }
 ]
 
-const workedHoursCollection = [
+const workerHoursCollection = [
   {
     employee: {
       id: 'Tu4SFfDhBUgAwGsvfopc', // person id

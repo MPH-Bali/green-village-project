@@ -155,7 +155,7 @@ export default {
   methods: {
     save () {
       this.formData.timestamp = new Date()
-      this.$firestore.add('workertimes', this.formData).then(() => {
+      this.$firestore.save('workertimes', this.formData).then(() => {
         this.$router.go(-1)
       })
     },

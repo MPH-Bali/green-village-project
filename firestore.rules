@@ -4,7 +4,7 @@ service cloud.firestore {
     		return request.auth != null;
     	}
       function getDoc(id, col) {
-        return get(/databases/$(database)/documents/$(col)/$(id))
+        return get(/databases/$(database)/documents/$(col)/$(id)).data
       }
 
       function docExists(id, col) {
@@ -21,7 +21,7 @@ service cloud.firestore {
     		allow create, update:
   				if request.resource.keys().hasAll(['timetamp, driver, banjar'])
   				//driver exists and his role is employee
-  				&& getDoc(data().driver.id, 'person').data.type.employee == true
+  				&& getDoc(data().driver.id, 'person').type.employee == true
   				//timestamp
   				&& (data().timestamp) is timestamp
   				//banjar exists
@@ -33,7 +33,7 @@ service cloud.firestore {
 
 	      allow create, update:
 	      	if data().keys().hasAll(['buyer', 'materials'])
-	      	&& getDoc(data().buyer.id, 'person').data.type.buyer == true
+	      	&& getDoc(data().buyer.id, 'person').type.buyer == true
 	    }
 
     	match /settings/{settingsId} {
@@ -41,11 +41,18 @@ service cloud.firestore {
 
 	      allow create, update:
 	      	if data().keys().hasAll(['name', 'village'])
-					&& data().name is string
-					&& data().village is string
+	      	&& data().name is string
+	      	&& data().village is string
 	    }
 
+    	match /expense/{expenseId} {
+	      allow read: if true;
 
+	      allow create, update:
+	      	if data().keys().hasAll(['person', 'amount'])
+	      	&& data().amount is int
+	      	&& getDoc(data().person.id, 'person').type.buyer == true
+  		}
   	}
   }
 }

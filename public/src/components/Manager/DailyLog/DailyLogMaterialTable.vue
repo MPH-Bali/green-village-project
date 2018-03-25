@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style >
+<style scoped>
   .elevation-1 thead {
     background: #e5ece9;
   }

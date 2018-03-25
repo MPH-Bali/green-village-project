@@ -6,7 +6,8 @@ export default {
     login: 'Login',
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
-    deliveryForm: 'Delivery Form'
+    deliveryForm: 'Delivery Form',
+    addMaterial: 'Add material'
   },
   // example string
   home: {

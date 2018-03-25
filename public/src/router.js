@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
-import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
+import DeliveryForm from '@/components/Manager/Delivery/Form'
+import AddMaterial from '@/components/Manager/AddMaterial'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -36,6 +37,7 @@ const router = new Router({
         { path: '', name: 'dailyLog', component: DailyLog, meta: { requiresAuth: true } },
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true, meta: { requiresAuth: true } },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true, meta: { requiresAuth: true } },
+        { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: '*', redirect: '/manager' }
       ]
     },

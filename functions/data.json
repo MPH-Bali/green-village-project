@@ -102,7 +102,7 @@
 		{
 			"timestamp": "2018-03-15T09:55:48.942Z",
 			"material": {
-				"id": "stockMaterial1",
+				"id": "materialType1",
 				"name": "plastic"
 			},
 			"amount": 200
@@ -127,7 +127,7 @@
 			"materials": [
 				{
 					"material": {
-						"id": "stockMaterial1",
+						"id": "materialType1",
 						"name": "plastic"
 					},
 					"kilo": 200,
@@ -145,7 +145,7 @@
 			"paid_until": "2018-07-15T09:55:48.942Z"
     }
   ],
-	"stockMaterial": [
+	"materialType": [
 		{
 			"name": "Plastic",
 			"pricePerKilo": 2000

@@ -5,7 +5,7 @@
         <v-card color="primary">
           <v-card-text>
             <h2 class="subheading white--text">{{ $t("home.welcome") }}</h2>
-            <h1 class="display-1 white--text">Pererenan Facility</h1>
+            <h1 class="display-1 white--text">{{facilityData.name}} Facility</h1>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -17,8 +17,8 @@
               <v-icon size="50px">people</v-icon>
             </v-avatar>
             <h1 class="headline mt-2">MEMBERS</h1>
-            <p>We’re already a lot, but we want all 805 Pererenan households to join us!</p>
-            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalarChartOptions" />
+            <p>We’re already a lot, but we want all {{customerData.householdCount}} Pererenan households to join us!</p>
+            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalBarChartOptions" />
             <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
           </v-card-text>
         </v-card>
@@ -28,7 +28,7 @@
         <v-card color="grey lighten-2">
           <v-card-text>
             <h1 class="headline mt-2">Recycling Efficiency</h1>
-            <doughnut-chart :height="300" :chart-data="recyclingData" :options="ChartOptions" />
+            <doughnut-chart :height="300" :chart-data="materialData" :options="ChartOptions" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -39,7 +39,7 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">multiline_chart</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">PERERENAN</h1>
+            <h1 class="headline mt-2">{{facilityData.name}}</h1>
             <h1 class="headline">FACILITY DATA</h1>
           </v-card-text>
         </v-card>
@@ -89,16 +89,12 @@
             </v-avatar>
             <h1 class="headline mt-2">COLLECTION</h1>
             <v-layout row>
-              <v-flex xs4 sm4 md4>
-                <h1 class="title">Banajar 1:</h1>
-                <h1 class="mb-3 headline primary--text">DRIVEN</h1>
-              </v-flex>
-              <v-flex xs4 sm4 md4>
-                <h1 class="title">Banajar 1:</h1>
+              <v-flex xs6 sm6 md6>
+                <h1 class="title">{{pickupsData.totalPickups}}</h1>
                 <h1 class="mb-3 headline primary--text">COLLECTIONS</h1>
               </v-flex>
-              <v-flex xs4 sm 4 md4>
-                <h1 class="title">Banajar 1:</h1>
+              <v-flex xs6 sm 6 md6>
+                <h1 class="title">{{pickupsData.totalWeight}}</h1>
                 <h1 class="mb-3 headline primary--text">PICKUPS</h1>
               </v-flex>
           </v-layout>
@@ -113,7 +109,7 @@
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
             <h1 class="headline mt-2">TEAM</h1>
-            <p>Pickups for Pererenan are scheduled as follow:</p>
+            <p>Pickups for {{facilityData.name}} are scheduled as follow:</p>
             <v-container fluid grid-list-xl>
               <v-layout row>
                  <v-flex xs4 sm4 md4 style="align-self: center;">
@@ -122,8 +118,8 @@
                   </v-avatar>
                 </v-flex>
                 <v-flex xs4 sm4 md4>
-                  <p>firstlastname</p>
-                  <p>roleatfacility</p>
+                  <p>{{facilityData.employees[0].firstName}} {{facilityData.employees[0].lastName}}</p>
+                  <p>{{facilityData.employees[0].role}}</p>
                 </v-flex>
             </v-layout>
 
@@ -131,7 +127,7 @@
             <v-card>
               <v-card-text class="text-xs-center">
                 <h1 class="title">Working Hours</h1>
-                <bar-chart :height="300" :chart-data="recyclingEfficiency" :options="barChartOptions" />
+                <bar-chart :height="300" :chart-data="hoursData" :options="horizontalBarChartOptions" />
               </v-card-text>
             </v-card>
             </v-flex>
@@ -147,7 +143,7 @@
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
             <h1 class="headline mt-2">Banner Materials</h1>
-            <p>Pickups for Pererenan are scheduled as follow:</p>
+            <p>Pickups for {{facilityData.name}} are scheduled as follow:</p>
             <v-container fluid grid-list-xl>
               <v-layout row>
                  <v-flex xs4 sm4 md4 style="align-self: center;">
@@ -189,6 +185,47 @@ export default {
   data () {
     return {
       form: {},
+      facilityData: {
+        name: 'Pererenan',
+        employees: [
+          {
+            firstName: 'Made',
+            lastName: 'Kutu',
+            role: 'Facility Manager'
+          },
+          {
+            firstName: 'Putu',
+            lastName: 'Futu',
+            role: 'Community Manager'
+          },
+          {
+            firstName: 'Mutu',
+            lastName: 'Lutu',
+            role: 'Manager'
+          }
+        ]
+      },
+      hoursData: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Hours',
+            fill: false,
+            backgroundColor: '#cd2027',
+            borderColor: '#cd2027',
+            data: [35, 43, 46, 64, 60, 75, 90]
+          }
+        ]
+      },
+      householdData: {
+        labels: ['businesses', 'villa', 'household'],
+        datasets: [
+          {
+            data: [35, 20, 60],
+            backgroundColor: ['#4a90e2', '#d1dfd0', '#cc8a8c']
+          }
+        ]
+      },
       dailyStockData: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [
@@ -208,7 +245,7 @@ export default {
         ]
       },
       customerData: {
-        labels: ['businesses', 'villa', 'households'],
+        householdCount: 35,
         datasets: [
           {
             label: 'businesses',
@@ -283,17 +320,29 @@ export default {
           }
         ]
       },
-      recyclingData: {
+      materialData: {
         labels: ['Compost', 'Material', 'Landfill'],
         datasets: [
           {
-            label: 'Oragnic',
-            backgroundColor: '#4a90e2',
-            data: [65, 45, 60, 65, 52]
-          },
+            data: [35, 20, 60],
+            backgroundColor: ['#4a90e2', '#d1dfd0', '#cc8a8c']
+          }
         ]
       },
+      pickupsData: {
+        totalPickups: 40,
+        totalWeight: 40
+      },
       barChartOptions: {
+        scales: {
+          xAxes: [{ stacked: true }],
+          yAxes: [{ stacked: true }]
+        }
+      },
+      horizontalBarChartOptions: {
+        legend: {
+            display: false,
+        },
         scales: {
           xAxes: [{ stacked: true }],
           yAxes: [{ stacked: true }]
@@ -304,6 +353,22 @@ export default {
         v => !!v || 'E-mail is required',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ]
+    }
+  },
+  methods: {
+    getHouseholdCount: function(collection) {
+      this.$firestore.get(personCollection)
+        .then((data) => {
+          this.household = data
+        })
+
+      return new Promise((resolve, reject) => {
+        if (itWorked) {
+          return resolve(someValue)
+        } else {
+          return reject(someOtherValue)
+        }
+      })
     }
   }
 }

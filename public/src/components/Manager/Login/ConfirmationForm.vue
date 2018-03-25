@@ -139,6 +139,11 @@ export default {
     margin-top: 10px;      
   }
 
+  input.confirmationField:focus {
+    outline: none;
+    border-bottom: 1px solid #42853d;
+  }
+
   .resendCode {
     font-size: 16px;
     font-weight: 600;    

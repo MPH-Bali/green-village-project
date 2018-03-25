@@ -283,9 +283,9 @@ export default {
           }
         ]
       },
-     recyclingData: {
-      labels: ['Compost', 'Material', 'Landfill'],
-      datasets: [
+      recyclingData: {
+        labels: ['Compost', 'Material', 'Landfill'],
+        datasets: [
           {
             label: 'Oragnic',
             backgroundColor: '#4a90e2',

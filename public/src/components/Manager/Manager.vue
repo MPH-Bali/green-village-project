@@ -53,7 +53,7 @@ export default {
         {
           name: this.$i18n.t('bottomMenu.addDelivery'),
           icon: 'fa-truck',
-          route: '/manager/delivery'
+          route: '/manager/delivery-form'
         },
         {
           name: this.$i18n.t('bottomMenu.weighMaterials'),

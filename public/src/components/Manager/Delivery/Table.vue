@@ -6,13 +6,12 @@
     hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
-      <td class="text-xs-center">{{ parseInt(props.item.organic) + parseInt(props.item.anorganic) }}</td>
-      <td class="text-xs-center">{{ props.item.organic }}</td>
-      <td class="text-xs-center">{{ props.item.anorganic }}</td>
+      <td class="text-xs-center">{{ props.item.villas }}</td>
       <td class="text-xs-center">{{ props.item.households }}</td>
+      <td class="text-xs-center">{{ props.item.businesses }}</td>
+      <td class="text-xs-center">{{ props.item.facilities }}</td>
       <td>{{ props.item.driver && props.item.driver.name }}</td>
       <td>{{ props.item.banjar && props.item.banjar.name }}</td>
-      <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">
         <v-btn icon @click="$router.push({ name: 'deliveryForm', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
@@ -29,13 +28,12 @@ export default {
       loading: false,
       headers: [
         { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
-        { text: 'Total Delivery (kg)', align: 'center', sortable: true, value: 'total' },
-        { text: 'Organic', align: 'center', sortable: true, value: 'organic' },
-        { text: 'Anorganic', align: 'center', sortable: true, value: 'anorganic' },
-        { text: 'Housholds', align: 'center', sortable: true, value: 'households' },
+        { text: 'Villas', align: 'center', sortable: true, value: 'villas' },
+        { text: 'Households', align: 'center', sortable: true, value: 'households' },
+        { text: 'Businesses', align: 'center', sortable: true, value: 'businesses' },
+        { text: 'Facilities', align: 'center', sortable: true, value: 'facilities' },
         { text: 'Driver', align: 'left', sortable: true, value: 'driver' },
         { text: 'Banjar', align: 'left', sortable: true, value: 'banjar' },
-        { text: 'Comments', align: 'left', sortable: false, value: 'comments' },
         { text: 'Actions', align: 'center', sortable: false, value: null }
       ]
     }

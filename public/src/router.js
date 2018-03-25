@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
-import DeliveryForm from '@/components/Manager/DeliveryForm/DeliveryForm'
+import DeliveryForm from '@/components/Manager/Delivery/Form'
+import AddMaterial from '@/components/Manager/AddMaterial'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -25,10 +26,14 @@ export default new Router({
     {
       path: '/manager',
       component: Manager,
+      /**
+       *  @desc the children.name value MUST coorlelate with the key in our i18n routeNames
+       */
       children: [
-        { path: '', name: 'Daily Log', component: DailyLog },
-        { path: 'daily-log/:date?', name: 'Daily Log History', component: DailyLog, props: true },
-        { path: 'delivery-form/:id?', name: 'Delivery Form', component: DeliveryForm, props: true },
+        { path: '', name: 'dailyLog', component: DailyLog },
+        { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
+        { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
+        { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: '*', redirect: '/manager' }
       ]
     },

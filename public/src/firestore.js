@@ -12,17 +12,32 @@ Vue.use(moment)
 const db = firebase.firestore()
 
 export default new Vue({
+  computed: {
+    list () {
+      return {
+        ...this.dailyCollections,
+        ...this.collections
+      }
+    }
+  },
   data () {
     return {
-      persons: [],
       dailySubscriptions: [],
-      delivery: [],
       start: null,
       end: null,
       // ToDo: Add all collections
-      collections: ['delivery'],
+      dailyCollections: {
+        delivery: [],
+        material: []
+      },
+      collections: {
+        banjar: [],
+        person: []
+      },
       collectionsPending: {
-        delivery: false
+        delivery: false,
+        banjar: false,
+        person: false
       }
     }
   },
@@ -34,11 +49,16 @@ export default new Vue({
       this.end = this.$moment(this.start).endOf('day')
       this.syncDailyData()
     },
-    syncPersons () {
-      db.collection('person').onSnapshot(snapshot => {
-        this.persons = []
-        snapshot.forEach(doc => {
-          this.persons.push({ id: doc.id, ...doc.data() })
+    syncData () {
+      Object.keys(this.collections).forEach((collection) => {
+        this.collectionsPending[collection] = true
+        this.collections[collection] = []
+
+        db.collection(collection).onSnapshot(snapshot => {
+          this.collections[collection] = []
+          snapshot.forEach(doc => {
+            this.collections[collection].push({ id: doc.id, ...doc.data() })
+          })
         })
       })
     },
@@ -46,15 +66,15 @@ export default new Vue({
       this.dailySubscriptions.forEach(unsubscribe => unsubscribe())
       this.dailySubscriptions = []
 
-      this.collections.forEach(collection => {
+      Object.keys(this.dailyCollections).forEach((collection) => {
         this.collectionsPending[collection] = true
         const unsubscribe = db.collection(collection)
           .where('timestamp', '>=', new Date(this.start))
           .where('timestamp', '<=', new Date(this.end))
           .onSnapshot(snapshot => {
-            this[collection] = []
+            this.dailyCollections[collection] = []
             snapshot.forEach(doc => {
-              this[collection].push({ id: doc.id, ...doc.data() })
+              this.dailyCollections[collection].push({ id: doc.id, ...doc.data() })
             })
             this.collectionsPending[collection] = false
           })
@@ -71,7 +91,17 @@ export default new Vue({
     update (collection, data) {
       return db.collection(collection).doc(data.id).set({ ...data })
     },
+    save (collection, data) {
+      const action = data.id ? this.update : this.add
+      return action(collection, data)
+    },
+    find (collection, condition) {
+      return this.list[collection].find(x => condition(x))
+    },
     async get (collection, id) {
+      const cached = this.list[collection].find(x => x.id === id)
+      if (cached) return cached
+
       const result = await db.collection(collection).doc(id).get()
       return {
         id: result.id,

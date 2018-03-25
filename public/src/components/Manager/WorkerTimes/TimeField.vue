@@ -10,11 +10,11 @@
     <v-text-field
       class='grey-select' 
       slot="activator"
-      v-model="time"
+      v-model="showTime"
       solo flat 
       readonly>
     </v-text-field>
-    <v-time-picker v-model="time" actions>
+    <v-time-picker v-model="time" actions >
       <v-spacer></v-spacer>
       <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
       <v-btn flat color="primary" @click="setTime(time)">OK</v-btn>
@@ -43,6 +43,13 @@ export default {
       time: null
     }
   },
+  computed: {
+    showTime () {
+      if (!this.time) return null
+      const now = this.$moment().format('YYYY-MM-DD')
+      return this.$moment(now + ' ' + this.time).format('hh:mm a')
+    }
+  },
   methods: {
     setTime (time) {
       const interval = this.part
@@ -56,7 +63,7 @@ export default {
   },
   watch: {
     inputTime (time) {
-      this.time = this.$moment(this.inputTime).format('HH:MM')
+      this.time = this.$moment(this.inputTime).format('hh:mm')
     }
   }
 }

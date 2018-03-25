@@ -7,10 +7,10 @@
   >
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ props.item.worker.name }}</td>
-      <td class="text-xs-center">{{ $moment(props.item.times.morning.start).format('HH:MM') }}</td>
-      <td class="text-xs-center">{{ $moment(props.item.times.morning.end).format('HH:MM') }}</td>
-      <td class="text-xs-center">{{ $moment(props.item.times.afternoon.start).format('HH:MM') }}</td>
-      <td class="text-xs-center">{{ $moment(props.item.times.afternoon.end).format('HH:MM') }}</td>
+      <td class="text-xs-center">{{ getTime(props.item.times.morning.start) }}</td>
+      <td class="text-xs-center">{{ getTime(props.item.times.morning.end) }}</td>
+      <td class="text-xs-center">{{ getTime(props.item.times.afternoon.start) }}</td>
+      <td class="text-xs-center">{{ getTime(props.item.times.afternoon.end) }}</td>
       <td class="text-xs-center">
         <v-btn icon @click="$router.push({ name: 'workerTimes', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
@@ -34,6 +34,14 @@ export default {
         { text: 'Out', align: 'center', sortable: true, value: 'afternoon_out' },
         { text: 'Actions', align: 'center', sortable: true, value: 'action' }
       ]
+    }
+  },
+  methods: {
+    getTime (time) {
+      if (time) {
+        return this.$moment(time).format('hh:mm a')
+      }
+      return ''
     }
   }
 }

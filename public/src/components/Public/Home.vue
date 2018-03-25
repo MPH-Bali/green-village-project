@@ -90,11 +90,13 @@
             <h1 class="headline mt-2">COLLECTION</h1>
             <v-layout row>
               <v-flex xs6 sm6 md6>
+                <v-icon size="50px">multiline_chart</v-icon>
                 <h1 class="title">{{pickupsData.totalPickups}}</h1>
-                <h1 class="mb-3 headline primary--text">COLLECTIONS</h1>
+                <h1 class="mb-3 headline primary--text">PICKUPS</h1>
               </v-flex>
               <v-flex xs6 sm 6 md6>
-                <h1 class="title">{{pickupsData.totalWeight}}</h1>
+                <v-icon size="50px">multiline_chart</v-icon>
+                <h1 class="title">{{pickupsData.totalWeight}} tons</h1>
                 <h1 class="mb-3 headline primary--text">PICKUPS</h1>
               </v-flex>
           </v-layout>
@@ -357,3 +359,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

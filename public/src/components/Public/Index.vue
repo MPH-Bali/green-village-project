@@ -2,8 +2,8 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
-          <v-icon>fa-recycle</v-icon>
+        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph">
+         <img src="../../assets/mph_logo.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
@@ -63,3 +63,9 @@ export default {
   })
 }
 </script>
+
+<style scoped>
+.main-mph img {
+  height: 50px;
+}
+</style>

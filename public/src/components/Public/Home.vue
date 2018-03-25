@@ -28,7 +28,7 @@
         <v-card color="grey lighten-2">
           <v-card-text>
             <h1 class="headline mt-2">Recycling Efficiency</h1>
-            <doughnut-chart :height="300" :chart-data="materialData" :options="ChartOptions" />
+            <doughnut-chart :height="300" :chart-data="materialData" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -168,10 +168,10 @@
             </v-avatar>
             <h1 class="headline mt-2">Newsletter Signup</h1>
             <p>Sign up and stay up to date with it</p>
-            <v-form v-model="valid" ref="form" lazy-validation>
+            <v-form  ref="form" lazy-validation>
               <v-text-field label="Email" flat v-model="form.email" :rules="emailRules" required />
             </v-form>
-            <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>Join Us</v-btn>
+            <v-btn @click="submit" color="primary" type="submit" depressed>Join Us</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -182,6 +182,11 @@
 
 <script>
 export default {
+  methods: {
+    submit () {
+      console.log('Submit join us')
+    }
+  },
   data () {
     return {
       form: {},

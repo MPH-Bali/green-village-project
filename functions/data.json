@@ -1,0 +1,166 @@
+{
+	"settings": [
+		{
+			"name": "Facility 1",
+			"village": "Pererenan"
+    }
+  ],
+	"person": [
+		{
+			"id": "SampleUser1",
+			"login": null,
+			"name": "Putu",
+			"phone": "+62 123 123 123",
+			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+			"email": "some@address.com",
+			"geolocation": {
+				"latitude": "8.39111",
+				"longitude": "115.07361"
+			},
+			"type": {
+				"employee": true,
+				"client": false
+			},
+			"role": {
+				"communityManager": false,
+				"facilityManager": false,
+				"superAdmin": false
+			},
+			"houseType": null
+    },
+		{
+			"id": "SampleUser2",
+			"login": "firebaseUserId",
+			"name": "Wayan",
+			"phone": "+62 123 123 123",
+			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+			"email": "some@address.com",
+			"geolocation": {
+				"latitude": "8.39111",
+				"longitude": "115.07361"
+			},
+			"type": {
+				"employee": false,
+				"client": false
+			},
+			"role": {
+				"communityManager": true,
+				"facilityManager": false,
+				"superAdmin": false
+			},
+			"houseType": null
+    }
+  ],
+	"delivery": [
+		{
+			"timestamp": "2018-03-15T09:55:48.942Z",
+			"organic": 12.5,
+			"anorganic": 12.5,
+			"driver": {
+				"id": "sampleUser1",
+				"name": "Putu"
+			},
+			"banjar": {
+				"id": "Banjar1",
+				"name": "Banjar Pererenan"
+			}
+    }
+  ],
+	"workHours": [
+		{
+			"employee": {
+				"id": "sampleUser1",
+				"name": "Putu"
+			},
+			"in": "2018-03-15T09:55:48.942Z",
+			"out": null
+    }
+  ],
+	"stock": [
+		{
+			"timestamp": "2018-03-15T09:55:48.942Z",
+			"material": {
+				"id": "sampleMaterial1",
+				"name": "plastic"
+			},
+			"amount": 200
+    }
+  ],
+	"expenses": [
+		{
+			"description": "Limited Furby Collection",
+			"amount": 20000000,
+			"person": {
+				"id": "Tu4SFfDhBUgAwGsvfopc",
+				"name": "Michael"
+			}
+    }
+  ],
+	"sales": [
+		{
+			"buyer": {
+				"id": "Tu4SFfDhBUgAwGsvfopc",
+				"name": "Michael"
+			},
+			"materials": [
+				{
+					"material": {
+						"id": "Tu4SFfDhBUgAwGsvfopc",
+						"name": "plastic"
+					},
+					"kilo": 200,
+					"pricePerKilo": 20000
+        }
+      ]
+    }
+  ],
+	"fees": [
+
+		{
+			"timestamp": "2018-03-15T09:55:48.942Z",
+			"monthly_fee": 50,
+			"total_paid": 200,
+			"paid_until": "2018-07-15T09:55:48.942Z"
+    }
+  ],
+	"stockMaterial": [
+		{
+			"name": "Plastic",
+			"pricePerKilo": 2000
+    }
+  ],
+	"houseType": [
+		{
+			"name": "Villa",
+			"collectionFee": 20000
+    }
+  ],
+	"banjar": [
+		{
+			"name": "Banjar Pererenan",
+			"pickupTimes": [
+				{
+					"day": "Monday",
+					"time": "6am-2pm"
+        },
+				{
+					"day": "Tuesday",
+					"time": "6am-2pm"
+        }
+      ]
+    },
+		{
+			"name": "Banjar pantai Berawa",
+			"pickupTimes": [
+				{
+					"day": "Monday",
+					"time": "6am-2pm"
+        },
+				{
+					"day": "Tuesday",
+					"time": "6am-2pm"
+        }
+      ]
+    }
+  ]
+}

@@ -206,6 +206,10 @@ export default {
     addFee (e) {
       e.preventDefault()
 
+      if (this.submitting) {
+        return
+      }
+
       this.submitting = true
 
       this.$firestore.add('fee', {

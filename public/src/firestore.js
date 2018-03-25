@@ -5,12 +5,21 @@ import { db } from '@/firebase'
 Vue.use(moment)
 
 export default new Vue({
+  computed: {
+    list () {
+      return {
+        ...this.dailyCollections,
+        ...this.collections
+      }
+    }
+  },
   data () {
     return {
       dailySubscriptions: [],
       start: null,
       end: null,
       user: null,
+      fees: [],
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
@@ -18,12 +27,14 @@ export default new Vue({
       },
       collections: {
         banjar: [],
-        person: []
+        person: [],
+        sales: []
       },
       collectionsPending: {
         delivery: false,
         banjar: false,
-        person: false
+        person: false,
+        sales: false
       }
     }
   },
@@ -45,8 +56,19 @@ export default new Vue({
           snapshot.forEach(doc => {
             this.collections[collection].push({ id: doc.id, ...doc.data() })
           })
+          this.collectionsPending[collection] = false
         })
       })
+    },
+    syncFees (personId) {
+      db.collection('fee')
+        .where('personId', '==', personId)
+        .onSnapshot(snapshot => {
+          this.fees = []
+          snapshot.forEach(doc => {
+            this.fees.push({ id: doc.id, ...doc.data() })
+          })
+        })
     },
     syncDailyData () {
       this.dailySubscriptions.forEach(unsubscribe => unsubscribe())
@@ -89,10 +111,15 @@ export default new Vue({
       return db.collection(collection).doc(data.id).set({ ...data })
     },
     save (collection, data) {
-      const action = data.id ? this.update : this.add
-      return action(collection, data)
+      return data.id ? this.update(collection, data) : this.add(collection, data)
+    },
+    find (collection, condition) {
+      return this.list[collection].find(x => condition(x))
     },
     async get (collection, id) {
+      const cached = this.list[collection].find(x => x.id === id)
+      if (cached) return cached
+
       const result = await db.collection(collection).doc(id).get()
       return {
         id: result.id,

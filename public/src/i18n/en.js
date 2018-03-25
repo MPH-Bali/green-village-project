@@ -11,7 +11,8 @@ export default {
     customerDetail: 'Customer Detail',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',
-    'buyer-details': 'Buyer Details'
+    'buyer-details': 'Buyer Details',
+    addExpense: 'Add Expense'
   },
   // example string
   home: {

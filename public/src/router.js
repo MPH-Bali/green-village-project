@@ -12,6 +12,8 @@ import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
 import BuyerEdit from '@/components/Manager/Buyers/BuyerEdit'
 
+import AddExpense from '@/components/Manager/Expenses/AddExpense'
+
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
@@ -51,6 +53,7 @@ export default new Router({
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
+        { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

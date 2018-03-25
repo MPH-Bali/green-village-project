@@ -88,16 +88,17 @@ export default {
     }
   },
   methods: {
-    save () {
+    async save () {
       if (!this.formdata.worker) {
         this.error = 'You have to select a worker to save'
       } else {
         this.setWeights()
         if (this.formdata.id) {
-          this.updateMaterial()
+          await this.updateMaterial()
         } else {
-          this.newMaterial()
+          await this.newMaterial()
         }
+        this.$emit('message', 'Material saved', 'success')
         this.clearForm()
       }
     },

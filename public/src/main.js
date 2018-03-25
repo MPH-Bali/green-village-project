@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import moment from 'vue-moment'
 import Vuetify from 'vuetify'
+
 import 'vuetify/dist/vuetify.min.css'
 import './App.css'
 

@@ -10,7 +10,7 @@
           v-model="search"
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-flex text-xs-right
+        <v-flex text-xs-right>
           <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyer-edit' })">
             <v-icon>add_circle</v-icon>
             <span style="text-transform: capitalize" class="ml-2">Add</span>

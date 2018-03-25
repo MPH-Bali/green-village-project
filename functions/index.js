@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-const data = require('./data.json');
+const data = require('./seed.json');
 const dbHelper = require('./dbHelper');
 const db = admin.firestore();
 

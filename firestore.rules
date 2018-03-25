@@ -103,10 +103,9 @@ service cloud.firestore {
 			allow read: if true;
 
 			allow create, update:
-				if data().keys().hasAll(['worker', 'banjar', 'timestamp']) &&
+				if data().keys().hasAll(['worker', 'timestamp']) &&
 				data().keys().hasAny(['organic', 'inorganic']) &&
 				isEmployee(data().worker.id) &&
-				docExists(data().banjar.id, 'banjar') &&
 				validTimestamp()
 		}
 

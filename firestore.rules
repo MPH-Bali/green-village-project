@@ -43,7 +43,7 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['name', 'village'])
 	      	&& data().name is string
 	      	&& data().village is string
-	    }
+    	}
 
     	match /expense/{expenseId} {
 	      allow read: if true;
@@ -52,7 +52,7 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['person', 'amount'])
 	      	&& data().amount is int
 	      	&& getDoc(data().person.id, 'person').type.buyer == true
-  		}
+    	}
 
     	match /stock/{stockId} {
 	      allow read: if true;
@@ -61,7 +61,20 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['timestamp', 'material', 'amount'])
 	      	&& data().amount is int
 	      	&& data().timestamp is timestamp
-  		}
+    	}
+
+    	match /fee/{feeId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['monthly_fee', 'total_paid', 'paid_until', 'timestamp'])
+	      	&& data().monthly_fee is int
+	      	&& data().total_paid is int
+	      	&& data().timestamp is timestamp
+	      	&& data().paid_until is timestamp
+    	}
+
+
   	}
   }
 }

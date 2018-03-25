@@ -31,7 +31,10 @@ export default {
       if (!newVal) return
       this.message = newVal
       this.show = true
-      if (this.type === 'success') this.playDing()
+      if (this.type === 'success') {
+        this.playDing()
+        window.navigator.vibrate()
+      }
     }
   },
   methods: {

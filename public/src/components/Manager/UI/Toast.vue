@@ -1,10 +1,12 @@
 <template>
-  <v-snackbar :bottom="true"
-              v-model="show"
-              :timeout="2000"
-              :color="type">
-   {{ message }}
- </v-snackbar>
+  <div>
+    <v-snackbar :bottom="true"
+                v-model="show"
+                :timeout="2000"
+                :color="type">
+     {{ message }}
+   </v-snackbar>
+  </div>
 </template>
 
 <script>
@@ -31,19 +33,17 @@ export default {
       if (!newVal) return
       this.message = newVal
       this.show = true
-      if (this.type === 'success') {
-        this.playDing()
-        window.navigator.vibrate(500)
-      }
+      if (this.type === 'success') this.playDing()
+      window.navigator.vibrate(1000)
     }
   },
   methods: {
     playDing () {
-      this.$options.audio.play()
+      this.$options.ding.play()
     }
   },
-  created () {
-    this.$options.audio = new Audio(ding)
+  mounted () {
+    this.$options.ding = new Audio(ding)
   }
 }
 </script>

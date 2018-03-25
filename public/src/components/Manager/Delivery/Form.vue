@@ -26,22 +26,6 @@
               return-object
               v-model="form.banjar" />
           </v-flex>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Oragnic</p>
-            <v-text-field
-              solo flat class="accent"
-              suffix="kg"
-              type="number" min="0"
-              v-model="form.organic" />
-          </v-flex>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Anoragnic</p>
-            <v-text-field
-              solo flat class="accent"
-              suffix="kg"
-              type="number" min="0"
-              v-model="form.anorganic" />
-          </v-flex>
           <v-flex xs3>
             <p class="body-2 mb-1">#villas</p>
             <v-text-field
@@ -117,8 +101,6 @@ export default {
   data () {
     return {
       form: {
-        organic: 0,
-        anorganic: 0,
         households: 0,
         villas: 0,
         businesses: 0,

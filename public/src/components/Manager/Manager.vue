@@ -1,7 +1,11 @@
 <template>
   <v-app>
-    <div v-if="loading"></div> 
-    <template v-else >
+    <v-fade-transition name="fade">
+      <template v-if="loading">
+          <loading-mask />
+      </template>
+    </v-fade-transition>
+    <template v-if="!loading" >
       <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
         <v-toolbar-items class="ml-0">
           <v-btn flat color="primary" @click="$router.push('/manager')">
@@ -17,7 +21,6 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-
       <login v-if="!user" />
       <unapproved v-else-if="!userApproved" />
       <template v-else>
@@ -43,7 +46,9 @@
     </template>
   </v-app>
 </template>
+
 <script>
+import LoadingMask from './LoadingMask'
 import Login from '@/components/Manager/Login/Login'
 import Unapproved from '@/components/Manager/Login/Unapproved'
 
@@ -53,19 +58,24 @@ export default {
     // Listen to when auth state changed (firebase initialized)
     this.$firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        this.user = user
         let person = await this.$firestore.getUserByUid(user.uid)
+        this.userApproved = person && person.approved
         if (person && person.approved) {
-          this.userApproved = person.approved
           this.$firestore.changeDate()
           this.$firestore.syncData()
         }
+
+        // We have a user, updating this will render the Manager componenets
+        this.user = user
       }
 
-      this.loading = false
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   },
   components: {
+    LoadingMask,
     Login,
     Unapproved
   },

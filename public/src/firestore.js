@@ -32,12 +32,14 @@ export default new Vue({
       },
       collections: {
         banjar: [],
-        person: []
+        person: [],
+        sales: []
       },
       collectionsPending: {
         delivery: false,
         banjar: false,
-        person: false
+        person: false,
+        sales: false
       }
     }
   },
@@ -59,6 +61,7 @@ export default new Vue({
           snapshot.forEach(doc => {
             this.collections[collection].push({ id: doc.id, ...doc.data() })
           })
+          this.collectionsPending[collection] = false
         })
       })
     },
@@ -92,8 +95,7 @@ export default new Vue({
       return db.collection(collection).doc(data.id).set({ ...data })
     },
     save (collection, data) {
-      const action = data.id ? this.update : this.add
-      return action(collection, data)
+      return data.id ? this.update(collection, data) : this.add(collection, data)
     },
     find (collection, condition) {
       return this.list[collection].find(x => condition(x))

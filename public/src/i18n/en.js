@@ -6,6 +6,9 @@ export default {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
+    buyers: 'Buyers',
+    'buyer-edit': 'Add/Edit Buyer',
+    'buyer-details': 'Buyer Details',
     addMaterial: 'Add material'
   },
   // example string
@@ -141,6 +144,9 @@ export default {
     time: 'time',
     details: 'details',
     edit: 'edit'
+  },
+  buyers: {
+
   },
   // material section of the daily log
   material: {

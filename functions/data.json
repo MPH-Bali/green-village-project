@@ -184,5 +184,20 @@
         }
       ]
     }
-  ]
+  ],
+	"material": [
+	 {
+			"worker": {
+			   "id": "person1",
+			   "name": "Putu"
+			},
+			"banjar": {
+			   "id": "banjar1",
+			   "name": "Banjar Pererenan"
+			},
+			"organic": 10,
+			"inorganic": 10,
+			"timestamp": "2018-03-15T09:55:48.942Z"
+   		}
+	]
 }

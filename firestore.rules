@@ -131,10 +131,10 @@ service cloud.firestore {
 			allow read: if true;
 
 			allow create, update:
-				if data().keys().hasAll(['employee']) &&
-				data().keys().hasAny(['in', 'out']) &&
-				isEmployee(data().employee.id) &&
-				(data().in is timestamp || data().out is timestamp)
+				if data().keys().hasAll(['worker', 'times']) &&
+        data().times.keys().hasAll(['in', 'out']) &&
+				isEmployee(data().worker.id) &&
+				(data().times.in is timestamp || data().times.out is timestamp)
 		}
 
 		match /person/{personId} {

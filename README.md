@@ -118,6 +118,7 @@ const personCollection = [
     login: firebaseUserId, // Only for people with a login
     name: 'Test User',
     phone: '+62 123 123 123',
+    whatsapp: '+62 123 123 123',
     address: 'Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361',
     email: 'some@address.com',
     geolocation: {

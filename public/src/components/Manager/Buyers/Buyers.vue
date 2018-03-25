@@ -34,17 +34,12 @@
           <td class="text-xs-center">{{ props.item.sales.length }}</td>
           <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
           <td class="text-xs-center">
-            <v-btn icon @click="$router.push({ name: 'buyer-info', params: { id: props.item.id }})">
+            <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
               <v-icon size="17px" color="primary">fa-search</v-icon>
             </v-btn>
           </td>
         </template>
       </v-data-table>
-<!-- 
-      <div class="text-xs-center pt-2">
-        <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-      </div>
-       -->
     </v-card>
   </v-container>
 </template>
@@ -65,74 +60,7 @@ export default {
   },
   computed: {
     sales () {
-      // return this.$firestore.list.sales
-      //  test data
-      return [
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '7TOr2Qzwi8tnHKfHNjwB',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        }
-      ]
+      return this.$firestore.list.sales
     },
     salesByBuyers () {
       return this.sales.reduce((result, sale) => {

@@ -127,73 +127,7 @@ export default {
   },
   computed: {
     allSales () {
-      // return this.$firestore.list.sales;
-      return [
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '7TOr2Qzwi8tnHKfHNjwB',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        },
-        {
-          buyer: {
-            id: '6yW9uHBgM3X9T7Qhgm1E',
-            name: 'Michael'
-          },
-          materials: [
-            {
-              material: {
-                id: 'Tu4SFfDhBUgAwGsvfopc',
-                name: 'plastic'
-              },
-              kilo: 200,
-              pricePerKilo: 20000
-            }
-          ]
-        }
-      ]
+      return this.$firestore.list.sales
     },
     buyersSales () {
       return this.allSales.filter(sale => sale.buyer.id === this.data.id)

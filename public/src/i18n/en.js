@@ -8,7 +8,7 @@ export default {
     deliveryForm: 'Delivery Form',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',
-    'buyer-info': 'Buyer Info',
+    'buyer-details': 'Buyer Details',
     addMaterial: 'Add material'
   },
   // example string

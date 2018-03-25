@@ -32,12 +32,14 @@ export default new Vue({
       },
       collections: {
         banjar: [],
-        person: []
+        person: [],
+        sales: []
       },
       collectionsPending: {
         delivery: false,
         banjar: false,
-        person: false
+        person: false,
+        sales: false
       }
     }
   },

@@ -6,6 +6,7 @@ import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
+import Customers from '@/components/Manager/Customers'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
@@ -43,6 +44,7 @@ export default new Router({
         { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
+        { path: 'customers', name: 'customers', component: Customers, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

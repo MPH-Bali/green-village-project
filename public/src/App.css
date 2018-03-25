@@ -5,3 +5,7 @@
 .datatable > thead {
   background: #e5ece9;
 }
+
+.pointer {
+  cursor: pointer;
+}

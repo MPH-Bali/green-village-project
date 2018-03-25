@@ -12,6 +12,14 @@ Vue.use(moment)
 const db = firebase.firestore()
 
 export default new Vue({
+  computed: {
+    list () {
+      return {
+        ...this.dailyCollections,
+        ...this.collections
+      }
+    }
+  },
   data () {
     return {
       dailySubscriptions: [],
@@ -87,7 +95,13 @@ export default new Vue({
       const action = data.id ? this.update : this.add
       return action(collection, data)
     },
+    find (collection, condition) {
+      return this.list[collection].find(x => condition(x))
+    },
     async get (collection, id) {
+      const cached = this.list[collection].find(x => x.id === id)
+      if (cached) return cached
+
       const result = await db.collection(collection).doc(id).get()
       return {
         id: result.id,

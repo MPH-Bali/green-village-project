@@ -2,21 +2,39 @@
   <v-data-table
     :loading="$firestore.collectionsPending.delivery"
     :headers="headers"
-    :items="$firestore.dailyCollections.delivery"
+    :items="$firestore.list.delivery"
     hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
-      <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
-      <td class="text-xs-center">{{ props.item.villas }}</td>
-      <td class="text-xs-center">{{ props.item.households }}</td>
-      <td class="text-xs-center">{{ props.item.businesses }}</td>
-      <td class="text-xs-center">{{ props.item.facilities }}</td>
-      <td>{{ props.item.driver && props.item.driver.name }}</td>
-      <td>{{ props.item.banjar && props.item.banjar.name }}</td>
-      <td class="text-xs-center">
-        <v-btn icon @click="$router.push({ name: 'deliveryForm', params: { id: props.item.id }})">
-          <v-icon size="17px" color="primary">fa-edit</v-icon>
-        </v-btn>
-      </td>
+      <tr class="pointer" @click="props.expanded = !props.expanded">
+        <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
+        <td class="text-xs-center">{{ props.item.villas }}</td>
+        <td class="text-xs-center">{{ props.item.households }}</td>
+        <td class="text-xs-center">{{ props.item.businesses }}</td>
+        <td class="text-xs-center">{{ props.item.facilities }}</td>
+        <td>{{ props.item.driver && props.item.driver.name }}</td>
+        <td>{{ props.item.banjar && props.item.banjar.name }}</td>
+        <td class="text-xs-center">
+          <v-btn icon @click="$router.push({ name: 'deliveryForm', params: { id: props.item.id }})">
+            <v-icon size="17px" color="primary">fa-edit</v-icon>
+          </v-btn>
+        </td>
+      </tr>
+    </template>
+    <template slot="expand" slot-scope="props">
+      <v-card flat>
+        <v-card-text class="pb-0">
+          <v-layout row px-2>
+            <v-flex xs2>
+              <p class="body-2 mb-0">Driver</p>
+              <p class="body-1">{{ props.item.driver && props.item.driver.name }}</p>
+            </v-flex>
+            <v-flex>
+              <p class="body-2 mb-0">Comments</p>
+              <p class="body-1">{{ props.item.comments || 'No comments' }}</p>
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+      </v-card>
     </template>
   </v-data-table>
 </template>

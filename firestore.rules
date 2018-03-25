@@ -1,0 +1,202 @@
+service cloud.firestore {
+	match /databases/{database}/documents {
+
+		function isSignedIn() {
+			return request.auth != null;
+		}
+
+		function getDoc(id, col) {
+			return get(/databases/$ (database)/documents/$(col)/$(id)).data
+		}
+
+		function docExists(id, col) {
+			return exists(/databases/$ (database)/documents/$(col)/$(id))
+		}
+
+		function data() {
+			return request.resource.data;
+		}
+
+		function validTimestamp() {
+			return data().timestamp is timestamp;
+		}
+
+		function isEmployee(id) {
+			return getDoc(id, 'person').type.employee == true;
+		}
+
+		function isBuyer(id) {
+			return getDoc(id, 'person').type.buyer == true;
+		}
+
+		match /delivery/{deliveryId} {
+			allow read: if true;
+
+			allow create, update:
+				if request.resource.keys().hasAll(['timetamp, driver, banjar'])
+				//driver exists and his role is employee
+				&&
+				isEmployee(data().driver.id)
+				//timestamp
+				&&
+				validTimestamp()
+				//banjar exists
+				&&
+				docExists(data().banjar.id, 'banjar')
+		}
+
+		match /sale/{saleId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['buyer', 'materials']) &&
+				isBuyer(data().buyer.id)
+		}
+
+		match /settings/{settingsId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['name', 'village']) &&
+				data().name is string &&
+				data().village is string
+		}
+
+		match /expense/{expenseId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['person', 'amount']) &&
+				data().amount is int &&
+				isBuyer(data().person.id)
+		}
+
+		match /stock/{stockId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['timestamp', 'material', 'amount']) &&
+				data().amount is float &&
+				validTimestamp()
+		}
+
+		match /fee/{feeId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['monthly_fee', 'total_paid', 'paid_until', 'timestamp']) &&
+				data().monthly_fee is int &&
+				data().total_paid is int &&
+				validTimestamp() &&
+				data().paid_until is timestamp
+		}
+
+		match /banjar/{banjarId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['name']) &&
+				data().name is string
+		}
+
+		match /material/{materialId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['worker', 'banjar', 'timestamp']) &&
+				data().keys().hasAny(['organic', 'inorganic']) &&
+				isEmployee(data().worker.id) &&
+				docExists(data().banjar.id, 'banjar') &&
+				validTimestamp()
+		}
+
+		match /materialType/{materialTypeId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['name', 'pricePerKilo']) &&
+				data().name is string &&
+				data().pricePerKilo is int;
+		}
+
+		match /houseType/{houseTypeId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['name', 'collectionFee']) &&
+				data().name is string &&
+				data().collectionFee is int;
+		}
+
+		match /workerHours/{workerHoursId} {
+			allow read: if true;
+
+			allow create, update:
+				if data().keys().hasAll(['employee']) &&
+				data().keys().hasAny(['in', 'out']) &&
+				isEmployee(data().employee.id) &&
+				(data().in is timestamp || data().out is timestamp)
+		}
+
+		match /person/{personId} {
+			function emailIsValid() {
+				return data().email == null || data().email.matches("\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}\\b")
+			}
+
+			function itemInMapIsTrue(item, map) {
+				return (item in map.keys()) && map[item] == true;
+			}
+
+			function hasEmployeeType() {
+				return itemInMapIsTrue('employee', data().type);
+			}
+
+			function isClient() {
+				return itemInMapIsTrue('client', data().type);
+			}
+
+			function isCommunityManager() {
+				return itemInMapIsTrue('communityManager', data().role);
+			}
+
+			function isFacilityManager() {
+				return itemInMapIsTrue('facilityManager', data().role);
+			}
+
+			function isSuperAdmin() {
+				return itemInMapIsTrue('superAdmin', data().role);
+			}
+
+			function hasOneType() {
+				return (hasEmployeeType() && !isClient()) || (!hasEmployeeType() && isClient());
+			}
+
+			function hasOneRole() {
+				return ((isCommunityManager() && !isFacilityManager() && !isSuperAdmin()) ||
+					(!isCommunityManager() && isFacilityManager() && isSuperAdmin()) ||
+					(!isCommunityManager() && isFacilityManager() && isSuperAdmin()))
+			}
+
+			function hasNoRole() {
+				return !('role' in data().keys()) || ((!isCommunityManager() && !isFacilityManager() && !isSuperAdmin()));
+			}
+
+			function hasNoType() {
+				return !('type' in data().keys()) || (!hasEmployeeType() && !isClient());
+			}
+
+			function hasRoleOrType() {
+				return (hasOneType() && hasNoRole()) || (hasOneRole() && hasNoType());
+			}
+
+			allow create:
+				if data().keys().hasAny(['role', 'type']) &&
+				data().keys().hasAll(['name', 'address', 'phone']) &&
+				data().name is string &&
+				data().address is string &&
+				data().phone is string &&
+				emailIsValid() &&
+				hasRoleOrType();
+		}
+	}
+}

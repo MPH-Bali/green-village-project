@@ -1,0 +1,11 @@
+.btn__content {
+  text-transform: capitalize !important;
+}
+
+.datatable > thead {
+  background: #e5ece9;
+}
+
+.pointer {
+  cursor: pointer;
+}

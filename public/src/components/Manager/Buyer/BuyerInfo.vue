@@ -55,9 +55,11 @@
              <p>{{ data.notes || '-' }}</p>   
            </v-flex>
            <v-flex xs3>
-            <v-btn color="primary">
-              Send Email
-            </v-btn>
+              <a :href="'mailto:' + data.email" v-if="data.email">
+                <v-btn color="primary">
+                  Send Email
+                </v-btn>
+              </a>
            </v-flex>
 
          </v-layout>        
@@ -100,6 +102,9 @@ export default {
       const result = await this.$firestore.get('person', id)
       this.getPending = false
       this.data = result
+    },
+    sendEmail() {
+
     }
   }
 }

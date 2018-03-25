@@ -32,22 +32,31 @@ export default {
         part: null
       }
     },
-    inpuTime: {
-      type: String,
+    inputTime: {
+      type: Date,
       default: null
     }
   },
   data () {
     return {
       modal: false,
-      time: this.inpuTime
+      time: null
     }
   },
   methods: {
     setTime (time) {
       const interval = this.part
       this.$refs.dialog.save(time)
-      this.$emit('done', { time, interval })
+
+      const now = this.$moment().format('YYYY-MM-DD')
+      const returnTime = this.$moment(now + 'T' + time).toDate()
+
+      this.$emit('done', { time: returnTime, interval })
+    }
+  },
+  watch: {
+    inputTime (time) {
+      this.time = this.$moment(this.inputTime).format('HH:MM')
     }
   }
 }

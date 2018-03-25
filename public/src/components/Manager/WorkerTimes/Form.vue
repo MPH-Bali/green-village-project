@@ -18,11 +18,19 @@
         <v-layout row wrap>
           <v-flex xs6 >
             <p class='subheading'>In</p>
-            <TimeField @done="receiveTime" :part="setPart('morning','start')"  />
+            <TimeField 
+              @done="receiveTime" 
+              :part="setPart('morning','start')"  
+              :inputTime="formData.times.morning.start"
+            />
           </v-flex>
           <v-flex xs6 >
             <p class='subheading'>Out</p>
-            <TimeField @done="receiveTime" :part="setPart('morning','end')"  />
+            <TimeField 
+              @done="receiveTime" 
+              :part="setPart('morning','end')"  
+              :inputTime="formData.times.morning.end"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -42,11 +50,19 @@
         <v-layout row wrap>
           <v-flex xs6 >
             <p class='subheading'>In</p>
-            <TimeField @done="receiveTime" :part="setPart('afternoon','start')" />
+            <TimeField
+              @done="receiveTime" 
+              :part="setPart('afternoon','start')" 
+              :inputTime="formData.times.afternoon.start"
+            />
           </v-flex>
           <v-flex xs6 >
             <p class='subheading'>Out</p>
-            <TimeField @done="receiveTime" :part="setPart('afternoon','end')" />
+            <TimeField 
+              @done="receiveTime" 
+              :part="setPart('afternoon','end')" 
+              :inputTime="formData.times.afternoon.end"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -75,10 +91,16 @@ export default {
   components: {
     TimeField, NavigationHeader
   },
+  props: {
+    id: { type: String, required: false }
+  },
+  async created () {
+    if (this.id) {
+      this.formData = await this.$firestore.get('workertimes', this.id)
+    }
+  },
   data () {
     return {
-      modal2: false,
-      returntime: null,
       formData: {
         worker: null,
         notes: '',
@@ -92,16 +114,6 @@ export default {
             end: null
           }
         }
-      },
-      pickedTime: {
-        morning: {
-          start: null,
-          end: null
-        },
-        afternoon: {
-          start: null,
-          end: null
-        }
       }
     }
   },
@@ -111,30 +123,26 @@ export default {
     },
     getTotalTime () {
       let total = 0
-      if (this.pickedTime.morning.start && this.pickedTime.morning.end) {
-        const now = this.$moment().format('YYYY-MM-DD')
 
-        const start = this.$moment(now + 'T' + this.pickedTime.morning.start)
-        const end = this.$moment(now + 'T' + this.pickedTime.morning.end)
+      const {morning: { start: mStart, end: mEnd }} = this.formData.times
+      const {afternoon: { start: aStart, end: aEnd }} = this.formData.times
 
-        this.formData.times.morning.start = start.toDate()
-        this.formData.times.morning.end = end.toDate()
-
-        const duration = this.$moment.duration(end.diff(start))
+      if (mStart && mEnd) {
+        const momentStart = this.$moment(mStart)
+        const momentEnd = this.$moment(mEnd)
+        const duration = this.$moment.duration(momentEnd.diff(momentStart))
+        console.log('recalculate morning', duration.asHours())
         total += duration.asHours()
       }
-      if (this.pickedTime.afternoon.start && this.pickedTime.afternoon.end) {
-        const now = this.$moment().format('YYYY-MM-DD')
 
-        const start = this.$moment(now + 'T' + this.pickedTime.afternoon.start)
-        const end = this.$moment(now + 'T' + this.pickedTime.afternoon.end)
-
-        this.formData.times.afternoon.start = start.toDate()
-        this.formData.times.afternoon.end = end.toDate()
-
-        const duration = this.$moment.duration(end.diff(start))
+      if (aStart && aEnd) {
+        const momentStart = this.$moment(aStart)
+        const momentEnd = this.$moment(aEnd)
+        const duration = this.$moment.duration(momentEnd.diff(momentStart))
+        console.log('recalculate afterternoon', duration.asHours())
         total += duration.asHours()
       }
+
       return Math.round(total)
     }
   },
@@ -147,7 +155,8 @@ export default {
     },
     receiveTime ({time, interval}) {
       const { daytime, part } = interval
-      this.pickedTime[daytime][part] = time
+      console.log('Receive time: ' + daytime + ' -> ' + part, time)
+      this.formData.times[daytime][part] = time
     },
     setPart (daytime, part) {
       return { daytime, part }

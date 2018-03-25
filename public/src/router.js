@@ -35,7 +35,7 @@ export default new Router({
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
-        { path: 'worker-times/:id?', name: 'workerTimes', component: WorkerTimes },
+        { path: 'worker-times/:id?', name: 'workerTimes', component: WorkerTimes, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

@@ -124,24 +124,15 @@ export default {
     getTotalTime () {
       let total = 0
 
-      const {morning: { start: mStart, end: mEnd }} = this.formData.times
-      const {afternoon: { start: aStart, end: aEnd }} = this.formData.times
-
-      if (mStart && mEnd) {
-        const momentStart = this.$moment(mStart)
-        const momentEnd = this.$moment(mEnd)
-        const duration = this.$moment.duration(momentEnd.diff(momentStart))
-        console.log('recalculate morning', duration.asHours())
-        total += duration.asHours()
-      }
-
-      if (aStart && aEnd) {
-        const momentStart = this.$moment(aStart)
-        const momentEnd = this.$moment(aEnd)
-        const duration = this.$moment.duration(momentEnd.diff(momentStart))
-        console.log('recalculate afterternoon', duration.asHours())
-        total += duration.asHours()
-      }
+      Object.keys(this.formData.times).forEach((daytime) => {
+        const { start, end } = this.formData.times[daytime]
+        if (start && end) {
+          const momentStart = this.$moment(start)
+          const momentEnd = this.$moment(end)
+          const duration = this.$moment.duration(momentEnd.diff(momentStart))
+          total += duration.asHours()
+        }
+      })
 
       return Math.round(total)
     }

@@ -63,7 +63,7 @@ service cloud.firestore {
 
 	      allow create, update:
 	      	if data().keys().hasAll(['timestamp', 'material', 'amount'])
-	      	&& data().amount is int
+	      	&& data().amount is float
 	      	&& validTimestamp()
     	}
 
@@ -104,6 +104,15 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['name', 'pricePerKilo'])
 	      	&& data().name is string
 	      	&& data().pricePerKilo is int;
+    	}
+
+    	match /houseType/{houseTypeId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['name', 'collectionFee'])
+	      	&& data().name is string
+	      	&& data().collectionFee is int;
     	}
   	}
   }

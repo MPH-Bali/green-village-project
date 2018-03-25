@@ -92,7 +92,8 @@ export default {
     Save: 'Save',
     Cancel: 'Cancel',
     Name: 'Name',
-    NoData: 'No Data'
+    NoData: 'No Data',
+    Add: 'Add'
   },
   // 01.0
   login: {

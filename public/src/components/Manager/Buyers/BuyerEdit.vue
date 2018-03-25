@@ -151,7 +151,10 @@ export default {
       this.formData.type.buyer = true
       this.savePending = true
       await this.$firestore.save('person', this.formData)
-      this.$emit('message', 'Buyer data saved', 'success')
+      this.$emit('message', {
+        text: 'Buyer saved',
+        type: 'success'
+      })
       this.savePending = false
       this.$router.go(-1)
     }

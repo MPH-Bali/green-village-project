@@ -117,7 +117,10 @@ export default {
         } else {
           await this.newMaterial()
         }
-        this.$emit('message', 'Material saved', 'success')
+        this.$emit('message', {
+          text: 'Material saved',
+          type: 'success'
+        })
         this.clearForm()
       }
     },

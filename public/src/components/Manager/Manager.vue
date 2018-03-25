@@ -95,7 +95,7 @@ export default {
         this.$router.go(-1)
       } else {
         this.menuOpened = true
-        this.$router.push('/manager')
+        this.$router.push('/manager/menu')
       }
     }
   }

@@ -341,7 +341,7 @@ export default {
       },
       horizontalBarChartOptions: {
         legend: {
-            display: false,
+          display: false
         },
         scales: {
           xAxes: [{ stacked: true }],
@@ -354,53 +354,6 @@ export default {
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ]
     }
-  },
-  methods: {
-    getHouseholdCount: function(collection) {
-      this.$firestore.get(personCollection)
-        .then((data) => {
-          this.household = data
-        })
-
-      return new Promise((resolve, reject) => {
-        if (itWorked) {
-          return resolve(someValue)
-        } else {
-          return reject(someOtherValue)
-        }
-      })
-    }
   }
 }
 </script>
-
-<style scoped>
-
-.Made-Surname-Facilit {
-  width: 132px;
-  height: 42px;
-  font-family: IBMPlexSans;
-  font-size: 14px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  text-align: left;
-  color: #393939;
-}
-.Made-Surname-Facilit .text-style-1 {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-</style>
-
-
-<!-- function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-} -->

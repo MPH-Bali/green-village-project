@@ -61,7 +61,7 @@ export default {
     submit () {
       if (this.$refs.form.validate()) {
         this.$router.push('/signed-up')
-        this.$firestore.add('person', form)
+        this.$firestore.add('person', this.form)
       }
     }
   }

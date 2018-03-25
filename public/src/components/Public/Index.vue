@@ -59,7 +59,7 @@
 <script>
 export default {
   data: () => ({
-    items: [{ title: "Bahasa" }, { title: "English" }]
+    items: [{ title: 'Bahasa' }, { title: 'English' }]
   })
-};
+}
 </script>

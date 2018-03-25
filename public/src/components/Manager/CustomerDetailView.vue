@@ -218,6 +218,7 @@ export default {
       }).then(() => {
         this.submitting = false
         this.form = {}
+        this.$emit('message', 'Fee added', 'success')
       })
     }
   },

@@ -77,6 +77,9 @@ The following CRUD actions are available:
 
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
+### Notifications
+To use in-app toasts emit message and type to the manager component (example: $emit('message', 'your message', 'success'))
+
 ---
 
 ## Back End
@@ -90,6 +93,21 @@ The app is designed to only look at a given day for all the forms and tables. Th
 each user will have a corresponding user in Firebase
 
 - OTP using SMS, 	[Firebase phone auth](https://firebase.google.com/docs/auth/web/phone-auth)
+
+- #### [Vue](https://vuejs.org/)
+	State management: [Vuex](https://vuex.vuejs.org/en/)
+
+	UI Components Framework: [Vueifiy](https://vuetifyjs.com/en/)
+
+	Routing: [Vue-router](https://router.vuejs.org/en/)
+
+	Internalization: [Vue-i18n](https://kazupon.github.io/vue-i18n/en/)
+
+	Form validation: [Vuelidate](https://monterail.github.io/vuelidate/)
+
+	Firebase integration: [Vuefire](https://github.com/vuejs/vuefire)
+
+	Initial build setup: [Vue-CLI](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md)
 
 ### Security rules
 
@@ -157,7 +175,7 @@ const deliveryCollection = [
   }
 ]
 
-const workedHoursCollection = [
+const workerHoursCollection = [
   {
     employee: {
       id: 'Tu4SFfDhBUgAwGsvfopc', // person id

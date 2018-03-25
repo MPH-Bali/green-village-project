@@ -111,7 +111,6 @@ export default {
     },
     receiveTime ({time, part}) {
       this.formData.times[part] = time
-      console.log('Receive time', time)
     }
   }
 }

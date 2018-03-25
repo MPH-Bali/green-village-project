@@ -33,7 +33,7 @@ export default {
       this.show = true
       if (this.type === 'success') {
         this.playDing()
-        window.navigator.vibrate()
+        window.navigator.vibrate(500)
       }
     }
   },

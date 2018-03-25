@@ -77,9 +77,10 @@
         <p class="total-hours">{{getTotalTime}} Hours</p>
       </v-flex>
       <v-flex xs4 class="right">
-        <v-btn color="success" @click="save">Save</v-btn>
+        <v-btn color="success" @click="save" :disabled="error.show">Save</v-btn>
       </v-flex>
     </v-layout>
+    <v-alert type="error" :value="error.show" class='full-width'>{{ error.msg }}</v-alert>
   </v-container>
 </template>
 
@@ -101,6 +102,10 @@ export default {
   },
   data () {
     return {
+      error: {
+        show: false,
+        msg: ''
+      },
       formData: {
         worker: null,
         notes: '',
@@ -129,6 +134,16 @@ export default {
         if (start && end) {
           const momentStart = this.$moment(start)
           const momentEnd = this.$moment(end)
+
+          if (momentEnd < momentStart) {
+            this.error = {
+              show: true,
+              msg: daytime + ' out time must be greater then in time'
+            }
+            return
+          }
+
+          this.error = { show: false, msg: '' }
           const duration = this.$moment.duration(momentEnd.diff(momentStart))
           total += duration.asHours()
         }
@@ -151,6 +166,11 @@ export default {
     },
     setPart (daytime, part) {
       return { daytime, part }
+    }
+  },
+  watch: {
+    error (error) {
+      console.log('Error', error)
     }
   }
 }

@@ -112,30 +112,18 @@ export default {
           this.formData.banjar = null
         }
 
-        if (this.formData.id) {
-          await this.updateMaterial()
-        } else {
-          await this.newMaterial()
-        }
+        this.formData.organic = parseInt(this.formData.organic)
+        this.formData.inorganic = parseInt(this.formData.inorganic)
+        this.formData.timestamp = new Date()
+
+        await this.$firestore.save('material', this.formData)
+
         this.$emit('message', {
           text: 'Material saved',
           type: 'success'
         })
         this.clearForm()
       }
-    },
-    newMaterial () {
-      const payload = {
-        worker: this.formData.worker,
-        organic: parseInt(this.formData.organic),
-        inorganic: parseInt(this.formData.inorganic),
-        banjar: this.formData.banjar,
-        timestamp: new Date()
-      }
-      return this.$firestore.add('material', payload)
-    },
-    updateMaterial () {
-      return this.$firestore.update('material', this.formData)
     },
     hideError () {
       this.error = ''

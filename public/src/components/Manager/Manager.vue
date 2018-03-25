@@ -20,19 +20,6 @@
         <router-view />
       </v-slide-y-transition>
     </v-content>
-    <v-bottom-nav app :value="$route.path" color="grey darken-4">
-      <v-btn
-        flat
-        color="primary"
-       :value="section.route"
-        v-for="section in sections"
-       :key="section.name"
-       @click.stop="$router.push(section.route)"
-       >
-        <span class="mt-1">{{ section.name }}</span>
-        <v-icon icon="blue" class="mt-1" size="20px">{{ section.icon }}</v-icon>
-      </v-btn>
-    </v-bottom-nav>
   </v-app>
 </template>
 <script>

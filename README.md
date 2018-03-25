@@ -73,6 +73,7 @@ The following CRUD actions are available:
 - **$firestore.remove(COLLCTION_NAME, ID)** deletes requested item, returns promise for success/error
 - **$firestore.update(COLLCTION_NAME, DATA)** updates parts of object (needs to have DATA.ID)
 - **$firestore.add(COLLCTION_NAME, DATA)** adds a record and returns promise with created object/error
+- **$firestore.save(COLLCTION_NAME, DATA)** add or updates a record based on if it has DATA.ID
 
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
@@ -127,7 +128,8 @@ const personCollection = [
     },
     type: {
       employee: false,
-      client: false
+      client: false,
+      buyer: false
     },
     role: {
       communityManager: false,

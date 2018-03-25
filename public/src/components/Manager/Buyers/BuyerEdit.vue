@@ -150,6 +150,7 @@ export default {
       if (!this.id) this.formData.type = {}
       this.formData.type.buyer = true
       this.savePending = true
+      console.log(this.formData)
       await this.$firestore.save('person', this.formData)
       this.$emit('message', 'Buyer data saved', 'success')
       this.savePending = false

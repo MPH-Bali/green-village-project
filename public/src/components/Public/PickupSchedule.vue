@@ -25,22 +25,7 @@ export default {
   data () {
     return {
       name: 'PickupSchedule'
-    //   banjar: [
-    // {
-    //   name: "Banjar Pererenan",
-    //   pickupTimes: [
-    //     {
-    //       day: "Monday",
-    //       time: "6am-2pm"
-    //     },
-    //     {
-    //       day: "Tuesday",
-    //       time: "6am-2pm"
-    //     }
-    //   ]
-    // }
     }
   }
 }
-
 </script>

@@ -189,7 +189,7 @@ export default {
   },
   computed: {
     pickupsData () {
-     return {
+      return {
         totalPickups: this.$firestore.charts.totalPickups,
         totalWeight: this.$firestore.charts.totalMaterialWeight
       }

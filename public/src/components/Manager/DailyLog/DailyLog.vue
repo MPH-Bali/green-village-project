@@ -21,6 +21,9 @@
 
       <log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <MaterialTable/>
+
+      <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />
+      <WorkerTimes/>
     </v-flex>
   </v-layout>
 </template>
@@ -29,6 +32,7 @@
 import LogHeader from './DailyLogHeader'
 import DeliveryTable from '@/components/Manager/Delivery/Table'
 import MaterialTable from './DailyLogMaterialTable'
+import WorkerTimes from './DailyLogWorkersTable'
 
 export default {
   props: {
@@ -40,7 +44,8 @@ export default {
   components: {
     LogHeader,
     DeliveryTable,
-    MaterialTable
+    MaterialTable,
+    WorkerTimes
   },
   data () {
     return {

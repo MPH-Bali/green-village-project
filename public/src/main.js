@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import Vue from 'vue'
 import moment from 'vue-moment'
 import Vuetify from 'vuetify'

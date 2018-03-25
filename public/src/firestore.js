@@ -25,10 +25,12 @@ export default new Vue({
       dailySubscriptions: [],
       start: null,
       end: null,
+      fees: [],
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
-        material: []
+        material: [],
+        workerhours: []
       },
       collections: {
         banjar: [],
@@ -39,6 +41,7 @@ export default new Vue({
         delivery: false,
         banjar: false,
         person: false,
+        workerhours: false,
         sales: false
       }
     }
@@ -64,6 +67,16 @@ export default new Vue({
           this.collectionsPending[collection] = false
         })
       })
+    },
+    syncFees (personId) {
+      db.collection('fee')
+        .where('personId', '==', personId)
+        .onSnapshot(snapshot => {
+          this.fees = []
+          snapshot.forEach(doc => {
+            this.fees.push({ id: doc.id, ...doc.data() })
+          })
+        })
     },
     syncDailyData () {
       this.dailySubscriptions.forEach(unsubscribe => unsubscribe())

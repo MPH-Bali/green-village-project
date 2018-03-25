@@ -143,8 +143,6 @@ const personCollection = [
 const deliveryCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
-    organic: 12.5,
-    anorganic: 12.5,
     driver: {
       id: 'Tu4SFfDhBUgAwGsvfopc', // person id
       name: 'Michael'
@@ -244,7 +242,7 @@ const materialCollection = [
 	},
 	organic: 10,
 	inorganic: 10,
-	timestamp: 2018-03-15T09:55:48.942Z'
+	timestamp: '2018-03-15T09:55:48.942Z'
    }
 ]
 

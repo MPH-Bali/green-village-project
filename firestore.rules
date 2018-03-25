@@ -1,7 +1,22 @@
 service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
-    }
+	match /databases/{database}/documents {
+  	function isSignedIn() {
+  		return request.auth != null;
+  	}
+  	match /delivery/{deliveryId} {
+  		allow create, write, update:
+  			if deliveryIsValid();
+
+  		function deliveryIsValid() {
+  			return
+  			//driver exists and his role is employee
+  			 exists(/databases/$(database)/documents/person/$(request.resource.data.driver))
+          && get(/databases/$(database)/documents/person/$(request.resource.data.driver)).data.type.employee == true
+  				//timestamp
+  				&& (request.resource.data.timestamp) is timestamp
+  				//banjar exists
+  				&& exists(/databases/$(database)/documents/banjar/$(request.resource.data.banjar))
+  		}
+  	}
   }
 }

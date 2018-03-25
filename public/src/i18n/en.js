@@ -6,10 +6,11 @@ export default {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
+    addMaterial: 'Add material',
+    customerDetail: 'Customer Detail',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',
-    'buyer-details': 'Buyer Details',
-    addMaterial: 'Add material'
+    'buyer-details': 'Buyer Details'
   },
   // example string
   home: {

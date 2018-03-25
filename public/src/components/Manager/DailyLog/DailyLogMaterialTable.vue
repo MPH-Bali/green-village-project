@@ -64,7 +64,6 @@ export default {
   },
   computed: {
     materials () {
-      console.log('Materials', this.$firestore.list.material)
       return this.$firestore.list.material
     }
   }

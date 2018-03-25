@@ -1,8 +1,8 @@
 <template>
   <v-layout layout row>
-    <v-flex xs12 sm3 v-if="left">
+    <v-flex hidden-xs-only sm3 v-if="left">
     </v-flex>
-    <v-flex xs12 sm9>
+    <v-flex xs12 sm9 class='menu-item-container'>
       <v-btn
       large
       color="blue-grey"
@@ -11,7 +11,7 @@
         {{ name }}
       </v-btn>
     </v-flex>
-    <v-flex xs12 sm3 v-if="!left">
+    <v-flex hidden-xs-only sm3 v-if="!left">
     </v-flex>
   </v-layout>
 </template>
@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style scoped>
+.menu-item-container {
+  text-align: center;
+}
 .menu-item {
   width: 250px!important;
 }

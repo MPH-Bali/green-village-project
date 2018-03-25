@@ -7,7 +7,6 @@
   ],
 	"person": [
 		{
-			"id": "SampleUser1",
 			"login": null,
 			"name": "Putu",
 			"phone": "+62 123 123 123",
@@ -19,7 +18,8 @@
 			},
 			"type": {
 				"employee": true,
-				"client": false
+				"client": false,
+				"buyer": false
 			},
 			"role": {
 				"communityManager": false,
@@ -29,7 +29,6 @@
 			"houseType": null
     },
 		{
-			"id": "SampleUser2",
 			"login": "firebaseUserId",
 			"name": "Wayan",
 			"phone": "+62 123 123 123",
@@ -41,10 +40,33 @@
 			},
 			"type": {
 				"employee": false,
-				"client": false
+				"client": false,
+				"buyer": false
 			},
 			"role": {
 				"communityManager": true,
+				"facilityManager": false,
+				"superAdmin": false
+			},
+			"houseType": null
+    },
+		{
+			"login": null,
+			"name": "Ketut",
+			"phone": "+62 123 123 123",
+			"address": "Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361",
+			"email": "some@address.com",
+			"geolocation": {
+				"latitude": "8.39111",
+				"longitude": "115.07361"
+			},
+			"type": {
+				"employee": false,
+				"client": false,
+				"buyer": true
+			},
+			"role": {
+				"communityManager": false,
 				"facilityManager": false,
 				"superAdmin": false
 			},
@@ -57,11 +79,11 @@
 			"organic": 12.5,
 			"anorganic": 12.5,
 			"driver": {
-				"id": "sampleUser1",
+				"id": "person1",
 				"name": "Putu"
 			},
 			"banjar": {
-				"id": "Banjar1",
+				"id": "banjar1",
 				"name": "Banjar Pererenan"
 			}
     }
@@ -69,7 +91,7 @@
 	"workHours": [
 		{
 			"employee": {
-				"id": "sampleUser1",
+				"id": "person1",
 				"name": "Putu"
 			},
 			"in": "2018-03-15T09:55:48.942Z",
@@ -80,7 +102,7 @@
 		{
 			"timestamp": "2018-03-15T09:55:48.942Z",
 			"material": {
-				"id": "sampleMaterial1",
+				"id": "stockMaterial1",
 				"name": "plastic"
 			},
 			"amount": 200
@@ -91,21 +113,21 @@
 			"description": "Limited Furby Collection",
 			"amount": 20000000,
 			"person": {
-				"id": "Tu4SFfDhBUgAwGsvfopc",
-				"name": "Michael"
+				"id": "person2",
+				"name": "Wayan"
 			}
     }
   ],
 	"sales": [
 		{
 			"buyer": {
-				"id": "Tu4SFfDhBUgAwGsvfopc",
-				"name": "Michael"
+				"id": "person3",
+				"name": "Ketut"
 			},
 			"materials": [
 				{
 					"material": {
-						"id": "Tu4SFfDhBUgAwGsvfopc",
+						"id": "stockMaterial1",
 						"name": "plastic"
 					},
 					"kilo": 200,

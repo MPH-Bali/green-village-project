@@ -1,76 +1,79 @@
 <template>
-  <v-layout row wrap class='add-worker'>
-    <v-flex xs12 sm6>
-      <p class='subheading'>Worker name</p>
-      <v-select solo flat :items="workers" 
-              v-model="formData.worker"
-              item-text="name" 
-              item-value="id"
-              return-object
-              label="" class='grey-select banjar' />
+  <v-container fluid grid-list-lg >
+    <navigation-header />
+    <v-layout row wrap class='add-worker'>
+      <v-flex xs12 sm6>
+        <p class='subheading'>Worker name</p>
+        <v-select solo flat :items="workers" 
+                v-model="formData.worker"
+                item-text="name" 
+                item-value="id"
+                return-object
+                label="" class='grey-select banjar' />
 
-      <div class='devider-container'>
-        <div class='devider subheadingfont'><span>Morning</span></div>
-      </div>
+        <div class='devider-container'>
+          <div class='devider subheadingfont'><span>Morning</span></div>
+        </div>
 
-      <v-layout row wrap>
-        <v-flex xs6 >
-          <p class='subheading'>In</p>
-          <TimeField @done="receiveTime" :part="setPart('morning','start')"  />
-        </v-flex>
-        <v-flex xs6 >
-          <p class='subheading'>Out</p>
-          <TimeField @done="receiveTime" :part="setPart('morning','end')"  />
-        </v-flex>
-      </v-layout>
-    </v-flex>
+        <v-layout row wrap>
+          <v-flex xs6 >
+            <p class='subheading'>In</p>
+            <TimeField @done="receiveTime" :part="setPart('morning','start')"  />
+          </v-flex>
+          <v-flex xs6 >
+            <p class='subheading'>Out</p>
+            <TimeField @done="receiveTime" :part="setPart('morning','end')"  />
+          </v-flex>
+        </v-layout>
+      </v-flex>
 
-    <v-flex xs12 sm6>
-      <p class='subheading'>Notes</p>
-      <v-text-field
-              v-model="formData.notes"
-              class='grey-select' 
-              solo flat 
-              name="input-1"></v-text-field>
+      <v-flex xs12 sm6>
+        <p class='subheading'>Notes</p>
+        <v-text-field
+                v-model="formData.notes"
+                class='grey-select' 
+                solo flat 
+                name="input-1"></v-text-field>
 
-      <div class='devider-container'>
-        <div class='devider subheadingfont'><span>Afternoon</span></div>
-      </div>
+        <div class='devider-container'>
+          <div class='devider subheadingfont'><span>Afternoon</span></div>
+        </div>
 
-      <v-layout row wrap>
-        <v-flex xs6 >
-          <p class='subheading'>In</p>
-          <TimeField @done="receiveTime" :part="setPart('afternoon','start')" />
-        </v-flex>
-        <v-flex xs6 >
-          <p class='subheading'>Out</p>
-          <TimeField @done="receiveTime" :part="setPart('afternoon','end')" />
-        </v-flex>
-      </v-layout>
-    </v-flex>
+        <v-layout row wrap>
+          <v-flex xs6 >
+            <p class='subheading'>In</p>
+            <TimeField @done="receiveTime" :part="setPart('afternoon','start')" />
+          </v-flex>
+          <v-flex xs6 >
+            <p class='subheading'>Out</p>
+            <TimeField @done="receiveTime" :part="setPart('afternoon','end')" />
+          </v-flex>
+        </v-layout>
+      </v-flex>
 
-    <v-flex xs4>
-      <div class="left">
-        <v-btn color="error">Cancel</v-btn>
-      </div>
-    </v-flex>
-    <v-flex xs4 class="center">
-      <span class="title">Total Hours</span>
-      <p class="total-hours">{{getTotalTime}} Hours</p>
-    </v-flex>
-    <v-flex xs4 class="right">
-      <v-btn color="success" @click="save">Save</v-btn>
-    </v-flex>
-  </v-layout>
+      <v-flex xs4>
+        <div class="left">
+          <v-btn color="error">Cancel</v-btn>
+        </div>
+      </v-flex>
+      <v-flex xs4 class="center">
+        <span class="title">Total Hours</span>
+        <p class="total-hours">{{getTotalTime}} Hours</p>
+      </v-flex>
+      <v-flex xs4 class="right">
+        <v-btn color="success" @click="save">Save</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-
+import NavigationHeader from '@/elements/NavigationHeader'
 import TimeField from './TimeField'
 
 export default {
   components: {
-    TimeField
+    TimeField, NavigationHeader
   },
   data () {
     return {

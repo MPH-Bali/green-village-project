@@ -11,6 +11,11 @@
       <td class="text-xs-center">{{ $moment(props.item.times.morning.end).format('HH:MM') }}</td>
       <td class="text-xs-center">{{ $moment(props.item.times.afternoon.start).format('HH:MM') }}</td>
       <td class="text-xs-center">{{ $moment(props.item.times.afternoon.end).format('HH:MM') }}</td>
+      <td class="text-xs-center">
+        <v-btn icon @click="$router.push({ name: 'workerTimes', params: { id: props.item.id }})">
+          <v-icon size="17px" color="primary">fa-edit</v-icon>
+        </v-btn>
+      </td>
     </template>
   </v-data-table>
 </template>
@@ -26,7 +31,8 @@ export default {
         { text: 'Morning In', align: 'center', sortable: true, value: 'morning_in' },
         { text: 'Morning Out', align: 'center', sortable: true, value: 'morning_out' },
         { text: 'In', align: 'center', sortable: true, value: 'afternoon_in' },
-        { text: 'Out', align: 'center', sortable: true, value: 'afternoon_out' }
+        { text: 'Out', align: 'center', sortable: true, value: 'afternoon_out' },
+        { text: 'Actions', align: 'center', sortable: true, value: 'action' }
       ]
     }
   }

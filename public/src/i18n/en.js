@@ -7,7 +7,7 @@ export default {
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
     addMaterial: 'Add material',
-    workerCheck: 'Check workers'
+    workerTimes: 'Check workers'
   },
   // example string
   home: {

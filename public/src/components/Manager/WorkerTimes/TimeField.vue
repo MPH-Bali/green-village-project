@@ -24,11 +24,23 @@
 
 <script>
 export default {
-  props: ['part'],
+  props: {
+    part: {
+      type: Object,
+      default: {
+        daytime: null,
+        part: null
+      }
+    },
+    inpuTime: {
+      type: String,
+      default: null
+    }
+  },
   data () {
     return {
       modal: false,
-      time: null
+      time: this.inpuTime
     }
   },
   methods: {

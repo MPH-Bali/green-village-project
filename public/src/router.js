@@ -5,7 +5,7 @@ import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
-import CheckWorkers from '@/components/Manager/CheckWorkers/CheckWorkers'
+import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -35,7 +35,7 @@ export default new Router({
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
-        { path: 'workercheck', name: 'workerCheck', component: CheckWorkers },
+        { path: 'worker-times/:id?', name: 'workerTimes', component: WorkerTimes },
         { path: '*', redirect: '/manager' }
       ]
     },

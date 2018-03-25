@@ -19,13 +19,14 @@ service cloud.firestore {
     		allow read: if true;
 
     		allow create, update:
-    			//driver exists and his role is employee
-  				if getDoc(data().driver.id, 'person').data.type.employee == true
+  				if request.resource.keys().hasAll(['timetamp, driver, banjar'])
+  				//driver exists and his role is employee
+  				&& getDoc(data().driver.id, 'person').data.type.employee == true
   				//timestamp
   				&& (data().timestamp) is timestamp
   				//banjar exists
   				&& docExists(data().banjar.id, 'banjar')
-      } 
+      }
   	}
   }
 }

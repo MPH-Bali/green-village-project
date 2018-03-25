@@ -14,7 +14,7 @@
             <transition name="slide-buyer-edit">
             <v-layout row wrap v-if="!getPending">
               <v-flex xs12 sm6>
-                <p class="body-2 mb-1">Name</p>
+                <p class="body-2 mb-1">{{ $t("common.Name") }}</p>
                 <v-text-field v-model="formData.name" 
                               :error-messages="nameErrors"
                               flat
@@ -22,13 +22,13 @@
                               @blur="$v.formData.name.$touch()"/>
               </v-flex>
               <v-flex xs12 sm6>
-                <p class="body-2 mb-1">Company</p>
+                <p class="body-2 mb-1">{{ $t("common.Company") }}</p>
                 <v-text-field flat 
                               v-model="formData.company"/>
               </v-flex>
               
               <v-flex xs12 sm6>
-                <p class="body-2 mb-1">E-mail</p>
+                <p class="body-2 mb-1">{{ $t("common.Email") }}</p>
                 <v-text-field v-model="formData.email" 
                               :error-messages="emailErrors"
                               flat 
@@ -39,7 +39,7 @@
               </v-flex>
 
               <v-flex xs12 sm6>
-                <p class="body-2 mb-1">Phone</p>
+                <p class="body-2 mb-1">{{ $t("common.PhoneNumber") }}</p>
                 <v-text-field v-model="formData.phone"
                               :error-messages="phoneErrors"
                               flat 
@@ -47,13 +47,13 @@
                               @blur="$v.formData.phone.$touch()"/>
               </v-flex>
               <v-flex xs12 sm6>
-                <p class="body-2 mb-1">Whatsapp</p>
+                <p class="body-2 mb-1">{{ $t("common.Whatsapp") }}</p>
                 <v-text-field flat 
                               v-model="formData.whatsapp" />
               </v-flex>
 
               <v-flex xs12>
-                <p class="body-2 mb-1">Notes</p>
+                <p class="body-2 mb-1">{{ $t("common.Notes") }}</p>
                 <v-text-field name="input-1"
                               v-model="formData.notes"
                               flat 
@@ -65,7 +65,7 @@
                 <v-btn color="error" 
                        outline
                        depressed 
-                      @click.stop="$router.go(-1)">Cancel
+                      @click.stop="$router.go(-1)">{{ $t("common.Cancel") }}
                 </v-btn>
               </v-flex>
               <v-flex xs6 text-xs-right>
@@ -73,7 +73,7 @@
                        depressed color="primary" 
                       :disabled="savePending"
                       @click.stop="save" 
-                      :loading="savePending">{{ this.id ? 'Save' : 'Add' }}
+                      :loading="savePending">{{ this.id ? $t('common.Save') : $t('common.Add') }}
                 </v-btn>
               </v-flex>
 
@@ -151,7 +151,10 @@ export default {
       this.formData.type.buyer = true
       this.savePending = true
       await this.$firestore.save('person', this.formData)
-      this.$emit('message', 'Buyer data saved', 'success')
+      this.$emit('message', {
+        text: 'Buyer saved',
+        type: 'success'
+      })
       this.savePending = false
       this.$router.go(-1)
     }

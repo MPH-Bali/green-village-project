@@ -5,7 +5,7 @@
       <v-card-title>
         <v-text-field
           append-icon="search"
-          label="Search"
+          :label="$t('common.search')"
           single-line
           hide-details
           v-model="search"
@@ -14,7 +14,7 @@
         <v-flex text-xs-right>
           <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyer-edit' })">
             <v-icon>add_circle</v-icon>
-            <span style="text-transform: capitalize" class="ml-2">Add</span>
+            <span style="text-transform: capitalize" class="ml-2">{{ $t("common.add") }}</span>
           </v-btn>
         </v-flex>    
       </v-card-title>
@@ -26,19 +26,21 @@
         :search="search"
         :light="true"
         :rows-per-page-items="[10, 5, 25,{text: 'All',value: -1}]"
-        no-data-text="No data"
-        no-results-text="No buyers found"
+        :no-data-text="$t('common.NoData')"
+        :no-results-text="$t('buyers.NoBuyers')"
         class="buyers-table">
         <template slot="items" slot-scope="props">
-          <td class="text-xs-center">{{ props.item.name }}</td>
-          <td class="text-xs-center">{{ props.item.company }}</td>
-          <td class="text-xs-center">{{ props.item.sales.length }}</td>
-          <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
-          <td class="text-xs-center">
-            <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
-              <v-icon size="17px" color="primary">fa-search</v-icon>
-            </v-btn>
-          </td>
+          <tr @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+            <td class="text-xs-center">{{ props.item.name }}</td>
+            <td class="text-xs-center">{{ props.item.company }}</td>
+            <td class="text-xs-center">{{ props.item.sales.length }}</td>
+            <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
+            <td class="text-xs-center">
+              <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+                <v-icon size="17px" color="primary">fa-search</v-icon>
+              </v-btn>
+            </td>            
+          </tr>
         </template>
       </v-data-table>
     </v-card>
@@ -52,10 +54,10 @@ export default {
     return {
       search: '',
       headers: [
-        { text: 'Name', align: 'center', sortable: true, value: 'name' },
-        { text: 'Company', align: 'center', sortable: true, value: 'company' },
-        { text: 'No. of Sales', align: 'center', sortable: true, value: 'sales.length' },
-        { text: 'Last Purchase', align: 'center', sortable: true, value: 'lastPurchase' },
+        { text: this.$t('common.Name'), align: 'center', sortable: true, value: 'name' },
+        { text: this.$t('common.Company'), align: 'center', sortable: true, value: 'company' },
+        { text: this.$t('buyers.numberOfSales'), align: 'center', sortable: true, value: 'sales.length' },
+        { text: this.$t('buyers.lastPurchase'), align: 'center', sortable: true, value: 'lastPurchase' },
         { text: '', sortable: false, align: 'center', value: null }
       ]
     }

@@ -13,8 +13,8 @@
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Language</v-btn>
             <v-list>
-              <v-list-tile v-for="item in items" :key="item.title">
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
+                <v-list-tile-title@click="lang(item.value)">{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
     </v-menu>
@@ -59,7 +59,24 @@
 <script>
 export default {
   data: () => ({
-    items: [{ title: 'Bahasa' }, { title: 'English' }]
-  })
+    items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
+  }),
+  methods: {
+    lang (val) {
+      this.$root.$options.i18n.locale = val
+    }
+  },
+  computed: {
+    currentLang () {
+      return this.$root.$options.i18n.locale
+    }
+  }
 }
 </script>
+
+<style scoped>
+.active {
+  background-color: #42853d;
+  color: white;
+}
+</style>

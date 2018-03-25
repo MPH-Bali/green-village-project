@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
+        <v-btn flat color="primary" @click="$router.push('')">
           <v-icon>fa-recycle</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -10,7 +10,7 @@
       <v-toolbar-title v-text="$t(`routeNames.${$route.name}`)" />
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat>
+        <v-btn flat @click="clickMenu">
           <v-icon size="30px">menu</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -20,7 +20,7 @@
         <router-view @message="newMessage"/>
       </v-slide-y-transition>
     </v-content>
-    <Toast :message="toastText" :type="toastType"/>
+    <Toast :message="toastMessage"/>
   </v-app>
 </template>
 
@@ -36,8 +36,8 @@ export default {
   },
   data () {
     return {
-      toastText: '',
-      toastType: '',
+      menuOpened: false,
+      toastMessage: {},
       sections: [
         {
           name: this.$i18n.t('bottomMenu.dailyLog'),
@@ -83,13 +83,20 @@ export default {
     }
   },
   methods: {
-    newMessage (message, type) {
-      this.toastText = message
-      this.toastType = type
+    newMessage (message) {
+      this.toastMessage = message
       setTimeout(() => {
-        this.toastText = ''
-        this.toastType = ''
+        this.toastMessage = {}
       }, 3000)
+    },
+    clickMenu () {
+      if (this.menuOpened) {
+        this.menuOpened = false
+        this.$router.go(-1)
+      } else {
+        this.menuOpened = true
+        this.$router.push('/manager/menu')
+      }
     }
   }
 }

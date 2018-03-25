@@ -8,10 +8,13 @@ import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Customers from '@/components/Manager/Customers'
+import Menu from '@/components/Manager/Menu/Menu'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
 import BuyerEdit from '@/components/Manager/Buyers/BuyerEdit'
+
+import AddExpense from '@/components/Manager/Expenses/AddExpense'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -52,7 +55,12 @@ export default new Router({
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
+<<<<<<< HEAD
         { path: 'customers', name: 'customers', component: Customers, props: true },
+=======
+        { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
+        { path: 'menu', name: 'menu', component: Menu },
+>>>>>>> develop
         { path: '*', redirect: '/manager' }
       ]
     },

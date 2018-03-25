@@ -27,6 +27,14 @@ service cloud.firestore {
   				//banjar exists
   				&& docExists(data().banjar.id, 'banjar')
       }
+
+    	match /sale/{saleId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['buyer', 'materials'])
+	      	&& getDoc(data().buyer.id, 'person').data.type.buyer == true
+	    }
   	}
   }
 }

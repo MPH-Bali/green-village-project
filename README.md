@@ -73,6 +73,7 @@ The following CRUD actions are available:
 - **$firestore.remove(COLLCTION_NAME, ID)** deletes requested item, returns promise for success/error
 - **$firestore.update(COLLCTION_NAME, DATA)** updates parts of object (needs to have DATA.ID)
 - **$firestore.add(COLLCTION_NAME, DATA)** adds a record and returns promise with created object/error
+- **$firestore.save(COLLCTION_NAME, DATA)** add or updates a record based on if it has DATA.ID
 
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
@@ -118,6 +119,7 @@ const personCollection = [
     login: firebaseUserId, // Only for people with a login
     name: 'Test User',
     phone: '+62 123 123 123',
+    whatsapp: '+62 123 123 123',
     address: 'Jalan Batu Mejan No. 88, Canggu, Kuta Utara, Kabupaten Badung, Bali 80361',
     email: 'some@address.com',
     geolocation: {
@@ -231,6 +233,7 @@ const banjarCollection = [
     ]
   }
 ];
+
 const materialTypeCollection = [
   {
     name: 'Material 1',

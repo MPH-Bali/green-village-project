@@ -1,7 +1,7 @@
 export default {
   // example string
   home: {
-    welcome: 'selamat datang',
+    welcome: 'selamat datang'
   },
   // the most common terms shared throughout components in the app
   common: {
@@ -65,7 +65,7 @@ export default {
     approve: 'setujui',
     sendEmail: 'kirim email',
     monthly: 'bulanan',
-    fee: 'biaya',
+    fee: 'biaya'
   },
   // 01.0
   login: {
@@ -73,7 +73,7 @@ export default {
     instructions: 'untuk masuk, masukkan nomor telepon',
     inputPlaceholder: 'ketik nomor telpon anda',
     label: 'nomor telepon',
-    button: 'lanjutkan',
+    button: 'lanjutkan'
   },
   // 01.1
   loginEnterCode: {
@@ -82,7 +82,7 @@ export default {
     codeInputLabel: 'kode',
     codeInputPlaceholder: '012345',
     resendCodeLink: 'kirim ulang kode',
-    button: 'masuk',
+    button: 'masuk'
   },
   // 02.0
   main: {
@@ -91,7 +91,7 @@ export default {
     codeInputLabel: '',
     codeInputPlaceholder: '',
     resendCodeLink: '',
-    button: '',
+    button: ''
   },
   // 02.0a Menu
   menu: {
@@ -100,7 +100,7 @@ export default {
     customerList: 'daftar pelanggan',
     buyerList: 'daftar pembeli',
     contactAdmin: 'hubungi admin',
-    logout: 'keluar',
+    logout: 'keluar'
   },
   // fixed menu located at the bottom of the screen
   bottomMenu: {
@@ -110,7 +110,7 @@ export default {
     addStock: 'tambah stok atau kompos',
     createSale: 'buat penjualan',
     addExpense: 'tambah biaya',
-    settings: 'pengaturan',
+    settings: 'pengaturan'
   },
   // 02.0b
   dailyLog: {
@@ -121,7 +121,7 @@ export default {
     expenses: 'biaya',
     workers: 'jam pekerja',
     currency: 'idr',
-    weightUnit: 'kg',
+    weightUnit: 'kg'
   },
   // deliveries section of the daily log
   deliveries: {
@@ -131,12 +131,12 @@ export default {
     facilities: 'fasilitas',
     time: 'waktu',
     details: 'detail',
-    edit: 'sunting',
+    edit: 'sunting'
   },
   // material section of the daily log
   material: {
     worker: 'pekerja',
     angorganic: 'non-organik',
-    organic: 'organik',
-  },
+    organic: 'organik'
+  }
 }

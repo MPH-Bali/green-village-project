@@ -62,7 +62,8 @@ export default new Vue({
     syncCharts () {
       db.collection('charts').doc(this.$moment().format('YYYY-ww')).onSnapshot(
       snapshot => {
-        this.charts = snapshot.data()
+        console.log(snapshot.data())
+        Vue.set(this, 'charts', snapshot.data())
       })
     },
     syncData () {

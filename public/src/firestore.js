@@ -29,7 +29,8 @@ export default new Vue({
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
-        material: []
+        material: [],
+        workerhours: []
       },
       collections: {
         banjar: [],
@@ -40,6 +41,7 @@ export default new Vue({
         delivery: false,
         banjar: false,
         person: false,
+        workerhours: false,
         sales: false
       }
     }

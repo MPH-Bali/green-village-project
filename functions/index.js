@@ -1,17 +1,32 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
+const data = require('./seed.json');
+const dbHelper = require('./dbHelper');
+const db = admin.firestore();
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.dbInit = functions.https.onRequest((req, res) => {
+	let promises = [];
 
-exports.triggerTest = functions.firestore.document('stock/{stockId}').onCreate(event => {
-    const newValue = event.data.data();
-    console.log(event);
-    if(newValue.amount > 10) {
-      console.log('a lot of stock');
-    }
-    return true;
-});
+	for (let key in data) {
+		const collection = db.collection(key);
+
+		data[key].forEach((document, docKey) => {
+			const id = key + (parseInt(docKey) + 1);
+			promises.push(collection.doc(id).set(document));
+		})
+	}
+	return Promise.all(promises)
+		.then(() => res.status(200).send())
+		.catch(e => console.log(e))
+})
+
+exports.dbDestroy = functions.https.onRequest((req, res) => {
+	let promises = [];
+	for (let key in data) {
+		promises.push(dbHelper.deleteCollection(db, key));
+	}
+	return Promise.all(promises)
+		.then(() => res.status(200).send())
+		.catch(e => console.log(e))
+})

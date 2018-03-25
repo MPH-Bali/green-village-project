@@ -71,6 +71,7 @@
               <v-flex xs6 text-xs-right>
                 <v-btn style="text-transform: capitalize" 
                        depressed color="primary" 
+                      :disabled="savePending"
                       @click.stop="save" 
                       :loading="savePending">{{ this.id ? 'Save' : 'Add' }}
                 </v-btn>

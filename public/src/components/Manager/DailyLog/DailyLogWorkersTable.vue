@@ -10,7 +10,7 @@
       <td class="text-xs-center">{{ getTime(props.item.times.in) }}</td>
       <td class="text-xs-center">{{ getTime(props.item.times.out) }}</td>
       <td class="text-xs-center">
-        <v-btn icon @click="$router.push({ name: 'workerTimes', params: { id: props.item.id }})">
+        <v-btn icon @click="$router.push({ name: 'workerHours', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
         </v-btn>
       </td>

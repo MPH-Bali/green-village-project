@@ -12,7 +12,8 @@ export default {
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',
     'buyer-details': 'Buyer Details',
-    addExpense: 'Add Expense'
+    addExpense: 'Add Expense',
+    menu: 'Daily Log'
   },
   // example string
   home: {

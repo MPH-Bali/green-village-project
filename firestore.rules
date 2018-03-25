@@ -4,7 +4,8 @@ service cloud.firestore {
   		return request.auth != null;
   	}
   	match /delivery/{deliveryId} {
-  		allow create, write, update:
+  		allow read if true;
+  		allow create, update:
   			if deliveryIsValid();
 
   		function deliveryIsValid() {

@@ -53,6 +53,15 @@ service cloud.firestore {
 	      	&& data().amount is int
 	      	&& getDoc(data().person.id, 'person').type.buyer == true
   		}
+
+    	match /stock/{stockId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['timestamp', 'material', 'amount'])
+	      	&& data().amount is int
+	      	&& data().timestamp is timestamp
+  		}
   	}
   }
 }

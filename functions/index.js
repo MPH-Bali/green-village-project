@@ -12,7 +12,7 @@ exports.dbInit = functions.https.onRequest((req, res) => {
 		const collection = db.collection(key);
 
 		data[key].forEach((document, docKey) => {
-			let id = key + (parseInt(docKey) + 1);
+			const id = key + (parseInt(docKey) + 1);
 			promises.push(collection.doc(id).set(document));
 		})
 	}

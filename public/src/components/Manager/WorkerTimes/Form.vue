@@ -161,16 +161,10 @@ export default {
     },
     receiveTime ({time, interval}) {
       const { daytime, part } = interval
-      console.log('Receive time: ' + daytime + ' -> ' + part, time)
       this.formData.times[daytime][part] = time
     },
     setPart (daytime, part) {
       return { daytime, part }
-    }
-  },
-  watch: {
-    error (error) {
-      console.log('Error', error)
     }
   }
 }

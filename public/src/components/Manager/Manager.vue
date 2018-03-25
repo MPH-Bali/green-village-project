@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
+        <v-btn flat color="primary" @click="$router.push('')">
           <v-icon>fa-recycle</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -10,7 +10,7 @@
       <v-toolbar-title v-text="$t(`routeNames.${$route.name}`)" />
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat>
+        <v-btn flat @click="clickMenu">
           <v-icon size="30px">menu</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -36,6 +36,7 @@ export default {
   },
   data () {
     return {
+      menuOpened: false,
       toastMessage: {},
       sections: [
         {
@@ -87,6 +88,15 @@ export default {
       setTimeout(() => {
         this.toastMessage = {}
       }, 3000)
+    },
+    clickMenu () {
+      if (this.menuOpened) {
+        this.menuOpened = false
+        this.$router.go(-1)
+      } else {
+        this.menuOpened = true
+        this.$router.push('/manager')
+      }
     }
   }
 }

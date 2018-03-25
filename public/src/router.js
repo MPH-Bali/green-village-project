@@ -6,6 +6,7 @@ import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
+import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Customers from '@/components/Manager/Customers'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
@@ -15,6 +16,9 @@ import BuyerEdit from '@/components/Manager/Buyers/BuyerEdit'
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
+import SignedUp from '@/components/Public/SignedUp'
+import ContactUs from '@/components/Public/ContactUs'
+import PickupSchedule from '@/components/Public/PickupSchedule'
 
 Vue.use(Router)
 
@@ -26,7 +30,10 @@ export default new Router({
       component: Public,
       children: [
         { path: '', name: 'Home', component: Home },
-        { path: 'sign-up', name: 'SignUp', component: SignUp }
+        { path: 'sign-up', name: 'SignUp', component: SignUp },
+        { path: 'signed-up', name: 'SignedUp', component: SignedUp },
+        { path: 'contact-us', name: 'ContactUs', component: ContactUs },
+        { path: 'pickup-schedule', name: 'PickupSchedule', component: PickupSchedule }
       ]
     },
     {
@@ -43,6 +50,7 @@ export default new Router({
         { path: 'buyer/details/:id?', name: 'buyer-details', component: BuyerDetails, props: true },
         { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
+        { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: 'customers', name: 'customers', component: Customers, props: true },
         { path: '*', redirect: '/manager' }

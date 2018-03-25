@@ -78,7 +78,8 @@ The following CRUD actions are available:
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
 ### Notifications
-To use in-app toasts emit message and type to the manager component (example: $emit('message', 'your message', 'success'))
+To use in-app toasts just $emit toast message to the manager component 
+ - **$emit('message', { text: 'delivery saved', type: 'success', ding: true }))**
 
 ---
 

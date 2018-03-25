@@ -2,9 +2,10 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const data = require('./data.json');
+const dbHelper = require('./dbHelper');
+const db = admin.firestore();
 
 exports.dbInit = functions.https.onRequest((req, res) => {
-	const db = admin.firestore();
 	let promises = [];
 
 	for (let key in data) {
@@ -17,4 +18,14 @@ exports.dbInit = functions.https.onRequest((req, res) => {
 	}
 	return Promise.all(promises)
 		.then(() => res.status(200).send())
+})
+
+exports.dbDestroy = functions.https.onRequest((req, res) => {
+	let promises = [];
+	for (let key in data) {
+		promises.push(dbHelper.deleteCollection(db, key));
+	}
+	return Promise.all(promises)
+		.then(() => res.status(200).send())
+		.catch(e => console.log(e))
 })

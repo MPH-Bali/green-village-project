@@ -30,7 +30,7 @@ export default new Vue({
       dailyCollections: {
         delivery: [],
         material: [],
-        workertimes: []
+        workerhours: []
       },
       collections: {
         banjar: [],
@@ -41,7 +41,7 @@ export default new Vue({
         delivery: false,
         banjar: false,
         person: false,
-        workertimes: false,
+        workerhours: false,
         sales: false
       }
     }

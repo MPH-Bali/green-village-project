@@ -5,6 +5,7 @@
       <v-flex xs12 sm6>
         <p class='title'>Worker name</p>
         <v-select solo flat :items="workers" 
+                @change="clearError"
                 v-model="formData.worker"
                 item-text="name" 
                 item-value="id"
@@ -56,7 +57,7 @@ export default {
   },
   async created () {
     if (this.id) {
-      this.formData = await this.$firestore.get('workertimes', this.id)
+      this.formData = await this.$firestore.get('workerhours', this.id)
     }
   },
   data () {
@@ -98,19 +99,41 @@ export default {
         const duration = this.$moment.duration(momentEnd.diff(momentStart))
         total += duration.asHours()
       }
-
       return Math.round(total)
     }
   },
   methods: {
     save () {
       this.formData.timestamp = new Date()
-      this.$firestore.save('workertimes', this.formData).then(() => {
+
+      if (!this.formData.worker) {
+        this.error = {
+          show: true,
+          msg: 'You must select Worker'
+        }
+        return
+      }
+
+      if (!this.formData.times.in || !this.formData.times.out) {
+        this.error = {
+          show: true,
+          msg: 'You must select both IN and OUT times'
+        }
+        return
+      }
+
+      this.$firestore.save('workerhours', this.formData).then(() => {
         this.$router.go(-1)
       })
     },
     receiveTime ({time, part}) {
       this.formData.times[part] = time
+    },
+    clearError () {
+      this.error = {
+        show: false,
+        msg: ''
+      }
     }
   }
 }

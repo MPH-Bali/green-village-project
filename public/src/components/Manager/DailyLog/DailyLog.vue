@@ -22,7 +22,7 @@
       <log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <MaterialTable/>
 
-      <log-header class="mt-4" action="/manager/worker-times" title="Workers Hours" />
+      <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />
       <WorkerTimes/>
     </v-flex>
   </v-layout>

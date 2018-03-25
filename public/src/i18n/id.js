@@ -1,5 +1,9 @@
 export default {
   // example string
+  routeNames: {
+    customerDetail: 'Customer Detail'
+  },
+
   home: {
     welcome: 'selamat datang'
   },

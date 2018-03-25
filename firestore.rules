@@ -10,8 +10,8 @@ service cloud.firestore {
   		function deliveryIsValid() {
   			return
   			//driver exists and his role is employee
-  			 exists(/databases/$(database)/documents/person/$(request.resource.data.driver))
-          && get(/databases/$(database)/documents/person/$(request.resource.data.driver)).data.type.employee == true
+  				exists(/databases/$(database)/documents/person/$(request.resource.data.driver))
+  				&& get(/databases/$(database)/documents/person/$(request.resource.data.driver)).data.type.employee == true
   				//timestamp
   				&& (request.resource.data.timestamp) is timestamp
   				//banjar exists

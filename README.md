@@ -147,7 +147,7 @@ const personCollection = [
     type: {
       employee: false,
       client: false,
-      buyer: false
+      buyer: true
     },
     role: {
       communityManager: false,
@@ -157,7 +157,8 @@ const personCollection = [
     houseType: {
       id: 'Tu4SFfDhBUgAwGsvfopc',
       name: 'villa'
-    }
+    },
+    approved: false
   }
 ]
 
@@ -251,8 +252,15 @@ const banjarCollection = [
   }
 ];
 
+const materialTypeCollection = [
+  {
+    name: 'Material 1',
+    pricePerKilo: 2000
+  }
+]
+
 const materialCollection = [
-   {
+ {
 	worker: {
 	   id: 'Tu4SFfDhBUgAwGsvfopc',
 	   name: 'Worker name'
@@ -265,13 +273,6 @@ const materialCollection = [
 	inorganic: 10,
 	timestamp: '2018-03-15T09:55:48.942Z'
    }
-]
-
-const materialTypeCollection = [
-  {
-    name: 'Material 1',
-    pricePerKilo: 2000
-  }
 ]
 
 // villa, household, business

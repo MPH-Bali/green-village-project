@@ -30,19 +30,23 @@ export default new Vue({
       dailyCollections: {
         delivery: [],
         material: [],
-        workerhours: []
+        workerhours: [],
+        expenses: []
       },
       collections: {
         banjar: [],
         person: [],
-        sales: []
+        sales: [],
+        settings: []
       },
       collectionsPending: {
         delivery: false,
         banjar: false,
         person: false,
         workerhours: false,
-        sales: false
+        sales: false,
+        settings: false,
+        expenses: false
       }
     }
   },

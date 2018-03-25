@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-lg>
     <template v-if="!loggedIn">
-      <confirmation-form v-if="confirmationResult" :confirmationResult="confirmationResult" />
-      <login-form v-else @onVerification="onVerification" />
+      <confirmation-form v-show="confirmationResult" :confirmationResult="confirmationResult" @onResend="onResend" />
+      <login-form v-show="!confirmationResult" @onVerification="onVerification" />
     </template>
     <template v-else>
       <v-layout class="logoutButtonContainer">
@@ -36,6 +36,9 @@ export default {
   methods: {
     onVerification (confirmationResult) {
       this.confirmationResult = confirmationResult
+    },
+    onResend () {
+      this.confirmationResult = null
     },
     async logout () {
       try {

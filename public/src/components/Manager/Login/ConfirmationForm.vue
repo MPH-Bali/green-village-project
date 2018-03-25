@@ -22,6 +22,9 @@
                 :error="hasErrors" />
             </v-layout>
             <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+            <v-flex ml-0 mt-3 pl-0 text-xs-right>
+              <a class="resendCode" @click.stop="$emit('onResend')" >Resend Code</a>
+            </v-flex>            
             <v-flex px-0 mt-3>
               <v-btn id="confirmButton" color="primary" depressed style="text-transform: uppercase" @click.stop="login" :loading="loading" block>Login</v-btn>
             </v-flex>
@@ -97,6 +100,12 @@ export default {
     font-size: 30px;
     text-align: center;
     margin-top: 10px;      
+  }
+
+  .resendCode {
+    font-size: 16px;
+    font-weight: 600;    
+    text-decoration: underline;
   }
 </style>
 

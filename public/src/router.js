@@ -5,10 +5,10 @@ import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
+import Login from '@/components/Manager/Login/Login'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
-import Login from '@/components/Public/Login/Login'
 import SignUp from '@/components/Public/SignUp'
 
 import { auth } from '@/firebase'

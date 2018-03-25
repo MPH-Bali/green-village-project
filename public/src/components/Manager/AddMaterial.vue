@@ -73,7 +73,10 @@ const defaultForm = {
   inorganic: '',
   organic: '',
   worker: null,
-  banjar: null
+  banjar: {
+    id: 0,
+    name: 'No banjar'
+  }
 }
 
 export default {
@@ -85,7 +88,13 @@ export default {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
     },
     banjars () {
-      return this.$firestore.collections.banjar
+      const banjars = this.$firestore.collections.banjar
+      const noBanjar = {
+        id: 0,
+        name: 'No banjar'
+      }
+      banjars.unshift(noBanjar)
+      return banjars
     },
     materials () {
       return this.$firestore.dailyCollections.material
@@ -97,6 +106,12 @@ export default {
         this.error = 'You have to select a worker to save'
       } else {
         this.setWeights()
+
+        // This is because we need to have 'No banjar field'
+        if (this.formData.banjar && this.formData.banjar.id === 0) {
+          this.formData.banjar = null
+        }
+
         if (this.formData.id) {
           this.updateMaterial()
         } else {

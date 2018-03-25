@@ -11,6 +11,7 @@
                 v-show="getPending"
                 color="primary"/>          
             </v-flex>
+            <transition name="slide-buyer-edit">
             <v-layout row wrap v-if="!getPending">
               <v-flex xs6>
                 <p class="body-2 mb-1">Name</p>
@@ -64,7 +65,7 @@
                 <v-btn color="error" 
                        outline
                        depressed 
-                      @click.stop="$router.push({ name: 'buyers' })">Cancel
+                      @click.stop="$router.go(-1)">Cancel
                 </v-btn>
               </v-flex>
               <v-flex xs6 text-xs-right>
@@ -76,6 +77,7 @@
               </v-flex>
 
             </v-layout>
+            </transition>
           </v-container>
         </v-flex>
       </v-card>
@@ -150,11 +152,19 @@ export default {
       this.savePending = true
       await this.$firestore.save('person', this.formData)
       this.savePending = false
-      this.$router.push({ name: 'buyers' })
+      this.$router.go(-1)
     }
   }
 }
 </script>
 
 <style>
+  .slide-buyer-edit-enter-active, .slide-buyer-edit-leave-active {
+    max-height: 1000px;
+    transition: max-height .5s, opacity .5s;
+  }
+  .slide-buyer-edit-enter, .slide-buyer-edit-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    max-height: 82px;
+  }
 </style>

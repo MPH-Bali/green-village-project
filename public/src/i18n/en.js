@@ -145,6 +145,9 @@ export default {
     details: 'details',
     edit: 'edit'
   },
+  buyers: {
+
+  },
   // material section of the daily log
   material: {
     worker: 'worker',

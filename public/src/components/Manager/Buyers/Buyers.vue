@@ -30,15 +30,17 @@
         :no-results-text="$t('buyers.NoBuyers')"
         class="buyers-table">
         <template slot="items" slot-scope="props">
-          <td class="text-xs-center">{{ props.item.name }}</td>
-          <td class="text-xs-center">{{ props.item.company }}</td>
-          <td class="text-xs-center">{{ props.item.sales.length }}</td>
-          <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
-          <td class="text-xs-center">
-            <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
-              <v-icon size="17px" color="primary">fa-search</v-icon>
-            </v-btn>
-          </td>
+          <tr @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+            <td class="text-xs-center">{{ props.item.name }}</td>
+            <td class="text-xs-center">{{ props.item.company }}</td>
+            <td class="text-xs-center">{{ props.item.sales.length }}</td>
+            <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
+            <td class="text-xs-center">
+              <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+                <v-icon size="17px" color="primary">fa-search</v-icon>
+              </v-btn>
+            </td>            
+          </tr>
         </template>
       </v-data-table>
     </v-card>

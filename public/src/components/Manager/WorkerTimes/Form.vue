@@ -28,7 +28,7 @@
 
       <v-flex xs4>
         <div class="left bottom">
-          <v-btn color="error">Cancel</v-btn>
+          <v-btn color="error" @click="$router.go(-1)">Cancel</v-btn>
         </div>
       </v-flex>
       <v-flex xs4 class="center">

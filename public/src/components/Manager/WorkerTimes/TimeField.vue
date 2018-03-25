@@ -9,7 +9,14 @@
                   label="" class='grey-select banjar' />
         </v-flex>
         <v-flex xs6 sm6>
-          <v-btn color="info" @click="toggleTimeText()">{{ timeText }}</v-btn>
+          <div class='ampmbutton'>
+            <div @click='setAm' class='am' v-bind:class="{ 'active': am, 'inactive': !am }">
+              AM
+            </div>
+            <div @click='setPm' class='pm' v-bind:class="{ 'active': !am, 'inactive': am }">
+              PM
+            </div>
+          </div>
         </v-flex>
       </v-layout>
   </div>
@@ -36,8 +43,11 @@ export default {
     }
   },
   methods: {
-    toggleTimeText () {
-      this.am = !this.am
+    setAm () {
+      this.am = true
+    },
+    setPm () {
+      this.am = false
     },
     returnTime () {
       const postfix = (this.am) ? ' AM' : ' PM'
@@ -50,7 +60,9 @@ export default {
       this.returnTime()
     },
     am () {
-      this.returnTime()
+      if (this.time) {
+        this.returnTime()
+      }
     },
     editTime (time) {
       const formatted = this.$moment(time).format('hh:mm')
@@ -68,5 +80,33 @@ export default {
 }
 .title {
   margin: 0!important;
+}
+
+.ampmbutton {
+  padding-top: 1px;
+}
+
+.ampmbutton div{
+  padding-top: 12px;
+  display: inline-block;
+  height: 45px;
+  width: 50px;
+  text-align: center;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.ampmbutton .active {
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.ampmbutton .inactive {
+  color: #dedede;
+  border: 1px solid #dedede;
+}
+
+.ampmbutton .pm {
+  margin-left: 5px;
 }
 </style>

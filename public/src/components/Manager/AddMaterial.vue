@@ -101,7 +101,7 @@ export default {
     }
   },
   methods: {
-    save () {
+    async save () {
       if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
       } else {
@@ -113,10 +113,11 @@ export default {
         }
 
         if (this.formData.id) {
-          this.updateMaterial()
+          await this.updateMaterial()
         } else {
-          this.newMaterial()
+          await this.newMaterial()
         }
+        this.$emit('message', 'Material saved', 'success')
         this.clearForm()
       }
     },
@@ -128,10 +129,10 @@ export default {
         banjar: this.formData.banjar,
         timestamp: new Date()
       }
-      this.$firestore.add('material', payload)
+      return this.$firestore.add('material', payload)
     },
     updateMaterial () {
-      this.$firestore.update('material', this.formData)
+      return this.$firestore.update('material', this.formData)
     },
     hideError () {
       this.error = ''

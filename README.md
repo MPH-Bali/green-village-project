@@ -126,7 +126,8 @@ const personCollection = [
     },
     type: {
       employee: false,
-      client: false
+      client: false,
+      buyer: true
     },
     role: {
       communityManager: false,
@@ -136,15 +137,14 @@ const personCollection = [
     houseType: {
       id: 'Tu4SFfDhBUgAwGsvfopc',
       name: 'villa'
-    }
+    },
+    approved: false
   }
 ]
 
 const deliveryCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
-    organic: 12.5,
-    anorganic: 12.5,
     driver: {
       id: 'Tu4SFfDhBUgAwGsvfopc', // person id
       name: 'Michael'
@@ -231,12 +231,27 @@ const banjarCollection = [
     ]
   }
 ];
-
-const materialCollection = [
+const materialTypeCollection = [
   {
     name: 'Material 1',
     pricePerKilo: 2000
   }
+]
+
+const materialCollection = [
+ {
+	worker: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Worker name'
+	},
+	banjar: {
+	   id: 'Tu4SFfDhBUgAwGsvfopc',
+	   name: 'Banjar name'
+	},
+	organic: 10,
+	inorganic: 10,
+	timestamp: '2018-03-15T09:55:48.942Z'
+   }
 ]
 
 // villa, household, business

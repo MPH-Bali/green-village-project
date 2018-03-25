@@ -23,38 +23,38 @@
      <v-container fluid grid-list-lg>
         <transition name="slide">
          <v-layout row wrap v-if="!getPending"  class="buyer-info-container">
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              <p class="body-2 mb-1">Buyer name</p>
              <p> {{ data.name || '-' }}</p>
            </v-flex>
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              <p class="body-2 mb-1">Company</p>
              <p>{{ data.company || '-' }}</p>
            </v-flex>
            
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              <p class="body-2 mb-1">E-mail</p>
              <p>{{ data.email || '-' }}</p>
            </v-flex>
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              
            </v-flex>
 
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              <p class="body-2 mb-1">Phone</p>
              <p>{{ data.phone || '-' }}</p>
            </v-flex>
-           <v-flex xs6 sm3>
+           <v-flex xs12 sm3>
              <p class="body-2 mb-1">Whatsapp</p>
              <p>{{ data.whatsapp || '-' }}</p>
            </v-flex>
-           <v-flex xs6 sm3></v-flex>
+           <v-flex xs12 sm3></v-flex>
 
            <v-flex xs12 sm9>
              <p class="body-2 mb-1">Notes</p>
              <p>{{ data.notes || '-' }}</p>   
            </v-flex>
-           <v-flex xs3 text-xs-right>
+           <v-flex xs12 text-xs-right>
               <a :href="'mailto:' + data.email" v-if="data.email">
                 <v-btn color="primary">
                   Send Email

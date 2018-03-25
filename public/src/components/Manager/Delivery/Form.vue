@@ -115,6 +115,7 @@ export default {
     async save () {
       this.savePending = true
       await this.$firestore.save('delivery', this.form)
+      this.$emit('message', 'Delivery saved', 'success')
       this.$router.go(-1)
     }
   }

@@ -13,7 +13,7 @@
             </v-flex>
             <transition name="slide-buyer-edit">
             <v-layout row wrap v-if="!getPending">
-              <v-flex xs6>
+              <v-flex xs12 sm6>
                 <p class="body-2 mb-1">Name</p>
                 <v-text-field v-model="formData.name" 
                               :error-messages="nameErrors"
@@ -21,13 +21,13 @@
                               @input="$v.formData.name.$touch()"
                               @blur="$v.formData.name.$touch()"/>
               </v-flex>
-              <v-flex xs6>
+              <v-flex xs12 sm6>
                 <p class="body-2 mb-1">Company</p>
                 <v-text-field flat 
                               v-model="formData.company"/>
               </v-flex>
               
-              <v-flex xs6>
+              <v-flex xs12 sm6>
                 <p class="body-2 mb-1">E-mail</p>
                 <v-text-field v-model="formData.email" 
                               :error-messages="emailErrors"
@@ -35,10 +35,10 @@
                               @input="$v.formData.email.$touch()"
                               @blur="$v.formData.email.$touch()"/>
               </v-flex>
-              <v-flex xs6>
+              <v-flex sm6>
               </v-flex>
 
-              <v-flex xs6>
+              <v-flex xs12 sm6>
                 <p class="body-2 mb-1">Phone</p>
                 <v-text-field v-model="formData.phone"
                               :error-messages="phoneErrors"
@@ -46,7 +46,7 @@
                               @input="$v.formData.phone.$touch()"
                               @blur="$v.formData.phone.$touch()"/>
               </v-flex>
-              <v-flex xs6>
+              <v-flex xs12 sm6>
                 <p class="body-2 mb-1">Whatsapp</p>
                 <v-text-field flat 
                               v-model="formData.whatsapp" />
@@ -88,7 +88,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, email, numeric } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   mixins: [validationMixin],
@@ -111,7 +111,7 @@ export default {
     formData: {
       name: { required },
       email: { email },
-      phone: { required, numeric }
+      phone: { required }
     }
   },
   computed: {
@@ -131,7 +131,6 @@ export default {
       const errors = []
       if (!this.$v.formData.phone.$dirty) return errors
       !this.$v.formData.phone.required && errors.push('Phone number is required')
-      !this.$v.formData.phone.numeric && errors.push('Invalid phone number')
       return errors
     }
   },
@@ -152,6 +151,7 @@ export default {
       this.formData.type.buyer = true
       this.savePending = true
       await this.$firestore.save('person', this.formData)
+      this.$emit('message', 'Buyer data saved', 'success')
       this.savePending = false
       this.$router.go(-1)
     }

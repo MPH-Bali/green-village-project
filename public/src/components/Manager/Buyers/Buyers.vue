@@ -1,5 +1,6 @@
 <template>
-  <v-container grid-list-lg>
+  <v-layout row >
+  <v-flex xs12 md8 offset-md2>
     <v-card class="mt-4">
       <v-card-title>
         <v-text-field
@@ -10,7 +11,7 @@
           v-model="search"
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-flex text-xs-right
+        <v-flex text-xs-right>
           <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyer-edit' })">
             <v-icon>add_circle</v-icon>
             <span style="text-transform: capitalize" class="ml-2">Add</span>
@@ -41,7 +42,8 @@
         </template>
       </v-data-table>
     </v-card>
-  </v-container>
+  </v-flex>
+  </v-layout>
 </template>
 
 <script>

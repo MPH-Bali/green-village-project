@@ -3,72 +3,31 @@
     <navigation-header />
     <v-layout row wrap class='add-worker'>
       <v-flex xs12 sm6>
-        <p class='subheading'>Worker name</p>
+        <p class='title'>Worker name</p>
         <v-select solo flat :items="workers" 
                 v-model="formData.worker"
                 item-text="name" 
                 item-value="id"
                 return-object
-                label="" class='grey-select banjar' />
-
-        <div class='devider-container'>
-          <div class='devider subheadingfont'><span>Morning</span></div>
-        </div>
-
-        <v-layout row wrap>
-          <v-flex xs6 >
-            <p class='subheading'>In</p>
-            <TimeField 
-              @done="receiveTime" 
-              :part="setPart('morning','start')"  
-              :inputTime="formData.times.morning.start"
-            />
-          </v-flex>
-          <v-flex xs6 >
-            <p class='subheading'>Out</p>
-            <TimeField 
-              @done="receiveTime" 
-              :part="setPart('morning','end')"  
-              :inputTime="formData.times.morning.end"
-            />
-          </v-flex>
-        </v-layout>
+                label="" class='grey-select' />
       </v-flex>
-
       <v-flex xs12 sm6>
-        <p class='subheading'>Notes</p>
+        <p class='title'>Notes</p>
         <v-text-field
                 v-model="formData.notes"
                 class='grey-select' 
                 solo flat 
                 name="input-1"></v-text-field>
-
-        <div class='devider-container'>
-          <div class='devider subheadingfont'><span>Afternoon</span></div>
-        </div>
-
-        <v-layout row wrap>
-          <v-flex xs6 >
-            <p class='subheading'>In</p>
-            <TimeField
-              @done="receiveTime" 
-              :part="setPart('afternoon','start')" 
-              :inputTime="formData.times.afternoon.start"
-            />
-          </v-flex>
-          <v-flex xs6 >
-            <p class='subheading'>Out</p>
-            <TimeField 
-              @done="receiveTime" 
-              :part="setPart('afternoon','end')" 
-              :inputTime="formData.times.afternoon.end"
-            />
-          </v-flex>
-        </v-layout>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <time-field @done="receiveTime" part="in" :editTime="formData.times.in" />
+      </v-flex>
+      <v-flex xs12 sm6>
+        <time-field @done="receiveTime" part="out" :editTime="formData.times.out"/>
       </v-flex>
 
       <v-flex xs4>
-        <div class="left">
+        <div class="left bottom">
           <v-btn color="error">Cancel</v-btn>
         </div>
       </v-flex>
@@ -76,7 +35,7 @@
         <span class="title">Total Hours</span>
         <p class="total-hours">{{getTotalTime}} Hours</p>
       </v-flex>
-      <v-flex xs4 class="right">
+      <v-flex xs4 class="right bottom">
         <v-btn color="success" @click="save" :disabled="error.show">Save</v-btn>
       </v-flex>
     </v-layout>
@@ -110,14 +69,8 @@ export default {
         worker: null,
         notes: '',
         times: {
-          morning: {
-            start: null,
-            end: null
-          },
-          afternoon: {
-            start: null,
-            end: null
-          }
+          in: null,
+          out: null
         }
       }
     }
@@ -129,25 +82,22 @@ export default {
     getTotalTime () {
       let total = 0
 
-      Object.keys(this.formData.times).forEach((daytime) => {
-        const { start, end } = this.formData.times[daytime]
-        if (start && end) {
-          const momentStart = this.$moment(start)
-          const momentEnd = this.$moment(end)
+      if (this.formData.times.in && this.formData.times.out) {
+        const momentStart = this.$moment(this.formData.times.in)
+        const momentEnd = this.$moment(this.formData.times.out)
 
-          if (momentEnd < momentStart) {
-            this.error = {
-              show: true,
-              msg: daytime + ' out time must be greater then in time'
-            }
-            return
+        if (momentEnd < momentStart) {
+          this.error = {
+            show: true,
+            msg: 'Time OUT must be greater then IN'
           }
-
-          this.error = { show: false, msg: '' }
-          const duration = this.$moment.duration(momentEnd.diff(momentStart))
-          total += duration.asHours()
+          return 0
         }
-      })
+
+        this.error = { show: false, msg: '' }
+        const duration = this.$moment.duration(momentEnd.diff(momentStart))
+        total += duration.asHours()
+      }
 
       return Math.round(total)
     }
@@ -159,12 +109,9 @@ export default {
         this.$router.go(-1)
       })
     },
-    receiveTime ({time, interval}) {
-      const { daytime, part } = interval
-      this.formData.times[daytime][part] = time
-    },
-    setPart (daytime, part) {
-      return { daytime, part }
+    receiveTime ({time, part}) {
+      this.formData.times[part] = time
+      console.log('Receive time', time)
     }
   }
 }
@@ -191,10 +138,6 @@ export default {
 
 .center {
   text-align: center;
-}
-
-.subheading {
-  margin-bottom: 0px!important;
 }
 
 .add-worker {
@@ -230,5 +173,9 @@ export default {
   font-stretch: normal;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.bottom {
+  margin-top: 5vw;
 }
 </style>

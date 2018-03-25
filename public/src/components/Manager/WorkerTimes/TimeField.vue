@@ -1,69 +1,62 @@
 <template>
-  <v-dialog
-    ref="dialog"
-    persistent
-    v-model="modal"
-    lazy
-    full-width
-    width="290px"
-    :return-value.sync="time">
-    <v-text-field
-      class='grey-select' 
-      slot="activator"
-      v-model="showTime"
-      solo flat 
-      readonly>
-    </v-text-field>
-    <v-time-picker v-model="time" actions >
-      <v-spacer></v-spacer>
-      <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-      <v-btn flat color="primary" @click="setTime(time)">OK</v-btn>
-    </v-time-picker>
-  </v-dialog>
+  <div>
+    <p class='title'>Time {{ this.part }}</p>
+      <v-layout>
+        <v-flex xs6 sm6>
+          <v-select solo flat :items="hours" 
+                  v-model="time"
+                  return-object
+                  label="" class='grey-select banjar' />
+        </v-flex>
+        <v-flex xs6 sm6>
+          <v-btn color="info" @click="toggleTimeText()">{{ timeText }}</v-btn>
+        </v-flex>
+      </v-layout>
+  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    part: {
-      type: Object,
-      default: {
-        daytime: null,
-        part: null
-      }
-    },
-    inputTime: {
-      type: Date,
-      default: null
-    }
-  },
+  props: ['part', 'editTime'],
   data () {
+    const hours = []
+    for (let i = 12; i >= 1; i--) {
+      hours.push((i < 10) ? `0${i}:00` : `${i}:00`)
+    }
+
     return {
-      modal: false,
-      time: null
+      hours,
+      time: '',
+      am: true
     }
   },
   computed: {
-    showTime () {
-      if (!this.time) return null
-      const now = this.$moment().format('YYYY-MM-DD')
-      return this.$moment(now + ' ' + this.time).format('hh:mm a')
+    timeText () {
+      return (this.am) ? 'AM' : 'PM'
     }
   },
   methods: {
-    setTime (time) {
-      const interval = this.part
-      this.$refs.dialog.save(time)
-
-      const now = this.$moment().format('YYYY-MM-DD')
-      const returnTime = this.$moment(now + 'T' + time).toDate()
-
-      this.$emit('done', { time: returnTime, interval })
+    toggleTimeText () {
+      this.am = !this.am
+    },
+    returnTime () {
+      const postfix = (this.am) ? ' AM' : ' PM'
+      const formated = this.$moment(this.time + postfix, 'hh:mm A').toDate()
+      this.$emit('done', {time: formated, part: this.part})
     }
   },
   watch: {
-    inputTime (time) {
-      this.time = this.$moment(this.inputTime).format('hh:mm')
+    time () {
+      this.returnTime()
+    },
+    am () {
+      this.returnTime()
+    },
+    editTime (time) {
+      const formatted = this.$moment(time).format('hh:mm')
+      const postfix = this.$moment(time).format('A')
+      this.am = postfix === 'AM'
+      this.time = formatted
     }
   }
 }
@@ -72,5 +65,8 @@ export default {
 <style scoped>
 .grey-select {
   background-color: rgba(66, 133, 61, 0.1)!important;
+}
+.title {
+  margin: 0!important;
 }
 </style>

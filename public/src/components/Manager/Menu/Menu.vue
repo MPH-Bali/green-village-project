@@ -4,7 +4,7 @@
       <v-layout wrap>
         <template v-for="(item, index) in items">
           <v-flex xs12 sm6>
-            <MenuItem  :name="item.name" :position="index" :path="item.path" />
+            <MenuItem :name="item.name" :position="index" :path="item.path" />
           </v-flex>
         </template>
       </v-layout>
@@ -21,17 +21,17 @@ export default {
     return {
       items: [
         { name: 'SEND DAY REPORT', path: '/manager' },
-        { name: 'ADD DELIVERY', path: '/manager' },
+        { name: 'ADD DELIVERY', path: '/manager/delivery-form' },
         { name: 'ADD DAILY NOTE', path: '/manager' },
-        { name: 'WEIGH MATERIAL', path: '/manager' },
+        { name: 'WEIGH MATERIAL', path: '/material' },
         { name: 'CUSTOMERS LIST', path: '/manager' },
         { name: 'WORKERS HOURS', path: '/manager' },
-        { name: 'BUYERS LIST', path: '/manager' },
+        { name: 'BUYERS LIST', path: '/manager/buyers' },
         { name: 'ADD STOCK', path: '/manager' },
         { name: 'CONTACT ADMIN', path: '/manager' },
         { name: 'CREATE SALE', path: '/manager' },
         { name: 'LOGOUT', path: '/manager' },
-        { name: 'ADD EXPENSE', path: '/manager' }
+        { name: 'ADD EXPENSE', path: '/manager/expense' }
       ]
     }
   }

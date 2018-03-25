@@ -64,8 +64,10 @@ export default {
           // Create a new person in the database linking them to a uid
           await this.createPerson(user)
         }
-
         this.loading = false
+        if (this.$router.query === '/manager/login') {
+          this.$router.push('/manager')
+        }
       } catch (error) {
         this.loading = false
         this.errorMessages.push(error.message)

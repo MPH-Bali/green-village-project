@@ -1,5 +1,6 @@
 service cloud.firestore {
 	match /databases/{database}/documents {
+		allow read: if true;
 
 		function isSignedIn() {
 			return request.auth != null;
@@ -33,7 +34,7 @@ service cloud.firestore {
 			allow read: if true;
 
 			allow create, update:
-				if request.resource.keys().hasAll(['timetamp, driver, banjar'])
+				if data().keys().hasAll(['driver', 'banjar', 'timestamp'])
 				//driver exists and his role is employee
 				&&
 				isEmployee(data().driver.id)
@@ -45,7 +46,7 @@ service cloud.firestore {
 				docExists(data().banjar.id, 'banjar')
 		}
 
-		match /sale/{saleId} {
+		match /sales/{saleId} {
 			allow read: if true;
 
 			allow create, update:
@@ -66,9 +67,8 @@ service cloud.firestore {
 			allow read: if true;
 
 			allow create, update:
-				if data().keys().hasAll(['person', 'amount']) &&
-				data().amount is int &&
-				isBuyer(data().person.id)
+				if data().keys().hasAll(['cost']) &&
+				data().cost is int
 		}
 
 		match /stock/{stockId} {
@@ -128,7 +128,7 @@ service cloud.firestore {
 				data().collectionFee is int;
 		}
 
-		match /workerHours/{workerHoursId} {
+		match /workerhours/{workerhoursId} {
 			allow read: if true;
 
 			allow create, update:
@@ -139,6 +139,9 @@ service cloud.firestore {
 		}
 
 		match /person/{personId} {
+
+			allow read: if true;
+
 			function emailIsValid() {
 				return data().email == null || data().email.matches("\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}\\b")
 			}
@@ -189,9 +192,9 @@ service cloud.firestore {
 				return (hasOneType() && hasNoRole()) || (hasOneRole() && hasNoType());
 			}
 
-			allow create:
+			allow create, update:
 				if data().keys().hasAny(['role', 'type']) &&
-				data().keys().hasAll(['name', 'address', 'phone']) &&
+				data().keys().hasAll(['name', 'phone']) &&
 				data().name is string &&
 				data().address is string &&
 				data().phone is string &&

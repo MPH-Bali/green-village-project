@@ -74,6 +74,14 @@ service cloud.firestore {
 	      	&& data().paid_until is timestamp
     	}
 
+    	match /banjar/{banjarId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['name'])
+	      	&& data().name is string
+    	}
+
 
   	}
   }

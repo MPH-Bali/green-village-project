@@ -24,16 +24,16 @@
         <transition name="slide">
          <v-layout row wrap v-if="!getPending"  class="buyer-info-container">
            <v-flex xs12 sm3>
-             <p class="body-2 mb-1">Buyer name</p>
+             <p class="body-2 mb-1">{{ $t('buyers.buyer') }} {{ $t('common.Name') }}</p>
              <p> {{ data.name || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
-             <p class="body-2 mb-1">Company</p>
+             <p class="body-2 mb-1">{{ $t('common.Company') }}</p>
              <p>{{ data.company || '-' }}</p>
            </v-flex>
            
            <v-flex xs12 sm3>
-             <p class="body-2 mb-1">E-mail</p>
+             <p class="body-2 mb-1">{{ $t("common.Email") }}</p>
              <p>{{ data.email || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
@@ -41,23 +41,23 @@
            </v-flex>
 
            <v-flex xs12 sm3>
-             <p class="body-2 mb-1">Phone</p>
+             <p class="body-2 mb-1">{{ $t('common.PhoneNumber') }}</p>
              <p>{{ data.phone || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
-             <p class="body-2 mb-1">Whatsapp</p>
+             <p class="body-2 mb-1">{{ $t('common.Whatsapp') }}</p>
              <p>{{ data.whatsapp || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3></v-flex>
 
            <v-flex xs12 sm9>
-             <p class="body-2 mb-1">Notes</p>
+             <p class="body-2 mb-1">{{ $t('common.Notes') }}</p>
              <p>{{ data.notes || '-' }}</p>   
            </v-flex>
            <v-flex xs12 text-xs-right>
               <a :href="'mailto:' + data.email" v-if="data.email">
                 <v-btn color="primary">
-                  Send Email
+                  {{ $t("common.Send") }} {{ $t("common['Email']") }}
                 </v-btn>
               </a>
            </v-flex>
@@ -77,13 +77,13 @@
           :headers="headers"
           :items="buyersSales"
           :light="true"
-          no-data-text="No Sales"
+          :no-data-text="$t('sales.NoSales')"
           hide-actions class="buyers-table"
           pagination.sync="pagination">
           <template slot="items" slot-scope="props">
             <td class="text-xs-center">{{ props.item.date || $moment().format('DD/MM/YYYY') }}</td>
             <td class="text-xs-center">{{ props.item.materials[0].material.name }}</td>
-            <td class="text-xs-center">{{  props.item.materials[0].kilo }}kg</td>
+            <td class="text-xs-center">{{ props.item.materials[0].kilo }}kg</td>
             <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
             <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
             <td class="text-xs-center">
@@ -116,11 +116,11 @@ export default {
       getPending: false,
       data: {},
       headers: [
-        { text: 'Date', align: 'center', sortable: true, value: 'name' },
-        { text: 'Material/Compost', align: 'center', sortable: true, value: 'company' },
-        { text: 'Kg', align: 'center', sortable: true, value: 'sales.length' },
-        { text: 'Cost/Kg', align: 'center', sortable: true, value: 'lastPurchase' },
-        { text: 'Final Price', sortable: true, align: 'center', value: 'finalPrice' },
+        { text: this.$t('common.Date'), align: 'center', sortable: true, value: 'date' },
+        { text: this.$t('buyers.materialCompost'), align: 'center', sortable: true, value: 'company' },
+        { text: this.$t('buyers.kg'), align: 'center', sortable: true, value: 'sales.length' },
+        { text: this.$t('buyers.costKg'), align: 'center', sortable: true, value: 'lastPurchase' },
+        { text: this.$t('buyers.FinalPrice'), sortable: true, align: 'center', value: 'finalPrice' },
         { text: '', sortable: false, align: 'center', value: null }
       ]
     }

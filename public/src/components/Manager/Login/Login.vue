@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-lg>
-    <confirmation-form v-show="confirmationResult" :confirmationResult="confirmationResult" @onResend="onResend" />
+    <confirmation-form 
+      v-show="confirmationResult" 
+      :confirmationResult="confirmationResult" 
+      @onResend="onResend" />
     <login-form v-show="!confirmationResult" @onVerification="onVerification" />
   </v-container>
 </template>
@@ -11,8 +14,14 @@ import ConfirmationForm from './ConfirmationForm'
 
 export default {
   mounted () {
+    // We don't have a logout button at the moment,
+    // so this route will log the user out if they have already logged in.
     if (this.$firebase.auth().currentUser) {
-      this.$router.push('/manager')
+      try {
+        this.$firebase.auth().signOut()
+      } catch (error) {
+        console.log(`Error logging out: ${error}`)
+      }
     }
   },
   components: {

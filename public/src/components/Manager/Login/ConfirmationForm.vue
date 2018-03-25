@@ -2,7 +2,9 @@
   <v-layout column text-xs-center>
     <v-card class="py-5 my-5">
       <v-card-text class="py-5 my-5">
-        <p class="title" style="text-transform: uppercase;">Please enter the code we sent you via sms</p>
+        <p class="title" style="text-transform: uppercase;">
+          Please enter the code we sent you via sms
+        </p>
         <v-flex md4 offset-md4>
           <v-form>
             <v-flex ml-0 mt-3 pl-0 text-xs-left>
@@ -26,7 +28,15 @@
               <a class="resendCode" @click.stop="$emit('onResend')" >Resend Code</a>
             </v-flex>            
             <v-flex px-0 mt-3>
-              <v-btn color="primary" depressed style="text-transform: uppercase" @click.stop="login" :loading="loading" block>Login</v-btn>
+              <v-btn 
+                color="primary" 
+                depressed 
+                style="text-transform: uppercase" 
+                @click.stop="login" 
+                :loading="loading" 
+                block>
+                Login
+              </v-btn>
             </v-flex>
           </v-form>
         </v-flex>
@@ -65,9 +75,7 @@ export default {
           await this.createPerson(user)
         }
         this.loading = false
-        if (this.$router.query === '/manager/login') {
-          this.$router.push('/manager')
-        }
+        this.$router.push('/manager')
       } catch (error) {
         this.loading = false
         this.errorMessages.push(error.message)

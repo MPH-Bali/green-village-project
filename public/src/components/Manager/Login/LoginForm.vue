@@ -22,7 +22,16 @@
               :error="hasErrors" />
             <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
             <v-flex px-0 mt-3>
-              <v-btn id="confirmButton" color="primary" depressed style="text-transform: uppercase" @click.stop="confirm" :loading="loading" block>Continue</v-btn>
+              <v-btn 
+                id="confirmButton" 
+                color="primary" 
+                depressed 
+                style="text-transform: uppercase" 
+                @click.stop="confirm" 
+                :loading="loading" 
+                block>
+                Continue
+              </v-btn>
             </v-flex>
           </v-form>
         </v-flex>
@@ -34,7 +43,7 @@
 <script>
 export default {
   mounted () {
-    window.recaptchaVerifier = new this.$firebase.auth.RecaptchaVerifier('confirmButton', {
+    this.recaptchaVerifier = new this.$firebase.auth.RecaptchaVerifier('confirmButton', {
       size: 'invisible'
     })
   },
@@ -45,6 +54,7 @@ export default {
   },
   data () {
     return {
+      recaptchaVerifier: null,
       phoneNumber: null,
       loading: false,
       errorMessages: []
@@ -54,7 +64,8 @@ export default {
     async confirm () {
       try {
         this.loading = true
-        let confirmationResult = await this.$firebase.auth().signInWithPhoneNumber(this.phoneNumber, window.recaptchaVerifier)
+        let confirmationResult = await this.$firebase.auth()
+                                  .signInWithPhoneNumber(this.phoneNumber, this.recaptchaVerifier)
         // SMS sent. Prompt user to type the code from the message.
         this.$emit('onVerification', confirmationResult)
         this.loading = false

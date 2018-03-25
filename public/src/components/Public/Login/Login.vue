@@ -1,17 +1,20 @@
 <template>
   <v-container grid-list-lg>
-    <v-layout v-if="!loggedIn" column text-xs-center>
+    <template v-if="!loggedIn">
       <confirmation-form v-if="confirmationResult" :confirmationResult="confirmationResult" />
       <login-form v-else @onVerification="onVerification" />
-    </v-layout>
-    <v-layout class="logoutButtonContainer" v-else>
-      <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="logout">Logout</v-btn>
-    </v-layout>
+    </template>
+    <template v-else>
+      <v-layout class="logoutButtonContainer">
+        <!-- temporarily stick a logout button here when we are logged in, until we have somewhere better to put it -->
+        <v-btn color="primary" depressed style="text-transform: capitalize" @click.stop="logout">Logout</v-btn>
+      </v-layout>
+    </template>
   </v-container>
 </template>
 
 <script>
-import firebase, { auth } from '@/firebase'
+import { auth } from '@/firebase'
 import LoginForm from './LoginForm'
 import ConfirmationForm from './ConfirmationForm'
 
@@ -36,7 +39,7 @@ export default {
     },
     async logout () {
       try {
-        await firebase.auth().signOut()
+        await auth.signOut()
       } catch (error) {
         console.log(`Error logging out: ${error}`)
       }
@@ -53,11 +56,6 @@ export default {
   .layout.column {
     height: 100%;
     justify-content: center;
-  }
-
-  .loginLabel {
-    font-size: 16px;
-    font-weight: 600;
   }
 
   .logoutButtonContainer {

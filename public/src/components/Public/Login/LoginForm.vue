@@ -1,32 +1,34 @@
 <template>
-  <v-card class="py-5 my-5">
-    <v-card-text class="py-5 my-5">
-      <p class="title" style="text-transform: uppercase;">To login, please enter your phone number</p>
-      <v-flex md4 offset-md4>
-        <v-form>
-          <v-flex ml-0 mt-3 pl-0 text-xs-left>
-            <label class="loginLabel">Phone Number</label>
-          </v-flex>
-          <v-text-field
-            class="loginField"
-            name="phoneNumber" 
-            ref="phoneNumber" 
-            solo 
-            flat 
-            label="Type Your Phone Number" 
-            type="tel" 
-            v-model="phoneNumber" 
-            :disabled="loading" 
-            @input="errorMessages = []" 
-            :error="hasErrors" />
-          <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
-          <v-flex px-0 mt-3>
-            <v-btn id="confirmButton" color="primary" depressed style="text-transform: capitalize" @click.stop="confirm" :loading="loading" block>Continue</v-btn>
-          </v-flex>
-        </v-form>
-      </v-flex>
-    </v-card-text>
-  </v-card>  
+  <v-layout column text-xs-center>
+    <v-card class="py-5 my-5">
+      <v-card-text class="py-5 my-5">
+        <p class="title" style="text-transform: uppercase;">To login, please enter your phone number</p>
+        <v-flex md4 offset-md4>
+          <v-form>
+            <v-flex ml-0 mt-3 pl-0 text-xs-left>
+              <label class="loginLabel">Phone Number</label>
+            </v-flex>
+            <v-text-field
+              class="loginField"
+              name="phoneNumber" 
+              autofocus
+              solo 
+              flat 
+              label="Type Your Phone Number" 
+              type="tel" 
+              v-model="phoneNumber" 
+              :disabled="loading" 
+              @input="errorMessages = []" 
+              :error="hasErrors" />
+            <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+            <v-flex px-0 mt-3>
+              <v-btn id="confirmButton" color="primary" depressed style="text-transform: uppercase" @click.stop="confirm" :loading="loading" block>Continue</v-btn>
+            </v-flex>
+          </v-form>
+        </v-flex>
+      </v-card-text>
+    </v-card>  
+  </v-layout>
 </template>
 
 <script>
@@ -37,8 +39,6 @@ export default {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('confirmButton', {
       size: 'invisible'
     })
-
-    this.$refs.phoneNumber.focus()
   },
   computed: {
     hasErrors () {
@@ -71,8 +71,12 @@ export default {
 </script>
 
 <style scoped>
+  .loginLabel {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   .loginField {
     background-color:  rgba(66, 133, 61, 0.1) !important;
   }
-
 </style>

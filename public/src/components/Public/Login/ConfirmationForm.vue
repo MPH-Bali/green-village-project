@@ -1,33 +1,35 @@
 <template>
-  <v-card class="py-5 my-5">
-    <v-card-text class="py-5 my-5">
-      <p class="title" style="text-transform: uppercase;">Please enter the code we sent you via sms</p>
-      <v-flex md4 offset-md4>
-        <v-form>
-          <v-flex ml-0 mt-3 pl-0 text-xs-left>
-            <label class="loginLabel">Code</label>
-          </v-flex>
-          <v-layout rows>
-            <input
-              v-for="(character, index) in confirmationCode"
-              :key="index"
-              class="confirmationField"              
-              name="confirmationCode" 
-              type="tel"
-              maxlength="1"
-              v-model="confirmationCode[index]" 
-              :disabled="loading" 
-              @input="event => confirmationCodeInput(event, index)"
-              :error="hasErrors" />
-          </v-layout>
-          <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
-          <v-flex px-0 mt-3>
-            <v-btn id="confirmButton" color="primary" depressed style="text-transform: capitalize" @click.stop="login" :loading="loading" block>Login</v-btn>
-          </v-flex>
-        </v-form>
-      </v-flex>
-    </v-card-text>
-  </v-card>   
+  <v-layout column text-xs-center>
+    <v-card class="py-5 my-5">
+      <v-card-text class="py-5 my-5">
+        <p class="title" style="text-transform: uppercase;">Please enter the code we sent you via sms</p>
+        <v-flex md4 offset-md4>
+          <v-form>
+            <v-flex ml-0 mt-3 pl-0 text-xs-left>
+              <label class="loginLabel">Code</label>
+            </v-flex>
+            <v-layout rows>
+              <input
+                v-for="(character, index) in confirmationCode"
+                :key="index"
+                class="confirmationField"              
+                name="confirmationCode" 
+                type="tel"
+                maxlength="1"
+                v-model="confirmationCode[index]" 
+                :disabled="loading" 
+                @input="event => confirmationCodeInput(event, index)"
+                :error="hasErrors" />
+            </v-layout>
+            <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+            <v-flex px-0 mt-3>
+              <v-btn id="confirmButton" color="primary" depressed style="text-transform: uppercase" @click.stop="login" :loading="loading" block>Login</v-btn>
+            </v-flex>
+          </v-form>
+        </v-flex>
+      </v-card-text>
+    </v-card>   
+  </v-layout>
 </template>
 
 <script>
@@ -82,14 +84,19 @@ export default {
 </script>
 
 <style scoped>
-  input.confirmationField {
-      border-bottom: 1px solid black;
-      margin: 0 10px;
-      flex: 1;
-      width: 100%;
-      font-size: 30px;
-      text-align: center;
-      margin-top: 10px;      
+  .loginLabel {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .confirmationField {
+    border-bottom: 1px solid black;
+    margin: 0 10px;
+    flex: 1;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;      
   }
 </style>
 

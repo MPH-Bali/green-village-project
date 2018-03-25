@@ -18,6 +18,7 @@ exports.dbInit = functions.https.onRequest((req, res) => {
 	}
 	return Promise.all(promises)
 		.then(() => res.status(200).send())
+		.catch(e => console.log(e))
 })
 
 exports.dbDestroy = functions.https.onRequest((req, res) => {

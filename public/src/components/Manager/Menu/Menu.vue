@@ -20,17 +20,17 @@ export default {
   data () {
     return {
       items: [
-        { name: 'SEND DAY REPORT', path: '/manager' },
+        { name: 'SEND DAY REPORT', path: '/manager/daily-log' },
         { name: 'ADD DELIVERY', path: '/manager/delivery-form' },
-        { name: 'ADD DAILY NOTE', path: '/manager' },
+        { name: 'ADD DAILY NOTE', path: '/manager/daily-log' },
         { name: 'WEIGH MATERIAL', path: '/material' },
-        { name: 'CUSTOMERS LIST', path: '/manager' },
-        { name: 'WORKERS HOURS', path: '/manager' },
+        { name: 'CUSTOMERS LIST', path: '/manager/daily-log' },
+        { name: 'WORKERS HOURS', path: '/manager/daily-log' },
         { name: 'BUYERS LIST', path: '/manager/buyers' },
-        { name: 'ADD STOCK', path: '/manager' },
-        { name: 'CONTACT ADMIN', path: '/manager' },
-        { name: 'CREATE SALE', path: '/manager' },
-        { name: 'LOGOUT', path: '/manager' },
+        { name: 'ADD STOCK', path: '/manager/daily-log' },
+        { name: 'CONTACT ADMIN', path: '/manager/daily-log' },
+        { name: 'CREATE SALE', path: '/manager/daily-log' },
+        { name: 'LOGOUT', path: '/manager/daily-log' },
         { name: 'ADD EXPENSE', path: '/manager/expense' }
       ]
     }

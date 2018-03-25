@@ -7,7 +7,11 @@ export default {
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
     addMaterial: 'Add material',
-    workerTimes: 'Check workers'
+    workerTimes: 'Check workers',
+    customerDetail: 'Customer Detail',
+    buyers: 'Buyers',
+    'buyer-edit': 'Add/Edit Buyer',
+    'buyer-details': 'Buyer Details'
   },
   // example string
   home: {
@@ -142,6 +146,9 @@ export default {
     time: 'time',
     details: 'details',
     edit: 'edit'
+  },
+  buyers: {
+
   },
   // material section of the daily log
   material: {

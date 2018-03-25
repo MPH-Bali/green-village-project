@@ -2,10 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
+import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
+
+import Buyers from '@/components/Manager/Buyers/Buyers'
+import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
+import BuyerEdit from '@/components/Manager/Buyers/BuyerEdit'
 
 import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
@@ -34,8 +39,12 @@ export default new Router({
         { path: '', name: 'dailyLog', component: DailyLog },
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
+        { path: 'buyers', name: 'buyers', component: Buyers },
+        { path: 'buyer/details/:id?', name: 'buyer-details', component: BuyerDetails, props: true },
+        { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-times/:id?', name: 'workerTimes', component: WorkerTimes, props: true },
+        { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: '*', redirect: '/manager' }
       ]
     },

@@ -2,10 +2,10 @@
   <v-data-table
     :loading="$firestore.collectionsPending.delivery"
     :headers="headers"
-    :items="$firestore.list.delivery"
+    :items="deliveries"
     hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
-      <tr class="pointer" @click="props.expanded = !props.expanded">
+      <tr v-if="!collapsed" class="pointer" @click="props.expanded = !props.expanded">
         <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
         <td class="text-xs-center">{{ props.item.villas }}</td>
         <td class="text-xs-center">{{ props.item.households }}</td>
@@ -36,14 +36,47 @@
         </v-card-text>
       </v-card>
     </template>
+    <template slot="footer">
+      <tr class="secondary pointer" @click="collapsed = !collapsed">
+        <td></td>
+        <td class="text-xs-center">
+          <span class="body-2">
+            {{ deliveries.reduce((total, item) => total + parseInt(item.villas), 0) }}
+          </span>
+        </td>
+        <td class="text-xs-center">
+          <span class="body-2">
+            {{ deliveries.reduce((total, item) => total + parseInt(item.households), 0) }}
+          </span>
+        </td>
+        <td class="text-xs-center">
+          <span class="body-2">
+            {{ deliveries.reduce((total, item) => total + parseInt(item.businesses), 0) }}
+          </span>
+        </td>
+        <td class="text-xs-center">
+          <span class="body-2">
+            {{ deliveries.reduce((total, item) => total + parseInt(item.facilities), 0) }}
+          </span>
+        </td>
+        <td colspan="3">
+        </td>
+      </tr>
+    </template>
   </v-data-table>
+
 </template>
 
 <script>
 export default {
+  computed: {
+    deliveries () {
+      return this.$firestore.list.delivery
+    }
+  },
   data () {
     return {
-      loading: false,
+      collapsed: false,
       headers: [
         { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
         { text: 'Villas', align: 'center', sortable: true, value: 'villas' },

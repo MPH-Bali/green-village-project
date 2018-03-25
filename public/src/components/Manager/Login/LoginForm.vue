@@ -32,11 +32,9 @@
 </template>
 
 <script>
-import firebase from '@/firebase'
-
 export default {
   mounted () {
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('confirmButton', {
+    window.recaptchaVerifier = new this.$firebase.auth.RecaptchaVerifier('confirmButton', {
       size: 'invisible'
     })
   },
@@ -56,7 +54,7 @@ export default {
     async confirm () {
       try {
         this.loading = true
-        let confirmationResult = await firebase.auth().signInWithPhoneNumber(this.phoneNumber, window.recaptchaVerifier)
+        let confirmationResult = await this.$firebase.auth().signInWithPhoneNumber(this.phoneNumber, window.recaptchaVerifier)
         // SMS sent. Prompt user to type the code from the message.
         this.$emit('onVerification', confirmationResult)
         this.loading = false

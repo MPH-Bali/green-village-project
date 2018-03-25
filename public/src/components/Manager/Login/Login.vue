@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { auth } from '@/firebase'
 import LoginForm from './LoginForm'
 import ConfirmationForm from './ConfirmationForm'
 
@@ -30,7 +29,7 @@ export default {
   },
   computed: {
     loggedIn () {
-      return auth.currentUser
+      return this.$firebase.auth().currentUser
     }
   },
   methods: {
@@ -42,7 +41,7 @@ export default {
     },
     async logout () {
       try {
-        await auth.signOut()
+        await this.$firebase.auth().signOut()
       } catch (error) {
         console.log(`Error logging out: ${error}`)
       }

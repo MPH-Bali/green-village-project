@@ -11,11 +11,9 @@ import Public from '@/components/Public/Index'
 import Home from '@/components/Public/Home'
 import SignUp from '@/components/Public/SignUp'
 
-import { auth } from '@/firebase'
-
 Vue.use(Router)
 
-const router = new Router({
+export default new Router({
   mode: 'history',
   routes: [
     {
@@ -34,9 +32,9 @@ const router = new Router({
        */
       children: [
         { path: 'login', name: 'login', component: Login },
-        { path: '', name: 'dailyLog', component: DailyLog, meta: { requiresAuth: true } },
-        { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true, meta: { requiresAuth: true } },
-        { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true, meta: { requiresAuth: true } },
+        { path: '', name: 'dailyLog', component: DailyLog },
+        { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
+        { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: '*', redirect: '/manager' }
       ]
@@ -47,19 +45,3 @@ const router = new Router({
     }
   ]
 })
-
-router.beforeEach((to, from, next) => {
-  let currentUser = auth.currentUser
-
-  // This route requires auth, check if logged in, if not then redirect to login page.
-  if (to.matched.some(record => record.meta.requiresAuth) && !currentUser) {
-    next({
-      path: '/manager/login',
-      query: { redirect: to.fullPath }
-    })
-  } else {
-    next()
-  }
-})
-
-export default router

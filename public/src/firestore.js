@@ -10,6 +10,7 @@ export default new Vue({
       dailySubscriptions: [],
       start: null,
       end: null,
+      user: null,
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
@@ -66,6 +67,17 @@ export default new Vue({
 
         this.dailySubscriptions.push(unsubscribe)
       })
+    },
+    async getUserByUid (uid) {
+      let querySnapshot = await db.collection('person')
+                          .where('login', '==', uid)
+                          .get()
+
+      let user = querySnapshot &&
+                  querySnapshot.docs[0] &&
+                  querySnapshot.docs[0].data()
+
+      return user || null
     },
     add (collection, data) {
       return db.collection(collection).add(data)

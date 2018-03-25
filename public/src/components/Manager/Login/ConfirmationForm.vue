@@ -26,7 +26,7 @@
               <a class="resendCode" @click.stop="$emit('onResend')" >Resend Code</a>
             </v-flex>            
             <v-flex px-0 mt-3>
-              <v-btn id="confirmButton" color="primary" depressed style="text-transform: uppercase" @click.stop="login" :loading="loading" block>Login</v-btn>
+              <v-btn color="primary" depressed style="text-transform: uppercase" @click.stop="login" :loading="loading" block>Login</v-btn>
             </v-flex>
           </v-form>
         </v-flex>

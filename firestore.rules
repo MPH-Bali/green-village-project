@@ -35,6 +35,17 @@ service cloud.firestore {
 	      	if data().keys().hasAll(['buyer', 'materials'])
 	      	&& getDoc(data().buyer.id, 'person').data.type.buyer == true
 	    }
+
+    	match /settings/{settingsId} {
+	      allow read: if true;
+
+	      allow create, update:
+	      	if data().keys().hasAll(['name', 'village'])
+					&& data().name is string
+					&& data().village is string
+	    }
+
+
   	}
   }
 }

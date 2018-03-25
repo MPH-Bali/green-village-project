@@ -1,23 +1,31 @@
 service cloud.firestore {
 	match /databases/{database}/documents {
-  	function isSignedIn() {
-  		return request.auth != null;
-  	}
-  	match /delivery/{deliveryId} {
-  		allow read if true;
-  		allow create, update:
-  			if deliveryIsValid();
+    	function isSignedIn() {
+    		return request.auth != null;
+    	}
+      function getDoc(id, col) {
+        return get(/databases/$(database)/documents/$(col)/$(id))
+      }
 
-  		function deliveryIsValid() {
-  			return
-  			//driver exists and his role is employee
-  				exists(/databases/$(database)/documents/person/$(request.resource.data.driver.id))
-  				&& get(/databases/$(database)/documents/person/$(request.resource.data.driver.id)).data.type.employee == true
+      function docExists(id, col) {
+      	return exists(/databases/$(database)/documents/$(col)/$(id))
+      }
+
+      function data() {
+        return request.resource.data;
+      }
+
+    	match /delivery/{deliveryId} {
+    		allow read: if true;
+
+    		allow create, update:
+    			//driver exists and his role is employee
+  				if getDoc(data().driver.id, 'person').data.type.employee == true
   				//timestamp
-  				&& (request.resource.data.timestamp) is timestamp
+  				&& (data().timestamp) is timestamp
   				//banjar exists
-  				&& exists(/databases/$(database)/documents/banjar/$(request.resource.data.banjar))
-  		}
+  				&& docExists(data().banjar.id, 'banjar')
+      } 
   	}
   }
 }

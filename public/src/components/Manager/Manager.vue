@@ -17,20 +17,26 @@
     </v-toolbar>
     <v-content>
       <v-slide-y-transition mode="out-in">
-        <router-view />
+        <router-view @message="newMessage"/>
       </v-slide-y-transition>
     </v-content>
+    <Toast :message="toastMessage"/>
   </v-app>
 </template>
+
 <script>
+import Toast from './UI/Toast'
+
 export default {
   name: 'Manager',
+  components: { Toast },
   created () {
     this.$firestore.changeDate()
     this.$firestore.syncData()
   },
   data () {
     return {
+      toastMessage: {},
       sections: [
         {
           name: this.$i18n.t('bottomMenu.dailyLog'),
@@ -73,6 +79,14 @@ export default {
           route: '/manager/settings'
         }
       ]
+    }
+  },
+  methods: {
+    newMessage (message) {
+      this.toastMessage = message
+      setTimeout(() => {
+        this.toastMessage = {}
+      }, 3000)
     }
   }
 }

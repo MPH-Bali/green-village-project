@@ -123,6 +123,10 @@ export default {
       }
 
       this.$firestore.save('workerhours', this.formData).then(() => {
+        this.$emit('message', {
+          text: 'Worker hours saved',
+          type: 'success'
+        })
         this.$router.go(-1)
       })
     },

@@ -77,6 +77,10 @@ The following CRUD actions are available:
 
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
+### Notifications
+To use in-app toasts just $emit toast message to the manager component 
+ - **$emit('message', { text: 'delivery saved', type: 'success', ding: true }))**
+
 ---
 
 ## Back End
@@ -144,7 +148,7 @@ const personCollection = [
     type: {
       employee: false,
       client: false,
-      buyer: false
+      buyer: true
     },
     role: {
       communityManager: false,
@@ -154,7 +158,8 @@ const personCollection = [
     houseType: {
       id: 'Tu4SFfDhBUgAwGsvfopc',
       name: 'villa'
-    }
+    },
+    approved: false
   }
 ]
 
@@ -172,7 +177,7 @@ const deliveryCollection = [
   }
 ]
 
-const workedHoursCollection = [
+const workerHoursCollection = [
   {
     employee: {
       id: 'Tu4SFfDhBUgAwGsvfopc', // person id
@@ -248,8 +253,15 @@ const banjarCollection = [
   }
 ];
 
+const materialTypeCollection = [
+  {
+    name: 'Material 1',
+    pricePerKilo: 2000
+  }
+]
+
 const materialCollection = [
-   {
+ {
 	worker: {
 	   id: 'Tu4SFfDhBUgAwGsvfopc',
 	   name: 'Worker name'
@@ -262,13 +274,6 @@ const materialCollection = [
 	inorganic: 10,
 	timestamp: '2018-03-15T09:55:48.942Z'
    }
-]
-
-const materialTypeCollection = [
-  {
-    name: 'Material 1',
-    pricePerKilo: 2000
-  }
 ]
 
 // villa, household, business

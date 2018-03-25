@@ -11,7 +11,8 @@ export default {
     customerDetail: 'Customer Detail',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',
-    'buyer-details': 'Buyer Details'
+    'buyer-details': 'Buyer Details',
+    addExpense: 'Add Expense'
   },
   // example string
   home: {
@@ -60,6 +61,7 @@ export default {
     create: 'create',
     sale: 'sale',
     email: 'email',
+    'Email': 'Email',
     quantity: 'quantity',
     fuel: 'fuel',
     maintenance: 'fuel',
@@ -73,13 +75,25 @@ export default {
     aToZ: 'a-z',
     typeBuyerName: 'type buyer name',
     phoneNumber: 'phone number',
+    'PhoneNumber': 'Phone Number',
     payment: 'payment',
     history: 'history',
     decline: 'decline',
     approve: 'approve',
     sendEmail: 'send email',
     monthly: 'monthly',
-    fee: 'fee'
+    fee: 'fee',
+    search: 'Search',
+    Company: 'Company',
+    Whatsapp: 'Whatsapp',
+    Notes: 'Notes',
+    Send: 'Send',
+    Date: 'Date',
+    Save: 'Save',
+    Cancel: 'Cancel',
+    Name: 'Name',
+    NoData: 'No Data',
+    Add: 'Add'
   },
   // 01.0
   login: {
@@ -148,7 +162,17 @@ export default {
     edit: 'edit'
   },
   buyers: {
-
+    numberOfSales: 'No. of Sales',
+    lastPurchase: 'Last purchase',
+    buyer: 'Buyer',
+    materialCompost: 'Material/Compost',
+    kg: 'kg',
+    costKg: 'Cost/Kg',
+    FinalPrice: 'Final Price',
+    NoBuyers: 'No Buyers'
+  },
+  sales: {
+    NoSales: 'No Sales'
   },
   // material section of the daily log
   material: {

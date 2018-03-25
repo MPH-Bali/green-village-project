@@ -1,28 +1,42 @@
 <template>
   <v-container grid-list-lg>
-    <v-layout row wrap>
-      <v-flex>
-        <v-btn @click="$router.go(-1)" flat>
-          <v-icon size="20px" color="blue darken-2">arrow_back</v-icon>
-          <span class="ml-1">Back</span>
+    <navigation-header>
+      <template slot="right">
+        <v-btn
+          block large color="success"
+          @click="goToNewCustomerForm">
+          Add Customer
         </v-btn>
-      </v-flex>
-    </v-layout>
+      </template>
+    </navigation-header>
     <v-layout row wrap>
       <v-flex>
         <v-card>
+          <v-card-title>
+            {{ $t('routeNames.customers') }}
+            <v-spacer></v-spacer>
+            <v-text-field
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+              v-model="search"
+            ></v-text-field>
+          </v-card-title>
           <v-data-table
+            :custom-filter="customFilter"
+            :search="search"
             :headers="headers"
             :items="customers">
             <template slot="items" slot-scope="props">
               <td>{{ props.item.name }}</td>
-              <td>{{ props.item.houseType }}</td>
+              <td>{{ props.item.type }}</td>
               <td>{{ props.item.address }}</td>
               <td>{{ props.item.idrPerMonth }}</td>
-              <td>{{ props.item.paidUntil }}</td>
+              <td>{{ props.item.lastFeePaid.paidUntil }}</td>
               <td>
-                <v-btn ghost :href="customerURL(props.item)">
-                  View
+                <v-btn flat :href="customerURL(props.item)">
+                  <v-icon color="">chevron_right</v-icon>
                 </v-btn>
               </td>
             </template>
@@ -34,16 +48,32 @@
 </template>
 
 <script>
+import NavigationHeader from '@/elements/NavigationHeader'
+
 export default {
   name: 'Customers',
+  components: {
+    NavigationHeader
+  },
   methods: {
+    customFilter (items, search, filter) {
+      return items.filter((row) => {
+        return filter(row['name'], search) ||
+          filter(row['type'], search) ||
+          filter(row['address'], search) ||
+          filter(row['idr'], search)
+      })
+    },
     customerURL (person) {
       return `/manager/customers/${person.id}`
+    },
+    goToNewCustomerForm () {
+      this.$router.push('/manager/customers/new')
     }
   },
   data () {
     return {
-      customers: [],
+      search: '',
       headers: [
         {
           text: 'Full Name',
@@ -76,16 +106,31 @@ export default {
           value: 'paidUntil'
         },
         {
-
+          text: 'Actions',
+          value: 'actions',
+          sortable: false
         }
       ]
     }
   },
   computed: {
-
+    customers () {
+      return this.$firestore.collections.person.map((customer) => {
+        return {
+          ...customer,
+          type: customer.houseType ? customer.houseType.name : '',
+          lastFeePaid: {
+            timestamp: new Date(),
+            monthlyFee: 100000,
+            feePaid: 100000,
+            paidUntil: new Date() + (60 * 60 * 24 * 30)
+          }
+        }
+      })
+    }
   },
   created () {
-    this.customers = this.$firestore.collections.person
+
   }
 }
 </script>

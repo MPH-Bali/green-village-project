@@ -158,7 +158,8 @@ const personCollection = [
       id: 'Tu4SFfDhBUgAwGsvfopc',
       name: 'villa'
     },
-    approved: false
+    approved: false,
+		lastFeePaid: [Object fee]
   }
 ]
 

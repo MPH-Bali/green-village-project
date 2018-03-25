@@ -54,7 +54,7 @@
              <p class="body-2 mb-1">Notes</p>
              <p>{{ data.notes || '-' }}</p>   
            </v-flex>
-           <v-flex xs3>
+           <v-flex xs3 text-xs-right>
               <a :href="'mailto:' + data.email" v-if="data.email">
                 <v-btn color="primary">
                   Send Email
@@ -72,6 +72,30 @@
         <v-flex xs12>
           <p class="title">Sales history</p>
         </v-flex>
+        <v-data-table
+          :loading="$firestore.collectionsPending.sales"
+          :headers="headers"
+          :items="buyersSales"
+          :light="true"
+          no-data-text="No Sales"
+          hide-actions class="buyers-table"
+          pagination.sync="pagination">
+          <template slot="items" slot-scope="props">
+            <td class="text-xs-center">{{ props.item.date || $moment().format('DD/MM/YYYY') }}</td>
+            <td class="text-xs-center">{{ props.item.materials[0].material.name }}</td>
+            <td class="text-xs-center">{{  props.item.materials[0].kilo }}kg</td>
+            <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
+            <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
+            <td class="text-xs-center">
+                <v-btn icon @click="">
+                  <v-icon size="16px" color="primary">edit</v-icon>
+                </v-btn>
+                <v-btn icon @click="">
+                  <v-icon size="16px" color="primary">close</v-icon>
+                </v-btn>                
+            </td>
+          </template>
+        </v-data-table>
       </v-container>  
     </v-card>
 
@@ -90,7 +114,89 @@ export default {
   data () {
     return {
       getPending: false,
-      data: {}
+      data: {},
+      headers: [
+        { text: 'Date', align: 'center', sortable: true, value: 'name' },
+        { text: 'Material/Compost', align: 'center', sortable: true, value: 'company' },
+        { text: 'Kg', align: 'center', sortable: true, value: 'sales.length' },
+        { text: 'Cost/Kg', align: 'center', sortable: true, value: 'lastPurchase' },
+        { text: 'Final Price', sortable: true, align: 'center', value: 'finalPrice' },
+        { text: '', sortable: false, align: 'center', value: null }
+      ]
+    }
+  },
+  computed: {
+    allSales () {
+      // return this.$firestore.list.sales;
+      return [
+        {
+          buyer: {
+            id: '6yW9uHBgM3X9T7Qhgm1E',
+            name: 'Michael'
+          },
+          materials: [
+            {
+              material: {
+                id: 'Tu4SFfDhBUgAwGsvfopc',
+                name: 'plastic'
+              },
+              kilo: 200,
+              pricePerKilo: 20000
+            }
+          ]
+        },
+        {
+          buyer: {
+            id: '7TOr2Qzwi8tnHKfHNjwB',
+            name: 'Michael'
+          },
+          materials: [
+            {
+              material: {
+                id: 'Tu4SFfDhBUgAwGsvfopc',
+                name: 'plastic'
+              },
+              kilo: 200,
+              pricePerKilo: 20000
+            }
+          ]
+        },
+        {
+          buyer: {
+            id: '6yW9uHBgM3X9T7Qhgm1E',
+            name: 'Michael'
+          },
+          materials: [
+            {
+              material: {
+                id: 'Tu4SFfDhBUgAwGsvfopc',
+                name: 'plastic'
+              },
+              kilo: 200,
+              pricePerKilo: 20000
+            }
+          ]
+        },
+        {
+          buyer: {
+            id: '6yW9uHBgM3X9T7Qhgm1E',
+            name: 'Michael'
+          },
+          materials: [
+            {
+              material: {
+                id: 'Tu4SFfDhBUgAwGsvfopc',
+                name: 'plastic'
+              },
+              kilo: 200,
+              pricePerKilo: 20000
+            }
+          ]
+        }
+      ]
+    },
+    buyersSales () {
+      return this.allSales.filter(sale => sale.buyer.id === this.data.id)
     }
   },
   created () {
@@ -103,8 +209,8 @@ export default {
       this.getPending = false
       this.data = result
     },
-    sendEmail() {
-
+    computeFinalPrice (item) {
+      return item.materials[0].kilo * item.materials[0].pricePerKilo
     }
   }
 }

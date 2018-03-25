@@ -24,10 +24,10 @@
         :items="buyersList"
         :search="search"
         :light="true"
+        :rows-per-page-items="[10, 5, 25,{text: 'All',value: -1}]"
         no-data-text="No data"
         no-results-text="No buyers found"
-        hide-actions class="buyers-table"
-        pagination.sync="pagination">
+        class="buyers-table">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.name }}</td>
           <td class="text-xs-center">{{ props.item.company }}</td>
@@ -40,11 +40,11 @@
           </td>
         </template>
       </v-data-table>
-
+<!-- 
       <div class="text-xs-center pt-2">
         <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
       </div>
-      
+       -->
     </v-card>
   </v-container>
 </template>
@@ -54,7 +54,6 @@ export default {
   data () {
     return {
       search: '',
-      pagination: {},
       headers: [
         { text: 'Name', align: 'center', sortable: true, value: 'name' },
         { text: 'Company', align: 'center', sortable: true, value: 'company' },
@@ -65,13 +64,8 @@ export default {
     }
   },
   computed: {
-    pages () {
-      if (this.pagination.rowsPerPage == null ||
-        this.pagination.totalItems == null) return 0
-      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-    },
     sales () {
-      // return this.$firestore.collections.sales
+      // return this.$firestore.list.sales
       //  test data
       return [
         {
@@ -148,7 +142,7 @@ export default {
       }, {})
     },
     buyers () {
-      return this.$firestore.collections.person.filter(person => {
+      return this.$firestore.list.person.filter(person => {
         return person.type && person.type.buyer
       })
     },

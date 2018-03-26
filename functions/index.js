@@ -79,55 +79,61 @@ functions.firestore.document('workerhours/{id}').onCreate(event => {
 
 // customer data
 exports.chartsCustomerData =
-functions.firestore.document('person/{id}').onWrite((event) => {
-			let data = [];
-			let promises = [];
-			let types = ['household', 'villa', 'business'];
+  functions.firestore.document('person/{id}').onWrite((event) => {
+    let data = [];
+    let promises = [];
+    let types = ['household', 'villa', 'business'];
 
-			 const getHouseTypeCount = (type)  => {
-				return db.collection('person').where('houseType', '==', type).get()
-				.then(snapshot => {
-					data[type + 'Count'] = parseInt(snapshot.size);
-					return;
-				})
-			}
+    const getHouseTypeCount = (type) => {
+      return db.collection('person').where('houseType', '==', type).get()
+        .then(snapshot => {
+          data[type + 'Count'] = parseInt(snapshot.size);
+          return;
+        })
+    }
 
-			types.forEach(type => {
-				promises.push(getHouseTypeCount(type));
-			})
+    types.forEach(type => {
+      promises.push(getHouseTypeCount(type));
+    })
 
-			return Promise.all(promises)
-			.then(() => {
-				console.log(data);
-				return charts.set({customerData: {
-						householdCount: data.householdCount + data.villaCount + data.businessCount,
-						households: data.householdCount,
-						businesses: data.businessCount,
-						villas: data.villaCount
-					}
-				}, { merge: true })
-			})
-			.catch(e => console.log(e));
-    });
+    return Promise.all(promises)
+      .then(() => {
+        console.log(data);
+        return charts.set({
+          customerData: {
+            householdCount: data.householdCount + data.villaCount + data.businessCount,
+            households: data.householdCount,
+            businesses: data.businessCount,
+            villas: data.villaCount
+          }
+        }, {
+          merge: true
+        })
+      })
+      .catch(e => console.log(e));
+  });
 
 // total No. client (person.type.client)
 exports.chartsTotalClientNo =
-	functions.firestore.document('person/{id}').onWrite((event) => {
-		let clients = 0;
-		return db.collection('person').get()
-		.then(snapshot => {
-			snapshot.forEach(doc => {
-				let data = doc.data();
-				console.log(data);
-				if(data.type && data.type.client) {
-					clients++;
-				}
-			})
-			return charts.set({totalClients: clients
-			}, { merge: true })
-		})
-		.catch(e => console.log(e));
-})
+  functions.firestore.document('person/{id}').onWrite((event) => {
+    let clients = 0;
+    return db.collection('person').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let data = doc.data();
+          console.log(data);
+          if (data.type && data.type.client) {
+            clients++;
+          }
+        })
+        return charts.set({
+          totalClients: clients
+        }, {
+          merge: true
+        })
+      })
+      .catch(e => console.log(e));
+  })
 
 
     // material weight per type

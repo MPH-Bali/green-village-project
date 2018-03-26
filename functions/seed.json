@@ -5,17 +5,99 @@
       "village": "Pererenan",
       "materialTypes": [
         {
-          "name": "Plastic",
+          "name": "PET Clear",
           "pricePerKilo": 2000
         },
         {
-          "name": "Metal",
+          "name": "PET Colored",
           "pricePerKilo": 2000
+        },
+        {
+          "name": "HDPE",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "PVC",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "PP",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "PS",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "O",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "ABS",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "Cardboard",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Newspaper",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Whitepaper",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Magazine",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Old book",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Cement sack",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Tetrapack",
+          "pricePerKilo": 1000
+        },
+        {
+          "name": "Aluminium can",
+          "pricePerKilo": 10000
+        },
+        {
+          "name": "Tin can",
+          "pricePerKilo": 10000
+        },
+        {
+          "name": "Scrap metal",
+          "pricePerKilo": 10000
+        },
+        {
+          "name": "Iron",
+          "pricePerKilo": 10000
         }
       ],
       "expenseType": [
-        "maintenance",
-        "other"
+        "Fuel Diesel",
+        "Fuel",
+        "Collection Sacks (Kampil)",
+        "Bamboo Baskets (Kranjang)",
+        "Keys & Locks",
+        "Jerry Can",
+        "Collection Bucket",
+        "Glue",
+        "Pens & Marker",
+        "Writing Books",
+        "Water Galon",
+        "Sewing Yarn",
+        "MPH Stickers",
+        "MPH Posters",
+        "Clip Board",
+        "-Other-"
       ],
       "houseTypes": [
         "villa",

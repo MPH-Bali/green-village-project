@@ -1,5 +1,5 @@
 <template>
-  <v-app class="manager-container">
+  <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
         <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
@@ -17,7 +17,7 @@
     </v-toolbar>
     <v-content>
       <v-slide-y-transition mode="out-in">
-        <router-view @message="newMessage"/>
+        <router-view class="pb-5" @message="newMessage"/>
       </v-slide-y-transition>
     </v-content>
     <Toast :message="toastMessage"/>
@@ -105,8 +105,5 @@ export default {
 <style>
   .main-mph img {
     height: 50px;
-  }
-  .manager-container .application--wrap {
-    padding-bottom: 40px;
   }
 </style>

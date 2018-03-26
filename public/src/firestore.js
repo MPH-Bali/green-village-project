@@ -22,23 +22,28 @@ export default new Vue({
       user: null,
       person: null,
       fees: [],
+      charts: null,
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
         material: [],
-        workerhours: []
+        workerhours: [],
+        expense: []
       },
       collections: {
         banjar: [],
         person: [],
-        sales: []
+        sales: [],
+        settings: []
       },
       collectionsPending: {
         delivery: false,
         banjar: false,
         person: false,
         workerhours: false,
-        sales: false
+        sales: false,
+        settings: false,
+        expense: false
       }
     }
   },
@@ -67,6 +72,13 @@ export default new Vue({
       this.start = today > newDate ? newDate : today
       this.end = this.$moment(this.start).endOf('day')
       this.syncDailyData()
+    },
+    syncCharts () {
+      db.collection('charts').doc(this.$moment().format('YYYY-ww')).onSnapshot(
+        snapshot => {
+          console.log(snapshot.data())
+          Vue.set(this, 'charts', snapshot.data())
+        })
     },
     syncData () {
       Object.keys(this.collections).forEach((collection) => {

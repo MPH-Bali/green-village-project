@@ -7,15 +7,15 @@
     </v-fade-transition>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
-          <v-icon>fa-recycle</v-icon>
+        <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
+         <img src="../../assets/mph_logo.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-title v-text="$t(`routeNames.${$route.name}`)" />
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat>
+        <v-btn flat @click="clickMenu">
           <v-icon size="30px">menu</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -23,24 +23,12 @@
     <login v-if="!$firestore.user" />
     <unapproved v-else-if="$firestore.person && !$firestore.person.approved" />
     <template v-else>
-      <v-content>
+	  <v-content>	
         <v-slide-y-transition mode="out-in">
-          <router-view />
-        </v-slide-y-transition>
-      </v-content>
-      <v-bottom-nav app :value="$route.path" v-if="$route.path !== '/manager/login'" color="grey darken-4">
-        <v-btn
-          flat
-          color="primary"
-        :value="section.route"
-          v-for="section in sections"
-        :key="section.name"
-        @click.stop="$router.push(section.route)"
-        >
-          <span class="mt-1">{{ section.name }}</span>
-          <v-icon icon="blue" class="mt-1" size="20px">{{ section.icon }}</v-icon>
-        </v-btn>
-      </v-bottom-nav>
+        <router-view @message="newMessage"/>
+    	</v-slide-y-transition>
+	  </v-content>
+      <Toast :message="toastMessage"/>
     </template>
   </v-app>
 </template>
@@ -49,6 +37,7 @@
 import LoadingMask from './LoadingMask'
 import Login from '@/components/Manager/Login/Login'
 import Unapproved from '@/components/Manager/Login/Unapproved'
+import Toast from './UI/Toast'
 
 export default {
   name: 'Manager',
@@ -58,10 +47,13 @@ export default {
   components: {
     LoadingMask,
     Login,
-    Unapproved
+    Unapproved,
+    Toast
   },
   data () {
     return {
+      menuOpened: false,
+      toastMessage: {},
       sections: [
         {
           name: this.$i18n.t('bottomMenu.dailyLog'),
@@ -105,6 +97,29 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    newMessage (message) {
+      this.toastMessage = message
+      setTimeout(() => {
+        this.toastMessage = {}
+      }, 3000)
+    },
+    clickMenu () {
+      if (this.menuOpened) {
+        this.menuOpened = false
+        this.$router.go(-1)
+      } else {
+        this.menuOpened = true
+        this.$router.push('/manager/menu')
+      }
+    }
   }
 }
 </script>
+
+<style>
+  .main-mph img {
+    height: 50px;
+  }
+</style>

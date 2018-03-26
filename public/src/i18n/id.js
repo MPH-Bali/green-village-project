@@ -1,7 +1,8 @@
 export default {
   // example string
   routeNames: {
-    customerDetail: 'Detail Pelanggan'
+    customerDetail: 'Detail Pelanggan',
+    newCustomer: 'Pelanggan Baru'
   },
 
   home: {

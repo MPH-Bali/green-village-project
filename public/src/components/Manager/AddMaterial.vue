@@ -101,7 +101,7 @@ export default {
     }
   },
   methods: {
-    save () {
+    async save () {
       if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
       } else {
@@ -112,26 +112,18 @@ export default {
           this.formData.banjar = null
         }
 
-        if (this.formData.id) {
-          this.updateMaterial()
-        } else {
-          this.newMaterial()
-        }
+        this.formData.organic = parseInt(this.formData.organic)
+        this.formData.inorganic = parseInt(this.formData.inorganic)
+        this.formData.timestamp = new Date()
+
+        await this.$firestore.save('material', this.formData)
+
+        this.$emit('message', {
+          text: 'Material saved',
+          type: 'success'
+        })
         this.clearForm()
       }
-    },
-    newMaterial () {
-      const payload = {
-        worker: this.formData.worker,
-        organic: parseInt(this.formData.organic),
-        inorganic: parseInt(this.formData.inorganic),
-        banjar: this.formData.banjar,
-        timestamp: new Date()
-      }
-      this.$firestore.add('material', payload)
-    },
-    updateMaterial () {
-      this.$firestore.update('material', this.formData)
     },
     hideError () {
       this.error = ''

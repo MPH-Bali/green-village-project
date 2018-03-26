@@ -3,7 +3,7 @@
     <p class="display-3 text-xs-center">Menu</p>
       <v-layout wrap>
         <template v-for="(item, index) in items">
-          <v-flex xs12 sm6>
+          <v-flex xs12 sm6 :key="index">
             <MenuItem :name="item.name" :position="index" :path="item.path" />
           </v-flex>
         </template>
@@ -30,7 +30,7 @@ export default {
         { name: 'ADD STOCK', path: '/manager' },
         { name: 'CONTACT ADMIN', path: '/manager' },
         { name: 'CREATE SALE', path: '/manager' },
-        { name: 'LOGOUT', path: '/manager' },
+        { name: 'LOGOUT', path: '/manager/login' },
         { name: 'ADD EXPENSE', path: '/manager/expense' }
       ]
     }

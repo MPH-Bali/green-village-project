@@ -52,8 +52,6 @@ export default new Vue({
       // Show loading mask initially while we wait for firebase auth to init.
       this.loading = true
       firebase.auth().onAuthStateChanged(async user => {
-        // Whenever auth state changed ensure loading mask shown.
-        this.loading = true
         if (user) {
           this.user = user
           this.person = await this.getUserByUid(user.uid)

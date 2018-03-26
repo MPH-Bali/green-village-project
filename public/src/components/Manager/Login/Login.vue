@@ -14,7 +14,7 @@ import ConfirmationForm from './ConfirmationForm'
 
 export default {
   mounted () {
-    if (this.$firebase.user) {
+    if (this.$firestore.user) {
       try {
         this.$firebase.auth().signOut()
       } catch (error) {

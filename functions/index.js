@@ -64,18 +64,14 @@ functions.firestore.document('workerhours/{id}').onCreate(event => {
 })
 
 // total material weight
-// exports.totalMaterialWeight =
-// functions.firestore.document('material/{id}').onCreate(event => {
-//   const times = event.data.data().times
-//   return charts.get().then(snapShot => {
-//     // Assign the current worker hours or set default
-//     let workerHours = snapShot.data().workerHours || [0, 0, 0, 0, 0, 0, 0]
-//     // Add the day of the added entry to the total worker hours
-//     workerHours[moment(times.in).day()] += Math.abs(times.in - times.out) / 36e5
-//     // Save the change to db
-//     return charts.set({ workerHours }, { merge: true })
-//   })
-// })
+exports.totalMaterialWeight =
+functions.firestore.document('material/{id}').onCreate(event => {
+  const material = event.data.data()
+  return charts.get().then(snapShot => {
+    let totalMaterialWeight = (snapShot.data().totalMaterialWeight || 0) + material.inorganic + material.organic
+    return charts.set({ totalMaterialWeight }, { merge: true })
+  })
+})
 
 // customer data
 exports.chartsCustomerData =

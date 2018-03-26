@@ -1,7 +1,19 @@
 export default {
-  /**
-   * @desc these keys MUST coorlate with the @/router Router.routes.children.name value
-   */
+
+  models: {
+    customers: {
+      labels: {
+        name: 'Customer Name',
+        email: 'Email',
+        houseType: 'Type',
+        address: 'Address',
+        notes: 'Notes',
+        whatsapp: 'Whatsapp',
+        phone: 'SMS/Call'
+      }
+    }
+  },
+  // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',

@@ -14,11 +14,7 @@
           <v-btn color="primary" dark slot="activator">Language</v-btn>
             <v-list>
               <v-list-tile v-for="item in items" :key="item.title">
-<<<<<<< HEAD
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-=======
                 <v-list-tile-title @click="lang(item.value)">{{ item.title }}</v-list-tile-title>
->>>>>>> d9ca81df9d790389a1b943007e35731664285b79
               </v-list-tile>
             </v-list>
     </v-menu>

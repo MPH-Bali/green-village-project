@@ -11,7 +11,7 @@
       <log-header class="mt-4" action="/manager/material" title="Material Kg" />
       <MaterialTable/>
 
-      <log-header class="mt-4" action="/manager/stock" title="Stock" />
+      <log-header class="mt-4" action="/manager/stock" title="Stock Kg" />
       <StockTable/>
 
       <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />

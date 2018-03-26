@@ -26,6 +26,7 @@ export default new Vue({
       start: null,
       end: null,
       fees: [],
+      charts: null,
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],
@@ -57,6 +58,13 @@ export default new Vue({
       this.start = today > newDate ? newDate : today
       this.end = this.$moment(this.start).endOf('day')
       this.syncDailyData()
+    },
+    syncCharts () {
+      db.collection('charts').doc(this.$moment().format('YYYY-ww')).onSnapshot(
+      snapshot => {
+        console.log(snapshot.data())
+        Vue.set(this, 'charts', snapshot.data())
+      })
     },
     syncData () {
       Object.keys(this.collections).forEach((collection) => {

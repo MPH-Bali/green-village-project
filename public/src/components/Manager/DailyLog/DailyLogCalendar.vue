@@ -1,5 +1,5 @@
 <template>
-   <v-flex text-xs-center class="datepicker-container">
+   <v-flex text-xs-center>
      <p class="title">
        <v-btn icon 
               class="mr-0 ml-0" 

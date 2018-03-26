@@ -1,37 +1,6 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row wrap>
-      <v-flex xs12>
-        <v-card color="primary">
-          <v-card-text>
-            <h2 class="subheading white--text">{{ $t("home.welcome") }}</h2>
-            <h1 class="display-1 white--text">{{facilityData.name}} Facility</h1>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs12>
-        <v-card>
-          <v-card-text>
-            <v-avatar color="grey lighten-2" size="80px">
-              <v-icon size="50px">people</v-icon>
-            </v-avatar>
-            <h1 class="headline mt-2">MEMBERS</h1>
-            <p>We’re already a lot, but we want all {{customerData.householdCount}} Pererenan households to join us!</p>
-            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalBarChartOptions" />
-            <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs12>
-        <v-card color="grey lighten-2">
-          <v-card-text>
-            <h1 class="headline mt-2">Recycling Efficiency</h1>
-            <doughnut-chart :height="300" :chart-data="materialData" />
-          </v-card-text>
-        </v-card>
-      </v-flex>
 
       <v-flex xs12>
         <v-card>
@@ -87,16 +56,14 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">COLLECTION</h1>
             <v-layout row>
               <v-flex xs6 sm6 md6>
-                <v-icon size="50px">multiline_chart</v-icon>
-                <h1 class="title">{{pickupsData.totalPickups}}</h1>
-                <h1 class="mb-3 headline primary--text">PICKUPS</h1>
+                <h1 class="title headline primary--text">{{pickupsData.totalPickups}}</h1>
+                <h1 class="mb-3 headline">Pickups</h1>
               </v-flex>
               <v-flex xs6 sm 6 md6>
-                <h1 class="title">{{pickupsData.totalWeight}}</h1>
-                <h1 class="mb-3 headline primary--text">Tons</h1>
+                <h1 class="title headline primary--text">{{pickupsData.totalWeight}}</h1>
+                <h1 class="mb-3 headline">Tons</h1>
               </v-flex>
           </v-layout>
           </v-card-text>
@@ -157,6 +124,29 @@
                 </v-flex>
             </v-layout>
           </v-container>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-card>
+          <v-card-text>
+            <v-avatar color="grey lighten-2" size="80px">
+              <v-icon size="50px">people</v-icon>
+            </v-avatar>
+            <h1 class="headline mt-2">MEMBERS</h1>
+            <p>We’re already a lot, but we want all {{customerData.householdCount}} Pererenan households to join us!</p>
+            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalBarChartOptions" />
+            <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-card color="grey lighten-2">
+          <v-card-text>
+            <h1 class="headline mt-2">Recycling Efficiency</h1>
+            <doughnut-chart :height="300" :chart-data="materialData" />
           </v-card-text>
         </v-card>
       </v-flex>

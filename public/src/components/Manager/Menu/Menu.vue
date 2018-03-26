@@ -1,14 +1,12 @@
 <template>
   <v-container grid-list-lg>
       <v-layout wrap>
-        <template v-for="(item, index) in items">
-          <v-flex xs12 sm6>
-            <MenuItem :name="item.name" 
-                      :position="index" 
-                      :path="item.path" 
-                      :disabled="item.disabled" />
-          </v-flex>
-        </template>
+        <v-flex xs12 sm6 v-for="(item, index) in items" :key="item.name">
+          <MenuItem :name="item.name"
+            :position="index"
+            :path="item.path"
+            :disabled="item.disabled" />
+        </v-flex>
       </v-layout>
   </v-container>
 </template>

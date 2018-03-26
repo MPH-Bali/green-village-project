@@ -9,6 +9,8 @@ export default {
     deliveryForm: 'Delivery Form',
     addMaterial: 'Add material',
     workerHours: 'Check workers',
+    addStock: 'Add Stock',
+    editStockForm: 'Edit Stock Form',
     customerDetail: 'Customer Detail',
     buyers: 'Buyers',
     'buyer-edit': 'Add/Edit Buyer',

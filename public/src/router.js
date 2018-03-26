@@ -11,6 +11,8 @@ import Customers from '@/components/Manager/Customers'
 import NewCustomer from '@/components/Manager/NewCustomer'
 import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import Menu from '@/components/Manager/Menu/Menu'
+import AddStock from '@/components/Manager/AddStock/AddStock'
+import EditStockForm from '@/components/Manager/AddStock/EditStockForm'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
@@ -60,6 +62,8 @@ export default new Router({
         { path: 'customers/new', name: 'newCustomer', component: NewCustomer, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: 'customers', name: 'customers', component: Customers, props: true },
+        { path: 'stock', name: 'addStock', component: AddStock, props: true },
+        { path: 'edit-stock-form/:id?', name: 'editStockForm', component: EditStockForm, props: true },
         { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
         { path: 'menu', name: 'menu', component: Menu },
         { path: '*', redirect: '/manager' }

@@ -32,7 +32,7 @@
               <td>{{ props.item.name }}</td>
               <td>{{ props.item.type }}</td>
               <td>{{ props.item.address }}</td>
-              <td>{{ props.item.idrPerMonth }}</td>
+              <td>{{ props.item.lastFeePaid.monthlyFee }}</td>
               <td>{{ props.item.lastFeePaid.paidUntil }}</td>
               <td>
                 <v-btn flat :href="customerURL(props.item)">
@@ -61,7 +61,8 @@ export default {
         return filter(row['name'], search) ||
           filter(row['type'], search) ||
           filter(row['address'], search) ||
-          filter(row['idr'], search)
+          filter(row.lastFeePaid.monthlyFee, search) ||
+          filter(row.lastFeePaid.paidUntil, search)
       })
     },
     customerURL (person) {
@@ -119,12 +120,7 @@ export default {
         return {
           ...customer,
           type: customer.houseType ? customer.houseType.name : '',
-          lastFeePaid: {
-            timestamp: new Date(),
-            monthlyFee: 100000,
-            feePaid: 100000,
-            paidUntil: new Date() + (60 * 60 * 24 * 30)
-          }
+          lastFeePaid: customer.lastFeePaid ? customer.lastFeePaid : { paidUntil: '-', monthlyFee: '-' }
         }
       })
     }

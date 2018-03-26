@@ -38,7 +38,7 @@ const week = moment().format('YYYY-ww')
 const charts = db.collection('charts').doc(week)
 
 // total No. devlieries
-exports.totalPickups = 
+exports.totalPickups =
 functions.firestore.document('delivery/{id}').onCreate(event => {
   // Get current chart data
   return charts.get().then(snapShot => {
@@ -50,7 +50,7 @@ functions.firestore.document('delivery/{id}').onCreate(event => {
 })
 
 // total hours per day
-exports.workerHours = 
+exports.workerHours =
 functions.firestore.document('workerhours/{id}').onCreate(event => {
   const times = event.data.data().times
   return charts.get().then(snapShot => {
@@ -64,7 +64,7 @@ functions.firestore.document('workerhours/{id}').onCreate(event => {
 })
 
 // total material weight
-// exports.totalMaterialWeight = 
+// exports.totalMaterialWeight =
 // functions.firestore.document('material/{id}').onCreate(event => {
 //   const times = event.data.data().times
 //   return charts.get().then(snapShot => {
@@ -77,10 +77,42 @@ functions.firestore.document('workerhours/{id}').onCreate(event => {
 //   })
 // })
 
+// customer data
+exports.chartsCustomerData =
+functions.firestore.document('person/{id}').onWrite((event) => {
+			let data = [];
+			let promises = [];
+			let types = ['household', 'villa', 'business'];
 
-    
+			 const getHouseTypeCount = (type)  => {
+				return db.collection('person').where('houseType', '==', type).get()
+				.then(snapshot => {
+					data[type + 'Count'] = parseInt(snapshot.size);
+					return;
+				})
+				.catch(e => console.log(e));
+			}
+
+			types.forEach(type => {
+				promises.push(getHouseTypeCount(type));
+			})
+
+			return Promise.all(promises)
+			.then(() => {
+				console.log(data);
+				return charts.set({customerData: {
+						householdCount: data.householdCount + data.villaCount + data.businessCount,
+						households: data.householdCount,
+						businesses: data.businessCount,
+						villas: data.villaCount
+					}
+				}, { merge: true })
+			})
+    });
+
+
     // total No. client (person.type.client)
-    // material weight per type 
+    // material weight per type
     // total fees per day (last 7)
     // total fees per month (last 5)
     // total expenses per month by type (last 5)

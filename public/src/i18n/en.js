@@ -49,7 +49,7 @@ export default {
     cancel: 'cancel',
     worker: 'worker',
     organic: 'organic',
-    anorganic: 'anorganic',
+    anorganic: 'inorganic',
     error: 'error',
     save: 'save',
     update: 'update',

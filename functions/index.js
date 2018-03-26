@@ -5,7 +5,7 @@ const data = require('./seed.json');
 const dbHelper = require('./dbHelper');
 const db = admin.firestore();
 const moment = require('moment');
-
+/* temporary
 exports.dbInit = functions.https.onRequest((req, res) => {
 	let promises = [];
 
@@ -31,7 +31,7 @@ exports.dbDestroy = functions.https.onRequest((req, res) => {
 		.then(() => res.status(200).send())
 		.catch(e => console.log(e))
 })
-
+*/
 
 // Chart reference
 const week = moment().format('YYYY-ww')

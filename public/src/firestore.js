@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import moment from 'vue-moment'
-import { db } from '@/firebase'
+import firebase, { db } from '@/firebase'
 
 Vue.use(moment)
 
@@ -18,7 +18,9 @@ export default new Vue({
       dailySubscriptions: [],
       start: null,
       end: null,
+      loading: false,
       user: null,
+      person: null,
       fees: [],
       // ToDo: Add all collections
       dailyCollections: {
@@ -41,6 +43,24 @@ export default new Vue({
     }
   },
   methods: {
+    initStore () {
+      // Show loading mask initially while we wait for firebase auth to init.
+      this.loading = true
+      firebase.auth().onAuthStateChanged(async user => {
+        // Whenever auth state changed ensure loading mask shown.
+        this.loading = true
+        if (user) {
+          this.user = user
+          this.person = await this.getUserByUid(user.uid)
+          // If the user is attached to an approved person in the system, load app data.
+          if (this.person && this.person.approved) {
+            this.$firestore.changeDate()
+            this.$firestore.syncData()
+          }
+        }
+        this.loading = false
+      })
+    },
     changeDate (date) {
       const newDate = this.$moment(date)
       const today = this.$moment().startOf('day')

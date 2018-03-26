@@ -6,6 +6,9 @@
 
 <style scoped>
   .loadingWheelContainer{
+    position: fixed;
+    z-index: 99;
+    background-color: white;
     display: flex;
     height: 100vh;
     width: 100%;

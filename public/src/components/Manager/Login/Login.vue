@@ -14,9 +14,7 @@ import ConfirmationForm from './ConfirmationForm'
 
 export default {
   mounted () {
-    // We don't have a logout button at the moment,
-    // so this route will log the user out if they have already logged in.
-    if (this.$firebase.auth().currentUser) {
+    if (this.$firebase.user) {
       try {
         this.$firebase.auth().signOut()
       } catch (error) {

@@ -167,12 +167,12 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">Newsletter Signup</h1>
-            <p>Sign up and stay up to date with it</p>
-            <v-form  ref="form" lazy-validation>
+            <h1 class="headline mt-2">{{ $t('headers.newsletterSignup')}}</h1>
+            <p>{{ $t('common.newsletterSignup') }}</p>
+            <v-form ref="form" lazy-validation>
               <v-text-field label="Email" flat v-model="form.email" :rules="emailRules" required />
             </v-form>
-            <v-btn @click="submit" color="primary" type="submit" depressed>Join Us</v-btn>
+            <v-btn @click="submit" color="primary" type="submit" depressed>{{ $t('forms.joinus') }}</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>

@@ -6,6 +6,14 @@ export default {
     publicFacility: 'Public Facility'
   },
   models: {
+    fees: {
+      labels: {
+        timestamp: 'Date Time',
+        totalPaid: 'Total Paid',
+        paidUntil: 'Paid Until',
+        monthlyFee: 'Monthly Fee'
+      }
+    },
     customers: {
       labels: {
         name: 'Customer Name',
@@ -20,11 +28,21 @@ export default {
     }
   },
   forms: {
+    joinus: 'Join Us',
     save: 'Save',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    collectFee: 'Collect Fee',
+    sendEmail: 'Send Email',
+    approve: 'Approve',
+    decline: 'Decline',
+    ok: 'Ok'
   },
   toasts: {
     feeAdded: 'Fee Added'
+  },
+  headers: {
+    paymentHistory: 'Payment History',
+    newsletterSignup: 'Newsletter Signup'
   },
   // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
@@ -48,6 +66,14 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    newsletterSignup: 'Sign up and stay up to date with it',
+    pickupSchedule: 'Pickup Schedule',
+    signup: 'Sign Up',
+    language: 'Language',
+    sendFeedback: 'Send Feedback',
+    contactUs: 'Contact Us',
+    contribute: 'Contribute',
+    faq: 'FAQ',
     number: 'no.',
     notes: 'notes',
     time: 'time',

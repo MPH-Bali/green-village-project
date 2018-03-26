@@ -5,7 +5,7 @@
         <v-flex sx6>
           <v-btn @click="$router.go(-1)" flat>
              <v-icon size="20px" color="blue darken-2">arrow_back</v-icon>
-             <span class="ml-1">Back</span>
+             <span class="ml-1">{{ $t('common.back') }}</span>
            </v-btn>
         </v-flex>
         <v-flex sx6></v-flex>
@@ -14,19 +14,19 @@
         <v-card>
           <v-layout row wrap>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Customer Name</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.name') }}</h3>
               <p class="subheading">
                 {{person.name}}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Type</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.houseType') }}</h3>
               <p class="subheading">
                 {{ person.houseType }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">SMS/Call</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.phone') }}</h3>
               <p class="subheading">
                 {{ person.phone }}
               </p>
@@ -34,19 +34,19 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Whatsapp</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.whatsapp') }}</h3>
               <p class="subheading">
                 {{ person.whatsapp }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Email</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.email') }}</h3>
               <p class="subheading">
                 {{ person.email }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Address</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.address') }}</h3>
               <p class="subheading">
                 {{ person.address }}
               </p>
@@ -54,7 +54,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex md3 xs12 pa-3>
-              <h3 class="mb-3">Notes</h3>
+              <h3 class="mb-3">{{ $t('models.customers.labels.notes') }}</h3>
               <p class="subheading">
                 {{ notes }}
               </p>
@@ -67,16 +67,16 @@
                     <v-btn
                       @click="decline"
                       color="error"
-                      large>Decline</v-btn>
+                      large>{{ $t('forms.decline') }}</v-btn>
                     <v-btn
                       @click="approve"
                       color="info"
-                      large>Approve</v-btn>
+                      large>{{ $t('forms.approve') }}</v-btn>
                   </template>
                   <v-btn
                     v-if="person.email"
                     v-bind:href="mailto"
-                    color="success" large>Send Email</v-btn>
+                    color="success" large>{{ $t('forms.sendEmail') }}</v-btn>
               </v-card-actions>
             </v-flex>
           </v-layout>
@@ -86,7 +86,7 @@
       <v-flex xs12>
         <v-card>
           <v-card-title primary-title>
-            <h3 class="mb-0">Payment History</h3>
+            <h3 class="mb-0">{{ $t('headers.paymentHistory') }}</h3>
           </v-card-title>
           <v-layout pa-2 row align-center>
             <v-flex sm9>
@@ -106,11 +106,11 @@
                       prepend-icon="event"
                       readonly
                       class="accent" solo flat
-                      label="Date Time" />
+                      :label="$t('models.fees.labels.timestamp')" />
                     <v-date-picker v-model="form.timestamp">
                       <v-spacer></v-spacer>
-                      <v-btn flat color="primary" @click="timestampModal = false">Cancel</v-btn>
-                      <v-btn flat color="primary" @click="$refs.timestampModal.save(form.timestamp)">OK</v-btn>
+                      <v-btn flat color="primary" @click="timestampModal = false">{{ $t('forms.cancel') }}</v-btn>
+                      <v-btn flat color="primary" @click="$refs.timestampModal.save(form.timestamp)">{{ $t('forms.ok') }}</v-btn>
                     </v-date-picker>
                   </v-dialog>
                 </v-flex>
@@ -119,14 +119,14 @@
                     type="number"
                     class="accent" solo flat
                     v-model="form.monthlyFee"
-                    label="Monthly Fee" />
+                    :label="$t('models.fees.labels.monthlyFee')" />
                 </v-flex>
                 <v-flex sm3>
                   <v-text-field
                     type="number"
                     v-model="form.totalPaid"
                     class="accent" solo flat
-                    label="Total Paid" />
+                    :label="$t('models.fees.labels.totalPaid')" />
                 </v-flex>
                 <v-flex sm3>
                   <v-dialog
@@ -143,11 +143,11 @@
                       prepend-icon="event"
                       readonly
                       class="accent" solo flat
-                      label="Paid Until"></v-text-field>
+                      :label="$t('models.fees.labels.paidUntil')"></v-text-field>
                     <v-date-picker v-model="form.paidUntil">
                       <v-spacer></v-spacer>
-                      <v-btn flat color="primary" @click="paidUntilModal = false">Cancel</v-btn>
-                      <v-btn flat color="primary" @click="$refs.paidUntilDialog.save(form.paidUntil)">OK</v-btn>
+                      <v-btn flat color="primary" @click="paidUntilModal = false">{{ $t('forms.cancel') }}</v-btn>
+                      <v-btn flat color="primary" @click="$refs.paidUntilDialog.save(form.paidUntil)">{{ $t('forms.ok') }}</v-btn>
                     </v-date-picker>
                   </v-dialog>
                 </v-flex>
@@ -158,7 +158,7 @@
                 :disabled="submitting || !valid"
                 :loading="submitting"
                 @click="addFee"
-                large block color="success">Collect Fee</v-btn>
+                large block color="success">{{ $t('forms.collectFee') }}</v-btn>
             </v-flex>
           </v-layout>
         </v-card>
@@ -257,10 +257,10 @@ export default {
       form: {},
       person: {},
       headers: [
-        { text: 'Date Time', value: 'timestamp', align: 'center' },
-        { text: 'Monthly Fee', value: 'monthlyFee', align: 'center' },
-        { text: 'Total Paid', value: 'totalPaid', align: 'center' },
-        { text: 'Paid Until', value: 'paidUntil', align: 'center' }
+        { text: this.$t('models.fees.labels.timestamp'), value: 'timestamp', align: 'center' },
+        { text: this.$t('models.fees.labels.monthlyFee'), value: 'monthlyFee', align: 'center' },
+        { text: this.$t('models.fees.labels.totalPaid'), value: 'totalPaid', align: 'center' },
+        { text: this.$t('models.fees.labels.paidUntil'), value: 'paidUntil', align: 'center' }
       ],
       items: []
     }

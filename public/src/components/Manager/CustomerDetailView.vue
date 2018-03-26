@@ -22,7 +22,7 @@
             <v-flex md3 xs12 pa-3>
               <h3 class="mb-3">Type</h3>
               <p class="subheading">
-                {{ houseType }}
+                {{ person.houseType }}
               </p>
             </v-flex>
             <v-flex md3 xs12 pa-3>
@@ -119,7 +119,7 @@
                     type="number"
                     class="accent" solo flat
                     v-model="form.monthlyFee"
-                    flat label="Monthly Fee" />
+                    label="Monthly Fee" />
                 </v-flex>
                 <v-flex sm3>
                   <v-text-field
@@ -244,9 +244,6 @@ export default {
     decided () {
       const { approved, declined } = this.person
       return approved || declined
-    },
-    houseType: function () {
-      return this.person.houseType ? this.person.houseType.name : 'n/a'
     },
     notes: function () {
       return this.person.notes ? this.person.notes : '-'

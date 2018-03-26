@@ -10,14 +10,20 @@
       <v-toolbar-items class="mr-0">
         <v-btn flat @click="$router.push('/pickup-schedule')">Pickup Schedule</v-btn>
         <v-btn flat @click="$router.push('/sign-up')" >Sign Up</v-btn>
-        <v-menu offset-y>
-          <v-btn color="primary" dark slot="activator">Language</v-btn>
-            <v-list>
-              <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
-                <v-list-tile-title@click="lang(item.value)">{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-    </v-menu>
+        <v-menu offset-y :auto="true">
+          <v-btn flat slot="activator">
+            <img :src="currentLangItem && currentLangItem.img">
+          </v-btn>
+          <v-list class="py-0">
+            <v-list-tile v-for="item in items" 
+                        :key="item.title"  
+                         v-bind:class="{ 'active': item.value === currentLang }" >
+              <v-list-tile-title @click="lang(item.value)" class="btn__content">
+                <img :src="item.img"/>
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -59,7 +65,22 @@
 <script>
 export default {
   data: () => ({
-    items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
+    items: [{
+      title: 'Bahasa',
+      value: 'id',
+      img: 'http://www.countryflags.io/ID/shiny/32.png'
+    }, {
+      title: 'English',
+      value: 'en',
+      img: 'http://www.countryflags.io/GB/shiny/32.png'
+    }],
+    langItems: [{
+      text: 'Bahasa',
+      value: 'id'
+    }, {
+      text: 'English',
+      value: 'en'
+    }]
   }),
   created () {
     this.$firestore.syncCharts()
@@ -72,6 +93,9 @@ export default {
   computed: {
     currentLang () {
       return this.$root.$options.i18n.locale
+    },
+    currentLangItem () {
+      return this.items.find(item => item.value === this.currentLang)
     }
   }
 }

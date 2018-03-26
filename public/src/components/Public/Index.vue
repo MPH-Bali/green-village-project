@@ -13,8 +13,8 @@
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Language</v-btn>
             <v-list>
-              <v-list-tile v-for="item in items" :key="item.title">
-                <v-list-tile-title @click="lang(item.value)">{{ item.title }}</v-list-tile-title>
+              <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
+                <v-list-tile-title@click="lang(item.value)">{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
     </v-menu>
@@ -26,7 +26,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view />
+              <router-view v-if="$firestore.charts"/>
             </v-slide-y-transition>
           </v-layout>
         </v-flex>
@@ -61,18 +61,29 @@ export default {
   data: () => ({
     items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
   }),
+  created () {
+    this.$firestore.syncCharts()
+  },
   methods: {
     lang (val) {
       this.$root.$options.i18n.locale = val
+    }
+  },
+  computed: {
+    currentLang () {
+      return this.$root.$options.i18n.locale
     }
   }
 }
 </script>
 
-</script>
-
 <style scoped>
 .main-mph img {
-  height: 50px;
+  height: 50px; 
+}
+
+.active {
+  background-color: #42853d;
+  color: white;
 }
 </style>

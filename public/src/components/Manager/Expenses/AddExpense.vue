@@ -94,7 +94,10 @@ export default {
       this.formData.timestamp = new Date()
 
       this.$firestore.save('expense', this.formData).then(() => {
-        this.$emit('message', 'Expense saved', 'success')
+        this.$emit('message', {
+          text: 'Expense saved',
+          type: 'success'
+        })
         this.$router.go(-1)
       })
     },

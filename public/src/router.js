@@ -7,6 +7,7 @@ import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
+import Menu from '@/components/Manager/Menu/Menu'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
@@ -54,6 +55,7 @@ export default new Router({
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
+        { path: 'menu', name: 'menu', component: Menu },
         { path: '*', redirect: '/manager' }
       ]
     },

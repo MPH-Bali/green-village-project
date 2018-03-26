@@ -90,7 +90,6 @@ functions.firestore.document('person/{id}').onWrite((event) => {
 					data[type + 'Count'] = parseInt(snapshot.size);
 					return;
 				})
-				.catch(e => console.log(e));
 			}
 
 			types.forEach(type => {
@@ -108,14 +107,34 @@ functions.firestore.document('person/{id}').onWrite((event) => {
 					}
 				}, { merge: true })
 			})
+			.catch(e => console.log(e));
     });
 
+// total No. client (person.type.client)
+exports.chartsTotalClientNo =
+	functions.firestore.document('person/{id}').onWrite((event) => {
+		let clients = 0;
+		return db.collection('person').get()
+		.then(snapshot => {
+			snapshot.forEach(doc => {
+				let data = doc.data();
+				console.log(data);
+				if(data.type && data.type.client) {
+					clients++;
+				}
+			})
+			return charts.set({totalClients: clients
+			}, { merge: true })
+		})
+		.catch(e => console.log(e));
+})
 
-    // total No. client (person.type.client)
+
     // material weight per type
     // total fees per day (last 7)
     // total fees per month (last 5)
     // total expenses per month by type (last 5)
+
     // total stock per day (last 5)
 
 // analytics/wqewqe

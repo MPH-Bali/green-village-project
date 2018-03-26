@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph">
+        <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
          <img src="../../assets/mph_logo.png">
         </v-btn>
       </v-toolbar-items>

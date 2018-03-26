@@ -87,7 +87,6 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">{{ $t('headers.collection') }}</h1>
             <v-layout row>
               <v-flex xs6 sm6 md6>
                 <v-icon size="50px">multiline_chart</v-icon>
@@ -157,6 +156,29 @@
                 </v-flex>
             </v-layout>
           </v-container>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-card>
+          <v-card-text>
+            <v-avatar color="grey lighten-2" size="80px">
+              <v-icon size="50px">people</v-icon>
+            </v-avatar>
+            <h1 class="headline mt-2">MEMBERS</h1>
+            <p>We’re already a lot, but we want all {{customerData.householdCount}} Pererenan households to join us!</p>
+            <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalBarChartOptions" />
+            <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-card color="grey lighten-2">
+          <v-card-text>
+            <h1 class="headline mt-2">Recycling Efficiency</h1>
+            <doughnut-chart :height="300" :chart-data="materialData" />
           </v-card-text>
         </v-card>
       </v-flex>

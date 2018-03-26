@@ -24,6 +24,7 @@
 import LogHeader from './DailyLogHeader'
 import DeliveryTable from '@/components/Manager/Delivery/Table'
 import MaterialTable from './DailyLogMaterialTable'
+import StockTable from './DailyLogStockTable'
 import WorkerTimes from './DailyLogWorkersTable'
 import ExpensesTable from './DailyLogExpensesTable'
 import Calendar from './DailyLogCalendar'
@@ -42,6 +43,7 @@ export default {
     MaterialTable,
     WorkerTimes,
     ExpensesTable,
+    StockTable,
     Calendar
   },
   data () {

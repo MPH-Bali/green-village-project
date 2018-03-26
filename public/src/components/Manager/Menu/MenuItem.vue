@@ -7,6 +7,7 @@
       large
       color="blue-grey"
       @click="click"
+      :disabled="disabled"
       class="white--text menu-item">
         {{ name }}
       </v-btn>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  props: ['name', 'position', 'icon', 'path'],
+  props: ['name', 'position', 'icon', 'path', 'disabled'],
   computed: {
     left () {
       return this.position % 2 === 0

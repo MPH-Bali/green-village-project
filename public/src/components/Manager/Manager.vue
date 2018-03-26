@@ -23,9 +23,9 @@
     <login v-if="!$firestore.user" />
     <unapproved v-else-if="$firestore.person && !$firestore.person.approved" />
     <template v-else>
-	  <v-content>	
+	  <v-content>
         <v-slide-y-transition mode="out-in">
-        <router-view @message="newMessage"/>
+        <router-view class="pb-5" @message="newMessage"/>
     	</v-slide-y-transition>
 	  </v-content>
       <Toast :message="toastMessage"/>

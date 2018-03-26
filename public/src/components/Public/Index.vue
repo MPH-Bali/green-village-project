@@ -2,8 +2,8 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
-          <v-icon>fa-recycle</v-icon>
+        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph">
+         <img src="../../assets/mph_logo.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
@@ -26,7 +26,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view />
+              <router-view v-if="$firestore.charts"/>
             </v-slide-y-transition>
           </v-layout>
         </v-flex>
@@ -61,6 +61,9 @@ export default {
   data: () => ({
     items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
   }),
+  created () {
+    this.$firestore.syncCharts()
+  },
   methods: {
     lang (val) {
       this.$root.$options.i18n.locale = val
@@ -75,6 +78,10 @@ export default {
 </script>
 
 <style scoped>
+.main-mph img {
+  height: 50px; 
+}
+
 .active {
   background-color: #42853d;
   color: white;

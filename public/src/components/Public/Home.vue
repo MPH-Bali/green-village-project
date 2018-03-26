@@ -90,12 +90,13 @@
             <h1 class="headline mt-2">COLLECTION</h1>
             <v-layout row>
               <v-flex xs6 sm6 md6>
+                <v-icon size="50px">multiline_chart</v-icon>
                 <h1 class="title">{{pickupsData.totalPickups}}</h1>
-                <h1 class="mb-3 headline primary--text">COLLECTIONS</h1>
+                <h1 class="mb-3 headline primary--text">PICKUPS</h1>
               </v-flex>
               <v-flex xs6 sm 6 md6>
                 <h1 class="title">{{pickupsData.totalWeight}}</h1>
-                <h1 class="mb-3 headline primary--text">PICKUPS</h1>
+                <h1 class="mb-3 headline primary--text">Tons</h1>
               </v-flex>
           </v-layout>
           </v-card-text>
@@ -187,6 +188,28 @@ export default {
       console.log('Submit join us')
     }
   },
+  computed: {
+    pickupsData () {
+      return {
+        totalPickups: this.$firestore.charts.totalPickups,
+        totalWeight: this.$firestore.charts.totalMaterialWeight
+      }
+    },
+    hoursData () {
+      return {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Hours',
+            fill: false,
+            backgroundColor: '#cd2027',
+            borderColor: '#cd2027',
+            data: this.$firestore.charts.workerHours
+          }
+        ]
+      }
+    }
+  },
   data () {
     return {
       form: {},
@@ -207,18 +230,6 @@ export default {
             firstName: 'Mutu',
             lastName: 'Lutu',
             role: 'Manager'
-          }
-        ]
-      },
-      hoursData: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        datasets: [
-          {
-            label: 'Hours',
-            fill: false,
-            backgroundColor: '#cd2027',
-            borderColor: '#cd2027',
-            data: [35, 43, 46, 64, 60, 75, 90]
           }
         ]
       },
@@ -334,10 +345,6 @@ export default {
           }
         ]
       },
-      pickupsData: {
-        totalPickups: 40,
-        totalWeight: 40
-      },
       barChartOptions: {
         scales: {
           xAxes: [{ stacked: true }],
@@ -362,3 +369,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

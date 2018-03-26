@@ -1,18 +1,30 @@
 <template>
-   <v-flex text-xs-center>
+   <v-flex text-xs-center class="datepicker-container">
      <p class="title">
-       <v-btn icon class="mr-3" @click="fetchDayilyData(previousDay)">
+       <v-btn icon 
+              class="mr-0 ml-0" 
+              @click="fetchDayilyData(previousDay)">
          <v-icon>chevron_left</v-icon>
        </v-btn>
-       <v-icon color="primary">event</v-icon>
-       <span>{{ $moment(logDate).format('ddd, DD MMM YYYY') }}</span>
+       <v-icon color="primary" @click="displayDatePicker">event</v-icon>
+       <span @click="displayDatePicker">{{ $moment(logDate).format('ddd, DD MMM YYYY') }}</span>
        <v-btn icon 
-              class="ml-3"
+              class="ml-0 mr-0"
              @click="fetchDayilyData(nextDay)" 
              :disabled="isToday">
          <v-icon>chevron_right</v-icon>
        </v-btn>
      </p>
+
+     <v-dialog v-model="showDatePicker" width="290px">
+        <v-card>
+          <v-date-picker v-model="pickerDate" 
+                         color="primary"
+                        @input="fetchDayilyData">
+          </v-date-picker>            
+        </v-card>
+      </v-dialog>
+
    </v-flex>
 </template>
 
@@ -27,6 +39,8 @@ export default {
   },
   data () {
     return {
+      pickerDate: null,
+      showDatePicker: false
     }
   },
   computed: {
@@ -47,8 +61,13 @@ export default {
   },
   methods: {
     fetchDayilyData (date) {
+      this.showDatePicker = false
       this.$router.push({ name: 'dailyLogHistory', params: { date } })
       this.$firestore.changeDate(date)
+    },
+    displayDatePicker () {
+      this.pickerDate = this.logDate.format('YYYY-MM-DD')
+      this.showDatePicker = true
     }
   },
   created () {

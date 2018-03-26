@@ -55,12 +55,9 @@ export default new Router({
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
-<<<<<<< HEAD
         { path: 'customers', name: 'customers', component: Customers, props: true },
-=======
         { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
         { path: 'menu', name: 'menu', component: Menu },
->>>>>>> develop
         { path: '*', redirect: '/manager' }
       ]
     },

@@ -129,7 +129,27 @@ const settingsCollection = {
   importantVillageGuy: {
     id: 'Tu4SFfDhBUgAwGsvfopc', // person id
     name: 'Michael'
-  }
+  },
+  materialTypes: [
+    {
+      name: 'Plastic',
+      pricePerKilo: 2000
+    },
+    {
+      name: 'Metal',
+      pricePerKilo: 2000
+    }        
+  ],
+  expenseType: [
+    'maintenance',
+    'other'
+  ],
+  houseTypes: [
+    'villa',
+    'household',
+    'business',
+    'public facilities'
+  ]
   // + other information about the facility that we might need
 }
 
@@ -254,13 +274,6 @@ const banjarCollection = [
   }
 ];
 
-const materialTypeCollection = [
-  {
-    name: 'Material 1',
-    pricePerKilo: 2000
-  }
-]
-
 const materialCollection = [
  {
 	worker: {
@@ -277,13 +290,6 @@ const materialCollection = [
    }
 ]
 
-// villa, household, business
-const houseTypesCollection = [
-  {
-    name: 'Villa',
-    collectionFee: 20000
-  }
-]
 ```
 ---
 

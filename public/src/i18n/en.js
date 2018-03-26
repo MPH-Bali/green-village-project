@@ -48,7 +48,20 @@ export default {
     delivery: 'Delivery',
     materialKg: 'Material Kg',
     workerHours: 'Workers Hours',
-    addExpense: 'Add Expense'
+    addExpense: 'Add Expense',
+    dailyStock: 'Daily Stock',
+    revenue: 'Revenue',
+    expenses: 'Expenses',
+    income: 'Income',
+    collection: 'Collection',
+    team: 'Team',
+    workingHours: 'Working Hours',
+    bannerMaterials: 'Banner Materials',
+    facilityData: 'Facility Data',
+    pickups: 'Pickups',
+    tons: 'Tons',
+    members: 'Members',
+    recyclingEfficiency: 'Recycling Efficiency'
   },
   // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
@@ -72,6 +85,10 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    members: "We're already a lot, but we want all {count} Pererenan households to join us!",
+    facility: '{facility} Facility',
+    pickups: 'Pickups for {facility} are scheduled as follow:',
+    downloadInfo: "Download information and PDF to understand what we're doing",
     details: 'Details',
     timestamp: 'Time',
     newsletterSignup: 'Sign up and stay up to date with it',

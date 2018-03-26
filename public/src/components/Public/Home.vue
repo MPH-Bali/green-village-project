@@ -5,7 +5,7 @@
         <v-card color="primary">
           <v-card-text>
             <h2 class="subheading white--text">{{ $t("home.welcome") }}</h2>
-            <h1 class="display-1 white--text">{{facilityData.name}} Facility</h1>
+            <h1 class="display-1 white--text">{{ $t('common.facility', { facility: facilityData.name }) }}</h1>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -16,10 +16,10 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">people</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">MEMBERS</h1>
-            <p>We’re already a lot, but we want all {{customerData.householdCount}} Pererenan households to join us!</p>
+            <h1 class="headline mt-2">{{ $t('headers.members') }}</h1>
+            <p>{{ $t('common.members', { count: customerData.householdCount }) }}</p>
             <horizontal-bar-chart :height="50" :chart-data="customerData" :options="horizontalBarChartOptions" />
-            <v-btn color="primary" depressed @click="$router.push('/sign-up')">Join Us</v-btn>
+            <v-btn color="primary" depressed @click="$router.push('/sign-up')">{{ $t('forms.joinus') }}</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -27,7 +27,7 @@
       <v-flex xs12>
         <v-card color="grey lighten-2">
           <v-card-text>
-            <h1 class="headline mt-2">Recycling Efficiency</h1>
+            <h1 class="headline mt-2">{{ $t('headers.recyclingEfficiency') }}</h1>
             <doughnut-chart :height="300" :chart-data="materialData" />
           </v-card-text>
         </v-card>
@@ -40,7 +40,7 @@
               <v-icon size="50px">multiline_chart</v-icon>
             </v-avatar>
             <h1 class="headline mt-2">{{facilityData.name}}</h1>
-            <h1 class="headline">FACILITY DATA</h1>
+            <h1 class="headline">{{ $t('headers.facilityData') }}</h1>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -48,7 +48,7 @@
       <v-flex xs12 md6>
         <v-card>
           <v-card-text class="text-xs-center">
-            <h1 class="title">Daily stock</h1>
+            <h1 class="title">{{ $t('headers.dailyStock') }}</h1>
             <line-chart :height="300" :chart-data="dailyStockData" />
           </v-card-text>
         </v-card>
@@ -57,7 +57,7 @@
       <v-flex xs12 md6>
         <v-card>
           <v-card-text class="text-xs-center">
-            <h1 class="title">Revenue</h1>
+            <h1 class="title">{{ $t('headers.revenue') }}</h1>
             <line-chart :height="300" :chart-data="revenueData" />
           </v-card-text>
         </v-card>
@@ -66,7 +66,7 @@
       <v-flex xs12 md6>
         <v-card>
           <v-card-text class="text-xs-center">
-            <h1 class="title">Expenses</h1>
+            <h1 class="title">{{ $t('headers.expenses') }}</h1>
             <bar-chart :height="300" :chart-data="expensesData" :options="barChartOptions" />
           </v-card-text>
         </v-card>
@@ -75,7 +75,7 @@
       <v-flex xs12 md6>
         <v-card>
           <v-card-text class="text-xs-center">
-            <h1 class="title">Income</h1>
+            <h1 class="title">{{ $t('headers.income') }}</h1>
             <bar-chart :height="300" :chart-data="incomeData" :options="barChartOptions" />
           </v-card-text>
         </v-card>
@@ -87,16 +87,16 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">COLLECTION</h1>
+            <h1 class="headline mt-2">{{ $t('headers.collection') }}</h1>
             <v-layout row>
               <v-flex xs6 sm6 md6>
                 <v-icon size="50px">multiline_chart</v-icon>
                 <h1 class="title">{{pickupsData.totalPickups}}</h1>
-                <h1 class="mb-3 headline primary--text">PICKUPS</h1>
+                <h1 class="mb-3 headline primary--text">{{ $t('headers.pickups') }}</h1>
               </v-flex>
               <v-flex xs6 sm 6 md6>
                 <h1 class="title">{{pickupsData.totalWeight}}</h1>
-                <h1 class="mb-3 headline primary--text">Tons</h1>
+                <h1 class="mb-3 headline primary--text">{{ $t('headers.tons') }}</h1>
               </v-flex>
           </v-layout>
           </v-card-text>
@@ -109,8 +109,8 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">TEAM</h1>
-            <p>Pickups for {{facilityData.name}} are scheduled as follow:</p>
+            <h1 class="headline mt-2">{{ $t('headers.team') }}</h1>
+            <p>{{ $t('common.pickups', { facility: facilityData.name }) }}</p>
             <v-container fluid grid-list-xl>
               <v-layout row>
                  <v-flex xs4 sm4 md4 style="align-self: center;">
@@ -127,7 +127,7 @@
           <v-flex xs12>
             <v-card>
               <v-card-text class="text-xs-center">
-                <h1 class="title">Working Hours</h1>
+                <h1 class="title">{{ $t('headers.workingHours') }}</h1>
                 <bar-chart :height="300" :chart-data="hoursData" :options="horizontalBarChartOptions" />
               </v-card-text>
             </v-card>
@@ -143,8 +143,8 @@
             <v-avatar color="grey lighten-2" size="80px">
               <v-icon size="50px">assignment_turned_in</v-icon>
             </v-avatar>
-            <h1 class="headline mt-2">Banner Materials</h1>
-            <p>Pickups for {{facilityData.name}} are scheduled as follow:</p>
+            <h1 class="headline mt-2">{{ $t('headers.bannerMaterials') }}</h1>
+            <p>{{ $t('common.pickups', { facility: facilityData.name}) }}</p>
             <v-container fluid grid-list-xl>
               <v-layout row>
                  <v-flex xs4 sm4 md4 style="align-self: center;">
@@ -153,7 +153,7 @@
                   </v-avatar>
                 </v-flex>
                 <v-flex xs8>
-                  <p>Download information and PDF to understand what we're doing</p>
+                  <p>{{ $t('common.downloadInfo') }}</p>
                 </v-flex>
             </v-layout>
           </v-container>

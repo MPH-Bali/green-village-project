@@ -48,7 +48,20 @@ export default {
     delivery: 'Pengiriman',
     materialKg: 'Material Kg',
     workerHours: 'Jam Kerja',
-    addExpense: 'Tambahkan Pengeluaran'
+    addExpense: 'Tambahkan Pengeluaran',
+    dailyStock: 'Stok Harian',
+    revenue: 'Penghasilan',
+    expenses: 'Pengeluaran',
+    income: 'Pemasukkan',
+    collection: 'Pengambilan',
+    team: 'Tim',
+    workingHours: 'Jam Kerja',
+    bannerMaterials: 'Spanduk Material',
+    facilityData: 'Data Fasilitas',
+    pickups: 'Penjemputan',
+    tons: 'Ton',
+    members: 'Anggota',
+    recyclingEfficiency: 'Efisiensi Daur Ulang'
   },
   routeNames: {
     dailyLog: 'Catatan Harian',
@@ -71,6 +84,10 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    members: 'Jumlah kita sudah banyak, tapi kita ingin agar {count} rumah tangga di Pererenan untuk bergabung bersama kami!',
+    facility: 'Fasilitas {facility}',
+    pickups: 'Jemputan untuk {facility} telah terjadwal sebagai berikut:',
+    downloadInfo: 'Unggah informasi dan PDF ini untuk mengerti tentang apa yang kami lakukan',
     details: 'Detail',
     timestamp: 'Tanggal Waktu',
     newsletterSignup: 'Daftar dan dapatkan kabar terbaru',

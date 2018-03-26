@@ -2,8 +2,28 @@
   "settings": [
     {
       "name": "Facility 1",
-      "village": "Pererenan"
-    }
+      "village": "Pererenan",
+      "materialTypes": [
+        {
+          "name": "Plastic",
+          "pricePerKilo": 2000
+        },
+        {
+          "name": "Metal",
+          "pricePerKilo": 2000
+        }
+      ],
+      "expenseType": [
+        "maintenance",
+        "other"
+      ],
+      "houseTypes": [
+        "villa",
+        "household",
+        "business",
+        "public facilities"
+      ]
+    },
   ],
   "person": [
     {
@@ -104,10 +124,7 @@
   "stock": [
     {
       "timestamp": "2018-03-15T09:55:48.942Z",
-      "material": {
-        "id": "materialType1",
-        "name": "plastic"
-      },
+      "material": "plastic",
       "amount": 200
     }
   ],
@@ -129,10 +146,7 @@
       },
       "materials": [
         {
-          "material": {
-            "id": "materialType1",
-            "name": "plastic"
-          },
+          "materialType": "plastic",
           "kilo": 200,
           "pricePerKilo": 20000
         }
@@ -145,18 +159,6 @@
       "monthly_fee": 50,
       "total_paid": 200,
       "paid_until": "2018-07-15T09:55:48.942Z"
-    }
-  ],
-  "materialType": [
-    {
-      "name": "Plastic",
-      "pricePerKilo": 2000
-    }
-  ],
-  "houseType": [
-    {
-      "name": "Villa",
-      "collectionFee": 20000
     }
   ],
   "banjar": [

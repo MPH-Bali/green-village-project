@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap my-2>
+  <v-layout row wrap my-2 align-center>
     <v-flex xs2 text-xs-left pt-0>
       <v-btn flat class="mt-1" @click="$router.go(-1)">
         <v-icon small color="blue darken-2">arrow_back</v-icon>
@@ -13,6 +13,7 @@
       </p>
     </v-flex>
     <v-flex xs2>
+      <slot name="right"></slot>
     </v-flex>
   </v-layout>
 </template>

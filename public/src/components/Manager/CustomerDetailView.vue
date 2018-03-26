@@ -212,15 +212,23 @@ export default {
 
       this.submitting = true
 
+      const fee = this.form
+
       this.$firestore.add('fee', {
-        ...this.form,
+        ...fee,
         personId: this.$route.params.id
       }).then(() => {
-        this.submitting = false
-        this.form = {}
-        this.$emit('message', {
-          text: 'Fee added',
-          type: 'success'
+        this.$firestore.update('person', {
+          ...this.person,
+          lastFeePaid: fee
+        }).then(() => {
+          this.submitting = false
+          this.form = {}
+          this.$emit('message', {
+            text: 'Fee added',
+            type: 'success',
+            ding: true
+          })
         })
       })
     }

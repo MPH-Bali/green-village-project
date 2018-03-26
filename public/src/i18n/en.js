@@ -15,7 +15,7 @@ export default {
     'buyer-edit': 'Add/Edit Buyer',
     'buyer-details': 'Buyer Details',
     addExpense: 'Add Expense',
-    menu: 'Daily Log',
+    menu: 'Menu',
     customers: 'Customers',
     newCustomer: 'New Customer'
   },

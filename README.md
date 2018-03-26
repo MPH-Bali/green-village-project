@@ -175,7 +175,7 @@ const personCollection = [
       facilityManager: false,
       superAdmin: true
     },
-    houseType: name: 'villa',
+    houseType: 'villa',
     approved: false,
 		lastFeePaid: [Object fee]
   }

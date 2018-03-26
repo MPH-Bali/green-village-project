@@ -8,6 +8,8 @@ import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Menu from '@/components/Manager/Menu/Menu'
+import AddStock from '@/components/Manager/AddStock/AddStock'
+import EditStockForm from '@/components/Manager/AddStock/EditStockForm'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
 import BuyerDetails from '@/components/Manager/Buyers/BuyerDetails'
@@ -55,6 +57,8 @@ export default new Router({
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },
+        { path: 'stock', name: 'addStock', component: AddStock, props: true },
+        { path: 'edit-stock-form/:id?', name: 'Edit Stock Form', component: EditStockForm, props: true },
         { path: 'menu', name: 'menu', component: Menu },
         { path: '*', redirect: '/manager' }
       ]

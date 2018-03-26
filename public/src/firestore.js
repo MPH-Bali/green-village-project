@@ -38,7 +38,8 @@ export default new Vue({
         banjar: [],
         person: [],
         sales: [],
-        settings: []
+        settings: [],
+        stock: []
       },
       collectionsPending: {
         delivery: false,
@@ -47,7 +48,8 @@ export default new Vue({
         workerhours: false,
         sales: false,
         settings: false,
-        expense: false
+        expense: false,
+        stock: false
       }
     }
   },

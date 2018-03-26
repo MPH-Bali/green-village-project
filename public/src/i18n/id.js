@@ -1,21 +1,63 @@
 export default {
+  houseTypes: {
+    villa: 'villa',
+    business: 'bisnis',
+    household: 'rumah tangga',
+    publicFacility: 'fasilitas umum'
+  },
   models: {
+    fees: {
+      labels: {
+        timestamp: 'Tanggal Waktu',
+        totalPaid: 'Total Pembayaran',
+        paidUntil: 'Terbayar Sampai',
+        monthlyFee: 'Biaya Bulanan'
+      }
+    },
     customers: {
       labels: {
-        name: 'Customer Name',
+        name: 'Nama Pelanggan',
         email: 'Email',
-        houseType: 'Type',
-        address: 'Address',
-        notes: 'Notes',
+        houseType: 'Jenis',
+        address: 'Alamat',
+        notes: 'Catatan',
         whatsapp: 'Whatsapp',
-        phone: 'SMS/Call'
+        phone: 'SMS/Telepon',
+        company: 'Perusahaan'
       }
     }
   },
-  // example string
+  forms: {
+    joinus: 'Bergabung Dengan Kami',
+    save: 'Simpan',
+    cancel: 'Batalkan',
+    collectFee: 'Pungut Biaya',
+    sendEmail: 'Kirim Email',
+    approve: 'Setujui',
+    decline: 'Batalkan',
+    ok: 'Ok'
+  },
+  toasts: {
+    feeAdded: 'Tambahkan Biaya'
+  },
+  headers: {
+    paymentHistory: 'Riwayat Pembayaran',
+    newsletterSignup: 'Daftar Bulletin'
+  },
   routeNames: {
+    dailyLog: 'Catatan Harian',
+    dailyLogHistory: 'Riwayat Catatan Harian',
+    deliveryForm: 'Formulir Pengiriman',
+    addMaterial: 'Tambahkan Material',
+    workerHours: 'Cek Pekerja',
     customerDetail: 'Detail Pelanggan',
-    newCustomer: 'Pelanggan Baru'
+    newCustomer: 'Pelanggan Baru',
+    buyers: 'Pembeli',
+    'buyer-edit': 'Tambah/Sunting Pembeli',
+    'buyer-details': 'Detail Pembeli',
+    addExpense: 'Tambahkan Pengeluaran',
+    menu: 'Catatan Harian',
+    customers: 'Pelanggan'
   },
 
   home: {
@@ -23,6 +65,14 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    newsletterSignup: 'Daftar dan dapatkan kabar terbaru',
+    pickupSchedule: 'Jadwal Penjemputan',
+    signup: 'Registrasi',
+    language: 'Bahasa',
+    sendFeedback: 'Kirim Komen',
+    contactUs: 'Hubungi Kami',
+    contribute: 'Ikut-serta',
+    faq: 'FAQ',
     number: 'no.',
     notes: 'catatan',
     time: 'jam',

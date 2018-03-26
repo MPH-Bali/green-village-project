@@ -26,7 +26,8 @@ export default {
     'buyer-details': 'Buyer Details',
     addExpense: 'Add Expense',
     menu: 'Daily Log',
-    customers: 'Customers'
+    customers: 'Customers',
+    newCustomer: 'New Customer'
   },
   // example string
   home: {
@@ -61,7 +62,7 @@ export default {
     cancel: 'cancel',
     worker: 'worker',
     organic: 'organic',
-    anorganic: 'anorganic',
+    anorganic: 'inorganic',
     error: 'error',
     save: 'save',
     update: 'update',

@@ -2,12 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Manager from '@/components/Manager/Manager'
-import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Customers from '@/components/Manager/Customers'
+import NewCustomer from '@/components/Manager/NewCustomer'
+import CustomerDetailView from '@/components/Manager/CustomerDetailView'
 import Menu from '@/components/Manager/Menu/Menu'
 
 import Buyers from '@/components/Manager/Buyers/Buyers'
@@ -54,6 +55,7 @@ export default new Router({
         { path: 'buyer/edit/:id?', name: 'buyer-edit', component: BuyerEdit, props: true },
         { path: 'material', name: 'addMaterial', component: AddMaterial },
         { path: 'worker-hours/:id?', name: 'workerHours', component: WorkerTimes, props: true },
+        { path: 'customers/new', name: 'newCustomer', component: NewCustomer, props: true },
         { path: 'customers/:id', name: 'customerDetail', component: CustomerDetailView, props: true },
         { path: 'customers', name: 'customers', component: Customers, props: true },
         { path: 'expense/:id?', name: 'addExpense', component: AddExpense, props: true },

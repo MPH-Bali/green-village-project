@@ -1,4 +1,17 @@
 export default {
+  models: {
+    customers: {
+      labels: {
+        name: 'Customer Name',
+        email: 'Email',
+        houseType: 'Type',
+        address: 'Address',
+        notes: 'Notes',
+        whatsapp: 'Whatsapp',
+        phone: 'SMS/Call'
+      }
+    }
+  },
   // example string
   routeNames: {
     customerDetail: 'Detail Pelanggan',

@@ -1,5 +1,10 @@
 export default {
-
+  houseTypes: {
+    villa: 'Villa',
+    business: 'Business',
+    household: 'Household',
+    publicFacility: 'Public Facility'
+  },
   models: {
     customers: {
       labels: {
@@ -9,9 +14,17 @@ export default {
         address: 'Address',
         notes: 'Notes',
         whatsapp: 'Whatsapp',
-        phone: 'SMS/Call'
+        phone: 'SMS/Call',
+        company: 'Company'
       }
     }
+  },
+  forms: {
+    save: 'Save',
+    cancel: 'Cancel'
+  },
+  toasts: {
+    feeAdded: 'Fee Added'
   },
   // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {

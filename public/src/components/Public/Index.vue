@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import localStorage from 'local-storage'
+
 export default {
   data: () => ({
     items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
@@ -66,7 +68,8 @@ export default {
   },
   methods: {
     lang (val) {
-      this.$root.$options.i18n.locale = val
+      localStorage.set('locale', val)
+      this.$i18n.locale = val
     }
   },
   computed: {
@@ -79,7 +82,7 @@ export default {
 
 <style scoped>
 .main-mph img {
-  height: 50px; 
+  height: 50px;
 }
 
 .active {

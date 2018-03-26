@@ -12,6 +12,7 @@ import router from './router'
 import i18n from './i18n'
 import './elements'
 import firestore from './firestore'
+import localStorage from 'local-storage'
 
 Vue.prototype.$firestore = firestore
 

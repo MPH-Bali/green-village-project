@@ -225,7 +225,7 @@ export default {
           this.submitting = false
           this.form = {}
           this.$emit('message', {
-            text: 'Fee added',
+            text: this.$t('toasts.feeAdded'),
             type: 'success',
             ding: true
           })

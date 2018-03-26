@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="manager-container">
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
         <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
@@ -105,5 +105,8 @@ export default {
 <style>
   .main-mph img {
     height: 50px;
+  }
+  .manager-container .application--wrap {
+    padding-bottom: 40px;
   }
 </style>

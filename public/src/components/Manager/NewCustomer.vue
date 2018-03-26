@@ -143,9 +143,6 @@ export default {
       submitting: false,
       form: {}
     }
-  },
-  created () {
-
   }
 }
 </script>

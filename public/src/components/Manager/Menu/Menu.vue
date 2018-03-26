@@ -1,12 +1,14 @@
 <template>
   <v-container grid-list-lg>
       <v-layout wrap>
-        <v-flex xs12 sm6 v-for="(item, index) in items" :key="item.name">
-          <MenuItem :name="item.name"
-            :position="index"
-            :path="item.path"
-            :disabled="item.disabled" />
-        </v-flex>
+        <template v-for="(item, index) in items">
+          <v-flex xs12 sm6>
+            <MenuItem :name="item.name"
+                      :position="index"
+                      :path="item.path"
+                      :disabled="item.disabled" />
+          </v-flex>
+        </template>
       </v-layout>
   </v-container>
 </template>
@@ -20,18 +22,18 @@ export default {
   data () {
     return {
       items: [
-        { name: 'SEND DAY REPORT', path: '/manager/daily-log', disabled: true },
-        { name: 'ADD DELIVERY', path: '/manager/delivery-form' },
-        { name: 'ADD DAILY NOTE', path: '/manager/daily-log', disabled: true },
-        { name: 'WEIGH MATERIAL', path: '/manager/material' },
-        { name: 'CUSTOMERS LIST', path: '/manager/customers' },
-        { name: 'WORKERS HOURS', path: '/manager/daily-log', disabled: true },
-        { name: 'BUYERS LIST', path: '/manager/buyers' },
-        { name: 'ADD STOCK', path: '/manager/stock' },
-        { name: 'CONTACT ADMIN', path: '/contact-us' },
-        { name: 'CREATE SALE', path: '/manager/daily-log', disabled: true },
-        { name: 'LOGOUT', path: '/manager/daily-log', disabled: true },
-        { name: 'ADD EXPENSE', path: '/manager/expense' }
+        { name: this.$t('menu.sendDayReport'), path: '/manager' },
+        { name: this.$t('menu.addDelivery'), path: '/manager/delivery-form' },
+        { name: this.$t('menu.addDailyNote'), path: '/manager' },
+        { name: this.$t('menu.weighMaterial'), path: '/material' },
+        { name: this.$t('menu.customersList'), path: '/manager/customers' },
+        { name: this.$t('menu.workersHours'), path: '/manager' },
+        { name: this.$t('menu.buyersList'), path: '/manager/buyers' },
+        { name: this.$t('menu.addStock'), path: '/manager' },
+        { name: this.$t('menu.contactAdmin'), path: '/manager' },
+        { name: this.$t('menu.createSale'), path: '/manager' },
+        { name: this.$t('menu.logout'), path: '/manager' },
+        { name: this.$t('menu.addExpense'), path: '/manager/expense' }
       ]
     }
   }

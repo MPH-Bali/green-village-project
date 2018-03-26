@@ -1,7 +1,86 @@
 export default {
-  /**
-   * @desc these keys MUST coorlate with the @/router Router.routes.children.name value
-   */
+  tables: {
+    headers: {
+      name: 'Name',
+      timeIn: 'Time In',
+      timeOut: 'Time Out',
+      actions: 'Actions',
+      time: 'Time',
+      worker: 'Worker',
+      inorganic: 'Inorganic',
+      organic: 'Organic',
+      banjar: 'Banjar',
+      type: 'Type',
+      cost: 'Cost',
+      notes: 'Notes'
+    }
+  },
+  houseTypes: {
+    villa: 'Villa',
+    business: 'Business',
+    household: 'Household',
+    publicFacility: 'Public Facility',
+    businesses: 'Businesses',
+    facilities: 'Facilities'
+  },
+  models: {
+    fees: {
+      labels: {
+        timestamp: 'Date Time',
+        totalPaid: 'Total Paid',
+        paidUntil: 'Paid Until',
+        monthlyFee: 'Monthly Fee'
+      }
+    },
+    customers: {
+      labels: {
+        name: 'Customer Name',
+        email: 'Email',
+        houseType: 'Type',
+        address: 'Address',
+        notes: 'Notes',
+        whatsapp: 'Whatsapp',
+        phone: 'SMS/Call',
+        company: 'Company'
+      }
+    }
+  },
+  forms: {
+    joinus: 'Join Us',
+    save: 'Save',
+    cancel: 'Cancel',
+    collectFee: 'Collect Fee',
+    sendEmail: 'Send Email',
+    approve: 'Approve',
+    decline: 'Decline',
+    ok: 'Ok'
+  },
+  toasts: {
+    feeAdded: 'Fee Added'
+  },
+  headers: {
+    paymentHistory: 'Payment History',
+    newsletterSignup: 'Newsletter Signup',
+    delivery: 'Delivery',
+    materialKg: 'Material Kg',
+    workerHours: 'Workers Hours',
+    addExpense: 'Add Expense',
+    dailyStock: 'Daily Stock',
+    revenue: 'Revenue',
+    expenses: 'Expenses',
+    income: 'Income',
+    collection: 'Collection',
+    team: 'Team',
+    workingHours: 'Working Hours',
+    bannerMaterials: 'Banner Materials',
+    facilityData: 'Facility Data',
+    pickups: 'Pickups',
+    tons: 'Tons',
+    members: 'Members',
+    recyclingEfficiency: 'Recycling Efficiency',
+    pickupSchedule: 'Pickup Schedule'
+  },
+  // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
@@ -25,6 +104,20 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    members: "We're already a lot, but we want all {count} Pererenan households to join us!",
+    facility: '{facility} Facility',
+    pickups: 'Pickups for {facility} are scheduled as follow:',
+    downloadInfo: "Download information and PDF to understand what we're doing",
+    details: 'Details',
+    timestamp: 'Time',
+    newsletterSignup: 'Sign up and stay up to date with it',
+    pickupSchedule: 'Pickup Schedule',
+    signup: 'Sign Up',
+    language: 'Language',
+    sendFeedback: 'Send Feedback',
+    contactUs: 'Contact Us',
+    contribute: 'Contribute',
+    faq: 'FAQ',
     number: 'no.',
     notes: 'notes',
     time: 'time',
@@ -52,7 +145,7 @@ export default {
     cancel: 'cancel',
     worker: 'worker',
     organic: 'organic',
-    anorganic: 'anorganic',
+    anorganic: 'inorganic',
     error: 'error',
     save: 'save',
     update: 'update',
@@ -129,11 +222,18 @@ export default {
   // 02.0a Menu
   menu: {
     title: 'menu',
+    sendDayReport: 'Send Day Report',
+    addDelivery: 'Add Delivery',
     addDailyNote: 'add daily note',
-    customerList: 'customer list',
-    buyerList: 'buyer list',
-    contactAdmin: 'contact admin',
-    logout: 'logout'
+    weighMaterial: 'Weigh Material',
+    customersList: 'Customers List',
+    workersHours: 'Workers Hours',
+    buyersList: 'Buyers List',
+    addStock: 'Add Stock',
+    contactAdmin: 'Contact Admin',
+    createSale: 'Create Sale',
+    logout: 'Logout',
+    addExpense: 'Add Expense'
   },
   // fixed menu located at the bottom of the screen
   bottomMenu: {

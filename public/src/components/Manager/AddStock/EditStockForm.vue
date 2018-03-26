@@ -2,13 +2,8 @@
   <v-layout row>
     <v-flex xs12 md8 offset-md2>
       <v-container fluid grid-list-lg v-if="formData">
+        <navigation-header />
         <v-layout row wrap>
-          <v-flex xs12 text-xs-center pt-4>
-            <p class="title">
-              <v-icon color="primary">event</v-icon>
-              <span>{{ $moment(formData.timestamp).format('ddd, DD MMM YYYY') }}</span>
-            </p>
-          </v-flex>
           <v-flex xs6>
             <v-text-field solo flat label="Weight" suffix="kg" type="number" v-model="formData.weight" />
           </v-flex>
@@ -51,7 +46,12 @@
 </template>
 
 <script>
+import NavigationHeader from '@/elements/NavigationHeader'
+
 export default {
+  components: {
+    NavigationHeader
+  },
   props: {
     id: {
       type: String,

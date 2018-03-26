@@ -2,12 +2,10 @@
   <v-data-table
     :loading="$firestore.collectionsPending.stock"
     :headers="headers"
-    :items="$firestore.collections.stock.filter(x => x.type === 'Metals')"
-    hide-actions class="elevation-1"
-  >
+    :items="items"
+    hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <td>{{ props.item.weight }}</td>
-      <td>{{ props.item.type }}</td>
       <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">
@@ -18,7 +16,7 @@
     </template>
     <template slot="footer">
       <td colspan="100%">
-        <strong>Metals Total Today: {{ this.totalMetals }}</strong>
+        <strong>{{ materialType }} Total Today: {{ totalWeight }}</strong>
       </td>
     </template>
   </v-data-table>
@@ -27,29 +25,28 @@
 <script>
 
 export default {
-
+  props: {
+    materialType: { type: String, required: true }
+  },
+  computed: {
+    items () {
+      return this.$firestore.list.stock.filter(x => x.type === this.materialType)
+    },
+    totalWeight () {
+      return this.items.reduce((total, item) => total + parseInt(item.weight), 0)
+    }
+  },
   data () {
     return {
       loading: false,
+      timestamp: new Date(),
       headers: [
         { text: 'Weight (kg)', align: 'center', sortable: true, value: 'weight' },
-        { text: 'Type', align: 'left', sortable: true, value: 'type' },
         { text: 'Comments', align: 'left', sortable: false, value: 'comments' },
-        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' }
+        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
+        { text: 'Edit', align: 'center', sortable: false, value: null }
       ]
     }
-  },
-  created () {
-    let stockWeights = []
-    this.$firestore.collections.stock.filter(x => x.type === 'Metals').map(item => stockWeights.push(parseInt(item.weight)))
-    this.totalMetals = stockWeights.reduce((a, b) => a + b, 0)
-    return this.totalMetals
   }
 }
 </script>
-
-<style>
-  thead {
-    background: #e5ece9;
-  }
-</style>

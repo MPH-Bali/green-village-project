@@ -1,9 +1,11 @@
 export default {
   houseTypes: {
-    villa: 'villa',
-    business: 'bisnis',
-    household: 'rumah tangga',
-    publicFacility: 'fasilitas umum'
+    villa: 'Villa',
+    business: 'Bisnis',
+    household: 'Rumah Tangga',
+    publicFacility: 'Fasilitas Umum',
+    businesses: 'Bisnis',
+    facilities: 'Fasilitas'
   },
   models: {
     fees: {
@@ -42,7 +44,11 @@ export default {
   },
   headers: {
     paymentHistory: 'Riwayat Pembayaran',
-    newsletterSignup: 'Daftar Bulletin'
+    newsletterSignup: 'Daftar Bulletin',
+    delivery: 'Pengiriman',
+    materialKg: 'Material Kg',
+    workerHours: 'Jam Kerja',
+    addExpense: 'Tambahkan Pengeluaran'
   },
   routeNames: {
     dailyLog: 'Catatan Harian',
@@ -65,6 +71,8 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    details: 'Detail',
+    timestamp: 'Tanggal Waktu',
     newsletterSignup: 'Daftar dan dapatkan kabar terbaru',
     pickupSchedule: 'Jadwal Penjemputan',
     signup: 'Registrasi',

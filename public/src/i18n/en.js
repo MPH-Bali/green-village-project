@@ -3,7 +3,9 @@ export default {
     villa: 'Villa',
     business: 'Business',
     household: 'Household',
-    publicFacility: 'Public Facility'
+    publicFacility: 'Public Facility',
+    businesses: 'Businesses',
+    facilities: 'Facilities'
   },
   models: {
     fees: {
@@ -42,7 +44,11 @@ export default {
   },
   headers: {
     paymentHistory: 'Payment History',
-    newsletterSignup: 'Newsletter Signup'
+    newsletterSignup: 'Newsletter Signup',
+    delivery: 'Delivery',
+    materialKg: 'Material Kg',
+    workerHours: 'Workers Hours',
+    addExpense: 'Add Expense'
   },
   // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
@@ -66,6 +72,8 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    details: 'Details',
+    timestamp: 'Time',
     newsletterSignup: 'Sign up and stay up to date with it',
     pickupSchedule: 'Pickup Schedule',
     signup: 'Sign Up',

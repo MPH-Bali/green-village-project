@@ -6,7 +6,7 @@
     <v-flex text-xs-right>
       <v-btn depressed color="primary" @click.stop="$router.push(action)">
         <v-icon>add_circle</v-icon>
-        <span style="text-transform: capitalize" class="ml-2">Add</span>
+        <span style="text-transform: capitalize" class="ml-2">{{ $t('common.add') }}</span>
       </v-btn>
     </v-flex>
   </v-layout>

@@ -78,7 +78,7 @@ The following CRUD actions are available:
 The app is designed to only look at a given day for all the forms and tables. The day can be changed using **$firestore.changeDate(DATE)**.
 
 ### Notifications
-To use in-app toasts just $emit toast message to the manager component 
+To use in-app toasts just $emit toast message to the manager component
  - **$emit('message', { text: 'delivery saved', type: 'success', ding: true }))**
 
 ---
@@ -129,7 +129,27 @@ const settingsCollection = {
   importantVillageGuy: {
     id: 'Tu4SFfDhBUgAwGsvfopc', // person id
     name: 'Michael'
-  }
+  },
+  materialTypes: [
+    {
+      name: 'Plastic',
+      pricePerKilo: 2000
+    },
+    {
+      name: 'Metal',
+      pricePerKilo: 2000
+    }        
+  ],
+  expenseType: [
+    'maintenance',
+    'other'
+  ],
+  houseTypes: [
+    'villa',
+    'household',
+    'business',
+    'public facilities'
+  ]
   // + other information about the facility that we might need
 }
 
@@ -155,10 +175,7 @@ const personCollection = [
       facilityManager: false,
       superAdmin: true
     },
-    houseType: {
-      id: 'Tu4SFfDhBUgAwGsvfopc',
-      name: 'villa'
-    },
+    houseType: 'villa',
     approved: false,
 		lastFeePaid: [Object fee]
   }
@@ -192,10 +209,7 @@ const workerHoursCollection = [
 const stockCollection = [
   {
     timestamp: '2018-03-15T09:55:48.942Z',
-    material: {
-      id: 'Tu4SFfDhBUgAwGsvfopc',
-      name: 'plastic'
-    },
+    materialType: 'plastic',
     amount: 200
   }
 ]
@@ -218,10 +232,7 @@ const saleCollection = [
     },
     materials: [
       {
-        material: {
-          id: 'Tu4SFfDhBUgAwGsvfopc',
-          name: 'plastic'
-        },
+        materialType: 'plastic',
         kilo: 200,
         pricePerKilo: 20000
       }
@@ -254,13 +265,6 @@ const banjarCollection = [
   }
 ];
 
-const materialTypeCollection = [
-  {
-    name: 'Material 1',
-    pricePerKilo: 2000
-  }
-]
-
 const materialCollection = [
  {
 	worker: {
@@ -277,13 +281,6 @@ const materialCollection = [
    }
 ]
 
-// villa, household, business
-const houseTypesCollection = [
-  {
-    name: 'Villa',
-    collectionFee: 20000
-  }
-]
 ```
 ---
 

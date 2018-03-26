@@ -1,10 +1,12 @@
 <template>
   <v-container grid-list-lg>
-    <p class="display-3 text-xs-center">Menu</p>
       <v-layout wrap>
         <template v-for="(item, index) in items">
           <v-flex xs12 sm6>
-            <MenuItem :name="item.name" :position="index" :path="item.path" />
+            <MenuItem :name="item.name" 
+                      :position="index" 
+                      :path="item.path" 
+                      :disabled="item.disabled" />
           </v-flex>
         </template>
       </v-layout>
@@ -20,17 +22,17 @@ export default {
   data () {
     return {
       items: [
-        { name: 'SEND DAY REPORT', path: '/manager' },
+        { name: 'SEND DAY REPORT', path: '/manager/daily-log', disabled: true },
         { name: 'ADD DELIVERY', path: '/manager/delivery-form' },
-        { name: 'ADD DAILY NOTE', path: '/manager' },
-        { name: 'WEIGH MATERIAL', path: '/material' },
-        { name: 'CUSTOMERS LIST', path: '/manager' },
-        { name: 'WORKERS HOURS', path: '/manager' },
+        { name: 'ADD DAILY NOTE', path: '/manager/daily-log', disabled: true },
+        { name: 'WEIGH MATERIAL', path: '/manager/material' },
+        { name: 'CUSTOMERS LIST', path: '/manager/customers' },
+        { name: 'WORKERS HOURS', path: '/manager/daily-log', disabled: true },
         { name: 'BUYERS LIST', path: '/manager/buyers' },
-        { name: 'ADD STOCK', path: '/manager' },
-        { name: 'CONTACT ADMIN', path: '/manager' },
-        { name: 'CREATE SALE', path: '/manager' },
-        { name: 'LOGOUT', path: '/manager' },
+        { name: 'ADD STOCK', path: '/manager/stock' },
+        { name: 'CONTACT ADMIN', path: '/contact-us' },
+        { name: 'CREATE SALE', path: '/manager/daily-log', disabled: true },
+        { name: 'LOGOUT', path: '/manager/daily-log', disabled: true },
         { name: 'ADD EXPENSE', path: '/manager/expense' }
       ]
     }

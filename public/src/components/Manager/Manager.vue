@@ -17,7 +17,7 @@
     </v-toolbar>
     <v-content>
       <v-slide-y-transition mode="out-in">
-        <router-view @message="newMessage"/>
+        <router-view class="pb-5" @message="newMessage"/>
       </v-slide-y-transition>
     </v-content>
     <Toast :message="toastMessage"/>

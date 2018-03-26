@@ -20,18 +20,18 @@ export default {
   data () {
     return {
       items: [
-        { name: 'SEND DAY REPORT', path: '/manager' },
-        { name: 'ADD DELIVERY', path: '/manager/delivery-form' },
-        { name: 'ADD DAILY NOTE', path: '/manager' },
-        { name: 'WEIGH MATERIAL', path: '/material' },
-        { name: 'CUSTOMERS LIST', path: '/manager' },
-        { name: 'WORKERS HOURS', path: '/manager' },
-        { name: 'BUYERS LIST', path: '/manager/buyers' },
-        { name: 'ADD STOCK', path: '/manager' },
-        { name: 'CONTACT ADMIN', path: '/manager' },
-        { name: 'CREATE SALE', path: '/manager' },
-        { name: 'LOGOUT', path: '/manager' },
-        { name: 'ADD EXPENSE', path: '/manager/expense' }
+        { name: this.$t('menu.sendDayReport'), path: '/manager' },
+        { name: this.$t('menu.addDelivery'), path: '/manager/delivery-form' },
+        { name: this.$t('menu.addDailyNote'), path: '/manager' },
+        { name: this.$t('menu.weighMaterial'), path: '/material' },
+        { name: this.$t('menu.customersList'), path: '/manager/customers' },
+        { name: this.$t('menu.workersHours'), path: '/manager' },
+        { name: this.$t('menu.buyersList'), path: '/manager/buyers' },
+        { name: this.$t('menu.addStock'), path: '/manager' },
+        { name: this.$t('menu.contactAdmin'), path: '/manager' },
+        { name: this.$t('menu.createSale'), path: '/manager' },
+        { name: this.$t('menu.logout'), path: '/manager' },
+        { name: this.$t('menu.addExpense'), path: '/manager/expense' }
       ]
     }
   }

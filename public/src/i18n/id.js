@@ -1,4 +1,20 @@
 export default {
+  tables: {
+    headers: {
+      name: 'Nama',
+      timeIn: 'Jam Masuk',
+      timeOut: 'Jam Keluar',
+      actions: 'Opsi',
+      time: 'Jam',
+      worker: 'Pekerja',
+      inorganic: 'Non-organik',
+      organic: 'Organik',
+      banjar: 'Banjar',
+      type: 'Jenis',
+      cost: 'Biaya',
+      notes: 'Catatan'
+    }
+  },
   houseTypes: {
     villa: 'Villa',
     business: 'Bisnis',
@@ -32,15 +48,15 @@ export default {
   forms: {
     joinus: 'Bergabung Dengan Kami',
     save: 'Simpan',
-    cancel: 'Batalkan',
+    cancel: 'batal',
     collectFee: 'Pungut Biaya',
     sendEmail: 'Kirim Email',
     approve: 'Setujui',
-    decline: 'Batalkan',
+    decline: 'batal',
     ok: 'Ok'
   },
   toasts: {
-    feeAdded: 'Tambahkan Biaya'
+    feeAdded: 'tambah Biaya'
   },
   headers: {
     paymentHistory: 'Riwayat Pembayaran',
@@ -48,7 +64,7 @@ export default {
     delivery: 'Pengiriman',
     materialKg: 'Material Kg',
     workerHours: 'Jam Kerja',
-    addExpense: 'Tambahkan Pengeluaran',
+    addExpense: 'tambah Pengeluaran',
     dailyStock: 'Stok Harian',
     revenue: 'Penghasilan',
     expenses: 'Pengeluaran',
@@ -61,20 +77,21 @@ export default {
     pickups: 'Penjemputan',
     tons: 'Ton',
     members: 'Anggota',
-    recyclingEfficiency: 'Efisiensi Daur Ulang'
+    recyclingEfficiency: 'Efisiensi Daur Ulang',
+    pickupSchedule: 'Jadwal Penjemputan'
   },
   routeNames: {
     dailyLog: 'Catatan Harian',
     dailyLogHistory: 'Riwayat Catatan Harian',
     deliveryForm: 'Formulir Pengiriman',
-    addMaterial: 'Tambahkan Material',
+    addMaterial: 'tambah Material',
     workerHours: 'Cek Pekerja',
     customerDetail: 'Detail Pelanggan',
     newCustomer: 'Pelanggan Baru',
     buyers: 'Pembeli',
     'buyer-edit': 'Tambah/Sunting Pembeli',
     'buyer-details': 'Detail Pembeli',
-    addExpense: 'Tambahkan Pengeluaran',
+    addExpense: 'tambah Pengeluaran',
     menu: 'Catatan Harian',
     customers: 'Pelanggan'
   },
@@ -94,17 +111,17 @@ export default {
     pickupSchedule: 'Jadwal Penjemputan',
     signup: 'Registrasi',
     language: 'Bahasa',
-    sendFeedback: 'Kirim Komen',
+    sendFeedback: 'Kirim Komentar',
     contactUs: 'Hubungi Kami',
     contribute: 'Ikut-serta',
     faq: 'FAQ',
     number: 'no.',
     notes: 'catatan',
     time: 'jam',
-    edit: 'sunting',
+    edit: 'Sunting',
     paper: 'kertas',
     type: 'ketik',
-    add: 'tambahkan',
+    add: 'tambah',
     cost: 'biaya',
     compost: 'kompos',
     metal: 'logam',
@@ -120,9 +137,9 @@ export default {
     households: 'rumah tangga',
     businesses: 'bisnis',
     facilities: 'fasilitas',
-    comments: 'komen',
+    comments: 'komentar',
     back: 'kembali',
-    cancel: 'batalkan',
+    cancel: 'batal',
     worker: 'pekerja',
     organic: 'organik',
     inorganic: 'non-organik',
@@ -188,12 +205,21 @@ export default {
   },
   // 02.0a Menu
   menu: {
+    sendDayReport: 'Kirim Laporan Harian',
     title: 'menu',
-    addDailyNote: 'tambahkan catatan harian',
+    addDailyNote: 'tambah catatan harian',
     customerList: 'daftar pelanggan',
     buyerList: 'daftar pembeli',
     contactAdmin: 'hubungi admin',
-    logout: 'keluar'
+    logout: 'keluar',
+    addDelivery: 'Tambah Pengiriman',
+    weighMaterial: 'Timbang Material',
+    customersList: 'Daftar Pelanggan',
+    workersHours: 'Jam Pekerja',
+    buyersList: 'Daftar Pembeli',
+    addStock: 'Tambah Stok',
+    createSale: 'Buat Pembelian',
+    addExpense: 'Tambah Pengeluaran'
   },
   // fixed menu located at the bottom of the screen
   bottomMenu: {

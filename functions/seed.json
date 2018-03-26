@@ -114,7 +114,7 @@
   "expenses": [
     {
       "description": "Limited Furby Collection",
-      "amount": 20000000,
+      "cost": 20000000,
       "person": {
         "id": "person2",
         "name": "Wayan"

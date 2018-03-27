@@ -17,6 +17,8 @@ export default {
     if (this.$firestore.user) {
       try {
         this.$firebase.auth().signOut()
+        this.$firestore.user = null
+        this.$firestore.person = null
       } catch (error) {
         console.log(`Error logging out: ${error}`)
       }

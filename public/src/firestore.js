@@ -57,7 +57,25 @@ export default new Vue({
       firebase.auth().onAuthStateChanged(async user => {
         if (user) {
           this.user = user
+
+          // Attempt to get the person linked to this user, if it is the
+          // first time signing on we create a person instead.
           this.person = await this.getUserByUid(user.uid)
+          if (!this.person) {
+            await this.$firestore.save('person', {
+              login: user.uid,
+              phone: user.phoneNumber,
+              type: {
+                employee: true
+              },
+              role: {
+                communityManager: true
+              },
+              approved: false
+            })
+            this.person = await this.getUserByUid(user.uid)
+          }
+
           // If the user is attached to an approved person in the system, load app data.
           if (this.person && this.person.approved) {
             this.$firestore.changeDate()

@@ -67,46 +67,13 @@ export default {
       try {
         this.loading = true
         // Sign the user in.
-        let result = await this.confirmationResult.confirm(this.confirmationCode.join(''))
-        // User signed in successfully.
-        let user = result.user
-        if (!await this.$firestore.getUserByUid(user.uid)) {
-          // Create a new person in the database linking them to a uid
-          await this.createPerson(user)
-        }
+        await this.confirmationResult.confirm(this.confirmationCode.join(''))
         this.loading = false
         this.$router.push('/manager')
       } catch (error) {
         this.loading = false
         this.errorMessages.push(error.message)
       }
-    },
-    async createPerson (user) {
-      await this.$firestore.save('person', {
-        login: user.uid,
-        name: '',
-        phone: user.phoneNumber,
-        address: '',
-        email: '',
-        geolocation: {
-          latitude: '',
-          longitude: ''
-        },
-        type: {
-          employee: true,
-          client: false
-        },
-        role: {
-          communityManager: true,
-          facilityManager: false,
-          superAdmin: false
-        },
-        houseType: {
-          id: '',
-          name: ''
-        },
-        approved: false
-      })
     },
     confirmationCodeInput (event, index) {
       if (!isNaN(parseInt(event.data, 10))) {

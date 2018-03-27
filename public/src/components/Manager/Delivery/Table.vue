@@ -90,13 +90,13 @@ export default {
     return {
       collapsed: true,
       headers: [
-        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
-        { text: 'Villas', align: 'center', sortable: true, value: 'villas' },
-        { text: 'Households', align: 'center', sortable: true, value: 'households' },
-        { text: 'Businesses', align: 'center', sortable: true, value: 'businesses' },
-        { text: 'Facilities', align: 'center', sortable: true, value: 'facilities' },
-        { text: 'Details', align: 'center', width: '10px', sortable: false, value: null },
-        { text: 'Edit', align: 'center', width: '10px', sortable: false, value: null }
+        { text: this.$t('common.timestamp'), align: 'center', sortable: true, value: 'timestamp' },
+        { text: this.$t('houseTypes.villa'), align: 'center', sortable: true, value: 'villas' },
+        { text: this.$t('houseTypes.household'), align: 'center', sortable: true, value: 'households' },
+        { text: this.$t('houseTypes.businesses'), align: 'center', sortable: true, value: 'businesses' },
+        { text: this.$t('houseTypes.facilities'), align: 'center', sortable: true, value: 'facilities' },
+        { text: this.$t('common.details'), align: 'center', width: '10px', sortable: false, value: null },
+        { text: this.$t('common.edit'), align: 'center', width: '10px', sortable: false, value: null }
       ]
     }
   }

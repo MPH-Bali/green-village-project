@@ -3,7 +3,7 @@
     <v-flex xs2 text-xs-left pt-0>
       <v-btn flat class="mt-1" @click="$router.go(-1)">
         <v-icon small color="blue darken-2">arrow_back</v-icon>
-        <span class="ml-1">Back</span>
+        <span class="ml-1">{{ $t('common.back') }}</span>
       </v-btn>
     </v-flex>
     <v-flex xs8 text-xs-center>

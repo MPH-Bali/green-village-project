@@ -25,10 +25,10 @@ export default {
     return {
       loading: false,
       headers: [
-        { text: 'Name', align: 'center', sortable: true, value: 'name' },
-        { text: 'Time In', align: 'center', sortable: true, value: 'in' },
-        { text: 'Time Out', align: 'center', sortable: true, value: 'out' },
-        { text: 'Actions', align: 'center', sortable: true, value: 'action' }
+        { text: this.$t('tables.headers.name'), align: 'center', sortable: true, value: 'name' },
+        { text: this.$t('tables.headers.timeIn'), align: 'center', sortable: true, value: 'in' },
+        { text: this.$t('tables.headers.timeOut'), align: 'center', sortable: true, value: 'out' },
+        { text: this.$t('tables.headers.actions'), align: 'center', sortable: true, value: 'action' }
       ]
     }
   },

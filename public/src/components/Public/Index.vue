@@ -8,10 +8,10 @@
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat @click="$router.push('/pickup-schedule')">Pickup Schedule</v-btn>
-        <v-btn flat @click="$router.push('/sign-up')" >Sign Up</v-btn>
+        <v-btn flat @click="$router.push('/pickup-schedule')">{{ $t('common.pickupSchedule') }}</v-btn>
+        <v-btn flat @click="$router.push('/sign-up')" >{{ $t('common.signup') }}</v-btn>
         <v-menu offset-y>
-          <v-btn color="primary" dark slot="activator">Language</v-btn>
+          <v-btn color="primary" dark slot="activator">{{ $t('common.language') }}</v-btn>
             <v-list>
               <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
                 <v-list-tile-title@click="lang(item.value)">{{ item.title }}</v-list-tile-title>
@@ -45,10 +45,10 @@
           </v-btn>
         </v-flex>
         <v-flex xs12 class="grey darken-3 white--text">
-          <router-link to="contact-us">Contact Us</router-link>
-          <p class="body-1 my-3">Send Feedback</p>
-          <p class="body-1 my-3">Contribute</p>
-          <p class="body-1 my-3">FAQ</p>
+          <router-link to="contact-us">{{ $t('common.contactUs') }}</router-link>
+          <p class="body-1 my-3">{{ $t('common.sendFeedback') }}</p>
+          <p class="body-1 my-3">{{ $t('common.contribute') }}</p>
+          <p class="body-1 my-3">{{ $t('common.faq') }}</p>
         </v-flex>
       </v-layout>
 
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import localStorage from 'local-storage'
+
 export default {
   data: () => ({
     items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
@@ -66,7 +68,8 @@ export default {
   },
   methods: {
     lang (val) {
-      this.$root.$options.i18n.locale = val
+      localStorage.set('locale', val)
+      this.$i18n.locale = val
     }
   },
   computed: {
@@ -79,7 +82,7 @@ export default {
 
 <style scoped>
 .main-mph img {
-  height: 50px; 
+  height: 50px;
 }
 
 .active {

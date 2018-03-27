@@ -5,19 +5,16 @@
         <Calendar :date="date"/>
       </v-layout>
 
-      <log-header action="/manager/delivery-form" title="Delivery" />
+      <log-header action="/manager/delivery-form" :title="$t('headers.delivery')" />
       <delivery-table/>
 
-      <log-header class="mt-4" action="/manager/material" title="Material Kg" />
+      <log-header class="mt-4" action="/manager/material" :title="$t('headers.materialKg')" />
       <MaterialTable/>
 
-      <log-header class="mt-4" action="/manager/stock" title="Stock" />
-      <StockTable/>
-
-      <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />
+      <log-header class="mt-4" action="/manager/worker-hours" :title="$t('headers.workerHours')" />
       <WorkerTimes/>
 
-      <log-header class="mt-4" action="/manager/expense" title="Add Expense" />
+      <log-header class="mt-4" action="/manager/expense" :title="$t('headers.addExpense')" />
       <ExpensesTable/>
     </v-flex>
   </v-layout>

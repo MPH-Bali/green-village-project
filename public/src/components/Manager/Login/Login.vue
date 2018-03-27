@@ -1,10 +1,10 @@
 <template>
   <v-container grid-list-lg>
     <confirmation-form 
-      v-show="confirmationResult" 
+      v-if="confirmationResult" 
       :confirmationResult="confirmationResult" 
       @onResend="onResend" />
-    <login-form v-show="!confirmationResult" @onVerification="onVerification" />
+    <login-form v-else @onVerification="onVerification" />
   </v-container>
 </template>
 

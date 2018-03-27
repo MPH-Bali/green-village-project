@@ -4,7 +4,7 @@
       <v-card-text class="py-5 my-5">
         <p class="title" style="text-transform: uppercase;">To login, please enter your phone number</p>
         <v-flex md4 offset-md4>
-          <v-form>
+          <v-form @submit.prevent="confirm">
             <v-flex ml-0 mt-3 pl-0 text-xs-left>
               <label class="loginLabel">Phone Number</label>
             </v-flex>
@@ -20,7 +20,7 @@
               :disabled="loading" 
               @input="errorMessages = []" 
               :error="hasErrors" />
-            <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+            <p class="errorMessage" v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</p>
             <v-flex px-0 mt-3>
               <v-btn 
                 id="confirmButton" 
@@ -71,6 +71,7 @@ export default {
         this.loading = false
       } catch (error) {
         // Error SMS not sent
+        this.errorMessages = []
         this.errorMessages.push(error.message)
         this.loading = false
       }
@@ -88,4 +89,8 @@ export default {
   .loginField {
     background-color:  rgba(66, 133, 61, 0.1) !important;
   }
+
+  .errorMessage {
+    margin-top: 10px;
+  }  
 </style>

@@ -6,7 +6,7 @@
           Please enter the code we sent you via sms
         </p>
         <v-flex md4 offset-md4>
-          <v-form>
+          <v-form @submit.prevent>
             <v-flex ml-0 mt-3 pl-0 text-xs-left>
               <label class="loginLabel">Code</label>
             </v-flex>
@@ -14,16 +14,20 @@
               <input
                 v-for="(character, index) in confirmationCode"
                 :key="index"
+                autocomplete="off"
                 class="confirmationField"              
-                name="confirmationCode" 
+                name="confirmationCode"
                 type="tel"
                 maxlength="1"
                 v-model="confirmationCode[index]" 
                 :disabled="loading" 
                 @input="event => confirmationCodeInput(event, index)"
+                @keyup.enter="login"
+                @keyup.delete.left="moveLeft"
+                @keyup.right="moveRight"
                 :error="hasErrors" />
             </v-layout>
-            <span v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</span>
+            <p class="errorMessage" v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</p>
             <v-flex ml-0 mt-3 pl-0 text-xs-right>
               <a class="resendCode" @click.stop="$emit('onResend')" >Resend Code</a>
             </v-flex>            
@@ -72,11 +76,16 @@ export default {
         this.$router.push('/manager')
       } catch (error) {
         this.loading = false
+        this.errorMessages = []
         this.errorMessages.push(error.message)
       }
     },
     confirmationCodeInput (event, index) {
+      // On input select the next input control in the componenet.
+      this.errorMessages = []
       if (!isNaN(parseInt(event.data, 10))) {
+        this.confirmationCode[index] = event.data
+
         // Input is a number, focus on next input.
         if (event.srcElement.nextSibling) {
           event.srcElement.nextSibling.select()
@@ -84,6 +93,16 @@ export default {
       } else {
         // Input is not a number, reset the input value.
         this.confirmationCode[index] = null
+      }
+    },
+    moveLeft () {
+      if (event.srcElement.previousSibling) {
+        event.srcElement.previousSibling.select()
+      }
+    },
+    moveRight () {
+      if (event.srcElement.nextSibling) {
+        event.srcElement.nextSibling.select()
       }
     }
   }
@@ -108,7 +127,11 @@ export default {
 
   input.confirmationField:focus {
     outline: none;
-    border-bottom: 1px solid #42853d;
+    border-bottom: 2px solid #42853d;
+  }
+
+  .errorMessage {
+    margin-top: 10px;
   }
 
   .resendCode {

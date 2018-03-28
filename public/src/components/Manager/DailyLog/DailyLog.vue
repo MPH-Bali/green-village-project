@@ -11,6 +11,9 @@
       <log-header class="mt-4" action="/manager/material" :title="$t('headers.materialKg')" />
       <MaterialTable/>
 
+      <log-header class="mt-4" action="/manager/stock" title="Stock" />
+      <StockTable/>
+
       <log-header class="mt-4" action="/manager/worker-hours" :title="$t('headers.workerHours')" />
       <WorkerTimes/>
 

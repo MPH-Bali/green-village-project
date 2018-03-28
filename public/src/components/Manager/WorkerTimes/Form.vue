@@ -4,10 +4,10 @@
     <v-layout row wrap class='add-worker'>
       <v-flex xs12 sm6>
         <p class='title'>Worker name</p>
-        <v-select solo flat :items="workers" 
+        <v-select solo flat :items="workers"
                 @change="clearError"
                 v-model="formData.worker"
-                item-text="name" 
+                item-text="name"
                 item-value="id"
                 return-object
                 label="" class='grey-select' />
@@ -16,8 +16,8 @@
         <p class='title'>Notes</p>
         <v-text-field
                 v-model="formData.notes"
-                class='grey-select' 
-                solo flat 
+                class='grey-select'
+                solo flat
                 name="input-1"></v-text-field>
       </v-flex>
       <v-flex xs12 sm6>
@@ -45,12 +45,11 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
 import TimeField from './TimeField'
 
 export default {
   components: {
-    TimeField, NavigationHeader
+    TimeField
   },
   props: {
     id: { type: String, required: false }
@@ -186,9 +185,9 @@ export default {
 
 .devider{
   text-align: center;
-  border-bottom: 1px solid #ecf2eb; 
+  border-bottom: 1px solid #ecf2eb;
   line-height: 0.1em;
-  margin: 10px 0 20px; 
+  margin: 10px 0 20px;
 }
 
 .devider span{

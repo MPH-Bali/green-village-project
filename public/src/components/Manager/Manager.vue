@@ -28,7 +28,7 @@
         <router-view class="pb-5" @message="newMessage"/>
     	</v-slide-y-transition>
 	  </v-content>
-      <Toast :message="toastMessage"/>
+      <toast :message="toastMessage"/>
     </template>
   </v-app>
 </template>
@@ -37,7 +37,6 @@
 import LoadingMask from './LoadingMask'
 import Login from '@/components/Manager/Login/Login'
 import Unapproved from '@/components/Manager/Login/Unapproved'
-import Toast from './UI/Toast'
 
 export default {
   name: 'Manager',
@@ -47,8 +46,7 @@ export default {
   components: {
     LoadingMask,
     Login,
-    Unapproved,
-    Toast
+    Unapproved
   },
   data () {
     return {

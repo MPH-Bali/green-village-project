@@ -10,7 +10,7 @@ import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Customers from '@/components/Manager/Customers/Customers'
 import NewCustomer from '@/components/Manager/Customers/NewCustomer'
 import CustomerDetailView from '@/components/Manager/Customers/DetailView'
-import Menu from '@/components/Manager/Menu/Menu'
+import Menu from '@/components/Manager/Menu'
 import AddStock from '@/components/Manager/AddStock/AddStock'
 import EditStockForm from '@/components/Manager/AddStock/EditStockForm'
 

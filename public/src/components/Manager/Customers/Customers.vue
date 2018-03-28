@@ -52,13 +52,8 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
-
 export default {
   name: 'Customers',
-  components: {
-    NavigationHeader
-  },
   methods: {
     customFilter (items, search, filter) {
       return items.filter((row) => {

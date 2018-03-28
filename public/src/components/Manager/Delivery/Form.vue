@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs12 md6 offset-md3>
       <v-container fluid grid-list-lg v-if="form">
-        <NavigationHeader />
+        <navigation-header />
         <v-layout row wrap>
           <v-flex xs6>
             <p class="body-2 mb-1">Driver</p>
@@ -91,11 +91,7 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
 export default {
-  components: {
-    NavigationHeader
-  },
   props: {
     id: { type: String, required: false }
   },

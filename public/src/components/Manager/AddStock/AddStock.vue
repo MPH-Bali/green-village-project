@@ -70,15 +70,13 @@
 
 <script>
 import StockTable from './Table'
-import NavigationHeader from '@/elements/NavigationHeader'
 
 export default {
   props: {
     date: { type: String, required: false }
   },
   components: {
-    StockTable,
-    NavigationHeader
+    StockTable
   },
   data () {
     return {

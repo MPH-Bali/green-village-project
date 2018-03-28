@@ -236,16 +236,6 @@ export default {
     logout: 'Logout',
     addExpense: 'Add Expense'
   },
-  // fixed menu located at the bottom of the screen
-  bottomMenu: {
-    addDelivery: 'add delivery',
-    weighMaterials: 'weigh material',
-    workersHours: 'workers hours',
-    addStock: 'add stock',
-    createSale: 'create sale',
-    addExpense: 'add expense',
-    settings: 'settings'
-  },
   // 02.0b
   dailyLog: {
     deliveries: 'deliveries',

@@ -53,49 +53,7 @@ export default {
   data () {
     return {
       menuOpened: false,
-      toastMessage: {},
-      sections: [
-        {
-          name: this.$i18n.t('bottomMenu.dailyLog'),
-          icon: 'fa-calendar-alt',
-          route: '/manager'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.addDelivery'),
-          icon: 'fa-truck',
-          route: '/manager/delivery-form'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.weighMaterials'),
-          icon: 'fa-weight',
-          route: '/manager/material'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.workerHours'),
-          icon: 'fa-clock',
-          route: '/manager/hours'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.addStock'),
-          icon: 'fa-cubes',
-          route: '/manager/stock'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.createSale'),
-          icon: 'fa-credit-card',
-          route: '/manager/sale'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.addExpense'),
-          icon: 'fa-money-bill-alt',
-          route: '/manager/expense'
-        },
-        {
-          name: this.$i18n.t('bottomMenu.settings'),
-          icon: 'fa-cog',
-          route: '/manager/settings'
-        }
-      ]
+      toastMessage: {}
     }
   },
   methods: {

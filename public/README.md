@@ -5,23 +5,35 @@
 ## Build Setup
 
 ``` bash
+# from the public/ directory..
+
 # install dependencies
-npm install
+yarn
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn run dev
 
 # build for production with minification
-npm run build
+yarn run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+yarn run build --report
 
 # run unit tests
-npm run unit
+yarn run unit
 
 # run all tests
-npm test
+yarn test
+
+# ---
+# please request admin rights from @nicksarafa or @piggydoughnut to !mph firebase project for deployment privileges
+# ---
+
+# deploy to firebase
+firebase deploy
+
+# deploy only hosting
+firebase deploy --only hosting
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

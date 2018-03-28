@@ -1,15 +1,8 @@
 import Vue from 'vue'
 import moment from 'vue-moment'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-firebase.initializeApp({
-  projectId: 'mph-bali',
-  databaseURL: 'https://mph-bali.firebaseio.com'
-})
+import firebase, { db } from '@/firebase'
 
 Vue.use(moment)
-const db = firebase.firestore()
 
 export default new Vue({
   computed: {
@@ -25,6 +18,9 @@ export default new Vue({
       dailySubscriptions: [],
       start: null,
       end: null,
+      loading: false,
+      user: null,
+      person: null,
       fees: [],
       charts: null,
       // ToDo: Add all collections
@@ -55,6 +51,40 @@ export default new Vue({
     }
   },
   methods: {
+    initStore () {
+      // Show loading mask initially while we wait for firebase auth to init.
+      this.loading = true
+      firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+          this.user = user
+
+          // Attempt to get the person linked to this user, if it is the
+          // first time signing on we create a person instead.
+          this.person = await this.getUserByUid(user.uid)
+          if (!this.person) {
+            await this.$firestore.save('person', {
+              login: user.uid,
+              phone: user.phoneNumber,
+              type: {
+                employee: true
+              },
+              role: {
+                communityManager: true
+              },
+              approved: false
+            })
+            this.person = await this.getUserByUid(user.uid)
+          }
+
+          // If the user is attached to an approved person in the system, load app data.
+          if (this.person && this.person.approved) {
+            this.$firestore.changeDate()
+            this.$firestore.syncData()
+          }
+        }
+        this.loading = false
+      })
+    },
     changeDate (date) {
       const newDate = this.$moment(date)
       const today = this.$moment().startOf('day')
@@ -111,6 +141,17 @@ export default new Vue({
 
         this.dailySubscriptions.push(unsubscribe)
       })
+    },
+    async getUserByUid (uid) {
+      let querySnapshot = await db.collection('person')
+                          .where('login', '==', uid)
+                          .get()
+
+      let user = querySnapshot &&
+                  querySnapshot.docs[0] &&
+                  querySnapshot.docs[0].data()
+
+      return user || null
     },
     add (collection, data) {
       return db.collection(collection).add(data)

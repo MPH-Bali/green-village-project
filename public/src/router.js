@@ -5,6 +5,7 @@ import Manager from '@/components/Manager/Manager'
 import DailyLog from '@/components/Manager/DailyLog/DailyLog'
 import DeliveryForm from '@/components/Manager/Delivery/Form'
 import AddMaterial from '@/components/Manager/AddMaterial'
+import Login from '@/components/Manager/Login/Login'
 import WorkerTimes from '@/components/Manager/WorkerTimes/Form'
 import Customers from '@/components/Manager/Customers'
 import NewCustomer from '@/components/Manager/NewCustomer'
@@ -49,6 +50,7 @@ export default new Router({
        *  @desc the children.name value MUST coorlelate with the key in our i18n routeNames
        */
       children: [
+        { path: 'login', name: 'login', component: Login },
         { path: '', name: 'dailyLog', component: DailyLog },
         { path: 'daily-log/:date?', name: 'dailyLogHistory', component: DailyLog, props: true },
         { path: 'delivery-form/:id?', name: 'deliveryForm', component: DeliveryForm, props: true },

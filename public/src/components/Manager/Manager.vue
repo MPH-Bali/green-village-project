@@ -1,5 +1,10 @@
 <template>
   <v-app>
+    <v-fade-transition>
+      <template v-if="$firestore.loading">
+          <loading-mask />
+      </template>
+    </v-fade-transition>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
         <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
@@ -15,24 +20,35 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-content>
-      <v-slide-y-transition mode="out-in">
+    <login v-if="!$firestore.user" />
+    <unapproved v-else-if="$firestore.person && !$firestore.person.approved" />
+    <template v-else>
+	  <v-content>
+        <v-slide-y-transition mode="out-in">
         <router-view class="pb-5" @message="newMessage"/>
-      </v-slide-y-transition>
-    </v-content>
-    <Toast :message="toastMessage"/>
+    	</v-slide-y-transition>
+	  </v-content>
+      <Toast :message="toastMessage"/>
+    </template>
   </v-app>
 </template>
 
 <script>
+import LoadingMask from './LoadingMask'
+import Login from '@/components/Manager/Login/Login'
+import Unapproved from '@/components/Manager/Login/Unapproved'
 import Toast from './UI/Toast'
 
 export default {
   name: 'Manager',
-  components: { Toast },
   created () {
-    this.$firestore.changeDate()
-    this.$firestore.syncData()
+    this.$firestore.initStore()
+  },
+  components: {
+    LoadingMask,
+    Login,
+    Unapproved,
+    Toast
   },
   data () {
     return {

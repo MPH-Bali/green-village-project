@@ -2,7 +2,7 @@
   <v-container grid-list-lg>
       <v-layout wrap>
         <template v-for="(item, index) in items">
-          <v-flex xs12 sm6>
+          <v-flex xs12 sm6 :key="index">
             <MenuItem :name="item.name"
                       :position="index"
                       :path="item.path"
@@ -32,7 +32,7 @@ export default {
         { name: this.$t('menu.addStock'), path: '/manager' },
         { name: this.$t('menu.contactAdmin'), path: '/manager' },
         { name: this.$t('menu.createSale'), path: '/manager' },
-        { name: this.$t('menu.logout'), path: '/manager' },
+        { name: this.$t('menu.logout'), path: '/manager/login' },
         { name: this.$t('menu.addExpense'), path: '/manager/expense' }
       ]
     }

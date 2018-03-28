@@ -11,8 +11,10 @@ import App from './App'
 import router from './router'
 import i18n from './i18n'
 import './elements'
+import firebase from './firebase'
 import firestore from './firestore'
 
+Vue.prototype.$firebase = firebase
 Vue.prototype.$firestore = firestore
 
 Vue.use(moment)

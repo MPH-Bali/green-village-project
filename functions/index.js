@@ -5,7 +5,7 @@ const data = require('./seed.json');
 const dbHelper = require('./dbHelper');
 const db = admin.firestore();
 const moment = require('moment');
-
+/* temporary
 exports.dbInit = functions.https.onRequest((req, res) => {
 	let promises = [];
 
@@ -31,14 +31,14 @@ exports.dbDestroy = functions.https.onRequest((req, res) => {
 		.then(() => res.status(200).send())
 		.catch(e => console.log(e))
 })
-
+*/
 
 // Chart reference
 const week = moment().format('YYYY-ww')
 const charts = db.collection('charts').doc(week)
 
 // total No. devlieries
-exports.totalPickups = 
+exports.totalPickups =
 functions.firestore.document('delivery/{id}').onCreate(event => {
   // Get current chart data
   return charts.get().then(snapShot => {
@@ -50,7 +50,7 @@ functions.firestore.document('delivery/{id}').onCreate(event => {
 })
 
 // total hours per day
-exports.workerHours = 
+exports.workerHours =
 functions.firestore.document('workerhours/{id}').onCreate(event => {
   const times = event.data.data().times
   return charts.get().then(snapShot => {
@@ -64,7 +64,7 @@ functions.firestore.document('workerhours/{id}').onCreate(event => {
 })
 
 // total material weight
-exports.totalMaterialWeight = 
+exports.totalMaterialWeight =
 functions.firestore.document('material/{id}').onCreate(event => {
   const material = event.data.data()
   return charts.get().then(snapShot => {
@@ -73,13 +73,70 @@ functions.firestore.document('material/{id}').onCreate(event => {
   })
 })
 
+// customer data
+exports.chartsCustomerData =
+  functions.firestore.document('person/{id}').onWrite((event) => {
+    let data = [];
+    let promises = [];
+    let types = ['household', 'villa', 'business'];
 
-    
-    // total No. client (person.type.client)
-    // material weight per type 
+    const getHouseTypeCount = (type) => {
+      return db.collection('person').where('houseType', '==', type).get()
+        .then(snapshot => {
+          data[type + 'Count'] = parseInt(snapshot.size);
+          return;
+        })
+    }
+
+    types.forEach(type => {
+      promises.push(getHouseTypeCount(type));
+    })
+
+    return Promise.all(promises)
+      .then(() => {
+        console.log(data);
+        return charts.set({
+          customerData: {
+            householdCount: data.householdCount + data.villaCount + data.businessCount,
+            households: data.householdCount,
+            businesses: data.businessCount,
+            villas: data.villaCount
+          }
+        }, {
+          merge: true
+        })
+      })
+      .catch(e => console.log(e));
+  });
+
+// total No. client (person.type.client)
+exports.chartsTotalClientNo =
+  functions.firestore.document('person/{id}').onWrite((event) => {
+    let clients = 0;
+    return db.collection('person').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let data = doc.data();
+          console.log(data);
+          if (data.type && data.type.client) {
+            clients++;
+          }
+        })
+        return charts.set({
+          totalClients: clients
+        }, {
+          merge: true
+        })
+      })
+      .catch(e => console.log(e));
+  })
+
+
+    // material weight per type
     // total fees per day (last 7)
     // total fees per month (last 5)
     // total expenses per month by type (last 5)
+
     // total stock per day (last 5)
 
 // analytics/wqewqe

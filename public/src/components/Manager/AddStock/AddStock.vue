@@ -24,7 +24,7 @@
           </v-container>
         </v-jumbotron>
 
-        <v-flex text-xs-center pt-4 pr-2 xs3>
+        <v-flex text-xs-center pt-4 pr-2 xs1>
           <v-text-field
             solo flat class="accent"
             autofocus
@@ -32,11 +32,43 @@
             type="number"
             v-model="formData.weight" />
         </v-flex>
+        <v-flex pt-4 pr-2 xs2>
+          <v-select
+            solo flat class="accent"
+            :items="[
+            'Compost',
+            'Plastics',
+            'Metals',
+            'Paper'
+            ]"
+            v-model="formData.type" label="Type" />
+        </v-flex>
         <v-flex pt-4 pr-2 xs3>
           <v-select
             solo flat class="accent"
-            :items="['Compost', 'Plastics', 'Metals', 'Paper']"
-            v-model="formData.type" label="Type" />
+            :items="[
+            'PET Clear',
+            'PET Colored',
+            'HDPE',
+            'PVC',
+            'LDPE',
+            'PP',
+            'PS',
+            'O',
+            'ABS',
+            'Cardboard',
+            'Newspaper',
+            'White paper',
+            'Magazine',
+            'Old book',
+            'Cement sack',
+            'Tetrapak',
+            'Aluminium can',
+            'Tin can',
+            'Scrap metal',
+            'Iron'
+            ]"
+            v-model="formData.subtype" label="Subtype" />
         </v-flex>
         <v-flex pt-4 xs3>
           <v-text-field
@@ -46,7 +78,8 @@
         </v-flex>
         <v-flex xs3 text-xs-right pt-4>
           <v-btn depressed color="primary"
-            @click.stop="save"
+            @click="save"
+            @click.stop="$router.go(-1)"
             :loading="savePending">Save
           </v-btn>
         </v-flex>
@@ -86,8 +119,6 @@ export default {
       addPending: false,
       fetchingDelivery: false,
       defaultFormData: {
-        weight: 20,
-        type: 'Compost',
         timestamp: new Date()
       }
     }
@@ -99,6 +130,8 @@ export default {
     } else {
       this.formData = this.defaultFormData
     }
+    const workers = this.$firestore.dailyCollections.workerhours
+    console.log(workers)
   },
   methods: {
     cancel () {

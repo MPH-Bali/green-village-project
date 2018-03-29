@@ -4,11 +4,38 @@
       <v-container fluid grid-list-lg v-if="formData">
         <navigation-header />
         <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs4>
             <v-text-field solo flat class="accent" label="Weight" suffix="kg" type="number" v-model="formData.weight" />
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs4>
             <v-select solo flat class="accent" :items="['Compost', 'Plastics', 'Metals']" v-model="formData.type" label="Type" />
+          </v-flex>
+          <v-flex xs4>
+            <v-select
+              solo flat class="accent"
+              :items="[
+              'PET Clear',
+              'PET Colored',
+              'HDPE',
+              'PVC',
+              'LDPE',
+              'PP',
+              'PS',
+              'O',
+              'ABS',
+              'Cardboard',
+              'Newspaper',
+              'White paper',
+              'Magazine',
+              'Old book',
+              'Cement sack',
+              'Tetrapak',
+              'Aluminium can',
+              'Tin can',
+              'Scrap metal',
+              'Iron'
+              ]"
+              v-model="formData.subtype" label="Subtype" />
           </v-flex>
           <v-flex xs12>
             <v-text-field solo flat class="accent" label="Comments" v-model="formData.comments" auto-grow multi-line/>

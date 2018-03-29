@@ -45,12 +45,7 @@
 </template>
 
 <script>
-import TimeField from './TimeField'
-
 export default {
-  components: {
-    TimeField
-  },
   props: {
     id: { type: String, required: false }
   },

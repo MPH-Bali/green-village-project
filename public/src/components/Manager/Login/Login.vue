@@ -1,17 +1,14 @@
 <template>
   <v-container grid-list-lg>
-    <confirmation-form 
-      v-if="confirmationResult" 
-      :confirmationResult="confirmationResult" 
+    <confirmation-form
+      v-if="confirmationResult"
+      :confirmationResult="confirmationResult"
       @onResend="onResend" />
     <login-form v-else @onVerification="onVerification" />
   </v-container>
 </template>
 
 <script>
-import LoginForm from './LoginForm'
-import ConfirmationForm from './ConfirmationForm'
-
 export default {
   mounted () {
     if (this.$firestore.user) {
@@ -23,10 +20,6 @@ export default {
         console.log(`Error logging out: ${error}`)
       }
     }
-  },
-  components: {
-    LoginForm,
-    ConfirmationForm
   },
   data () {
     return {

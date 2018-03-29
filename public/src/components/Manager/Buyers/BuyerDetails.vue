@@ -1,7 +1,7 @@
 <template>
  <v-layout row >
    <v-flex xs12 md8 offset-md2>
-    
+
     <v-card class="mt-4">
 
       <v-toolbar color="white" flat>
@@ -9,11 +9,11 @@
           <v-icon color="grey darken-2">arrow_back</v-icon>
         </v-btn>
         <v-toolbar-title class="grey--text text--darken-4">{{ data.name }}</v-toolbar-title>
-        <v-progress-circular 
-          indeterminate 
-          :size="30" 
+        <v-progress-circular
+          indeterminate
+          :size="30"
           v-show="getPending"
-          color="primary"/> 
+          color="primary"/>
         <v-spacer></v-spacer>
         <v-btn icon light @click="$router.push({ name: 'buyer-edit', params: { id: data.id }})">
           <v-icon color="grey darken-2">edit</v-icon>
@@ -31,13 +31,13 @@
              <p class="body-2 mb-1">{{ $t('common.Company') }}</p>
              <p>{{ data.company || '-' }}</p>
            </v-flex>
-           
+
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t("common.Email") }}</p>
              <p>{{ data.email || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
-             
+
            </v-flex>
 
            <v-flex xs12 sm3>
@@ -52,7 +52,7 @@
 
            <v-flex xs12 sm9>
              <p class="body-2 mb-1">{{ $t('common.Notes') }}</p>
-             <p>{{ data.notes || '-' }}</p>   
+             <p>{{ data.notes || '-' }}</p>
            </v-flex>
            <v-flex xs12 text-xs-right>
               <a :href="'mailto:' + data.email" v-if="data.email">
@@ -62,11 +62,11 @@
               </a>
            </v-flex>
 
-         </v-layout>        
+         </v-layout>
         </transition>
       </v-container>
     </v-card>
-    
+
     <v-card class="mt-4">
       <v-container fluid grid-list-lg>
         <v-flex xs12>
@@ -87,16 +87,16 @@
             <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
             <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
             <td class="text-xs-center">
-                <v-btn icon @click="">
+                <v-btn icon>
                   <v-icon size="16px" color="primary">edit</v-icon>
                 </v-btn>
-                <v-btn icon @click="">
+                <v-btn icon>
                   <v-icon size="16px" color="primary">close</v-icon>
-                </v-btn>                
+                </v-btn>
             </td>
           </template>
         </v-data-table>
-      </v-container>  
+      </v-container>
     </v-card>
 
    </v-flex>

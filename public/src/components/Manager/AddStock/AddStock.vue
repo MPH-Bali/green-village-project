@@ -102,14 +102,9 @@
 </template>
 
 <script>
-import StockTable from './Table'
-
 export default {
   props: {
     date: { type: String, required: false }
-  },
-  components: {
-    StockTable
   },
   data () {
     return {

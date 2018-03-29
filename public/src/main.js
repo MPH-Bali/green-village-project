@@ -7,14 +7,12 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import './App.css'
 
+import './components'
 import App from './App'
 import router from './router'
 import i18n from './i18n'
 import firebase from './firebase'
 import firestore from './firestore'
-
-import './components/Elements'
-import './components/Charts'
 
 Vue.prototype.$firebase = firebase
 Vue.prototype.$firestore = firestore

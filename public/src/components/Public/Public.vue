@@ -14,7 +14,7 @@
           <v-btn color="primary" dark slot="activator">{{ $t('common.language') }}</v-btn>
             <v-list>
               <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
-                <v-list-tile-title@click="lang(item.value)">{{ item.title }}</v-list-tile-title>
+                <v-list-tile-title @click="lang(item.value)">{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
     </v-menu>

@@ -34,19 +34,10 @@
 </template>
 
 <script>
-import LoadingMask from './LoadingMask'
-import Login from '@/components/Manager/Login/Login'
-import Unapproved from '@/components/Manager/Login/Unapproved'
-
 export default {
   name: 'Manager',
   created () {
     this.$firestore.initStore()
-  },
-  components: {
-    LoadingMask,
-    Login,
-    Unapproved
   },
   data () {
     return {

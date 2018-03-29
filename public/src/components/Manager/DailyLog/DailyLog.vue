@@ -11,8 +11,17 @@
       <log-header class="mt-4" action="/manager/material" :title="$t('headers.materialKg')" />
       <MaterialTable/>
 
-      <log-header class="mt-4" action="/manager/stock" title="Stock" />
-      <StockTable/>
+      <log-header class="mt-4" action="/manager/stock" title="Compost" />
+      <StockTable material-type="Compost" />
+
+      <log-header class="mt-4" action="/manager/stock" title="Plastics" />
+      <StockTable material-type="Plastics" />
+
+      <log-header class="mt-4" action="/manager/stock" title="Metals" />
+      <StockTable material-type="Metals" />
+
+      <log-header class="mt-4" action="/manager/stock" title="Paper" />
+      <StockTable material-type="Paper" />
 
       <log-header class="mt-4" action="/manager/worker-hours" :title="$t('headers.workerHours')" />
       <WorkerTimes/>

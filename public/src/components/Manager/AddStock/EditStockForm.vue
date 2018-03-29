@@ -38,12 +38,7 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
-
 export default {
-  components: {
-    NavigationHeader
-  },
   props: {
     id: {
       type: String,

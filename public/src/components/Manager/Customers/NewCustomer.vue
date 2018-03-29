@@ -97,13 +97,8 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
-
 export default {
   name: 'NewCustomer',
-  components: {
-    NavigationHeader
-  },
   methods: {
     submit () {
       if (!this.valid) {

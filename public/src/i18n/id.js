@@ -221,16 +221,6 @@ export default {
     createSale: 'Buat Pembelian',
     addExpense: 'Tambah Pengeluaran'
   },
-  // fixed menu located at the bottom of the screen
-  bottomMenu: {
-    addDelivery: 'tambah pengiriman',
-    weighMaterials: 'berat material',
-    workersHours: ' jam pekerja',
-    addStock: 'tambah stok atau kompos',
-    createSale: 'buat penjualan',
-    addExpense: 'tambah biaya',
-    settings: 'pengaturan'
-  },
   // 02.0b
   dailyLog: {
     deliveries: 'pengiriman',

@@ -14,9 +14,14 @@ import i18n from './i18n'
 import firebase from './firebase'
 import firestore from './firestore'
 
+import VueAnalytics from 'vue-analytics'
+
 Vue.prototype.$firebase = firebase
 Vue.prototype.$firestore = firestore
 
+Vue.use(VueAnalytics, {
+  id: 'UA-116695467-1'
+})
 Vue.use(moment)
 Vue.use(Vuetify, {
   theme: {

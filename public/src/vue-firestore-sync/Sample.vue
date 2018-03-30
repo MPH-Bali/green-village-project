@@ -17,7 +17,6 @@ export default {
     this.$sync({
       foo: this.$db.collection('foo')
     })
-    console.log(this.$store.foo)
   },
   methods: {
     add () {

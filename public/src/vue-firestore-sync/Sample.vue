@@ -5,7 +5,7 @@
     <p v-for="foo in $store.foo.data" :key="foo.id">
       <span class="mx-2">{{ foo.id }}</span>
       <span class="mx-2">{{ foo.bar }}</span>
-      <span class="mx-2" @click="$store.foo.remove(foo.id)"> del</span>
+      <span class="mx-2" @click="$store.foo.collection.remove(foo.id)"> del</span>
     </p>
     <h1 v-if="$store.foo.pending">loading</h1>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     add () {
-      this.$store.foo.add({ bar: 'foo' })
+      this.$store.foo.collection.add({ bar: 'foo' })
     }
   }
 }

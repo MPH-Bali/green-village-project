@@ -22,7 +22,8 @@ const initInstance = (Vue, db) => {
           if (this.store[key]) this.store[key].unsubscribe()
 
           // Get collection name
-          const collection = isCollection ? refs[key].id : refs[key].parent.id
+          const colId = isCollection ? refs[key].id : refs[key].parent.id
+          const colRef = db.collection(colId)
 
           // Set/reset store for this key
           this.store[key] = {
@@ -30,22 +31,13 @@ const initInstance = (Vue, db) => {
             ref: refs[key],
             pending: true,
             data: isCollection ? [] : null,
-            collection,
-            add (data) {
-              db.collection(collection).add(data)
-            },
-            remove (id) {
-              db.collection(collection).doc(id).delete()
-            },
-            update (data) {
-              db.collection(collection).doc(data.id).set({ ...data })
-            },
-            save (data) {
-              if (data.id) {
-                db.collection(collection).doc(data.id).set({ ...data })
-              } else {
-                db.collection(collection).add(data)
-              }
+            collection: {
+              id: colId,
+              ref: colRef,
+              add: (data) => colRef.add(data),
+              remove: (id) => colRef.doc(id).delete(),
+              update: (data) => colRef.doc(data.id).set({ ...data }),
+              save: (data) => data.id ? colRef.doc(data.id).set({ ...data }) : colRef.add(data)
             }
           }
 

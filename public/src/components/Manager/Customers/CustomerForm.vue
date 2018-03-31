@@ -98,7 +98,7 @@
 
 <script>
 export default {
-  name: 'NewCustomer',
+  name: 'CustomerForm',
   methods: {
     submit () {
       if (!this.valid) {
@@ -141,7 +141,9 @@ export default {
   data () {
     return {
       submitting: false,
-      form: {}
+      form: {
+        type: { customer: true }
+      }
     }
   }
 }

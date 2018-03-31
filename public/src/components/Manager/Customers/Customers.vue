@@ -4,11 +4,11 @@
       <template slot="right">
         <v-btn class="hidden-xs-only"
           depressed color="primary"
-          @click="goToNewCustomerForm">
+          @click="$router.push('/manager/customers/form')">
           Add Customer
         </v-btn>
         <v-btn icon class="hidden-sm-and-up mt-0"
-          @click="goToNewCustomerForm">
+          @click="$router.push('/manager/customers/form')">
           <v-icon color="primary">add</v-icon>
         </v-btn>
       </template>
@@ -39,7 +39,7 @@
               <td>{{ props.item.lastFeePaid.monthlyFee }}</td>
               <td>{{ props.item.lastFeePaid.paidUntil }}</td>
               <td>
-                <v-btn flat :href="customerURL(props.item)">
+                <v-btn flat :href="`/manager/customers/${props.item.id}`">
                   <v-icon color="">chevron_right</v-icon>
                 </v-btn>
               </td>
@@ -63,12 +63,6 @@ export default {
           filter(row.lastFeePaid.monthlyFee, search) ||
           filter(row.lastFeePaid.paidUntil, search)
       })
-    },
-    customerURL (person) {
-      return `/manager/customers/${person.id}`
-    },
-    goToNewCustomerForm () {
-      this.$router.push('/manager/customers/new')
     }
   },
   data () {
@@ -115,17 +109,14 @@ export default {
   },
   computed: {
     customers () {
-      return this.$firestore.collections.person.map((customer) => {
-        return {
-          ...customer,
-          type: customer.houseType ? customer.houseType.name : '',
-          lastFeePaid: customer.lastFeePaid ? customer.lastFeePaid : { paidUntil: '-', monthlyFee: '-' }
-        }
-      })
+      return this.$store.person.data
+      .filter(person => person.type && person.type.customer)
+      .map((customer) => ({
+        ...customer,
+        type: (customer.houseType && customer.houseType.name) || '',
+        lastFeePaid: (customer.lastFeePaid && customer.lastFeePaid) || { paidUntil: '-', monthlyFee: '-' }
+      }))
     }
-  },
-  created () {
-
   }
 }
 </script>

@@ -5,26 +5,30 @@
       <v-flex xs12 sm6>
         <p class='title'>Worker name</p>
         <v-select solo flat :items="workers"
-                @change="clearError"
-                v-model="formData.worker"
-                item-text="name"
-                item-value="id"
-                return-object
-                label="" class='grey-select' />
+          @change="clearError"
+          v-model="formData.worker"
+          item-text="name"
+          item-value="id"
+          return-object
+          label="" class='grey-select' />
       </v-flex>
       <v-flex xs12 sm6>
         <p class='title'>Notes</p>
         <v-text-field
-                v-model="formData.notes"
-                class='grey-select'
-                solo flat
-                name="input-1"></v-text-field>
+          v-model="formData.notes"
+          class='grey-select'
+          solo flat
+          name="input-1" />
       </v-flex>
       <v-flex xs12 sm6>
-        <time-field @done="receiveTime" part="in" :editTime="formData.times.in" />
+        <worker-hours-time-field
+          @done="receiveTime" part="in"
+          :editTime="formData.times.in" />
       </v-flex>
       <v-flex xs12 sm6>
-        <time-field @done="receiveTime" part="out" :editTime="formData.times.out"/>
+        <worker-hours-time-field
+          @done="receiveTime" part="out"
+          :editTime="formData.times.out"/>
       </v-flex>
 
       <v-flex xs4>

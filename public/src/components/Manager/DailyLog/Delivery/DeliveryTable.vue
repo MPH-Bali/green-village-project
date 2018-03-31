@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.delivery"
+    :loading="$store.delivery.pending"
     :headers="headers"
     :items="deliveries"
     hide-actions class="elevation-1">
@@ -83,7 +83,7 @@
 export default {
   computed: {
     deliveries () {
-      return this.$firestore.list.delivery
+      return this.$store.delivery.data || []
     }
   },
   data () {

@@ -12,15 +12,15 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-flex text-xs-right>
-          <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyer-edit' })">
+          <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyerForm' })">
             <v-icon>add_circle</v-icon>
             <span style="text-transform: capitalize" class="ml-2">{{ $t("common.add") }}</span>
           </v-btn>
-        </v-flex>    
+        </v-flex>
       </v-card-title>
 
       <v-data-table
-        :loading="$firestore.collectionsPending.person"
+        :loading="$store.person.pending"
         :headers="headers"
         :items="buyersList"
         :search="search"
@@ -30,16 +30,16 @@
         :no-results-text="$t('buyers.NoBuyers')"
         class="buyers-table">
         <template slot="items" slot-scope="props">
-          <tr @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+          <tr @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
             <td class="text-xs-center">{{ props.item.name }}</td>
             <td class="text-xs-center">{{ props.item.company }}</td>
             <td class="text-xs-center">{{ props.item.sales.length }}</td>
             <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
             <td class="text-xs-center">
-              <v-btn icon @click="$router.push({ name: 'buyer-details', params: { id: props.item.id }})">
+              <v-btn icon @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
                 <v-icon size="17px" color="primary">fa-search</v-icon>
               </v-btn>
-            </td>            
+            </td>
           </tr>
         </template>
       </v-data-table>
@@ -64,7 +64,7 @@ export default {
   },
   computed: {
     sales () {
-      return this.$firestore.list.sales
+      return this.$store.sales.data
     },
     salesByBuyers () {
       return this.sales.reduce((result, sale) => {
@@ -74,7 +74,7 @@ export default {
       }, {})
     },
     buyers () {
-      return this.$firestore.list.person.filter(person => {
+      return this.$store.person.data.filter(person => {
         return person.type && person.type.buyer
       })
     },
@@ -87,9 +87,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .buyers-table th {
-    background: #e5ece9;
-  }
-</style>

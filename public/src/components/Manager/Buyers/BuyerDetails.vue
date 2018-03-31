@@ -8,21 +8,23 @@
         <v-btn icon light @click="$router.push({ name: 'buyers' })">
           <v-icon color="grey darken-2">arrow_back</v-icon>
         </v-btn>
-        <v-toolbar-title class="grey--text text--darken-4">{{ data.name }}</v-toolbar-title>
+        <v-toolbar-title class="grey--text text--darken-4">
+          {{ $store.buyerDetails.pending || data.name }}
+        </v-toolbar-title>
         <v-progress-circular
           indeterminate
           :size="30"
-          v-show="getPending"
+          v-show="$store.buyerDetails.pending"
           color="primary"/>
         <v-spacer></v-spacer>
-        <v-btn icon light @click="$router.push({ name: 'buyer-edit', params: { id: data.id }})">
+        <v-btn icon light @click="$router.push({ name: 'buyerForm', params: { id: data.id }})">
           <v-icon color="grey darken-2">edit</v-icon>
         </v-btn>
       </v-toolbar>
 
      <v-container fluid grid-list-lg>
         <transition name="slide">
-         <v-layout row wrap v-if="!getPending"  class="buyer-info-container">
+         <v-layout row wrap v-if="!$store.buyerDetails.pending"  class="buyer-info-container">
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t('buyers.buyer') }} {{ $t('common.Name') }}</p>
              <p> {{ data.name || '-' }}</p>
@@ -67,38 +69,31 @@
       </v-container>
     </v-card>
 
-    <v-card class="mt-4">
-      <v-container fluid grid-list-lg>
-        <v-flex xs12>
-          <p class="title">Sales history</p>
-        </v-flex>
-        <v-data-table
-          :loading="$firestore.collectionsPending.sales"
-          :headers="headers"
-          :items="buyersSales"
-          :light="true"
-          :no-data-text="$t('sales.NoSales')"
-          hide-actions class="buyers-table"
-          pagination.sync="pagination">
-          <template slot="items" slot-scope="props">
-            <td class="text-xs-center">{{ props.item.date || $moment().format('DD/MM/YYYY') }}</td>
-            <td class="text-xs-center">{{ props.item.materials[0].material.name }}</td>
-            <td class="text-xs-center">{{ props.item.materials[0].kilo }}kg</td>
-            <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
-            <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
-            <td class="text-xs-center">
-                <v-btn icon>
-                  <v-icon size="16px" color="primary">edit</v-icon>
-                </v-btn>
-                <v-btn icon>
-                  <v-icon size="16px" color="primary">close</v-icon>
-                </v-btn>
-            </td>
-          </template>
-        </v-data-table>
-      </v-container>
-    </v-card>
-
+    <h1 class="px-2 mb-3 mt-4 title">Sales history</h1>
+    <v-data-table
+      :loading="$store.sales.pending"
+      :headers="headers"
+      :items="buyersSales"
+      :light="true"
+      :no-data-text="$t('sales.NoSales')"
+      hide-actions class="elevation-1"
+      pagination.sync="pagination">
+      <template slot="items" slot-scope="props">
+        <td class="text-xs-center">{{ props.item.date || $moment().format('DD/MM/YYYY') }}</td>
+        <td class="text-xs-center">{{ props.item.materials[0].material.name }}</td>
+        <td class="text-xs-center">{{ props.item.materials[0].kilo }}kg</td>
+        <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
+        <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
+        <td class="text-xs-center">
+            <v-btn icon>
+              <v-icon size="16px" color="primary">edit</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon size="16px" color="primary">close</v-icon>
+            </v-btn>
+        </td>
+      </template>
+    </v-data-table>
    </v-flex>
  </v-layout>
 </template>
@@ -111,10 +106,27 @@ export default {
       reqired: true
     }
   },
+  created () {
+    this.$sync({
+      buyerDetails: this.$db.collection('person').doc(this.id)
+    })
+  },
+  beforeDestroy () {
+    this.$store.buyerDetails.unsubscribe()
+  },
+  computed: {
+    data () {
+      return this.$store.buyerDetails.data
+    },
+    allSales () {
+      return this.$store.sales.data
+    },
+    buyersSales () {
+      return this.allSales.filter(sale => sale.buyer.id === this.data.id)
+    }
+  },
   data () {
     return {
-      getPending: false,
-      data: {},
       headers: [
         { text: this.$t('common.Date'), align: 'center', sortable: true, value: 'date' },
         { text: this.$t('buyers.materialCompost'), align: 'center', sortable: true, value: 'company' },
@@ -125,24 +137,7 @@ export default {
       ]
     }
   },
-  computed: {
-    allSales () {
-      return this.$firestore.list.sales
-    },
-    buyersSales () {
-      return this.allSales.filter(sale => sale.buyer.id === this.data.id)
-    }
-  },
-  created () {
-    this.fetchBuyer(this.id)
-  },
   methods: {
-    async fetchBuyer (id) {
-      this.getPending = true
-      const result = await this.$firestore.get('person', id)
-      this.getPending = false
-      this.data = result
-    },
     computeFinalPrice (item) {
       return item.materials[0].kilo * item.materials[0].pricePerKilo
     }

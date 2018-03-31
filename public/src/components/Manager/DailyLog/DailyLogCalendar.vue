@@ -1,31 +1,27 @@
 <template>
-   <v-flex text-xs-center>
-     <p class="title">
-       <v-btn icon 
-              class="mr-0 ml-0" 
-              @click="fetchDayilyData(previousDay)">
-         <v-icon>chevron_left</v-icon>
-       </v-btn>
-       <v-icon color="primary" @click="displayDatePicker">event</v-icon>
-       <span @click="displayDatePicker">{{ $moment(logDate).format('ddd, DD MMM YYYY') }}</span>
-       <v-btn icon 
-              class="ml-0 mr-0"
-             @click="fetchDayilyData(nextDay)" 
-             :disabled="isToday">
-         <v-icon>chevron_right</v-icon>
-       </v-btn>
-     </p>
+  <v-flex text-xs-center>
+    <p class="title">
+      <v-btn icon class="mr-0 ml-0" @click="fetchDayilyData(previousDay)">
+        <v-icon>chevron_left</v-icon>
+      </v-btn>
+      <v-icon color="primary" @click="displayDatePicker">event</v-icon>
+      <span @click="displayDatePicker">
+        {{ $moment(logDate).format('ddd, DD MMM YYYY') }}</span>
+      <v-btn icon class="ml-0 mr-0" @click="fetchDayilyData(nextDay)" :disabled="isToday">
+        <v-icon>chevron_right</v-icon>
+      </v-btn>
+    </p>
 
-     <v-dialog v-model="showDatePicker" width="290px">
-        <v-card>
-          <v-date-picker v-model="pickerDate" 
-                         color="primary"
-                        @input="fetchDayilyData">
-          </v-date-picker>            
-        </v-card>
-      </v-dialog>
+    <v-dialog v-model="showDatePicker" width="290px">
+      <v-card>
+        <v-date-picker
+          v-model="pickerDate"
+          color="primary"
+          @input="fetchDayilyData" />
+      </v-card>
+    </v-dialog>
 
-   </v-flex>
+  </v-flex>
 </template>
 
 <script>

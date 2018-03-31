@@ -80,20 +80,23 @@ export default {
     recyclingEfficiency: 'Efisiensi Daur Ulang',
     pickupSchedule: 'Jadwal Penjemputan'
   },
+  // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
+    menu: 'Catatan Harian',
+    login: 'Login',
     dailyLog: 'Catatan Harian',
     dailyLogHistory: 'Riwayat Catatan Harian',
     deliveryForm: 'Formulir Pengiriman',
-    addMaterial: 'tambah Material',
-    workerHours: 'Cek Pekerja',
-    customerDetail: 'Detail Pelanggan',
-    newCustomer: 'Pelanggan Baru',
+    materialForm: 'tambah Material',
+    stockForm: 'Tambah Stok',
+    expensesForm: 'tambah Pengeluaran',
+    workerHoursForm: 'Cek Pekerja',
     buyers: 'Pembeli',
-    'buyer-edit': 'Tambah/Sunting Pembeli',
-    'buyer-details': 'Detail Pembeli',
-    addExpense: 'tambah Pengeluaran',
-    menu: 'Catatan Harian',
-    customers: 'Pelanggan'
+    buyerForm: 'Tambah/Sunting Pembeli',
+    buyerDetails: 'Detail Pembeli',
+    customers: 'Pelanggan',
+    customerDetails: 'Detail Pelanggan',
+    customerForm: 'Tambah/Sunting Pelanggan'
   },
 
   home: {

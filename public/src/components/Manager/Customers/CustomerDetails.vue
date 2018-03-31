@@ -185,7 +185,7 @@
 
 <script>
 export default {
-  name: 'CustomerDetailView',
+  name: 'CustomerDetails',
   created () {
     this.$firestore.get('person', this.$route.params.id)
       .then((data) => {

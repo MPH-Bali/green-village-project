@@ -11,7 +11,7 @@
               autofocus
               solo flat class="accent"
               label="Pick a driver name"
-              :items="$firestore.collections.person.filter(p => p.type && p.type.employee)"
+              :items="$store.person.data.filter(p => p.type && p.type.employee)"
               item-value="id"
               item-text="name"
               return-object
@@ -23,7 +23,7 @@
               tabindex=2
               solo flat class="accent"
               label="Select one ore more Banjars"
-              :items="$firestore.collections.banjar"
+              :items="$store.banjar.data"
               item-value="id"
               item-text="name"
               return-object
@@ -98,7 +98,7 @@ export default {
   async created () {
     if (this.id) {
       this.fetchingDelivery = true
-      this.form = await this.$firestore.get('delivery', this.id)
+      this.form = await this.$store.delivery.collection.get(this.id)
       this.fetchingDelivery = false
     }
   },
@@ -117,7 +117,7 @@ export default {
   methods: {
     async save () {
       this.savePending = true
-      await this.$firestore.save('delivery', {
+      await this.$store.delivery.collection.save({
         ...this.form,
         timestamp: this.form.timestamp || new Date(),
         households: parseInt(this.form.households || 0),

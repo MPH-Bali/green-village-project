@@ -82,22 +82,21 @@ export default {
   },
   // @desc these keys MUST coorlate with the @/router Router.routes.children.name value
   routeNames: {
+    menu: 'Menu',
     login: 'Login',
     dailyLog: 'Daily Log',
     dailyLogHistory: 'Daily Log History',
     deliveryForm: 'Delivery Form',
-    addMaterial: 'Add material',
-    workerHours: 'Check workers',
-    addStock: 'Add Stock',
-    editStockForm: 'Edit Stock Form',
-    customerDetail: 'Customer Detail',
+    materialForm: 'Material Form',
+    stockForm: 'Stock Form',
+    workerHoursForm: 'Check workers',
+    expensesForm: 'Expenses Form',
     buyers: 'Buyers',
-    'buyer-edit': 'Add/Edit Buyer',
-    'buyer-details': 'Buyer Details',
-    addExpense: 'Add Expense',
-    menu: 'Menu',
+    buyerForm: 'Add/Edit Buyer',
+    buyerDetails: 'Buyer Details',
     customers: 'Customers',
-    newCustomer: 'New Customer'
+    customerForm: 'Add/Edit Customer',
+    customerDetails: 'Customer Detail'
   },
   // example string
   home: {

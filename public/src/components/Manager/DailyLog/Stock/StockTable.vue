@@ -1,10 +1,10 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.stock"
+    :loading="$store.stock.pending"
     :headers="headers"
     :items="items"
     hide-actions class="elevation-1">
-    <template slot="items" slot-scope="props">
+    <template slot="items" slot-scope="props"  v-if="!collapsed">
       <td>{{ props.item.subtype }}</td>
       <td>{{ props.item.weight }}</td>
       <td>{{ props.item.comments }}</td>
@@ -16,9 +16,11 @@
       </td>
     </template>
     <template slot="footer">
-      <td colspan="100%">
-        <strong>{{ materialType }} Total Today: {{ totalWeight }} kg</strong>
-      </td>
+      <tr class="secondary pointer" @click.stop="collapsed = !collapsed">
+        <td colspan="100%">
+          <strong>{{ materialType }} Total Today: {{ totalWeight }} kg</strong>
+        </td>
+      </tr>
     </template>
   </v-data-table>
 </template>
@@ -31,14 +33,17 @@ export default {
   },
   computed: {
     items () {
-      return this.$firestore.dailyCollections.stock.filter(x => x.type === this.materialType)
+      return (this.$store.stock.data || [])
+        .filter(x => x.type === this.materialType)
     },
     totalWeight () {
-      return this.items.filter(x => x.type === this.materialType).reduce((total, item) => total + parseInt(item.weight), 0)
+      return this.items
+        .reduce((total, item) => total + parseInt(item.weight), 0)
     }
   },
   data () {
     return {
+      collapsed: true,
       loading: false,
       timestamp: new Date(),
       headers: [

@@ -5,74 +5,74 @@
         <v-flex xs12>
           <v-container fluid grid-list-lg class="buyers-container">
             <v-flex xs12 text-xs-center>
-              <v-progress-circular 
-                indeterminate 
-                :size="50" 
+              <v-progress-circular
+                indeterminate
+                :size="50"
                 v-show="getPending"
-                color="primary"/>          
+                color="primary"/>
             </v-flex>
-            <transition name="slide-buyer-edit">
+            <transition name="slide-buyer-form">
             <v-layout row wrap v-if="!getPending">
               <v-flex xs12 sm6>
                 <p class="body-2 mb-1">{{ $t("common.Name") }}</p>
-                <v-text-field v-model="formData.name" 
+                <v-text-field v-model="form.name"
                               :error-messages="nameErrors"
                               flat
-                              @input="$v.formData.name.$touch()"
-                              @blur="$v.formData.name.$touch()"/>
+                              @input="$v.form.name.$touch()"
+                              @blur="$v.form.name.$touch()"/>
               </v-flex>
               <v-flex xs12 sm6>
                 <p class="body-2 mb-1">{{ $t("common.Company") }}</p>
-                <v-text-field flat 
-                              v-model="formData.company"/>
+                <v-text-field flat
+                              v-model="form.company"/>
               </v-flex>
-              
+
               <v-flex xs12 sm6>
                 <p class="body-2 mb-1">{{ $t("common.Email") }}</p>
-                <v-text-field v-model="formData.email" 
+                <v-text-field v-model="form.email"
                               :error-messages="emailErrors"
-                              flat 
-                              @input="$v.formData.email.$touch()"
-                              @blur="$v.formData.email.$touch()"/>
+                              flat
+                              @input="$v.form.email.$touch()"
+                              @blur="$v.form.email.$touch()"/>
               </v-flex>
               <v-flex sm6>
               </v-flex>
 
               <v-flex xs12 sm6>
                 <p class="body-2 mb-1">{{ $t("common.PhoneNumber") }}</p>
-                <v-text-field v-model="formData.phone"
+                <v-text-field v-model="form.phone"
                               :error-messages="phoneErrors"
-                              flat 
-                              @input="$v.formData.phone.$touch()"
-                              @blur="$v.formData.phone.$touch()"/>
+                              flat
+                              @input="$v.form.phone.$touch()"
+                              @blur="$v.form.phone.$touch()"/>
               </v-flex>
               <v-flex xs12 sm6>
                 <p class="body-2 mb-1">{{ $t("common.Whatsapp") }}</p>
-                <v-text-field flat 
-                              v-model="formData.whatsapp" />
+                <v-text-field flat
+                              v-model="form.whatsapp" />
               </v-flex>
 
               <v-flex xs12>
                 <p class="body-2 mb-1">{{ $t("common.Notes") }}</p>
                 <v-text-field name="input-1"
-                              v-model="formData.notes"
-                              flat 
+                              v-model="form.notes"
+                              flat
                               multi-line>
-                </v-text-field>            
+                </v-text-field>
               </v-flex>
 
               <v-flex xs6 text-xs-left>
-                <v-btn color="error" 
+                <v-btn color="error"
                        outline
-                       depressed 
+                       depressed
                       @click.stop="$router.go(-1)">{{ $t("common.Cancel") }}
                 </v-btn>
               </v-flex>
               <v-flex xs6 text-xs-right>
-                <v-btn style="text-transform: capitalize" 
-                       depressed color="primary" 
+                <v-btn style="text-transform: capitalize"
+                       depressed color="primary"
                       :disabled="savePending"
-                      @click.stop="save" 
+                      @click.stop="save"
                       :loading="savePending">{{ this.id ? $t('common.Save') : $t('common.Add') }}
                 </v-btn>
               </v-flex>
@@ -104,11 +104,11 @@ export default {
       deletePending: false,
       savePending: false,
       addPending: false,
-      formData: {}
+      form: {}
     }
   },
   validations: {
-    formData: {
+    form: {
       name: { required },
       email: { email },
       phone: { required }
@@ -117,43 +117,42 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
-      if (!this.$v.formData.name.$dirty) return errors
-      !this.$v.formData.name.required && errors.push('Name is required')
+      if (!this.$v.form.name.$dirty) return errors
+      !this.$v.form.name.required && errors.push('Name is required')
       return errors
     },
     emailErrors () {
       const errors = []
-      if (!this.$v.formData.email.$dirty) return errors
-      !this.$v.formData.email.email && errors.push('Invalid e-mail')
+      if (!this.$v.form.email.$dirty) return errors
+      !this.$v.form.email.email && errors.push('Invalid e-mail')
       return errors
     },
     phoneErrors () {
       const errors = []
-      if (!this.$v.formData.phone.$dirty) return errors
-      !this.$v.formData.phone.required && errors.push('Phone number is required')
+      if (!this.$v.form.phone.$dirty) return errors
+      !this.$v.form.phone.required && errors.push('Phone number is required')
       return errors
     }
   },
-  created () {
-    if (this.id) this.fetchBuyer(this.id)
+  async created () {
+    if (this.id) {
+      this.getPending = true
+      this.form = await this.$store.person.collection.get(this.id)
+      this.getPending = false
+    }
   },
   methods: {
-    async fetchBuyer (id) {
-      this.getPending = true
-      const result = await this.$firestore.get('person', id)
-      this.getPending = false
-      this.formData = result
-    },
     async save () {
       this.$v.$touch()
       if (this.$v.$invalid) return
-      if (!this.id) this.formData.type = {}
-      this.formData.type.buyer = true
+      if (!this.id) this.form.type = {}
+      this.form.type.buyer = true
       this.savePending = true
-      await this.$firestore.save('person', this.formData)
+      await this.$store.person.collection.save(this.form)
       this.$emit('message', {
         text: 'Buyer saved',
-        type: 'success'
+        type: 'success',
+        ding: true
       })
       this.savePending = false
       this.$router.go(-1)
@@ -163,11 +162,11 @@ export default {
 </script>
 
 <style>
-  .slide-buyer-edit-enter-active, .slide-buyer-edit-leave-active {
+  .slide-buyer-form-enter-active, .slide-buyer-form-leave-active {
     max-height: 1000px;
     transition: max-height .5s, opacity .5s;
   }
-  .slide-buyer-edit-enter, .slide-buyer-edit-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .slide-buyer-form-enter, .slide-buyer-form-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
     max-height: 82px;
   }

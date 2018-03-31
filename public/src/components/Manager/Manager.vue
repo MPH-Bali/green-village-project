@@ -37,6 +37,13 @@
 export default {
   name: 'Manager',
   created () {
+    this.$sync({
+      person: this.$db.collection('person'),
+      banjar: this.$db.collection('banjar'),
+      sales: this.$db.collection('sales'),
+      settings: this.$db.collection('settings')
+    })
+
     this.$firestore.initStore()
   },
   data () {

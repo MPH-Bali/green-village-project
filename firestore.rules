@@ -200,5 +200,9 @@ service cloud.firestore {
 				emailIsValid() &&
 				hasRoleOrType();
 		}
+
+		match /charts/{chartId} {
+			allow read: if true;
+		}
 	}
 }

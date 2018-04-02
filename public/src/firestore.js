@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import moment from 'vue-moment'
 import firebase, { db } from '@/firebase'
+import VueAnalytics from 'vue-analytics'
 
+Vue.use(VueAnalytics, {
+  id: 'UA-116695467-1'
+})
 Vue.use(moment)
 
 export default new Vue({

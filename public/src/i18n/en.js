@@ -25,24 +25,20 @@ export default {
   },
   models: {
     fees: {
-      labels: {
-        timestamp: 'Date Time',
-        totalPaid: 'Total Paid',
-        paidUntil: 'Paid Until',
-        monthlyFee: 'Monthly Fee'
-      }
+      timestamp: 'Date Time',
+      totalPaid: 'Total Paid',
+      paidUntil: 'Paid Until',
+      monthlyFee: 'Monthly Fee'
     },
     customers: {
-      labels: {
-        name: 'Customer Name',
-        email: 'Email',
-        houseType: 'Type',
-        address: 'Address',
-        notes: 'Notes',
-        whatsapp: 'Whatsapp',
-        phone: 'SMS/Call',
-        company: 'Company'
-      }
+      name: 'Customer Name',
+      email: 'Email',
+      houseType: 'Type',
+      address: 'Address',
+      notes: 'Notes',
+      whatsapp: 'Whatsapp',
+      phone: 'SMS/Call',
+      company: 'Company'
     }
   },
   forms: {

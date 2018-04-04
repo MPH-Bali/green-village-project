@@ -109,11 +109,6 @@ export default new Router({
           name: 'customers',
           component: Vue.component('Customers'),
           props: true
-        },
-        {
-          path: 'menu',
-          name: 'menu',
-          component: Vue.component('Menu')
         }, {
           path: '*',
           redirect: '/manager'

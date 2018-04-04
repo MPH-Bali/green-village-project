@@ -25,24 +25,20 @@ export default {
   },
   models: {
     fees: {
-      labels: {
-        timestamp: 'Tanggal Waktu',
-        totalPaid: 'Total Pembayaran',
-        paidUntil: 'Terbayar Sampai',
-        monthlyFee: 'Biaya Bulanan'
-      }
+      timestamp: 'Tanggal Waktu',
+      totalPaid: 'Total Pembayaran',
+      paidUntil: 'Terbayar Sampai',
+      monthlyFee: 'Biaya Bulanan'
     },
     customers: {
-      labels: {
-        name: 'Nama Pelanggan',
-        email: 'Email',
-        houseType: 'Jenis',
-        address: 'Alamat',
-        notes: 'Catatan',
-        whatsapp: 'Whatsapp',
-        phone: 'SMS/Telepon',
-        company: 'Perusahaan'
-      }
+      name: 'Nama Pelanggan',
+      email: 'Email',
+      houseType: 'Jenis',
+      address: 'Alamat',
+      notes: 'Catatan',
+      whatsapp: 'Whatsapp',
+      phone: 'SMS/Telepon',
+      company: 'Perusahaan'
     }
   },
   forms: {

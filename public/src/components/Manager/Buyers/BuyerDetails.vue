@@ -9,7 +9,7 @@
           <v-icon color="grey darken-2">arrow_back</v-icon>
         </v-btn>
         <v-toolbar-title class="grey--text text--darken-4">
-          {{ $store.buyerDetails.pending || data.name }}
+          {{ $store.buyerDetails.pending || buyer.name }}
         </v-toolbar-title>
         <v-progress-circular
           indeterminate
@@ -17,26 +17,26 @@
           v-show="$store.buyerDetails.pending"
           color="primary"/>
         <v-spacer></v-spacer>
-        <v-btn icon light @click="$router.push({ name: 'buyerForm', params: { id: data.id }})">
+        <v-btn icon light @click="$router.push({ name: 'buyerForm', params: { id: buyer.id }})">
           <v-icon color="grey darken-2">edit</v-icon>
         </v-btn>
       </v-toolbar>
 
-     <v-container fluid grid-list-lg>
+      <v-container fluid grid-list-lg>
         <transition name="slide">
          <v-layout row wrap v-if="!$store.buyerDetails.pending"  class="buyer-info-container">
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t('buyers.buyer') }} {{ $t('common.Name') }}</p>
-             <p> {{ data.name || '-' }}</p>
+             <p> {{ buyer.name || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t('common.Company') }}</p>
-             <p>{{ data.company || '-' }}</p>
+             <p>{{ buyer.company || '-' }}</p>
            </v-flex>
 
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t("common.Email") }}</p>
-             <p>{{ data.email || '-' }}</p>
+             <p>{{ buyer.email || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
 
@@ -44,20 +44,20 @@
 
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t('common.PhoneNumber') }}</p>
-             <p>{{ data.phone || '-' }}</p>
+             <p>{{ buyer.phone || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3>
              <p class="body-2 mb-1">{{ $t('common.Whatsapp') }}</p>
-             <p>{{ data.whatsapp || '-' }}</p>
+             <p>{{ buyer.whatsapp || '-' }}</p>
            </v-flex>
            <v-flex xs12 sm3></v-flex>
 
            <v-flex xs12 sm9>
              <p class="body-2 mb-1">{{ $t('common.Notes') }}</p>
-             <p>{{ data.notes || '-' }}</p>
+             <p>{{ buyer.notes || '-' }}</p>
            </v-flex>
            <v-flex xs12 text-xs-right>
-              <a :href="'mailto:' + data.email" v-if="data.email">
+              <a :href="'mailto:' + buyer.email" v-if="buyer.email">
                 <v-btn color="primary">
                   {{ $t("common.Send") }} {{ $t("common['Email']") }}
                 </v-btn>
@@ -71,9 +71,9 @@
 
     <h1 class="px-2 mb-3 mt-4 title">Sales history</h1>
     <v-data-table
-      :loading="$store.sales.pending"
+      :loading="$store.buyerSales.pending"
+      :items="$store.buyerSales.data"
       :headers="headers"
-      :items="buyersSales"
       :light="true"
       :no-data-text="$t('sales.NoSales')"
       hide-actions class="elevation-1"
@@ -85,12 +85,12 @@
         <td class="text-xs-center">{{ props.item.materials[0].pricePerKilo }}IDR/kg</td>
         <td class="text-xs-center">{{ props.item.materials[0].finalPrice || computeFinalPrice(props.item) }}IDR</td>
         <td class="text-xs-center">
-            <v-btn icon>
-              <v-icon size="16px" color="primary">edit</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon size="16px" color="primary">close</v-icon>
-            </v-btn>
+          <v-btn icon>
+            <v-icon size="16px" color="primary">edit</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon size="16px" color="primary">close</v-icon>
+          </v-btn>
         </td>
       </template>
     </v-data-table>
@@ -101,28 +101,21 @@
 <script>
 export default {
   props: {
-    id: {
-      type: String,
-      reqired: true
-    }
+    id: { type: String, reqired: true }
   },
   created () {
     this.$sync({
-      buyerDetails: this.$db.collection('person').doc(this.id)
+      buyerDetails: this.$db.collection('person').doc(this.id),
+      buyerSales: this.$db.collection('sales').where('buyer.id', '==', this.id)
     })
   },
   beforeDestroy () {
     this.$store.buyerDetails.unsubscribe()
+    this.$store.buyerSales.unsubscribe()
   },
   computed: {
-    data () {
+    buyer () {
       return this.$store.buyerDetails.data
-    },
-    allSales () {
-      return this.$store.sales.data
-    },
-    buyersSales () {
-      return this.allSales.filter(sale => sale.buyer.id === this.data.id)
     }
   },
   data () {
@@ -153,7 +146,7 @@ export default {
     max-height: 1000px;
     transition: max-height .5s, opacity .5s;
   }
-  .slide-enter, .slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .slide-enter, .slide-leave-to {
     opacity: 0;
     max-height: 0;
   }

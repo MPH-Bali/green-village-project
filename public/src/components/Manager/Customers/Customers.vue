@@ -18,14 +18,13 @@
         <v-card>
           <v-card-title>
             {{ $t('routeNames.customers') }}
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-text-field
               append-icon="search"
               label="Search"
               single-line
               hide-details
-              v-model="search"
-            ></v-text-field>
+              v-model="search" />
           </v-card-title>
           <v-data-table
             :custom-filter="customFilter"
@@ -110,12 +109,15 @@ export default {
   computed: {
     customers () {
       return this.$store.person.data
-      .filter(person => person.type && person.type.customer)
-      .map((customer) => ({
-        ...customer,
-        type: (customer.houseType && customer.houseType.name) || '',
-        lastFeePaid: (customer.lastFeePaid && customer.lastFeePaid) || { paidUntil: '-', monthlyFee: '-' }
-      }))
+        .filter(person => person.type && person.type.customer)
+        .map((customer) => ({
+          ...customer,
+          type: (customer.houseType && customer.houseType.name) || '',
+          lastFeePaid: {
+            paidUntil: (customer.lastFeePaid && customer.lastFeePaid.paidUntil) || '-',
+            monthlyFee: (customer.lastFeePaid && customer.lastFeePaid.monthlyFee) || '-'
+          }
+        }))
     }
   }
 }

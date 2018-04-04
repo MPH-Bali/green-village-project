@@ -84,13 +84,8 @@ export default {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
     },
     banjars () {
-      const banjars = this.$firestore.collections.banjar
-      const noBanjar = {
-        id: 0,
-        name: 'No banjar'
-      }
-      banjars.unshift(noBanjar)
-      return banjars
+      const banjars = this.$store.banjar.data
+      return banjars.length ? banjars : [ { id: 0, name: 'No banjar' } ]
     },
     materials () {
       return this.$firestore.dailyCollections.material

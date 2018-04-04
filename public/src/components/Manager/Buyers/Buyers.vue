@@ -1,50 +1,50 @@
 <template>
   <v-layout row >
-  <v-flex xs12 md8 offset-md2>
-    <v-card class="mt-4">
-      <v-card-title>
-        <v-text-field
-          append-icon="search"
-          :label="$t('common.search')"
-          single-line
-          hide-details
-          v-model="search"
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-flex text-xs-right>
-          <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyerForm' })">
-            <v-icon>add_circle</v-icon>
-            <span style="text-transform: capitalize" class="ml-2">{{ $t("common.add") }}</span>
-          </v-btn>
-        </v-flex>
-      </v-card-title>
+    <v-flex xs12 md8 offset-md2>
+      <v-card class="mt-4">
+        <v-card-title>
+          <v-text-field
+            append-icon="search"
+            :label="$t('common.search')"
+            single-line
+            hide-details
+            v-model="search"
+          ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-flex text-xs-right>
+            <v-btn depressed color="primary" @click.stop="$router.push({ name: 'buyerForm' })">
+              <v-icon>add_circle</v-icon>
+              <span style="text-transform: capitalize" class="ml-2">{{ $t("common.add") }}</span>
+            </v-btn>
+          </v-flex>
+        </v-card-title>
 
-      <v-data-table
-        :loading="$store.person.pending"
-        :headers="headers"
-        :items="buyersList"
-        :search="search"
-        :light="true"
-        :rows-per-page-items="[10, 5, 25,{text: 'All',value: -1}]"
-        :no-data-text="$t('common.NoData')"
-        :no-results-text="$t('buyers.NoBuyers')"
-        class="buyers-table">
-        <template slot="items" slot-scope="props">
-          <tr @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
-            <td class="text-xs-center">{{ props.item.name }}</td>
-            <td class="text-xs-center">{{ props.item.company }}</td>
-            <td class="text-xs-center">{{ props.item.sales.length }}</td>
-            <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
-            <td class="text-xs-center">
-              <v-btn icon @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
-                <v-icon size="17px" color="primary">fa-search</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </template>
-      </v-data-table>
-    </v-card>
-  </v-flex>
+        <v-data-table
+          :loading="$store.person.pending"
+          :headers="headers"
+          :items="buyersList"
+          :search="search"
+          :light="true"
+          :rows-per-page-items="[10, 5, 25,{text: 'All',value: -1}]"
+          :no-data-text="$t('common.NoData')"
+          :no-results-text="$t('buyers.NoBuyers')"
+          class="buyers-table">
+          <template slot="items" slot-scope="props">
+            <tr @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
+              <td class="text-xs-center">{{ props.item.name }}</td>
+              <td class="text-xs-center">{{ props.item.company }}</td>
+              <td class="text-xs-center">{{ props.item.sales.length }}</td>
+              <td class="text-xs-center">{{ props.item.lastPurchase }}</td>
+              <td class="text-xs-center">
+                <v-btn icon @click="$router.push({ name: 'buyerDetails', params: { id: props.item.id }})">
+                  <v-icon size="17px" color="primary">fa-search</v-icon>
+                </v-btn>
+              </td>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-card>
+    </v-flex>
   </v-layout>
 </template>
 

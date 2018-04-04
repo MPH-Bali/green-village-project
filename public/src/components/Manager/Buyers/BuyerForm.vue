@@ -166,7 +166,7 @@ export default {
     max-height: 1000px;
     transition: max-height .5s, opacity .5s;
   }
-  .slide-buyer-form-enter, .slide-buyer-form-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .slide-buyer-form-enter, .slide-buyer-form-leave-to {
     opacity: 0;
     max-height: 82px;
   }

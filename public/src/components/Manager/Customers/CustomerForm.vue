@@ -7,69 +7,69 @@
         <v-card>
           <v-layout row wrap pa-3>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.name') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.name') }}</h3>
               <v-text-field
                 class="accent" solo flat
-                :label="$t('models.customers.labels.name')"
+                :label="$t('models.customers.name')"
                 type="text"
                 v-model="form.name" />
             </v-flex>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.email') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.email') }}</h3>
               <v-text-field
                 type="email"
                 class="accent" solo flat
-                :label="$t('models.customers.labels.email')"
+                :label="$t('models.customers.email')"
                 v-model="form.email" />
             </v-flex>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.houseType') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.houseType') }}</h3>
               <v-select
                 :items="houseTypes"
                 clearable
                 class="accent" solo flat
-                :label="$t('models.customers.labels.houseType')"
+                :label="$t('models.customers.houseType')"
                 v-model="form.houseType" />
             </v-flex>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.company') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.company') }}</h3>
               <v-text-field
                 :disabled="companyDisabled"
                 class="accent" solo flat
-                :label="$t('models.customers.labels.company')"
+                :label="$t('models.customers.company')"
                 type="text"
                 v-model="form.company" />
             </v-flex>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.phone') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.phone') }}</h3>
               <v-text-field
                 class="accent" solo flat
-                :label="$t('models.customers.labels.phone')"
+                :label="$t('models.customers.phone')"
                 type="text"
                 v-model="form.phone" />
             </v-flex>
             <v-flex xs12 sm12 md6>
-              <h3 class="pb-3">{{ $t('models.customers.labels.whatsapp') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.whatsapp') }}</h3>
               <v-text-field
                 class="accent" solo flat
-                :label="$t('models.customers.labels.whatsapp')"
+                :label="$t('models.customers.whatsapp')"
                 type="text"
                 v-model="form.whatsapp" />
             </v-flex>
             <v-flex sm12 md12>
-              <h3 class="pb-3">{{ $t('models.customers.labels.address') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.address') }}</h3>
               <v-text-field
                 class="accent" solo flat
-                :label="$t('models.customers.labels.address')"
+                :label="$t('models.customers.address')"
                 type="text"
                 multi-line
                 v-model="form.address" />
             </v-flex>
             <v-flex sm12 md12>
-              <h3 class="pb-3">{{ $t('models.customers.labels.notes') }}</h3>
+              <h3 class="pb-3">{{ $t('models.customers.notes') }}</h3>
               <v-text-field
                 class="accent" solo flat
-                :label="$t('models.customers.labels.notes')"
+                :label="$t('models.customers.notes')"
                 type="text"
                 multi-line
                 v-model="form.notes" />

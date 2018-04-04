@@ -1,19 +1,16 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.material"
     :headers="headers"
-    :items="$firestore.dailyCollections.material"
-    hide-actions class="elevation-1"
-  >
+    :items="materials"
+    :loading="$store.material.pending"
+    hide-actions class="elevation-1">
     <template slot="items" slot-scope="props" v-if="!collapsed" >
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ props.item.worker.name }}</td>
       <td class="text-xs-center">{{ props.item.inorganic }}</td>
       <td class="text-xs-center">{{ props.item.organic }}</td>
       <td class="text-xs-center">
-        <template v-if="props.item.banjar">
-          {{ props.item.banjar.name }}
-        </template>
+        {{ (props.item.banjar && props.item.banjar.name) || '-' }}
       </td>
     </template>
     {{ materials }}
@@ -64,14 +61,8 @@ export default {
   },
   computed: {
     materials () {
-      return this.$firestore.list.material
+      return this.$store.material.data || []
     }
   }
 }
 </script>
-
-<style scoped>
-  .elevation-1 thead {
-    background: #e5ece9;
-  }
-</style>

@@ -1,10 +1,9 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.expense"
     :headers="headers"
-    :items="$firestore.dailyCollections.expense"
-    hide-actions class="elevation-1"
-  >
+    :items="$store.expense.data"
+    :loading="$store.expense.pending"
+    hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
       <td class="text-xs-center">{{ props.item.type }}</td>
@@ -15,7 +14,6 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -31,8 +29,3 @@ export default {
 }
 </script>
 
-<style scoped>
-  .elevation-1 thead {
-    background: #e5ece9;
-  }
-</style>

@@ -70,7 +70,13 @@
               v-model="form.comments"/>
           </v-flex>
           <v-flex xs6>
-            <v-btn tabindex=9 color="error" flat outline @click.stop="$router.go(-1)">Cancel</v-btn>
+            <v-btn
+              tabindex=9
+              color="error"
+              flat outline
+              @click.stop="$router.go(-1)">
+              Cancel
+            </v-btn>
           </v-flex>
           <v-flex xs6 text-xs-right>
             <v-btn @click.stop="save"

@@ -1,9 +1,10 @@
 <template>
   <div>
-    <v-snackbar :bottom="true"
-                v-model="show"
-                :timeout="2000"
-                :color="message.type">
+    <v-snackbar
+      :bottom="true"
+      v-model="show"
+      :timeout="2000"
+      :color="message.type">
      {{ message.text }}
    </v-snackbar>
   </div>
@@ -45,7 +46,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

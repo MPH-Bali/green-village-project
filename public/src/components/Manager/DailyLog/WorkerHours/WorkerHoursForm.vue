@@ -1,51 +1,99 @@
 <template>
-  <v-container fluid grid-list-lg >
-    <navigation-header />
-    <v-layout row wrap class='add-worker'>
-      <v-flex xs12 sm6>
-        <p class='title'>Worker name</p>
-        <v-select solo flat :items="workers"
-          @change="clearError"
-          v-model="formData.worker"
-          item-text="name"
-          item-value="id"
-          return-object
-          label="" class='grey-select' />
-      </v-flex>
-      <v-flex xs12 sm6>
-        <p class='title'>Notes</p>
-        <v-text-field
-          v-model="formData.notes"
-          class='grey-select'
-          solo flat
-          name="input-1" />
-      </v-flex>
-      <v-flex xs12 sm6>
-        <worker-hours-time-field
-          @done="receiveTime" part="in"
-          :editTime="formData.times.in" />
-      </v-flex>
-      <v-flex xs12 sm6>
-        <worker-hours-time-field
-          @done="receiveTime" part="out"
-          :editTime="formData.times.out"/>
-      </v-flex>
+  <v-layout row>
+    <v-flex xs12 md8 offset-md2>
+      <v-container fluid grid-list-lg v-if="form">
+        <navigation-header />
+        <v-layout row wrap>
+          <v-flex xs12>
+            <p class="body-2 mb-1">Worker name</p>
+            <v-select solo flat :items="$store.workers.data"
+              @change="error = null"
+              v-model="form.worker"
+              item-text="name"
+              item-value="id"
+              return-object
+              class="accent" />
+          </v-flex>
 
-      <v-flex xs4>
-        <div class="left bottom">
-          <v-btn color="error" @click="$router.go(-1)">Cancel</v-btn>
-        </div>
-      </v-flex>
-      <v-flex xs4 class="center">
-        <span class="title">Total Hours</span>
-        <p class="total-hours">{{getTotalTime}} Hours</p>
-      </v-flex>
-      <v-flex xs4 class="right bottom">
-        <v-btn color="success" @click="save" :disabled="error.show">Save</v-btn>
-      </v-flex>
-    </v-layout>
-    <v-alert type="error" :value="error.show" class='full-width'>{{ error.msg }}</v-alert>
-  </v-container>
+          <v-flex xs12 sm6>
+            <p class='body-2 mb-0'>Time in {{ form.checkIn }}</p>
+            <v-layout row wrap>
+              <v-flex xs7>
+                <v-select
+                  solo flat
+                  :items="hours"
+                  v-model="form.checkIn"
+                  class="accent" />
+              </v-flex>
+              <v-flex xs5>
+                <v-btn-toggle
+                  mandatory
+                  class="elevation-0"
+                  @change="togglePM('checkIn')"
+                  v-model="inPM">
+                  <v-btn outline large class="primary--text px-3">AM</v-btn>
+                  <v-btn outline large class="primary--text px-3">PM</v-btn>
+                </v-btn-toggle>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+
+          <v-flex xs12 sm6>
+            <p class='body-2 mb-0'>Time out {{ form.checkOut }}</p>
+            <v-layout row wrap>
+              <v-flex xs7>
+                <v-select
+                  solo flat
+                  :items="hours"
+                  v-model="form.checkOut"
+                  class="accent" />
+              </v-flex>
+              <v-flex xs5>
+                <v-btn-toggle
+                  mandatory
+                  class="elevation-0"
+                  @change="togglePM('checkOut')"
+                  v-model="outPM">
+                  <v-btn outline large class="primary--text px-3">AM</v-btn>
+                  <v-btn outline large class="primary--text px-3">PM</v-btn>
+                </v-btn-toggle>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+
+          <v-flex xs12 mb-3>
+            <p class="body-2 mb-1">Notes</p>
+            <v-text-field
+              v-model="form.notes"
+              multi-line
+              auto-grow
+              class="accent"
+              solo flat />
+          </v-flex>
+
+          <v-flex xs4>
+            <v-btn depressed color="error" @click="$router.go(-1)">
+              Cancel
+            </v-btn>
+          </v-flex>
+          <v-flex xs4 text-xs-center>
+            <span class="title">Total Hours</span>
+            <p class="display-1" style="font-weight: 300">
+              {{ total }} Hours
+            </p>
+          </v-flex>
+          <v-flex xs4 text-xs-right>
+            <v-btn depressed color="primary" @click="validate" :loading="savePending">
+              Save
+            </v-btn>
+          </v-flex>
+        </v-layout>
+        <v-alert type="error" :value="error" class="full-width">
+          {{ error }}
+        </v-alert>
+      </v-container>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -55,151 +103,88 @@ export default {
   },
   async created () {
     if (this.id) {
-      this.formData = await this.$firestore.get('workerhours', this.id)
+      this.form = await this.$store.workerhours.collection.get(this.id)
+
+      let checkIn = this.$moment(this.form.checkIn)
+      if (checkIn.hours() >= 12) {
+        this.form.checkIn = checkIn.hours(checkIn.hours() - 12)
+        this.inPM = 1
+      }
+
+      let checkOut = this.$moment(this.form.checkOut)
+      if (checkOut.hours() >= 12) {
+        this.form.checkOut = checkOut.hours(checkOut.hours() - 12)
+        this.outPM = 1
+      }
     }
+    this.loading = false
   },
   data () {
     return {
-      error: {
-        show: false,
-        msg: ''
-      },
-      formData: {
-        worker: null,
-        notes: '',
-        times: {
-          in: null,
-          out: null
-        }
-      }
+      inPM: 0,
+      outPM: 0,
+      loading: true,
+      savePending: false,
+      error: null,
+      form: { }
     }
   },
   computed: {
-    workers () {
-      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
+    hours () {
+      return [...Array(12).keys()].map(x => ({
+        value: this.$moment().startOf('day').hour(x + 1),
+        text: ((x + 1) + ':00').padStart(5, '0')
+      }))
     },
-    getTotalTime () {
-      let total = 0
-
-      if (this.formData.times.in && this.formData.times.out) {
-        const momentStart = this.$moment(this.formData.times.in)
-        const momentEnd = this.$moment(this.formData.times.out)
-
-        if (momentEnd < momentStart) {
-          this.error = {
-            show: true,
-            msg: 'Time OUT must be greater then IN'
-          }
-          return 0
-        }
-
-        this.error = { show: false, msg: '' }
-        const duration = this.$moment.duration(momentEnd.diff(momentStart))
-        total += duration.asHours()
-      }
-      return Math.round(total)
+    total () {
+      return (!this.form.checkIn || !this.form.checkOut)
+        ? 0 : (this.form.checkOut - this.form.checkIn) / 3600000
     }
   },
   methods: {
-    save () {
-      this.formData.timestamp = new Date()
-
-      if (!this.formData.worker) {
-        this.error = {
-          show: true,
-          msg: 'You must select Worker'
+    togglePM (field) {
+      const data = this.form[field]
+      if (data) {
+        const format = 'YYYY-MM-DD HH:mm:ss A'
+        console.log(data.format(format))
+        if (data.format('A') === 'AM') {
+          this.form[field] = null
+          this.form[field] = new Date(this.$moment(data.format(format).replace(' AM', 'PM'), format))
+        } else {
+          this.form[field] = null
+          this.form[field] = new Date(this.$moment(data.format(format).replace(' PM', 'AM'), format))
         }
-        return
       }
+    },
+    validate () {
+      const { worker, checkIn, checkOut } = this.form
 
-      if (!this.formData.times.in || !this.formData.times.out) {
-        this.error = {
-          show: true,
-          msg: 'You must select both IN and OUT times'
-        }
-        return
-      }
+      if (!worker) this.error = 'You must select Worker'
+      else if (!checkIn) this.error = 'You must select when the worker came IN'
+      else if (!checkOut) this.error = 'You must select when the worker went OUT'
+      else if (checkOut < checkIn) this.error = 'Time OUT must be greater then IN'
 
-      this.$firestore.save('workerhours', this.formData).then(() => {
-        this.$emit('message', {
-          text: 'Worker hours saved',
-          type: 'success'
-        })
-        this.$router.go(-1)
+      return this.error || this.save()
+    },
+    async save () {
+      this.savePending = true
+      await this.$store.workerhours.collection.save({
+        ...this.form,
+        notes: this.form.notes || '',
+        checkIn: new Date(this.form.checkIn),
+        checkOut: new Date(this.form.checkOut),
+        timestamp: this.form.timestamp || new Date()
       })
-    },
-    receiveTime ({time, part}) {
-      this.formData.times[part] = time
-    },
-    clearError () {
-      this.error = {
-        show: false,
-        msg: ''
-      }
+
+      this.savePending = false
+
+      this.$emit('message', {
+        text: 'Worker hours saved',
+        type: 'success'
+      })
+
+      this.$router.go(-1)
     }
   }
 }
 </script>
-
-<style scoped>
-.total-hours {
-  font-size: 28px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.25;
-  letter-spacing: normal;
-  color: #152935;
-}
-
-.left {
-  text-align: left;
-}
-
-.right {
-  text-align: right;
-}
-
-.center {
-  text-align: center;
-}
-
-.add-worker {
-  background-color: white;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-}
-.grey-select {
-  background-color: rgba(66, 133, 61, 0.1)!important;
-}
-
-.separator {
-  text-align: center;
-  width: 100%;
-  margin-top: -40px;
-}
-
-.devider-container {
-  padding-top: 3vw;
-}
-
-.devider{
-  text-align: center;
-  border-bottom: 1px solid #ecf2eb;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
-}
-
-.devider span{
-  background-color: white;
-  color: #152935;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.bottom {
-  margin-top: 5vw;
-}
-</style>

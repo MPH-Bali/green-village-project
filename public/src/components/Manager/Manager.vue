@@ -11,7 +11,7 @@
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
         <v-btn flat color="primary" @click="$router.push('/')">
-         <img style="height: 50px" src="../../assets/mph_logo.png">
+         <img height="50px" src="../../assets/mph_logo.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
@@ -44,7 +44,9 @@ export default {
   name: 'Manager',
   created () {
     this.$sync({
-      person: this.$db.collection('person'),
+      workers: this.$db.collection('person').where('type.employee', '==', true),
+      buyers: this.$db.collection('person').where('type.buyer', '==', true),
+      customers: this.$db.collection('person').where('type.customer', '==', true),
       banjar: this.$db.collection('banjar'),
       settings: this.$db.collection('settings')
     })

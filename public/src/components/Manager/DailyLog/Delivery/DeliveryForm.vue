@@ -11,7 +11,7 @@
               autofocus
               solo flat class="accent"
               label="Pick a driver name"
-              :items="$store.person.data.filter(p => p.type && p.type.employee)"
+              :items="$store.workers.data"
               item-value="id"
               item-text="name"
               return-object

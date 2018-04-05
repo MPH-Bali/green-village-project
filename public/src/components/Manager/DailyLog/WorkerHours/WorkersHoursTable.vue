@@ -1,16 +1,15 @@
 <template>
   <v-data-table
-    :loading="$firestore.collectionsPending.workerhours"
+    :loading="$store.workerhours.pending"
     :headers="headers"
-    :items="this.$firestore.dailyCollections.workerhours"
-    hide-actions class="elevation-1"
-  >
+    :items="$store.workerhours.data || []"
+    hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-center">{{ props.item.worker.name }}</td>
-      <td class="text-xs-center">{{ getTime(props.item.times.in) }}</td>
-      <td class="text-xs-center">{{ getTime(props.item.times.out) }}</td>
+      <td class="text-xs-center">{{ $moment(props.item.checkIn).format('hh:mm a') }}</td>
+      <td class="text-xs-center">{{ $moment(props.item.checkOut).format('hh:mm a') }}</td>
       <td class="text-xs-center">
-        <v-btn icon @click="$router.push({ name: 'workerHours', params: { id: props.item.id }})">
+        <v-btn icon @click="$router.push({ name: 'workerHoursForm', params: { id: props.item.id }})">
           <v-icon size="17px" color="primary">fa-edit</v-icon>
         </v-btn>
       </td>
@@ -26,25 +25,11 @@ export default {
       loading: false,
       headers: [
         { text: this.$t('tables.headers.name'), align: 'center', sortable: true, value: 'name' },
-        { text: this.$t('tables.headers.timeIn'), align: 'center', sortable: true, value: 'in' },
-        { text: this.$t('tables.headers.timeOut'), align: 'center', sortable: true, value: 'out' },
-        { text: this.$t('tables.headers.actions'), align: 'center', sortable: true, value: 'action' }
+        { text: this.$t('tables.headers.timeIn'), align: 'center', sortable: true, value: 'checkIn' },
+        { text: this.$t('tables.headers.timeOut'), align: 'center', sortable: true, value: 'checkOut' },
+        { text: this.$t('tables.headers.actions'), align: 'center', value: null }
       ]
-    }
-  },
-  methods: {
-    getTime (time) {
-      if (time) {
-        return this.$moment(time).format('hh:mm a')
-      }
-      return ''
     }
   }
 }
 </script>
-
-<style >
-  .elevation-1 thead {
-    background: #e5ece9;
-  }
-</style>

@@ -74,14 +74,14 @@ export default {
     valid () {
       const { timestamp, monthlyFee, paidUntil, totalPaid } = this.form
       return timestamp && monthlyFee && paidUntil && totalPaid
-    },
+    }
   },
   methods: {
     async addFee () {
       this.submitting = true
 
       const lastFeePaid = await this.$store.customerFees.ref.add(this.form)
-      await this.$store.customerDetail.ref.update({lastFeePaid })
+      await this.$store.customerDetail.ref.update({ lastFeePaid })
 
       this.submitting = false
       this.form = { personId: this.id }

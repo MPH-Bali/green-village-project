@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="$store.expense.data"
+    :items="$store.expense.data || []"
     :loading="$store.expense.pending"
     hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">

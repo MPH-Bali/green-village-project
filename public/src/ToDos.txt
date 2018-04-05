@@ -1,0 +1,33 @@
+Fix Work Time!
+  --> Fucks on 12:00
+  --> Doesn't work in edit mode
+
+New Github Issues
+ - Sync --> Check if path changed for resync
+ - Sync --> Handle changes (not replace entire thing)
+ - Move Fees under Person (type: customer) --> To much work otherwhise!
+ - Crud method mappings don't make sense under collection (move data to root)
+ - Try Data short cut data: () => ({ foo: 'bar' })
+ - Don't download all person (e.g. only 'drivers' where needed)
+ - Loading screen ontop of empty forms (also wait for reference data!)
+
+Refactor Firefly
+--------------------
+In gerenal export object and only optionally register these:
+  - $sync({ key: ref }) --> higher order function && resync cache
+  - $unsync('key')
+  - $refs('key') = getter
+  - $store('key', []) = getter
+  - $isPending('key') = getter
+
+ All methods return true for template action piping
+  - $addToCollectionOf('key', data, pendingKey)
+  - $getFormCollectionOf('key', id, pendingKey)
+  - $deleteFormCollectionOf('key', id, pendingKey)
+  - $getFormCollectionOf('key', data, pendingKey)
+  -
+
+Test
+  - Menu
+  - Customer --> Especially Datepicker!
+  - mph elements (header, button, text-field, select) --> use bind- & handle-all

@@ -20,7 +20,7 @@
         </v-card-title>
 
         <v-data-table
-          :loading="$store.person.pending"
+          :loading="$store.buyers.pending"
           :headers="headers"
           :items="buyersList"
           :search="search"
@@ -74,9 +74,7 @@ export default {
       }, {})
     },
     buyers () {
-      return this.$store.person.data.filter(person => {
-        return person.type && person.type.buyer
-      })
+      return this.$store.buyers.data
     },
     buyersList () {
       return this.buyers.map(buyer => {

@@ -108,8 +108,7 @@ export default {
   },
   computed: {
     customers () {
-      return this.$store.person.data
-        .filter(person => person.type && person.type.customer)
+      return this.$store.customers.data
         .map((customer) => ({
           ...customer,
           type: (customer.houseType && customer.houseType.name) || '',

@@ -137,7 +137,7 @@ export default {
   async created () {
     if (this.id) {
       this.getPending = true
-      this.form = await this.$store.person.collection.get(this.id)
+      this.form = await this.$store.buyers.collection.get(this.id)
       this.getPending = false
     }
   },
@@ -148,7 +148,7 @@ export default {
       if (!this.id) this.form.type = {}
       this.form.type.buyer = true
       this.savePending = true
-      await this.$store.person.collection.save(this.form)
+      await this.$store.buyers.collection.save(this.form)
       this.$emit('message', {
         text: 'Buyer saved',
         type: 'success',

@@ -107,7 +107,7 @@ export default {
   },
   computed: {
     person () {
-      this.$store.customerDetails.data
+      return this.$store.customerDetails.data
     },
     decided () {
       const { approved, declined } = this.person

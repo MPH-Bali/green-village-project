@@ -16,46 +16,30 @@
           </v-flex>
 
           <v-flex xs12 sm6>
-            <p class='body-2 mb-0'>Time in {{ form.checkIn }}</p>
+            <p class='body-2 mb-0'>Time in</p>
             <v-layout row wrap>
               <v-flex xs7>
-                <v-select
-                  solo flat
-                  :items="hours"
-                  v-model="form.checkIn"
-                  class="accent" />
+                <v-select solo flat :items="hours" v-model="checkIn" class="accent" />
               </v-flex>
               <v-flex xs5>
-                <v-btn-toggle
-                  mandatory
-                  class="elevation-0"
-                  @change="togglePM('checkIn')"
-                  v-model="inPM">
-                  <v-btn outline large class="primary--text px-3">AM</v-btn>
-                  <v-btn outline large class="primary--text px-3">PM</v-btn>
+                <v-btn-toggle mandatory class="elevation-0" v-model="checkInPostfix">
+                  <v-btn outline large class="primary--text px-3" value="AM">AM</v-btn>
+                  <v-btn outline large class="primary--text px-3" value="PM">PM</v-btn>
                 </v-btn-toggle>
               </v-flex>
             </v-layout>
           </v-flex>
 
           <v-flex xs12 sm6>
-            <p class='body-2 mb-0'>Time out {{ form.checkOut }}</p>
+            <p class='body-2 mb-0'>Time out</p>
             <v-layout row wrap>
               <v-flex xs7>
-                <v-select
-                  solo flat
-                  :items="hours"
-                  v-model="form.checkOut"
-                  class="accent" />
+                <v-select solo flat :items="hours" v-model="checkOut" class="accent" />
               </v-flex>
               <v-flex xs5>
-                <v-btn-toggle
-                  mandatory
-                  class="elevation-0"
-                  @change="togglePM('checkOut')"
-                  v-model="outPM">
-                  <v-btn outline large class="primary--text px-3">AM</v-btn>
-                  <v-btn outline large class="primary--text px-3">PM</v-btn>
+                <v-btn-toggle mandatory class="elevation-0" v-model="checkOutPostfix">
+                  <v-btn outline large class="primary--text px-3" value="AM">AM</v-btn>
+                  <v-btn outline large class="primary--text px-3" value="PM">PM</v-btn>
                 </v-btn-toggle>
               </v-flex>
             </v-layout>
@@ -97,6 +81,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     id: { type: String, required: false }
@@ -105,24 +91,23 @@ export default {
     if (this.id) {
       this.form = await this.$store.workerhours.collection.get(this.id)
 
-      let checkIn = this.$moment(this.form.checkIn)
-      if (checkIn.hours() >= 12) {
-        this.form.checkIn = checkIn.hours(checkIn.hours() - 12)
-        this.inPM = 1
-      }
+      const [ checkIn, checkInPostfix ] = moment(this.form.checkIn).format('hh:mm A').split(' ')
+      this.checkIn = checkIn
+      this.checkInPostfix = checkInPostfix
 
-      let checkOut = this.$moment(this.form.checkOut)
-      if (checkOut.hours() >= 12) {
-        this.form.checkOut = checkOut.hours(checkOut.hours() - 12)
-        this.outPM = 1
-      }
+      const [ checkOut, checkOutPostfix ] = moment(this.form.checkOut).format('hh:mm A').split(' ')
+      this.checkOut = checkOut
+      this.checkOutPostfix = checkOutPostfix
     }
     this.loading = false
   },
   data () {
     return {
-      inPM: 0,
-      outPM: 0,
+      tpTimestamp: null,
+      checkIn: null,
+      checkInPostfix: 'AM',
+      checkOut: null,
+      checkOutPostfix: 'AM',
       loading: true,
       savePending: false,
       error: null,
@@ -131,38 +116,28 @@ export default {
   },
   computed: {
     hours () {
-      return [...Array(12).keys()].map(x => ({
-        value: this.$moment().startOf('day').hour(x + 1),
-        text: ((x + 1) + ':00').padStart(5, '0')
-      }))
+      // Generate times between 01:00 and 12:00
+      return [...Array(12).keys()].map(x => {
+        return ((x + 1) + ':00').padStart(5, '0')
+      })
+    },
+    checkOutTimestamp () {
+      return moment(moment().format('YYYY-MM-DD') + ' ' + this.checkOut + ' ' + this.checkOutPostfix, 'YYYY-MM-DD hh:mm A')
+    },
+    checkInTimestamp () {
+      return moment(moment().format('YYYY-MM-DD') + ' ' + this.checkIn + ' ' + this.checkInPostfix, 'YYYY-MM-DD hh:mm A')
     },
     total () {
-      return (!this.form.checkIn || !this.form.checkOut)
-        ? 0 : (this.form.checkOut - this.form.checkIn) / 3600000
+      const validDates = this.checkOutTimestamp.isValid() && this.checkInTimestamp.isValid()
+      return validDates ? (this.checkOutTimestamp - this.checkInTimestamp) / 3600000 : 0
     }
   },
   methods: {
-    togglePM (field) {
-      const data = this.form[field]
-      if (data) {
-        const format = 'YYYY-MM-DD HH:mm:ss A'
-        console.log(data.format(format))
-        if (data.format('A') === 'AM') {
-          this.form[field] = null
-          this.form[field] = new Date(this.$moment(data.format(format).replace(' AM', 'PM'), format))
-        } else {
-          this.form[field] = null
-          this.form[field] = new Date(this.$moment(data.format(format).replace(' PM', 'AM'), format))
-        }
-      }
-    },
     validate () {
-      const { worker, checkIn, checkOut } = this.form
-
-      if (!worker) this.error = 'You must select Worker'
-      else if (!checkIn) this.error = 'You must select when the worker came IN'
-      else if (!checkOut) this.error = 'You must select when the worker went OUT'
-      else if (checkOut < checkIn) this.error = 'Time OUT must be greater then IN'
+      if (!this.form.worker) this.error = 'You must select Worker'
+      else if (!this.checkInTimestamp.isValid()) this.error = 'You must select when the worker came IN'
+      else if (!this.checkOutTimestamp.isValid()) this.error = 'You must select when the worker went OUT'
+      else if (this.total <= 0) this.error = 'Time OUT must be greater then IN'
 
       return this.error || this.save()
     },
@@ -171,8 +146,8 @@ export default {
       await this.$store.workerhours.collection.save({
         ...this.form,
         notes: this.form.notes || '',
-        checkIn: new Date(this.form.checkIn),
-        checkOut: new Date(this.form.checkOut),
+        checkIn: new Date(this.checkInTimestamp),
+        checkOut: new Date(this.checkOutTimestamp),
         timestamp: this.form.timestamp || new Date()
       })
 

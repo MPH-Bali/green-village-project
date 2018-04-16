@@ -15,15 +15,11 @@ import firebase, { db } from './firebase'
 import firestore from './firestore'
 import VueFirestoreSync from './vue-firestore-sync'
 
-import VueAnalytics from 'vue-analytics'
-
 Vue.prototype.$firebase = firebase
 Vue.prototype.$firestore = firestore
 
 Vue.use(VueFirestoreSync, { db })
-Vue.use(VueAnalytics, {
-  id: 'UA-116695467-1'
-})
+
 Vue.use(moment)
 Vue.use(Vuetify, {
   theme: {

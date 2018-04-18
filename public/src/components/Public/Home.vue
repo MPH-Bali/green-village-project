@@ -224,7 +224,7 @@ export default {
           {
             label: 'Hours',
             fill: false,
-            backgroundColor: '#cd2027',
+            backgroundColor: '#42853d',
             borderColor: '#cd2027',
             data: this.$firestore.charts.workerHours
           }

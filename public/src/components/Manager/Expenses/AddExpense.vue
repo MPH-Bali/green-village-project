@@ -4,7 +4,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm3>
         <p class='title'>Type</p>
-        <v-select solo flat :items="settings" 
+        <v-select solo flat :items="settings"
                 v-model="formData.type"
                 @change="clearError"
                 return-object
@@ -13,20 +13,20 @@
       <v-flex xs12 sm3>
         <p class='title'>Cost IDR</p>
         <v-text-field
-                class='grey-select'  
+                class='grey-select'
                 type='number'
                 @keyup="clearError"
                 v-model="formData.cost"
-                solo flat 
+                solo flat
                 name="input-1">
         </v-text-field>
       </v-flex>
       <v-flex xs12 sm4>
         <p class='title'>Notes</p>
         <v-text-field
-                class='grey-select' 
+                class='grey-select'
                 v-model="formData.notes"
-                solo flat 
+                solo flat
                 name="input-1">
         </v-text-field>
       </v-flex>
@@ -40,11 +40,7 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
 export default {
-  components: {
-    NavigationHeader
-  },
   async created () {
     if (this.id) {
       this.formData = await this.$firestore.get('workerhours', this.id)

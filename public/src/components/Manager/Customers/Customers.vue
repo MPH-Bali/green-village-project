@@ -2,15 +2,19 @@
   <v-container grid-list-lg>
     <navigation-header>
       <template slot="right">
-        <v-btn
-          block large color="success"
+        <v-btn class="hidden-xs-only"
+          depressed color="primary"
           @click="goToNewCustomerForm">
           Add Customer
+        </v-btn>
+        <v-btn icon class="hidden-sm-and-up mt-0"
+          @click="goToNewCustomerForm">
+          <v-icon color="primary">add</v-icon>
         </v-btn>
       </template>
     </navigation-header>
     <v-layout row wrap>
-      <v-flex>
+      <v-flex xs12>
         <v-card>
           <v-card-title>
             {{ $t('routeNames.customers') }}
@@ -48,13 +52,8 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
-
 export default {
   name: 'Customers',
-  components: {
-    NavigationHeader
-  },
   methods: {
     customFilter (items, search, filter) {
       return items.filter((row) => {

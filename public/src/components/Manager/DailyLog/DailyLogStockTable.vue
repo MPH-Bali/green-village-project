@@ -2,37 +2,23 @@
   <v-data-table
     :loading="$firestore.collectionsPending.stock"
     :headers="headers"
-    :items="$firestore.collections.stock"
-    hide-actions class="elevation-1"
-  >
-    <template slot="items" slot-scope="props" v-if="!collapsed" >
+    :items="items"
+    hide-actions class="elevation-1">
+    <template slot="items" slot-scope="props"  v-if="!collapsed">
+      <td>{{ props.item.subtype }}</td>
+      <td>{{ props.item.weight }}</td>
+      <td>{{ props.item.comments }}</td>
       <td class="text-xs-center">{{ $moment(props.item.timestamp).format('hh:mm A') }}</td>
-      <td class="text-xs-center">{{ props.item.weight  }}</td>
-      <td class="text-xs-center">{{ props.item.type }}</td>
-      <td class="text-xs-center">{{ props.item.comments }}</td>
+      <td class="text-xs-center">
+        <v-btn icon @click="$router.push({ name: 'editStockForm', params: { id: props.item.id }})">
+          <v-icon size="17px" color="primary">fa-edit</v-icon>
+        </v-btn>
+      </td>
     </template>
-    {{ stock }}
     <template slot="footer">
       <tr class="secondary pointer" @click.stop="collapsed = !collapsed">
-        <td class="text-xs-center">
-          <span class="body-2">
-            {{ totalCompost }}
-          </span>
-        </td>
-        <td class="text-xs-center">
-          <span class="body-2">
-            {{ totalPlastics }}
-          </span>
-        </td>
-        <td class="text-xs-center">
-          <span class="body-2">
-            {{ totalMetals }}
-          </span>
-        </td>
-        <td class="text-xs-center">
-          <span class="body-2">
-            {{ totalPaper }}
-          </span>
+        <td colspan="100%">
+          <strong>{{ materialType }} Total Today: {{ totalWeight }} kg</strong>
         </td>
       </tr>
     </template>
@@ -42,37 +28,30 @@
 <script>
 
 export default {
+  props: {
+    materialType: { type: String, required: true }
+  },
+  computed: {
+    items () {
+      return this.$firestore.dailyCollections.stock.filter(x => x.type === this.materialType)
+    },
+    totalWeight () {
+      return this.items.filter(x => x.type === this.materialType).reduce((total, item) => total + parseInt(item.weight), 0)
+    }
+  },
   data () {
     return {
       collapsed: true,
       loading: false,
+      timestamp: new Date(),
       headers: [
-        { text: 'Compost', align: 'center', sortable: true, value: 'compost' },
-        { text: 'Plastics', align: 'center', sortable: true, value: 'plastics' },
-        { text: 'Metals', align: 'center', sortable: true, value: 'metal' },
-        { text: 'Paper', align: 'center', sortable: true, value: 'paper' }
+        { text: 'Subtype', align: 'left', sortable: true, value: 'subtype' },
+        { text: 'Weight (kg)', align: 'left', sortable: true, value: 'weight' },
+        { text: 'Comments', align: 'left', sortable: false, value: 'comments' },
+        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
+        { text: 'Edit', align: 'center', sortable: false, value: null }
       ]
     }
-  },
-  mounted () {
-    let compostWeight = []
-    let plasticsWeight = []
-    let metalsWeight = []
-    let paperWeight = []
-    this.$firestore.collections.stock.filter(x => x.type === 'Compost').map(item => compostWeight.push(parseInt(item.weight)))
-    this.$firestore.collections.stock.filter(x => x.type === 'Plastics').map(item => plasticsWeight.push(parseInt(item.weight)))
-    this.$firestore.collections.stock.filter(x => x.type === 'Metals').map(item => metalsWeight.push(parseInt(item.weight)))
-    this.$firestore.collections.stock.filter(x => x.type === 'Paper').map(item => paperWeight.push(parseInt(item.weight)))
-    this.totalCompost = compostWeight.reduce((a, b) => a + b, 0)
-    this.totalPlastics = plasticsWeight.reduce((a, b) => a + b, 0)
-    this.totalMetals = metalsWeight.reduce((a, b) => a + b, 0)
-    this.totalPaper = paperWeight.reduce((a, b) => a + b, 0)
   }
 }
 </script>
-
-<style scoped>
-  .elevation-1 thead {
-    background: #e5ece9;
-  }
-</style>

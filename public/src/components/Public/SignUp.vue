@@ -18,7 +18,7 @@
             </v-form>
             <p class="caption">Our Community Manager will come to your place to collect the fee and finalise your subscription</p>
             <v-btn v-on:click="$router.push('/contact-us')" flat>Problem?</v-btn>
-            <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>Join Us</v-btn>
+            <v-btn v-on:click="submit" :disabled="!valid" color="primary" type="submit" depressed>{{ $t('forms.joinus') }}</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>

@@ -54,11 +54,11 @@ export default {
       collapsed: true,
       loading: false,
       headers: [
-        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
-        { text: 'Worker', align: 'center', sortable: true, value: 'worker' },
-        { text: 'Inorganic', align: 'center', sortable: true, value: 'Inorganic' },
-        { text: 'Organic', align: 'center', sortable: true, value: 'organic' },
-        { text: 'Banjar', align: 'center', sortable: true, value: 'banjar' }
+        { text: this.$t('tables.headers.time'), align: 'center', sortable: true, value: 'timestamp' },
+        { text: this.$t('tables.headers.worker'), align: 'center', sortable: true, value: 'worker' },
+        { text: this.$t('tables.headers.inorganic'), align: 'center', sortable: true, value: 'Inorganic' },
+        { text: this.$t('tables.headers.organic'), align: 'center', sortable: true, value: 'organic' },
+        { text: this.$t('tables.headers.banjar'), align: 'center', sortable: true, value: 'banjar' }
       ]
     }
   },

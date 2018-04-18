@@ -21,10 +21,10 @@ export default {
     return {
       loading: false,
       headers: [
-        { text: 'Time', align: 'center', sortable: true, value: 'timestamp' },
-        { text: 'Type', align: 'center', sortable: true, value: 'type' },
-        { text: 'Cost', align: 'center', sortable: true, value: 'cost' },
-        { text: 'Notes', align: 'center', sortable: true, value: 'notes' }
+        { text: this.$t('tables.headers.time'), align: 'center', sortable: true, value: 'timestamp' },
+        { text: this.$t('tables.headers.type'), align: 'center', sortable: true, value: 'type' },
+        { text: this.$t('tables.headers.cost'), align: 'center', sortable: true, value: 'cost' },
+        { text: this.$t('tables.headers.notes'), align: 'center', sortable: true, value: 'notes' }
       ]
     }
   }

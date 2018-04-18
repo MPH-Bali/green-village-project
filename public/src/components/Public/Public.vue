@@ -2,14 +2,14 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph">
-         <img src="../../assets/mph_logo.png">
+        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph-btn">
+         <img src="../../../static/icons/icon-72x72.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat @click="$router.push('/pickup-schedule')">Pickup Schedule</v-btn>
-        <v-btn flat @click="$router.push('/sign-up')" >Sign Up</v-btn>
+        <v-btn flat color="primary" @click="$router.push('/pickup-schedule')">{{ $t('common.pickupSchedule') }}</v-btn>
+        <v-btn flat color="primary" @click="$router.push('/sign-up')" >{{ $t('common.signup') }}</v-btn>
         <v-menu offset-y :auto="true">
           <v-btn flat slot="activator">
             <img :src="currentLangItem && currentLangItem.img">
@@ -17,8 +17,8 @@
           <v-list class="py-0">
             <v-list-tile v-for="item in items" 
                         :key="item.title"  
-                         v-bind:class="{ 'active': item.value === currentLang }" >
-              <v-list-tile-title @click="lang(item.value)" class="btn__content">
+                         :class="{ 'active-language': item.value === currentLang }" >
+              <v-list-tile-title @click="setLanguage(item.value)" class="btn__content">
                 <img :src="item.img"/>
               </v-list-tile-title>
             </v-list-tile>
@@ -51,10 +51,10 @@
           </v-btn>
         </v-flex>
         <v-flex xs12 class="grey darken-3 white--text">
-          <router-link to="contact-us">Contact Us</router-link>
-          <p class="body-1 my-3">Send Feedback</p>
-          <p class="body-1 my-3">Contribute</p>
-          <p class="body-1 my-3">FAQ</p>
+          <router-link to="contact-us">{{ $t('common.contactUs') }}</router-link>
+          <p class="body-1 my-3">{{ $t('common.sendFeedback') }}</p>
+          <p class="body-1 my-3">{{ $t('common.contribute') }}</p>
+          <p class="body-1 my-3">{{ $t('common.faq') }}</p>
         </v-flex>
       </v-layout>
 
@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import localStorage from 'local-storage'
+
 export default {
   data: () => ({
     items: [{
@@ -86,8 +88,9 @@ export default {
     this.$firestore.syncCharts()
   },
   methods: {
-    lang (val) {
-      this.$root.$options.i18n.locale = val
+    setLanguage (val) {
+      localStorage.set('locale', val)
+      this.$i18n.locale = val
     }
   },
   computed: {
@@ -102,11 +105,11 @@ export default {
 </script>
 
 <style scoped>
-.main-mph img {
-  height: 50px; 
+.main-mph-btn img {
+  height: 72%;
 }
 
-.active {
+.active-language {
   background-color: #42853d;
   color: white;
 }

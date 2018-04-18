@@ -2,55 +2,43 @@
   <v-layout row>
     <v-flex xs12 md10 offset-md1 lg8 offset-lg2>
       <v-layout row wrap pt-4>
-        <Calendar :date="date"/>
+        <daily-log-calendar :date="date"/>
       </v-layout>
 
-      <log-header action="/manager/delivery-form" title="Delivery" />
+      <daily-log-header action="/manager/delivery-form" :title="$t('headers.delivery')" />
       <delivery-table/>
 
-      <log-header class="mt-4" action="/manager/material" title="Material Kg" />
-      <MaterialTable/>
+      <daily-log-header class="mt-4" action="/manager/material" :title="$t('headers.materialKg')" />
+      <daily-log-material-table/>
 
-      <log-header class="mt-4" action="/manager/stock" title="Stock" />
-      <StockTable/>
+      <daily-log-header class="mt-4" action="/manager/stock" title="Compost" />
+      <daily-log-stock-table material-type="Compost" />
 
-      <log-header class="mt-4" action="/manager/worker-hours" title="Workers Hours" />
-      <WorkerTimes/>
+      <daily-log-header class="mt-4" action="/manager/stock" title="Plastics" />
+      <daily-log-stock-table material-type="Plastics" />
 
-      <log-header class="mt-4" action="/manager/expense" title="Add Expense" />
-      <ExpensesTable/>
+      <daily-log-header class="mt-4" action="/manager/stock" title="Metals" />
+      <daily-log-stock-table material-type="Metals" />
+
+      <daily-log-header class="mt-4" action="/manager/stock" title="Paper" />
+      <daily-log-stock-table material-type="Paper" />
+
+      <daily-log-header class="mt-4" action="/manager/worker-hours" :title="$t('headers.workerHours')" />
+      <daily-log-workers-table/>
+
+      <daily-log-header class="mt-4" action="/manager/expense" :title="$t('headers.addExpense')" />
+      <daily-log-expenses-table/>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import LogHeader from './DailyLogHeader'
-import DeliveryTable from '@/components/Manager/Delivery/Table'
-import MaterialTable from './DailyLogMaterialTable'
-import StockTable from './DailyLogStockTable'
-import WorkerTimes from './DailyLogWorkersTable'
-import ExpensesTable from './DailyLogExpensesTable'
-import Calendar from './DailyLogCalendar'
-
 export default {
   props: {
     date: {
       type: String,
       required: false,
       default: ''
-    }
-  },
-  components: {
-    LogHeader,
-    DeliveryTable,
-    MaterialTable,
-    WorkerTimes,
-    ExpensesTable,
-    StockTable,
-    Calendar
-  },
-  data () {
-    return {
     }
   }
 }

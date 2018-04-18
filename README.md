@@ -5,9 +5,9 @@ Powering MPH recycling and composting facilities in Bali.
 Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.com/)
 ## Links
 
-[Designs Trello Boars](https://trello.com/b/gbAYV7TV/mph-design)
+[Design Trello Board](https://trello.com/b/gbAYV7TV/mph-design)
 
-[Persona Real Time Board](https://realtimeboard.com/app/board/o9J_k0Yt1AU=/)
+[UX Whiteboard - RealtimeBoard](https://realtimeboard.com/app/board/o9J_k0Yt1AU=/)
 
 [Wireframes - Facility Manager](https://www.figma.com/file/BciMKKjYcuDKnhUdayNdBwtA/Backend-Facility-Manager-Wires)
 
@@ -15,7 +15,7 @@ Access the current deployed app at [FirebaseApp](https://mph-bali.firebaseapp.co
 
 [Wireframes - public facing web](https://www.figma.com/file/VxhqIW4QCTTX3Q95ocSAis3l/Community-Public-Pages-Wires)
 
-[Zepplin desings](https://app.zeplin.io/project/5a976d7c3ccf224b6dbd223b) Make sure you are registered and added to the project to view those. If you need adding to the project contact Daria (piggydoughnut) or Nick Sarafa (nicksarafa)
+[Zeplin desings](https://app.zeplin.io/project/5a976d7c3ccf224b6dbd223b) Make sure you are registered and added to the project to view those. If you need adding to the project contact Andrea (sovesove) or Daria (piggydoughnut) or Nick Sarafa (nicksarafa)
 
 ---
 ## How to contribute

@@ -10,9 +10,9 @@
         </tr>
         <tr class='material-actions'>
           <th style="width: 30%;">
-            <v-select solo flat :items="workers" 
+            <v-select solo flat :items="workers"
               v-model="formData.worker"
-              item-text="name" 
+              item-text="name"
               item-value="id"
               return-object
               label="" class='grey-select banjar' />
@@ -20,7 +20,7 @@
           <th style="width: 12.5%;">
             <v-text-field
               v-model="formData.inorganic"
-              class='grey-select red' 
+              class='grey-select red'
               type="number"
               solo flat
               name="input-1"></v-text-field>
@@ -28,15 +28,15 @@
           <th style="width: 12.5%;">
             <v-text-field
               v-model="formData.organic"
-              type="number" 
-              class='grey-select green' 
-              solo flat 
+              type="number"
+              class='grey-select green'
+              solo flat
               name="input-1"></v-text-field>
           </th>
           <th style="width: 30%">
-            <v-select solo flat :items="banjars" 
+            <v-select solo flat :items="banjars"
               v-model="formData.banjar"
-              item-text="name" label="" 
+              item-text="name" label=""
               item-value="id" return-object
               class='grey-select banjar'  />
           </th>
@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import NavigationHeader from '@/elements/NavigationHeader'
 const defaultForm = {
   inorganic: '',
   organic: '',
@@ -80,9 +79,6 @@ const defaultForm = {
 }
 
 export default {
-  components: {
-    NavigationHeader
-  },
   computed: {
     workers () {
       return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)

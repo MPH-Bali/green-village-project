@@ -1,8 +1,99 @@
 export default {
-  // example string
+  tables: {
+    headers: {
+      name: 'Nama',
+      timeIn: 'Jam Masuk',
+      timeOut: 'Jam Keluar',
+      actions: 'Opsi',
+      time: 'Jam',
+      worker: 'Pekerja',
+      inorganic: 'Non-organik',
+      organic: 'Organik',
+      banjar: 'Banjar',
+      type: 'Jenis',
+      cost: 'Biaya',
+      notes: 'Catatan'
+    }
+  },
+  houseTypes: {
+    villa: 'Villa',
+    business: 'Bisnis',
+    household: 'Rumah Tangga',
+    publicFacility: 'Fasilitas Umum',
+    businesses: 'Bisnis',
+    facilities: 'Fasilitas'
+  },
+  models: {
+    fees: {
+      labels: {
+        timestamp: 'Tanggal Waktu',
+        totalPaid: 'Total Pembayaran',
+        paidUntil: 'Terbayar Sampai',
+        monthlyFee: 'Biaya Bulanan'
+      }
+    },
+    customers: {
+      labels: {
+        name: 'Nama Pelanggan',
+        email: 'Email',
+        houseType: 'Jenis',
+        address: 'Alamat',
+        notes: 'Catatan',
+        whatsapp: 'Whatsapp',
+        phone: 'SMS/Telepon',
+        company: 'Perusahaan'
+      }
+    }
+  },
+  forms: {
+    joinus: 'Bergabung Dengan Kami',
+    save: 'Simpan',
+    cancel: 'batal',
+    collectFee: 'Pungut Biaya',
+    sendEmail: 'Kirim Email',
+    approve: 'Setujui',
+    decline: 'batal',
+    ok: 'Ok'
+  },
+  toasts: {
+    feeAdded: 'tambah Biaya'
+  },
+  headers: {
+    paymentHistory: 'Riwayat Pembayaran',
+    newsletterSignup: 'Daftar Bulletin',
+    delivery: 'Pengiriman',
+    materialKg: 'Material Kg',
+    workerHours: 'Jam Kerja',
+    addExpense: 'tambah Pengeluaran',
+    dailyStock: 'Stok Harian',
+    revenue: 'Penghasilan',
+    expenses: 'Pengeluaran',
+    income: 'Pemasukkan',
+    collection: 'Pengambilan',
+    team: 'Tim',
+    workingHours: 'Jam Kerja',
+    bannerMaterials: 'Spanduk Material',
+    facilityData: 'Data Fasilitas',
+    pickups: 'Penjemputan',
+    tons: 'Ton',
+    members: 'Anggota',
+    recyclingEfficiency: 'Efisiensi Daur Ulang',
+    pickupSchedule: 'Jadwal Penjemputan'
+  },
   routeNames: {
+    dailyLog: 'Catatan Harian',
+    dailyLogHistory: 'Riwayat Catatan Harian',
+    deliveryForm: 'Formulir Pengiriman',
+    addMaterial: 'tambah Material',
+    workerHours: 'Cek Pekerja',
     customerDetail: 'Detail Pelanggan',
-    newCustomer: 'Pelanggan Baru'
+    newCustomer: 'Pelanggan Baru',
+    buyers: 'Pembeli',
+    'buyer-edit': 'Tambah/Sunting Pembeli',
+    'buyer-details': 'Detail Pembeli',
+    addExpense: 'tambah Pengeluaran',
+    menu: 'Catatan Harian',
+    customers: 'Pelanggan'
   },
 
   home: {
@@ -10,13 +101,27 @@ export default {
   },
   // the most common terms shared throughout components in the app
   common: {
+    members: 'Jumlah kita sudah banyak, tapi kita ingin agar {count} rumah tangga di Pererenan untuk bergabung bersama kami!',
+    facility: 'Fasilitas {facility}',
+    pickups: 'Jemputan untuk {facility} telah terjadwal sebagai berikut:',
+    downloadInfo: 'Unggah informasi dan PDF ini untuk mengerti tentang apa yang kami lakukan',
+    details: 'Detail',
+    timestamp: 'Tanggal Waktu',
+    newsletterSignup: 'Daftar dan dapatkan kabar terbaru',
+    pickupSchedule: 'Jadwal Penjemputan',
+    signup: 'Registrasi',
+    language: 'Bahasa',
+    sendFeedback: 'Kirim Komentar',
+    contactUs: 'Hubungi Kami',
+    contribute: 'Ikut-serta',
+    faq: 'FAQ',
     number: 'no.',
     notes: 'catatan',
     time: 'jam',
-    edit: 'sunting',
+    edit: 'Sunting',
     paper: 'kertas',
     type: 'ketik',
-    add: 'tambahkan',
+    add: 'tambah',
     cost: 'biaya',
     compost: 'kompos',
     metal: 'logam',
@@ -32,9 +137,9 @@ export default {
     households: 'rumah tangga',
     businesses: 'bisnis',
     facilities: 'fasilitas',
-    comments: 'komen',
+    comments: 'komentar',
     back: 'kembali',
-    cancel: 'batalkan',
+    cancel: 'batal',
     worker: 'pekerja',
     organic: 'organik',
     inorganic: 'non-organik',
@@ -100,22 +205,21 @@ export default {
   },
   // 02.0a Menu
   menu: {
+    sendDayReport: 'Kirim Laporan Harian',
     title: 'menu',
-    addDailyNote: 'tambahkan catatan harian',
+    addDailyNote: 'tambah catatan harian',
     customerList: 'daftar pelanggan',
     buyerList: 'daftar pembeli',
     contactAdmin: 'hubungi admin',
-    logout: 'keluar'
-  },
-  // fixed menu located at the bottom of the screen
-  bottomMenu: {
-    addDelivery: 'tambah pengiriman',
-    weighMaterials: 'berat material',
-    workersHours: ' jam pekerja',
-    addStock: 'tambah stok atau kompos',
-    createSale: 'buat penjualan',
-    addExpense: 'tambah biaya',
-    settings: 'pengaturan'
+    logout: 'keluar',
+    addDelivery: 'Tambah Pengiriman',
+    weighMaterial: 'Timbang Material',
+    customersList: 'Daftar Pelanggan',
+    workersHours: 'Jam Pekerja',
+    buyersList: 'Daftar Pembeli',
+    addStock: 'Tambah Stok',
+    createSale: 'Buat Pembelian',
+    addExpense: 'Tambah Pengeluaran'
   },
   // 02.0b
   dailyLog: {

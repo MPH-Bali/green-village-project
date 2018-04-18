@@ -3,6 +3,9 @@ import { Bar, mixins } from 'vue-chartjs'
 const { reactiveProp } = mixins
 
 export default {
+  data () {
+    return {}
+  },
   extends: Bar,
   mixins: [reactiveProp],
   props: ['options'],

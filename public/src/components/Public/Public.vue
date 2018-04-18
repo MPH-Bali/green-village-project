@@ -75,13 +75,6 @@ export default {
       title: 'English',
       value: 'en',
       img: 'http://www.countryflags.io/GB/shiny/32.png'
-    }],
-    langItems: [{
-      text: 'Bahasa',
-      value: 'id'
-    }, {
-      text: 'English',
-      value: 'en'
     }]
   }),
   created () {

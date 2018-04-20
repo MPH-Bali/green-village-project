@@ -1,99 +1,93 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 md6 offset-md3>
-      <v-container fluid grid-list-lg v-if="form">
-        <navigation-header />
-        <v-layout row wrap>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Driver</p>
-            <v-select
-              tabindex=1
-              autofocus
-              solo flat class="accent"
-              label="Pick a driver name"
-              :items="$store.workers.data"
-              item-value="id"
-              item-text="name"
-              return-object
-              v-model="form.driver" />
-          </v-flex>
-          <v-flex xs6>
-            <p class="body-2 mb-1">Banjar</p>
-            <v-select
-              tabindex=2
-              solo flat class="accent"
-              label="Select one ore more Banjars"
-              :items="$store.banjar.data"
-              item-value="id"
-              item-text="name"
-              return-object
-              v-model="form.banjar" />
-          </v-flex>
-          <v-flex xs3>
-            <p class="body-2 mb-1">#villas</p>
-            <v-text-field
-              tabindex=3
-              solo flat class="accent"
-              type="number" min="0"
-              v-model="form.villas" />
-          </v-flex>
-          <v-flex xs3>
-            <p class="body-2 mb-1">#households</p>
-            <v-text-field
-              tabindex=4
-              solo flat class="accent"
-              type="number" min="0"
-              v-model="form.households" />
-          </v-flex>
-          <v-flex xs3>
-            <p class="body-2 mb-1">#businesses</p>
-            <v-text-field
-              tabindex=5
-              solo flat class="accent"
-              type="number" min="0"
-              v-model="form.businesses" />
-          </v-flex>
-          <v-flex xs3>
-            <p class="body-2 mb-1">#facilities</p>
-            <v-text-field
-              tabindex=6
-              solo flat class="accent"
-              type="number" min="0"
-              v-model="form.facilities" />
-          </v-flex>
-          <v-flex xs12>
-            <p class="body-2 mb-1">Comments</p>
-            <v-text-field
-              tabindex=7
-              solo flat class="accent"
-              auto-grow multi-line
-              v-model="form.comments"/>
-          </v-flex>
-          <v-flex xs6>
-            <v-btn
-              tabindex=9
-              color="error"
-              flat outline
-              @click.stop="$router.go(-1)">
-              Cancel
-            </v-btn>
-          </v-flex>
-          <v-flex xs6 text-xs-right>
-            <v-btn @click.stop="save"
-              tabindex=8
-              :disabled="!valid"
-              style="text-transform: capitalize"
-              depressed
-              color="primary"
-              :loading="savePending">
-              Save Delivery
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-flex>
-
-  </v-layout>
+  <v-container fluid grid-list-lg v-if="form">
+    <v-layout row wrap>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Driver</p>
+        <v-select
+          tabindex=1
+          autofocus
+          solo flat class="accent"
+          label="Pick a driver name"
+          :items="$store.workers.data"
+          item-value="id"
+          item-text="name"
+          return-object
+          v-model="form.driver" />
+      </v-flex>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Banjar</p>
+        <v-select
+          tabindex=2
+          solo flat class="accent"
+          label="Select one ore more Banjars"
+          :items="$store.banjar.data"
+          item-value="id"
+          item-text="name"
+          return-object
+          v-model="form.banjar" />
+      </v-flex>
+      <v-flex xs3>
+        <p class="body-2 mb-1">#villas</p>
+        <v-text-field
+          tabindex=3
+          solo flat class="accent"
+          type="number" min="0"
+          v-model="form.villas" />
+      </v-flex>
+      <v-flex xs3>
+        <p class="body-2 mb-1">#households</p>
+        <v-text-field
+          tabindex=4
+          solo flat class="accent"
+          type="number" min="0"
+          v-model="form.households" />
+      </v-flex>
+      <v-flex xs3>
+        <p class="body-2 mb-1">#businesses</p>
+        <v-text-field
+          tabindex=5
+          solo flat class="accent"
+          type="number" min="0"
+          v-model="form.businesses" />
+      </v-flex>
+      <v-flex xs3>
+        <p class="body-2 mb-1">#facilities</p>
+        <v-text-field
+          tabindex=6
+          solo flat class="accent"
+          type="number" min="0"
+          v-model="form.facilities" />
+      </v-flex>
+      <v-flex xs12>
+        <p class="body-2 mb-1">Comments</p>
+        <v-text-field
+          tabindex=7
+          solo flat class="accent"
+          auto-grow multi-line
+          v-model="form.comments"/>
+      </v-flex>
+      <v-flex xs6>
+        <v-btn
+          tabindex=9
+          color="error"
+          flat outline
+          @click.stop="$router.go(-1)">
+          Cancel
+        </v-btn>
+      </v-flex>
+      <v-flex xs6 text-xs-right>
+        <v-btn @click.stop="save"
+          tabindex=8
+          :disabled="!valid"
+          style="text-transform: capitalize"
+          depressed
+          color="primary"
+          :loading="savePending">
+          Save Delivery
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

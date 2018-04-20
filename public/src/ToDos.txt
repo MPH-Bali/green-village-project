@@ -13,12 +13,22 @@ New Github Issues
 
 Refactor Firefly
 --------------------
+No-Code setup
+  --> <my-element @hook-created="$sync({ foo: 'collection'})" />
+  --> <my-element @hook-created="$sync('foo', 'collection')" />
+
+  --> <p v-for="item in $store('foo')" :key="item.id" />
+
 In gerenal export object and only optionally register these:
   - $sync({ key: ref }) --> higher order function && resync cache
+  - $sync(key, ref) --> ref can also be string
   - $unsync('key')
-  - $refs('key') = getter
   - $store('key', []) = getter
+    -> Helper functions add(), delete()
   - $isPending('key') = getter
+  - $refs('key', isCollection?) = getter
+    -> all native firestore actions are on the refs
+    -> isCollection allows direct writes to collection without sync
 
  All methods return true for template action piping
   - $addToCollectionOf('key', data, pendingKey)

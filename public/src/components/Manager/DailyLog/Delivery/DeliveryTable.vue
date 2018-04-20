@@ -1,8 +1,16 @@
 <template>
   <v-data-table
     :loading="$store.delivery.pending"
-    :headers="headers"
     :items="deliveries"
+    :headers="[
+        { text: $t('common.timestamp'), align: 'center', value: 'timestamp' },
+        { text: $t('houseTypes.villa'), align: 'center', value: 'villas' },
+        { text: $t('houseTypes.household'), align: 'center', value: 'households' },
+        { text: $t('houseTypes.businesses'), align: 'center', value: 'businesses' },
+        { text: $t('houseTypes.facilities'), align: 'center', value: 'facilities' },
+        { text: $t('common.details'), align: 'center', width: 1, sortable: false },
+        { text: $t('common.edit'), align: 'center', width: 1, sortable: false }
+      ]"
     hide-actions class="elevation-1">
     <template slot="items" slot-scope="props">
       <tr v-if="!collapsed" class="pointer" @click.stop="props.expanded = !props.expanded">
@@ -88,16 +96,7 @@ export default {
   },
   data () {
     return {
-      collapsed: true,
-      headers: [
-        { text: this.$t('common.timestamp'), align: 'center', sortable: true, value: 'timestamp' },
-        { text: this.$t('houseTypes.villa'), align: 'center', sortable: true, value: 'villas' },
-        { text: this.$t('houseTypes.household'), align: 'center', sortable: true, value: 'households' },
-        { text: this.$t('houseTypes.businesses'), align: 'center', sortable: true, value: 'businesses' },
-        { text: this.$t('houseTypes.facilities'), align: 'center', sortable: true, value: 'facilities' },
-        { text: this.$t('common.details'), align: 'center', width: '10px', sortable: false, value: null },
-        { text: this.$t('common.edit'), align: 'center', width: '10px', sortable: false, value: null }
-      ]
+      collapsed: false
     }
   }
 }

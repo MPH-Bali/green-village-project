@@ -2,22 +2,28 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/manager')">
-         <img height="50px" src="../../assets/mph_logo.png">
+        <v-btn flat color="primary" @click="$router.push('/manager')" class="main-mph-btn">
+         <img src="../../../static/icons/icon-72x72.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat @click="$router.push('/pickup-schedule')">{{ $t('common.pickupSchedule') }}</v-btn>
-        <v-btn flat @click="$router.push('/sign-up')" >{{ $t('common.signup') }}</v-btn>
-        <v-menu offset-y>
-          <v-btn color="primary" dark slot="activator">{{ $t('common.language') }}</v-btn>
-            <v-list>
-              <v-list-tile v-for="item in items" :key="item.title"  v-bind:class="{ 'active': item.value === currentLang }" >
-                <v-list-tile-title @click="lang(item.value)">{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-    </v-menu>
+        <v-btn flat color="primary" @click="$router.push('/pickup-schedule')">{{ $t('common.pickupSchedule') }}</v-btn>
+        <v-btn flat color="primary" @click="$router.push('/sign-up')" >{{ $t('common.signup') }}</v-btn>
+        <v-menu offset-y :auto="true">
+          <v-btn flat slot="activator">
+            <img :src="currentLangItem && currentLangItem.img">
+          </v-btn>
+          <v-list class="py-0">
+            <v-list-tile v-for="item in items"
+                        :key="item.title"
+                         :class="{ 'active-language': item.value === currentLang }" >
+              <v-list-tile-title @click="setLanguage(item.value)" class="btn__content">
+                <img :src="item.img"/>
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -61,13 +67,21 @@ import localStorage from 'local-storage'
 
 export default {
   data: () => ({
-    items: [{ title: 'Bahasa', value: 'id' }, { title: 'English', value: 'en' }]
+    items: [{
+      title: 'Bahasa',
+      value: 'id',
+      img: 'http://www.countryflags.io/ID/shiny/32.png'
+    }, {
+      title: 'English',
+      value: 'en',
+      img: 'http://www.countryflags.io/GB/shiny/32.png'
+    }]
   }),
   created () {
     this.$firestore.syncCharts()
   },
   methods: {
-    lang (val) {
+    setLanguage (val) {
       localStorage.set('locale', val)
       this.$i18n.locale = val
     }
@@ -75,13 +89,20 @@ export default {
   computed: {
     currentLang () {
       return this.$root.$options.i18n.locale
+    },
+    currentLangItem () {
+      return this.items.find(item => item.value === this.currentLang)
     }
   }
 }
 </script>
 
 <style scoped>
-.active {
+.main-mph-btn img {
+  height: 72%;
+}
+
+.active-language {
   background-color: #42853d;
   color: white;
 }

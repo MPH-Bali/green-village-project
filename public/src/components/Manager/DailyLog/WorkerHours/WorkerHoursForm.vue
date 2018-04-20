@@ -1,62 +1,57 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 md8 offset-md2>
-      <v-container fluid grid-list-lg v-if="form">
-        <navigation-header />
-        <v-layout row wrap>
-          <v-flex xs12>
-            <p class="body-2 mb-1">Worker name</p>
-            <v-select solo flat :items="$store.workers.data"
-              v-model="form.worker"
-              item-text="name"
-              item-value="id"
-              return-object
-              class="accent" />
-          </v-flex>
+  <v-container fluid grid-list-lg v-if="form">
+    <v-layout row wrap>
+      <v-flex xs12>
+        <p class="body-2 mb-1">Worker name</p>
+        <v-select solo flat :items="$store.workers.data"
+          v-model="form.worker"
+          item-text="name"
+          item-value="id"
+          return-object
+          class="accent" />
+      </v-flex>
 
-          <v-flex xs12 sm6>
-            <p class='body-2 mb-0'>Time in</p>
-            <time-picker v-model="form.checkIn" />
-          </v-flex>
+      <v-flex xs12 sm6>
+        <p class='body-2 mb-0'>Time in</p>
+        <time-picker v-model="form.checkIn" />
+      </v-flex>
 
-          <v-flex xs12 sm6>
-            <p class='body-2 mb-0'>Time out</p>
-            <time-picker v-model="form.checkOut" />
-          </v-flex>
+      <v-flex xs12 sm6>
+        <p class='body-2 mb-0'>Time out</p>
+        <time-picker v-model="form.checkOut" />
+      </v-flex>
 
-          <v-flex xs12 mb-3>
-            <p class="body-2 mb-1">Notes</p>
-            <v-text-field
-              v-model="form.notes"
-              multi-line
-              auto-grow
-              class="accent"
-              solo flat />
-          </v-flex>
+      <v-flex xs12 mb-3>
+        <p class="body-2 mb-1">Notes</p>
+        <v-text-field
+          v-model="form.notes"
+          multi-line
+          auto-grow
+          class="accent"
+          solo flat />
+      </v-flex>
 
-          <v-flex xs4>
-            <v-btn depressed color="error" @click="$router.go(-1)">
-              Cancel
-            </v-btn>
-          </v-flex>
-          <v-flex xs4 text-xs-center>
-            <span class="title">Total Hours</span>
-            <p class="display-1" style="font-weight: 300">
-              {{ total }} Hours
-            </p>
-          </v-flex>
-          <v-flex xs4 text-xs-right>
-            <v-btn depressed color="primary" @click="validate" :loading="savePending">
-              Save
-            </v-btn>
-          </v-flex>
-        </v-layout>
-        <v-alert type="error" :value="error" class="full-width">
-          {{ error }}
-        </v-alert>
-      </v-container>
-    </v-flex>
-  </v-layout>
+      <v-flex xs4>
+        <v-btn depressed color="error" @click="$router.go(-1)">
+          Cancel
+        </v-btn>
+      </v-flex>
+      <v-flex xs4 text-xs-center>
+        <span class="title">Total Hours</span>
+        <p class="display-1" style="font-weight: 300">
+          {{ total }} Hours
+        </p>
+      </v-flex>
+      <v-flex xs4 text-xs-right>
+        <v-btn depressed color="primary" @click="validate" :loading="savePending">
+          Save
+        </v-btn>
+      </v-flex>
+    </v-layout>
+    <v-alert type="error" :value="error" class="full-width">
+      {{ error }}
+    </v-alert>
+  </v-container>
 </template>
 
 <script>

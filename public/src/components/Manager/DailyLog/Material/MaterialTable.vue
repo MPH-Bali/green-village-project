@@ -1,6 +1,12 @@
 <template>
   <v-data-table
-    :headers="headers"
+    :headers="[
+      { text: $t('tables.headers.time'), align: 'center', value: 'timestamp' },
+      { text: $t('tables.headers.worker'), align: 'center', value: 'worker' },
+      { text: $t('tables.headers.inorganic'), align: 'center', value: 'Inorganic' },
+      { text: $t('tables.headers.organic'), align: 'center', value: 'organic' },
+      { text: $t('tables.headers.banjar'), align: 'center', value: 'banjar' }
+    ]"
     :items="materials"
     :loading="$store.material.pending"
     hide-actions class="elevation-1">
@@ -44,19 +50,10 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
-      collapsed: true,
-      loading: false,
-      headers: [
-        { text: this.$t('tables.headers.time'), align: 'center', sortable: true, value: 'timestamp' },
-        { text: this.$t('tables.headers.worker'), align: 'center', sortable: true, value: 'worker' },
-        { text: this.$t('tables.headers.inorganic'), align: 'center', sortable: true, value: 'Inorganic' },
-        { text: this.$t('tables.headers.organic'), align: 'center', sortable: true, value: 'organic' },
-        { text: this.$t('tables.headers.banjar'), align: 'center', sortable: true, value: 'banjar' }
-      ]
+      collapsed: true
     }
   },
   computed: {

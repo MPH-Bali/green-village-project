@@ -1,197 +1,124 @@
 <template>
-  <v-container fluid grid-list-lg >
-    <navigation-header />
-    <v-data-table :items='materials' :headers='headers' hide-actions>
-      <template slot='headers' slot-scope="props">
-        <tr class='material-header'>
-          <th v-for='header in props.headers' :key="header.text">
-          {{ header.text }}
-          </th>
-        </tr>
-        <tr class='material-actions'>
-          <th style="width: 30%;">
-            <v-select solo flat :items="workers"
-              v-model="formData.worker"
-              item-text="name"
-              item-value="id"
-              return-object
-              label="" class='grey-select banjar' />
-          </th>
-          <th style="width: 12.5%;">
-            <v-text-field
-              v-model="formData.inorganic"
-              class='grey-select red'
-              type="number"
-              solo flat
-              name="input-1"></v-text-field>
-          </th>
-          <th style="width: 12.5%;">
-            <v-text-field
-              v-model="formData.organic"
-              type="number"
-              class='grey-select green'
-              solo flat
-              name="input-1"></v-text-field>
-          </th>
-          <th style="width: 30%">
-            <v-select solo flat :items="banjars"
-              v-model="formData.banjar"
-              item-text="name" label=""
-              item-value="id" return-object
-              class='grey-select banjar'  />
-          </th>
-          <th style="width: 15%">
-            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
-          </th>
-        </tr>
-        <tr>
-        <th colspan="5" v-show="error" @click="hideError">
-          <v-alert type="error" :value="true">
-            {{ error }}
-          </v-alert>
-        </th>
-        </tr>
-      </template>
-      <template slot='items' slot-scope='props'>
-        <td>{{ props.item.worker.name }}</td>
-        <td>{{ props.item.inorganic }}</td>
-        <td>{{ props.item.organic }}</td>
-        <td>
-          <template v-if="props.item.banjar">
-            {{ props.item.banjar.name }}
-          </template>
-        </td>
-        <td class="align-right" @click="editMaterial(props.item)"><v-icon small>fas fa-pencil-alt</v-icon></td>
-      </template>
-    </v-data-table>
+  <v-container fluid grid-list-lg v-if="form">
+    <v-layout row wrap>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Driver</p>
+        <v-select
+          tabindex=1
+          autofocus
+          solo flat class="accent"
+          label="Pick a driver name"
+          :items="$store.workers.data"
+          item-value="id"
+          item-text="name"
+          return-object
+          v-model="form.driver" />
+      </v-flex>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Banjar</p>
+        <v-select
+          tabindex=2
+          solo flat class="accent"
+          label="Select one ore more Banjars"
+          :items="$store.banjar.data"
+          item-value="id"
+          item-text="name"
+          return-object
+          v-model="form.banjar" />
+      </v-flex>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Type</p>
+        <v-select
+          tabindex=3
+          solo flat class="accent"
+          label="Select Material Type"
+          :items="['Organic', 'Inorganic']"
+          v-model="form.type" />
+      </v-flex>
+      <v-flex xs6>
+        <p class="body-2 mb-1">Weight</p>
+        <v-text-field
+          tabindex=4
+          solo flat class="accent"
+          type="number" min="0"
+          v-model="form.weight" />
+      </v-flex>
+
+      <v-flex xs6>
+        <v-btn
+          tabindex=9
+          color="error"
+          flat outline
+          @click.stop="$router.go(-1)">
+          Cancel
+        </v-btn>
+      </v-flex>
+      <v-flex xs6 text-xs-right>
+        <v-btn
+          depressed
+          class="mx-0"
+          color="primary"
+          @click="save"
+          :disabled="error"
+          :loading="savePending">
+          Save</v-btn>
+      </v-flex>
+    </v-layout>
+    <v-alert type="error" :value="error" class='full-width'>
+      {{ error }}
+    </v-alert>
   </v-container>
 </template>
 
 <script>
-const defaultForm = {
-  inorganic: '',
-  organic: '',
-  worker: null,
-  banjar: {
-    id: 0,
-    name: 'No banjar'
-  }
-}
-
 export default {
-  computed: {
-    workers () {
-      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
-    },
-    banjars () {
-      const banjars = this.$store.banjar.data
-      return banjars.length ? banjars : [ { id: 0, name: 'No banjar' } ]
-    },
-    materials () {
-      return this.$firestore.dailyCollections.material
-    }
+  props: {
+    id: { type: String, required: false }
   },
-  methods: {
-    async save () {
-      if (!this.formData.worker) {
-        this.error = 'You have to select a worker to save'
-      } else {
-        this.setWeights()
-
-        // This is because we need to have 'No banjar field'
-        if (this.formData.banjar && this.formData.banjar.id === 0) {
-          this.formData.banjar = null
-        }
-
-        this.formData.organic = parseInt(this.formData.organic)
-        this.formData.inorganic = parseInt(this.formData.inorganic)
-        this.formData.timestamp = new Date()
-
-        await this.$firestore.save('material', this.formData)
-
-        this.$emit('message', {
-          text: 'Material saved',
-          type: 'success'
-        })
-        this.clearForm()
-      }
-    },
-    hideError () {
-      this.error = ''
-    },
-    setWeights () {
-      if (this.formData.organic === '') {
-        this.formData.organic = 0
-      }
-      if (this.formData.inorganic === '') {
-        this.formData.inorganic = 0
-      }
-    },
-    clearForm () {
-      this.formData = defaultForm
-    },
-    editMaterial (material) {
-      this.formData = {...material}
+  async created () {
+    if (this.id) {
+      this.form = await this.$store.expense.collection.get(this.id)
+      this.fetchingExpense = false
     }
   },
   data () {
     return {
-      formData: defaultForm,
-      error: '',
-      headers: [
-        { text: 'Worker', value: 'worker', align: 'left' },
-        { text: 'Inorganic', value: 'inorganic', align: 'left' },
-        { text: 'Organic', value: 'organic', align: 'left' },
-        { text: 'Banjar', value: 'banjar', align: 'left' }
-      ]
+      savePending: false,
+      loading: true,
+      error: null,
+      form: {}
+    }
+  },
+  computed: {
+    expenseTypes () {
+      const settings = this.$store.settings.data[0]
+      return (settings && settings.expenseTypes) || []
+    }
+  },
+  methods: {
+    validate () {
+      let errors = []
+      if (!this.form.type) errors.push('You need to select expense type')
+      if (!this.form.cost) errors.push('You need to specify expense cost')
+      return (this.error = errors[0]) || this.save()
+    },
+    async save () {
+      this.savePending = true
+
+      await this.$store.expense.collection.save({
+        ...this.form,
+        timestamp: this.form.timestamp || new Date(),
+        cost: parseInt(this.form.cost || 0)
+      })
+
+      this.$emit('message', {
+        text: 'Expense saved',
+        type: 'success'
+      })
+
+      this.savePending = false
+      this.$router.go(-1)
     }
   }
 }
 </script>
-
-<style scoped>
-
-.red {
-  border: 1px solid #d0021b!important;
-}
-
-.green {
-  border: 1px solid #7ed321!important;
-}
-
-.material-header {
-  border-bottom: none!important;
-  background-color: white;
-}
-
-
-.material-header th {
-  text-align: left;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.13;
-  letter-spacing: normal;
-}
-
-.material-actions th {
-  padding: 0 10px!important;
-  background-color: white;
-}
-
-.grey-select {
-  background-color: rgba(66, 133, 61, 0.1)!important;
-}
-
-.grey-select div {
-  padding: 3px 3px!important;
-}
-
-.worker-id {
-  font-weight: bold;
-}
-
-.align-right {
-  text-align: right;
-}
-</style>

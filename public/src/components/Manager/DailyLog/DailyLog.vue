@@ -54,7 +54,8 @@
     </v-flex>
 
     <v-slide-x-transition mode="out-in">
-      <v-flex xs12 v-show="!showLogs">
+      <v-flex xs12 md8 offset-md2 v-show="!showLogs">
+        <navigation-header class="my-4 pt-3"/>
         <router-view />
       </v-flex>
     </v-slide-x-transition>

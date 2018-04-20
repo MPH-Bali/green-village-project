@@ -1,50 +1,45 @@
 <template>
-  <v-layout row wrap>
-    <v-flex  xs12 md8 offset-md2>
-      <v-container fluid grid-list-lg v-if="form">
-        <navigation-header />
-        <v-layout row wrap>
-          <v-flex xs12 md6>
-            <p class='title'>Type</p>
-            <v-select
-              solo flat class="accent"
-              :items="expenseTypes"
-              v-model="form.type"
-              @change="error = null"
-              return-object />
-          </v-flex>
-          <v-flex xs12 md6>
-            <p class='title'>Cost IDR</p>
-            <v-text-field
-              solo flat class="accent"
-              type='number'
-              @keyup="error = null"
-              v-model="form.cost" />
-          </v-flex>
-          <v-flex xs12>
-            <p class='title'>Notes</p>
-            <v-text-field
-              solo flat class='accent'
-              auto-grow multi-line
-              v-model="form.notes" />
-          </v-flex>
-          <v-flex xs12 text-xs-right>
-            <v-btn
-              depressed
-              class="mx-0"
-              color="primary"
-              @click="save"
-              :disabled="error"
-              :loading="savePending">
-              Save</v-btn>
-          </v-flex>
-        </v-layout>
-        <v-alert type="error" :value="error" class='full-width'>
-          {{ error }}
-        </v-alert>
-      </v-container>
-    </v-flex>
-  </v-layout>
+  <v-container fluid grid-list-lg v-if="form">
+    <v-layout row wrap>
+      <v-flex xs12 md6>
+        <p class='title'>Type</p>
+        <v-select
+          solo flat class="accent"
+          :items="expenseTypes"
+          v-model="form.type"
+          @change="error = null"
+          return-object />
+      </v-flex>
+      <v-flex xs12 md6>
+        <p class='title'>Cost IDR</p>
+        <v-text-field
+          solo flat class="accent"
+          type='number'
+          @keyup="error = null"
+          v-model="form.cost" />
+      </v-flex>
+      <v-flex xs12>
+        <p class='title'>Notes</p>
+        <v-text-field
+          solo flat class='accent'
+          auto-grow multi-line
+          v-model="form.notes" />
+      </v-flex>
+      <v-flex xs12 text-xs-right>
+        <v-btn
+          depressed
+          class="mx-0"
+          color="primary"
+          @click="save"
+          :disabled="error"
+          :loading="savePending">
+          Save</v-btn>
+      </v-flex>
+    </v-layout>
+    <v-alert type="error" :value="error" class='full-width'>
+      {{ error }}
+    </v-alert>
+  </v-container>
 </template>
 
 <script>

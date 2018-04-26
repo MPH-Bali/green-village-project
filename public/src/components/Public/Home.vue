@@ -270,11 +270,11 @@ export default {
           {
             label: 'Material',
             fill: false,
-            backgroundColor: '#4a90e2',
-            borderColor: '#4a90e2',
+            backgroundColor: '#cd2027',
+            borderColor: '#cd2027',
             data: [35, 43, 46, 64, 60, 75, 90]
           }, {
-            label: 'Organic',
+            label: 'Compost',
             fill: false,
             backgroundColor: '#42853d',
             borderColor: '#42853d',

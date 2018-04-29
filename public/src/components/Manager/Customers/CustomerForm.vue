@@ -100,19 +100,16 @@
 export default {
   name: 'CustomerForm',
   methods: {
-    submit () {
+    async submit () {
       if (!this.valid) {
         return
       }
 
       this.submitting = true
-
-      this.$firestore.add('person', this.form)
-        .then((ref) => {
-          this.form = {}
-          this.submitting = false
-          this.$router.push(`/manager/customers/${ref.id}`)
-        })
+      const ref = await this.$store.person.collection.add(this.form)
+      this.form = {}
+      this.submitting = false
+      this.$router.push(`/manager/customers/${ref.id}`)
     }
   },
   computed: {
@@ -128,9 +125,7 @@ export default {
       })
     },
     settings () {
-      const settings = this.$firestore.collections.settings
-
-      return settings[0] || {}
+      return this.$store.settings[0] || {}
     },
     valid () {
       const { name, email, phone, address, houseType } = this.form

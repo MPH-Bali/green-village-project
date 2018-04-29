@@ -46,8 +46,4 @@ export default {
     height: 100%;
     justify-content: center;
   }
-
-  .logoutButtonContainer {
-    justify-content: center;
-  }
 </style>

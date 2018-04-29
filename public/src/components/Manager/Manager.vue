@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-fade-transition>
-      <loading-mask v-if="$firestore.loading" />
+      <loading-mask v-if="loading" />
     </v-fade-transition>
 
     <v-fade-transition>
@@ -24,9 +24,9 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <login v-if="!$firestore.user" />
+    <login v-if="user" />
 
-    <unapproved v-else-if="$firestore.person && !$firestore.person.approved" />
+    <unapproved v-else-if="person && !person.approved" />
 
 	  <v-content v-else>
         <v-slide-y-transition mode="out-in">
@@ -40,21 +40,47 @@
 </template>
 
 <script>
+import firebase, { db } from '@/firebase'
+
 export default {
   name: 'Manager',
   created () {
-    this.$sync({
-      workers: this.$db.collection('person').where('type.employee', '==', true),
-      buyers: this.$db.collection('person').where('type.buyer', '==', true),
-      customers: this.$db.collection('person').where('type.customer', '==', true),
-      banjar: this.$db.collection('banjar'),
-      settings: this.$db.collection('settings')
-    })
+    this.loading = true
+    firebase.auth().onAuthStateChanged(async user => {
+      if (!user) return false
+      this.user = user
 
-    this.$firestore.initStore()
+      // Attempt to get the person linked to this user, if it is the
+      let qs = await db.collection('person').where('login', '==', user.uid).get()
+      this.person = qs.docs && qs.docs[0] && qs.doc[0].data()
+
+      if (!this.person) {
+        let res = await db.collection('person').add({
+          login: user.uid,
+          phone: user.phoneNumber,
+          type: { employee: true },
+          role: { communityManager: true },
+          approved: false
+        })
+        this.person = res.id
+      }
+      if (this.person && this.person.approved) {
+        this.$sync({
+          workers: this.$db.collection('person').where('type.employee', '==', true),
+          buyers: this.$db.collection('person').where('type.buyer', '==', true),
+          customers: this.$db.collection('person').where('type.customer', '==', true),
+          banjar: this.$db.collection('banjar'),
+          settings: this.$db.collection('settings')
+        })
+      }
+      this.loading = false
+    })
   },
   data () {
     return {
+      user: null,
+      person: null,
+      loading: true,
       showMenu: false,
       toastMessage: {}
     }

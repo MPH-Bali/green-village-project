@@ -59,7 +59,7 @@ export default {
     fetchDayilyData (date) {
       this.showDatePicker = false
       this.$router.push({ name: 'dailyLogHistory', params: { date } })
-      this.$firestore.changeDate(date)
+      // this.$firestore.changeDate(date)
     },
     displayDatePicker () {
       this.pickerDate = this.logDate.format('YYYY-MM-DD')

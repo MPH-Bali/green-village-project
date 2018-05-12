@@ -12,11 +12,12 @@ import App from './App'
 import router from './router'
 import i18n from './i18n'
 import firebase, { db } from './firebase'
-import VueFirestoreSync from './vue-firestore-sync'
+import firefly from './firefly'
+import store from './store'
 
 Vue.prototype.$firebase = firebase
 
-Vue.use(VueFirestoreSync, { db })
+Vue.use(firefly, store, db)
 
 Vue.use(moment)
 Vue.use(Vuetify, {

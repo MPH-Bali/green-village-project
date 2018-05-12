@@ -213,8 +213,8 @@ export default {
   computed: {
     pickupsData () {
       return {
-        totalPickups: this.$firestore.charts.totalPickups,
-        totalWeight: this.$firestore.charts.totalMaterialWeight
+        totalPickups: this.$store.charts.data.totalPickups,
+        totalWeight: this.$store.charts.data.totalMaterialWeight
       }
     },
     hoursData () {
@@ -226,7 +226,7 @@ export default {
             fill: false,
             backgroundColor: '#42853d',
             borderColor: '#cd2027',
-            data: this.$firestore.charts.workerHours
+            data: this.$store.charts.data.workerHours
           }
         ]
       }

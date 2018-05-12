@@ -32,7 +32,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view v-if="$firestore.charts"/>
+              <router-view v-if="$store.charts.data"/>
             </v-slide-y-transition>
           </v-layout>
         </v-flex>
@@ -78,7 +78,8 @@ export default {
     }]
   }),
   created () {
-    this.$firestore.syncCharts()
+    const week = this.$moment().format('YYYY-ww')
+    this.$sync({ charts: this.$db.collection('charts').doc(week) })
   },
   methods: {
     setLanguage (val) {

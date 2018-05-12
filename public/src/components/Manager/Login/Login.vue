@@ -11,11 +11,9 @@
 <script>
 export default {
   mounted () {
-    if (this.$firestore.user) {
+    if (this.$firebase.auth().currentUser) {
       try {
         this.$firebase.auth().signOut()
-        this.$firestore.user = null
-        this.$firestore.person = null
       } catch (error) {
         console.log(`Error logging out: ${error}`)
       }

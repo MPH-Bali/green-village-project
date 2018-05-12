@@ -1,24 +1,20 @@
 <template>
   <v-app>
     <v-fade-transition>
-      <loading-mask v-if="loading" />
-    </v-fade-transition>
-
-    <v-fade-transition>
-      <menu v-if="showMenu" />
+      <!-- <loading-mask v-if="loading" /> -->
     </v-fade-transition>
 
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/')" class="main-mph-btn">
-         <img src="../../../static/icons/icon-72x72.png">
+        <v-btn flat color="primary" @click="$router.push('/')">
+         <img style="height: 72%" src="../../../static/icons/icon-72x72.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-title v-text="$t(`routeNames.${$route.name}`)" />
       <v-spacer />
       <v-toolbar-items class="mr-0">
-        <v-btn flat @click="showMenu = !showMenu">
+        <v-btn flat @click="$route.name == 'menu' ? $router.go(-1) : $router.push('/manager/menu')">
           <v-icon size="30px">menu</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -45,6 +41,8 @@ import firebase, { db } from '@/firebase'
 export default {
   name: 'Manager',
   created () {
+    console.log(this.$route.name)
+    this.init()
     this.loading = true
     firebase.auth().onAuthStateChanged(async user => {
       if (!user) return false
@@ -65,13 +63,7 @@ export default {
         this.person = res.id
       }
       if (this.person && this.person.approved) {
-        this.$sync({
-          workers: this.$db.collection('person').where('type.employee', '==', true),
-          buyers: this.$db.collection('person').where('type.buyer', '==', true),
-          customers: this.$db.collection('person').where('type.customer', '==', true),
-          banjar: this.$db.collection('banjar'),
-          settings: this.$db.collection('settings')
-        })
+        this.init()
       }
       this.loading = false
     })
@@ -81,11 +73,19 @@ export default {
       user: null,
       person: null,
       loading: true,
-      showMenu: false,
       toastMessage: {}
     }
   },
   methods: {
+    init () {
+      this.$sync({
+        workers: this.$db.collection('person').where('type.employee', '==', true),
+        buyers: this.$db.collection('person').where('type.buyer', '==', true),
+        customers: this.$db.collection('person').where('type.customer', '==', true),
+        banjar: this.$db.collection('banjar'),
+        settings: this.$db.collection('settings')
+      })
+    },
     newMessage (message) {
       this.toastMessage = message
       setTimeout(() => {
@@ -95,9 +95,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .main-mph-btn img {
-    height: 72%;
-  }
-</style>

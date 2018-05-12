@@ -2,7 +2,7 @@
   <v-layout column text-xs-center>
     <v-card class="py-5 my-5">
       <v-card-text class="py-5 my-5">
-        <p class="title" style="text-transform: uppercase;">To login, please enter your phone number</p>
+        <p class="title">TO LGOIN, PLEASE ENTER YOUR PHONE NUMBER</p>
         <v-flex md4 offset-md4>
           <v-form @submit.prevent="confirm">
             <v-flex ml-0 mt-3 pl-0 text-xs-left>
@@ -10,25 +10,25 @@
             </v-flex>
             <v-text-field
               class="loginField"
-              name="phoneNumber" 
+              name="phoneNumber"
               autofocus
-              solo 
-              flat 
-              label="Type Your Phone Number" 
-              type="tel" 
-              v-model="phoneNumber" 
-              :disabled="loading" 
-              @input="errorMessages = []" 
+              solo
+              flat
+              label="Type Your Phone Number"
+              type="tel"
+              v-model="phoneNumber"
+              :disabled="loading"
+              @input="errorMessages = []"
               :error="hasErrors" />
             <p class="errorMessage" v-for="(error, index) in errorMessages" :key="index" style="color: #ff5252;">{{error}}</p>
             <v-flex px-0 mt-3>
-              <v-btn 
-                id="confirmButton" 
-                color="primary" 
-                depressed 
-                style="text-transform: uppercase" 
-                @click.stop="confirm" 
-                :loading="loading" 
+              <v-btn
+                id="confirmButton"
+                color="primary"
+                depressed
+                style="text-transform: uppercase"
+                @click.stop="confirm"
+                :loading="loading"
                 block>
                 Continue
               </v-btn>
@@ -36,7 +36,7 @@
           </v-form>
         </v-flex>
       </v-card-text>
-    </v-card>  
+    </v-card>
   </v-layout>
 </template>
 
@@ -64,8 +64,11 @@ export default {
     async confirm () {
       try {
         this.loading = true
-        let confirmationResult = await this.$firebase.auth()
-                                  .signInWithPhoneNumber(this.phoneNumber, this.recaptchaVerifier)
+        let { signInWithPhoneNumber } = this.$firebase.auth()
+        let confirmationResult = await signInWithPhoneNumber(
+          this.phoneNumber,
+          this.recaptchaVerifier
+        )
         // SMS sent. Prompt user to type the code from the message.
         this.$emit('onVerification', confirmationResult)
         this.loading = false
@@ -92,5 +95,5 @@ export default {
 
   .errorMessage {
     margin-top: 10px;
-  }  
+  }
 </style>

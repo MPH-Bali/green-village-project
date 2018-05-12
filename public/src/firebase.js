@@ -15,4 +15,4 @@ firebase.auth().useDeviceLanguage()
 
 export default firebase
 export const db = firebase.firestore()
-db.settings({ timestampsInSnapshots: true })
+db.settings({ timestampsInSnapshots: false })

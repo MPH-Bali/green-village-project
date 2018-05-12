@@ -41,6 +41,10 @@ export default new Router({
        */
       children: [
         {
+          path: 'menu',
+          name: 'menu',
+          component: Vue.component('Menu')
+        }, {
           path: 'login',
           name: 'login',
           component: Vue.component('Login')

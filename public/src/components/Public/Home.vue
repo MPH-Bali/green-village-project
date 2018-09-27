@@ -224,7 +224,7 @@ export default {
           {
             label: 'Hours',
             fill: false,
-            backgroundColor: '#cd2027',
+            backgroundColor: '#42853d',
             borderColor: '#cd2027',
             data: this.$firestore.charts.workerHours
           }
@@ -270,11 +270,11 @@ export default {
           {
             label: 'Material',
             fill: false,
-            backgroundColor: '#4a90e2',
-            borderColor: '#4a90e2',
+            backgroundColor: '#cd2027',
+            borderColor: '#cd2027',
             data: [35, 43, 46, 64, 60, 75, 90]
           }, {
-            label: 'Organic',
+            label: 'Compost',
             fill: false,
             backgroundColor: '#42853d',
             borderColor: '#42853d',
@@ -363,7 +363,7 @@ export default {
         datasets: [
           {
             data: [35, 20, 60],
-            backgroundColor: ['#4a90e2', '#d1dfd0', '#cc8a8c']
+            backgroundColor: ['#42853d', '#cc8a8c', '#4a90e2']
           }
         ]
       },

@@ -2,8 +2,8 @@
   <v-app>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
-        <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
-         <img src="../../assets/mph_logo.png">
+        <v-btn flat color="primary" @click="$router.push('/')" class="main-mph-btn">
+         <img src="../../../static/icons/icon-72x72.png">
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style>
-  .main-mph img {
-    height: 50px;
+  .main-mph-btn img {
+    height: 72%;
   }
 </style>

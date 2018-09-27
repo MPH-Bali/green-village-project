@@ -26,7 +26,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view v-if="$firestore.charts"/>
+              <router-view />
             </v-slide-y-transition>
           </v-layout>
         </v-flex>

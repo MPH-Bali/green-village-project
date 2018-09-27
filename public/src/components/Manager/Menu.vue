@@ -32,7 +32,7 @@ export default {
         { name: this.$t('menu.addStock') },
         { name: this.$t('menu.contactAdmin') },
         { name: this.$t('menu.createSale') },
-        { name: this.$t('menu.logout'), path: '/manager/login' },
+        { name: this.$t('menu.logout'), path: '/manager' },
         { name: this.$t('menu.addExpense'), path: '/manager/expense' }
       ]
     }

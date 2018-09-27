@@ -1,10 +1,5 @@
 <template>
   <v-app>
-    <v-fade-transition>
-      <template v-if="$firestore.loading">
-          <loading-mask />
-      </template>
-    </v-fade-transition>
     <v-toolbar flat class="elevation-1" app color="secondary" clipped-left>
       <v-toolbar-items class="ml-0">
         <v-btn flat color="primary" @click="$router.push('/')" class="main-mph">
@@ -20,16 +15,12 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <login v-if="!$firestore.user" />
-    <unapproved v-else-if="$firestore.person && !$firestore.person.approved" />
-    <template v-else>
 	  <v-content>
-        <v-slide-y-transition mode="out-in">
+      <v-slide-y-transition mode="out-in">
         <router-view class="pb-5" @message="newMessage"/>
     	</v-slide-y-transition>
 	  </v-content>
-      <toast :message="toastMessage"/>
-    </template>
+    <toast :message="toastMessage"/>
   </v-app>
 </template>
 
@@ -37,7 +28,8 @@
 export default {
   name: 'Manager',
   created () {
-    this.$firestore.initStore()
+    this.$firestore.changeDate()
+    this.$firestore.syncData()
   },
   data () {
     return {

@@ -70,11 +70,11 @@ export default {
     items: [{
       title: 'Bahasa',
       value: 'id',
-      img: 'http://www.countryflags.io/ID/shiny/32.png'
+      img: 'https://www.countryflags.io/ID/shiny/32.png'
     }, {
       title: 'English',
       value: 'en',
-      img: 'http://www.countryflags.io/GB/shiny/32.png'
+      img: 'https://www.countryflags.io/GB/shiny/32.png'
     }]
   }),
   created () {

@@ -29,6 +29,7 @@ export default {
   methods: {
     onVerification (confirmationResult) {
       this.confirmationResult = confirmationResult
+      this.$router.push('/manager/')
     },
     onResend () {
       this.confirmationResult = null

@@ -15,8 +15,8 @@
             <img :src="currentLangItem && currentLangItem.img">
           </v-btn>
           <v-list class="py-0">
-            <v-list-tile v-for="item in items" 
-                        :key="item.title"  
+            <v-list-tile v-for="item in items"
+                        :key="item.title"
                          :class="{ 'active-language': item.value === currentLang }" >
               <v-list-tile-title @click="setLanguage(item.value)" class="btn__content">
                 <img :src="item.img"/>
@@ -32,7 +32,7 @@
         <v-flex row wrap xs12 md8 offset-md2 lg6 offset-lg3 text-xs-center>
           <v-layout row wrap>
             <v-slide-y-transition mode="out-in">
-              <router-view v-if="$firestore.charts"/>
+              <router-view/>
             </v-slide-y-transition>
           </v-layout>
         </v-flex>

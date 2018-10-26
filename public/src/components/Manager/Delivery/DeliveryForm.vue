@@ -11,7 +11,7 @@
               autofocus
               solo flat class="accent"
               label="Pick a driver name"
-              :items="$firestore.collections.person.filter(p => p.type && p.type.employee)"
+              :items="$firestore.collections.person.filter(p => p.type && p.type.employee && p.name)"
               item-value="id"
               item-text="name"
               return-object

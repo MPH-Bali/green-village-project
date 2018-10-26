@@ -72,24 +72,16 @@ const defaultForm = {
   inorganic: '',
   organic: '',
   worker: null,
-  banjar: {
-    id: 0,
-    name: 'No banjar'
-  }
+  banjar: null
 }
 
 export default {
   computed: {
     workers () {
-      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
+      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee && person.name)
     },
     banjars () {
       const banjars = this.$firestore.collections.banjar
-      const noBanjar = {
-        id: 0,
-        name: 'No banjar'
-      }
-      banjars.unshift(noBanjar)
       return banjars
     },
     materials () {
@@ -100,13 +92,10 @@ export default {
     async save () {
       if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
+      } else if (!this.formData.banjar) {
+        this.error = 'You have to select a banjar to save'
       } else {
         this.setWeights()
-
-        // This is because we need to have 'No banjar field'
-        if (this.formData.banjar && this.formData.banjar.id === 0) {
-          this.formData.banjar = null
-        }
 
         this.formData.organic = parseInt(this.formData.organic)
         this.formData.inorganic = parseInt(this.formData.inorganic)

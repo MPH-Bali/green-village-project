@@ -22,7 +22,7 @@ export default new Vue({
       user: null,
       person: null,
       fees: [],
-      charts: null,
+      charts: {},
       // ToDo: Add all collections
       dailyCollections: {
         delivery: [],

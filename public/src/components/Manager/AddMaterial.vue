@@ -72,7 +72,7 @@ const defaultForm = {
   inorganic: '',
   organic: '',
   worker: null,
-  banjar: {}
+  banjar: null
 }
 
 export default {
@@ -92,6 +92,8 @@ export default {
     async save () {
       if (!this.formData.worker) {
         this.error = 'You have to select a worker to save'
+      } else if (!this.formData.banjar) {
+        this.error = 'You have to select a banjar to save'
       } else {
         this.setWeights()
 

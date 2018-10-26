@@ -78,7 +78,7 @@ const defaultForm = {
 export default {
   computed: {
     workers () {
-      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee)
+      return this.$firestore.collections.person.filter((person) => person.type && person.type.employee && person.name)
     },
     banjars () {
       const banjars = this.$firestore.collections.banjar

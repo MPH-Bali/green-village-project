@@ -11,7 +11,7 @@
       <daily-log-header class="mt-4" action="/manager/material" :title="$t('headers.materialKg')" />
       <daily-log-material-table/>
 
-      <daily-log-header class="mt-4" action="/manager/stock" title="Compost" />
+      <!-- <daily-log-header class="mt-4" action="/manager/stock" title="Compost" />
       <daily-log-stock-table material-type="Compost" />
 
       <daily-log-header class="mt-4" action="/manager/stock" title="Plastics" />
@@ -27,7 +27,7 @@
       <daily-log-workers-table/>
 
       <daily-log-header class="mt-4" action="/manager/expense" :title="$t('headers.addExpense')" />
-      <daily-log-expenses-table/>
+      <daily-log-expenses-table/> -->
     </v-flex>
   </v-layout>
 </template>

@@ -5,12 +5,12 @@
         <navigation-header />
         <v-layout row wrap>
           <v-flex xs6>
-            <p class="body-2 mb-1">Driver</p>
+            <p class="body-2 mb-1">{{ $t('common.driver') }}</p>
             <v-select
               tabindex=1
               autofocus
               solo flat class="accent"
-              label="Pick a driver name"
+              :label="$t('common.driver')"
               :items="$firestore.collections.person.filter(p => p.type && p.type.employee && p.name)"
               item-value="id"
               item-text="name"
@@ -18,7 +18,7 @@
               v-model="form.driver" />
           </v-flex>
           <v-flex xs6>
-            <p class="body-2 mb-1">Banjar</p>
+            <p class="body-2 mb-1">{{ $t('common.neighborhood') }}</p>
             <v-select
               tabindex=2
               solo flat class="accent"
@@ -30,7 +30,7 @@
               v-model="form.banjar" />
           </v-flex>
           <v-flex xs3>
-            <p class="body-2 mb-1">#villas</p>
+            <p class="body-2 mb-1"># {{ $t('common.villas') }}</p>
             <v-text-field
               tabindex=3
               solo flat class="accent"
@@ -38,7 +38,7 @@
               v-model="form.villas" />
           </v-flex>
           <v-flex xs3>
-            <p class="body-2 mb-1">#households</p>
+            <p class="body-2 mb-1"># {{ $t('common.households') }}</p>
             <v-text-field
               tabindex=4
               solo flat class="accent"
@@ -46,7 +46,7 @@
               v-model="form.households" />
           </v-flex>
           <v-flex xs3>
-            <p class="body-2 mb-1">#businesses</p>
+            <p class="body-2 mb-1"># {{ $t('common.businesses') }}</p>
             <v-text-field
               tabindex=5
               solo flat class="accent"
@@ -54,7 +54,7 @@
               v-model="form.businesses" />
           </v-flex>
           <v-flex xs3>
-            <p class="body-2 mb-1">#facilities</p>
+            <p class="body-2 mb-1"># {{ $t('common.facilities') }}</p>
             <v-text-field
               tabindex=6
               solo flat class="accent"
@@ -62,7 +62,7 @@
               v-model="form.facilities" />
           </v-flex>
           <v-flex xs12>
-            <p class="body-2 mb-1">Comments</p>
+            <p class="body-2 mb-1"># {{ $t('common.comments') }}</p>
             <v-text-field
               tabindex=7
               solo flat class="accent"
@@ -70,7 +70,7 @@
               v-model="form.comments"/>
           </v-flex>
           <v-flex xs6>
-            <v-btn tabindex=9 color="error" flat outline @click.stop="$router.go(-1)">Cancel</v-btn>
+            <v-btn tabindex=9 color="error" flat outline @click.stop="$router.go(-1)">{{ $t('common.cancel') }}</v-btn>
           </v-flex>
           <v-flex xs6 text-xs-right>
             <v-btn @click.stop="save"
@@ -80,7 +80,7 @@
               depressed
               color="primary"
               :loading="savePending">
-              Save Delivery
+              {{ $t('common.save') }}
             </v-btn>
           </v-flex>
         </v-layout>

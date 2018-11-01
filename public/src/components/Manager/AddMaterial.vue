@@ -41,7 +41,7 @@
               class='grey-select banjar'  />
           </th>
           <th style="width: 15%">
-            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">Save</v-btn>
+            <v-btn style="text-transform: capitalize" depressed color="primary" @click.stop="save">{{ $t('common.save') }}</v-btn>
           </th>
         </tr>
         <tr>
@@ -133,10 +133,10 @@ export default {
       formData: defaultForm,
       error: '',
       headers: [
-        { text: 'Worker', value: 'worker', align: 'left' },
-        { text: 'Inorganic', value: 'inorganic', align: 'left' },
-        { text: 'Organic', value: 'organic', align: 'left' },
-        { text: 'Banjar', value: 'banjar', align: 'left' }
+        { text: this.$t('tables.headers.worker'), value: 'worker', align: 'left' },
+        { text: this.$t('tables.headers.inorganic'), value: 'inorganic', align: 'left' },
+        { text: this.$t('tables.headers.organic'), value: 'organic', align: 'left' },
+        { text: this.$t('tables.headers.banjar'), value: 'banjar', align: 'left' }
       ]
     }
   }

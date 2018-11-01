@@ -56,7 +56,7 @@ export default {
     ok: 'Ok'
   },
   toasts: {
-    feeAdded: 'tambah Biaya'
+    feeAdded: 'Tambah Biaya'
   },
   headers: {
     paymentHistory: 'Riwayat Pembayaran',
@@ -64,7 +64,7 @@ export default {
     delivery: 'Pengiriman',
     materialKg: 'Material Kg',
     workerHours: 'Jam Kerja',
-    addExpense: 'tambah Pengeluaran',
+    addExpense: 'Tambah Pengeluaran',
     dailyStock: 'Stok Harian',
     revenue: 'Penghasilan',
     expenses: 'Pengeluaran',
@@ -84,14 +84,14 @@ export default {
     dailyLog: 'Catatan Harian',
     dailyLogHistory: 'Riwayat Catatan Harian',
     deliveryForm: 'Formulir Pengiriman',
-    addMaterial: 'tambah Material',
+    addMaterial: 'Tambah Material',
     workerHours: 'Cek Pekerja',
     customerDetail: 'Detail Pelanggan',
     newCustomer: 'Pelanggan Baru',
     buyers: 'Pembeli',
     'buyer-edit': 'Tambah/Sunting Pembeli',
     'buyer-details': 'Detail Pembeli',
-    addExpense: 'tambah Pengeluaran',
+    addExpense: 'Tambah Pengeluaran',
     menu: 'Catatan Harian',
     customers: 'Pelanggan'
   },
